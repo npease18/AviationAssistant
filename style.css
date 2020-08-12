@@ -1,0 +1,62 @@
+html, body {
+    margin: 0; padding: 0; background-color: #ffffff; font-family: Tahoma, Sans-Serif;
+    font-size: 10pt; overflow: auto; height: 100%;
+}
+
+div#nav_bar           { float: top; width: 100%; height: 40px;border: 2px solid black;padding: 2px;}
+div#map_container     { float: left; width: 100%; height: 100%; }
+div#map_canvas        { height: 100%; margin-right: 420px; }
+#nav_bar.divider{
+    width: 25px;
+}
+.space {padding-right: 20px;padding-left: 20px;padding-top: 0px;padding-bottom: 0px;margin: auto; width: fit-content;display: inline-block;}
+.space-nopad {margin: auto; width: fit-content;display: inline-block;}
+.center {display: table-cell;vertical-align: middle;}
+
+div#sidebar_container { float: left; width: 410px; margin-left: -410px; height: 100%; overflow: auto; }
+
+div#SpecialSquawkWarning { position: absolute; bottom: 25px; right: 430px; border: 2px solid red;
+    background-color: #FFFFA3; opacity: 0.75; filter:alpha(opacity=75); padding: 5px;
+    text-align: center; }
+
+div#update_error { position: absolute; bottom: 25px; left: 25px; border: 2px solid red;
+    background-color: #FFFFA3; opacity: 0.75; filter:alpha(opacity=75); padding: 5px;
+    text-align: center; }
+
+div#loader { z-index: 99; position: absolute; left: 0; top: 0; bottom: 0; right: 0; background: #000; opacity: 0.8; filter: alpha(opacity=80); }
+#spinny { width: 128px; height: 128px; position: absolute; top: 50%; left: 50%; margin: -64px 0 0 -64px; }
+#loader_progress { width: 250px; height: 20px; position: absolute; top: 50%; left: 50%; margin: 128px 0 0 -125px; }
+
+#tableinfo, #sudo_buttons { font-size: x-small; font-family: monospace; }
+
+.vPosition  { font-weight: bold; background-color: #d5ffd5; }
+.mlat       { font-weight: bold; background-color: #d5d5ff; }
+.squawk7500 { font-weight: bold; background-color: #ff5555; }
+.squawk7600 { font-weight: bold; background-color: #00ffff; }
+.squawk7700 { font-weight: bold; background-color: #ffff00; }
+.selected   { background-color: #dddddd; }
+.plane_table_row { cursor: pointer; }
+.hidden { display: none; }
+
+.infoblock_heading    { font-size: larger; }
+.infoblock_heading a  { text-decoration: none; color: blue; font-size: x-small;}
+.infoblock_body       { font-size: medium; }
+
+#selected_icao { font-size: x-small; }
+#selected_registration { font-size: x-small; }
+#selected_icaotype { font-size: x-small; }
+
+.dim    { opacity: 0.3; filter:alpha(opacity=30); /* For IE8 and earlier */ }
+
+.pointer { cursor: pointer; }
+
+td#icao {font-size: medium;}
+td#flag {font-size: medium;}
+td#flight {font-size: medium;}
+td#squawk {font-size: medium;}
+td#altitude {font-size: medium;}
+td#speed {font-size: medium;}
+td#distance {font-size: medium;}
+td#track {font-size: medium;}
+td#msgs {font-size: medium;}
+td#seen  {font-size: medium;}
