@@ -198,7 +198,7 @@ function initialize() {
 
         readBatteryLevel()
         window.setInterval(readBatteryLevel, 1000);
-        
+
         $("#loader").removeClass("hidden");
         
         // Get receiver metadata, reconfigure using it, then continue
