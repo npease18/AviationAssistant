@@ -30,6 +30,24 @@ function readBatteryLevel() {
             document.getElementById('battery').innerHTML = "battery_full"
             console.log("full")
 	}
-    })
+    });
 
+}
+
+function celciusToF(number) {
+    return number * 9/5 + 32
+}
+
+function metersToF(number) {
+    return number * 3.28084
+}
+
+function numToCompass(num) {
+    var val = Math.floor((num / 22.5) + 0.5);
+    var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    return arr[(val % 16)];
+}
+
+function ktsToMPH(num) {
+    return num * 1.15078
 }
