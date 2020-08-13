@@ -472,6 +472,13 @@ function initialize_map() {
 
         
             // Listeners for newly created Map
+        OLMap.on("moveend", function() {
+                var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
+                if (TAB === 'METAR') {
+                        nearestStations(center[1],center[0])
+                }
+        })
+
         OLMap.getView().on('change:center', function(event) {
                 var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
                 localStorage['CenterLon'] = center[0]
@@ -484,9 +491,6 @@ function initialize_map() {
                                 FollowSelected = false;
                                 refreshSelected();
                         }
-                }
-                if (TAB === 'METAR') {
-                        nearestStations(center[1],center[0])
                 }
         });
     
