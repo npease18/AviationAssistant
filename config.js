@@ -8,6 +8,10 @@
 // API KEYS
 AVWX = "iQVBsTZ23RhmA3VFcq3F56bugGV0mdWiKGPmjjv-vtU";
 
+
+// Open Page
+TAB = "RADAR"
+
 // -- Title Settings --------------------------------------
 // Show number of aircraft and/or messages per second in the page title
 PlaneCountInTitle = true;

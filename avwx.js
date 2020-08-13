@@ -7,7 +7,8 @@ function nearestStations(x,y) {
                                     dataType: 'json',
                                     });
         FetchPending.done(function(data) {
-            document.getElementById("results").innerHTML = "Station ID: "+data.station
+            json = data
+            document.getElementById("metar_data").innerHTML = "Station ID: "+json.station
         })
     
 }
