@@ -1,11 +1,15 @@
 function openMetar() {
     document.getElementById("metar_container").style.display = "block"
     document.getElementById("radar_container").style.display = "none"
+    TAB = "METAR"
+    var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
+    nearestStations(center[1],center[0])
 }
 
 function openRadar() {
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "block"
+    TAB = "RADAR"
 }
 
 function readBatteryLevel() {
