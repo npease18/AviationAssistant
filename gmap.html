@@ -12,8 +12,8 @@
 
                 <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css"/>
                 <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
-
 		<script type="text/javascript" src="config.js"></script>
+		<script type="text/javascript" src="avwx.js"></script>
 		<script type="text/javascript" src="markers.js"></script>
 		<script type="text/javascript" src="dbloader.js"></script>
 		<script type="text/javascript" src="registrations.js"></script>
@@ -27,7 +27,6 @@
 		<link rel="stylesheet" href="material/material.min.css">
 		<script src="material/material.min.js"></script>
 		<link rel="stylesheet" href="material/font.css">
-		<script type="text/javascript" src="avwx.js"></script>
 		<title>DUMP1090</title>
 	</head>
 	
@@ -218,10 +217,10 @@
 					
 				</div> <!-- sidebar_canvas -->
 			</div>
-			<div id="metar_container" style="display: none">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="nearestStations(44.37, -69)">
-					Refresh Map
-				  </button>
+			<div id="metar_container" style="display: none">	
+				  <div id="metar_data">
+					  
+				  </div>
 			</div>
 		</div> <!-- sidebar_container -->
 

@@ -1,0 +1,80 @@
+{
+   "meta":{
+      "timestamp":"2020-08-13T01:50:24.250933Z",
+      "stations_updated":"2020-08-09"
+   },
+   "altimeter":{
+      "repr":"A3002",
+      "value":30.02,
+      "spoken":"three zero point zero two"
+   },
+   "clouds":[
+
+   ],
+   "flight_rules":"VFR",
+   "other":[
+
+   ],
+   "sanitized":"KRKD 130056Z 00000KT 10SM 23/20 A3002 RMK AO2 SLP165 T02330200",
+   "visibility":{
+      "repr":"10",
+      "value":10,
+      "spoken":"one zero"
+   },
+   "wind_direction":{
+      "repr":"000",
+      "value":0,
+      "spoken":"zero zero zero"
+   },
+   "wind_gust":null,
+   "wind_speed":{
+      "repr":"00",
+      "value":0,
+      "spoken":"zero"
+   },
+   "wx_codes":[
+
+   ],
+   "raw":"KRKD 130056Z AUTO 00000KT 10SM CLR 23/20 A3002 RMK AO2 SLP165 T02330200",
+   "station":"KRKD",
+   "time":{
+      "repr":"130056Z",
+      "dt":"2020-08-13T00:56:00Z"
+   },
+   "remarks":"RMK AO2 SLP165 T02330200",
+   "dewpoint":{
+      "repr":"20",
+      "value":20,
+      "spoken":"two zero"
+   },
+   "remarks_info":{
+      "dewpoint_decimal":{
+         "repr":"20.0",
+         "value":20.0,
+         "spoken":"two zero point zero"
+      },
+      "temperature_decimal":{
+         "repr":"23.3",
+         "value":23.3,
+         "spoken":"two three point three"
+      }
+   },
+   "runway_visibility":[
+
+   ],
+   "temperature":{
+      "repr":"23",
+      "value":23,
+      "spoken":"two three"
+   },
+   "wind_variable_direction":[
+
+   ],
+   "units":{
+      "altimeter":"inHg",
+      "altitude":"ft",
+      "temperature":"C",
+      "visibility":"sm",
+      "wind_speed":"kt"
+   }
+}
