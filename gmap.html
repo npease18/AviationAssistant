@@ -90,7 +90,7 @@
 		</div>
 
 		<div id="sidebar_container">
-			<div id="radar_container">
+			<div id="radar_container" class="hidden">
 				<div id="sidebar_canvas">
 					<div id="dump1090_infoblock">
 						<table style="width: 100%">
@@ -182,7 +182,7 @@
 						</table>
 					</div> <!-- selected_infoblock -->
 
-					<div id="planes_table">
+					<div id="planes_table" class="hidden">
 						<table id="tableinfo" style="width: 100%">
 							<thead style="background-color: #BBBBBB; cursor: pointer;">
 								<tr>
@@ -217,9 +217,59 @@
 					
 				</div> <!-- sidebar_canvas -->
 			</div>
-			<div id="metar_container" style="display: none">	
-				  <div id="metar_data">
-					  
+			<div id="metar_container" style="display: block">
+				  <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>	
+				  <div id="metar_data" style="display: block">
+					  <h5>Local METAR Reporting Station:</h5>
+					  <h3>KBGR</h3>
+					  <h5>Bangor International Airport</h5>
+					  <h6>KRKD 131856Z AUTO 20007KT 10SM CLR 27/17 A3007 RMK AO2 SLP183 T02720172<br><br>(Updated 35 Minutes Ago)</h6>
+					  <table style="width: 100%">
+						  <tbody>
+							  <tr>
+								  <td style="text-align: center">
+									<h4>70 &#8457</h4>
+									Temperature  
+								  </td>
+								  <td style="text-align: center">
+									<h4>30.07 M</h4>
+									Altimeter
+								  </td>
+								  <td style="text-align: center">
+									<h4>10</h4>
+									Visibility
+								  </td>
+							  </tr>
+							  <tr>
+								<td style="text-align: center">
+								  <h4>7 kts</h4>
+								  Wind Speed  
+								</td>
+								<td style="text-align: center">
+								  <h4>200</h4>
+								  Wind Direction
+								</td>
+								<td style="text-align: center">
+								  <h4>N/A</h4>
+								  Wind Gusts
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: center">
+								  <h4>70 &#8457</h4>
+								  Dew Point  
+								</td>
+								<td style="text-align: center">
+								  <h4>VFR</h4>
+								  Flight Rules
+								</td>
+								<td style="text-align: center">
+								  <h4>Small</h4>
+								  Airport Size
+								</td>
+							</tr>
+						  </tbody>
+					  </table>					  
 				  </div>
 			</div>
 		</div> <!-- sidebar_container -->
