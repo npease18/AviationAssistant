@@ -161,6 +161,7 @@ function fetchData() {
 
 var PositionHistorySize = 0;
 function initialize() {
+       
         // Set page basics
         document.title = PageName;
 
@@ -198,7 +199,7 @@ function initialize() {
 
         readBatteryLevel()
         window.setInterval(readBatteryLevel, 1000);
-        
+
         $("#loader").removeClass("hidden");
         
         // Get receiver metadata, reconfigure using it, then continue
@@ -469,7 +470,15 @@ function initialize_map() {
                 loadTilesWhileInteracting: true
         });
 
-	// Listeners for newly created Map
+        
+            // Listeners for newly created Map
+        OLMap.on("moveend", function() {
+                var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
+                if (TAB === 'METAR') {
+                        nearestStations(center[1],center[0])
+                }
+        })
+
         OLMap.getView().on('change:center', function(event) {
                 var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
                 localStorage['CenterLon'] = center[0]
