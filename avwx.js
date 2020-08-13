@@ -1,7 +1,10 @@
 var baseurl = "https://avwx.rest/api/"
 
 function nearestStations(x,y) {
-    FetchPending = $.ajax({ url: baseurl + 'station/near/'+x+','+y+'?n=10&airport='+true+'&reporting='+true+'&format=json',
+    FetchPending = $.ajax({ url: baseurl + 'metar/'+x+','+y+'?'+AVWX+'&format=json',
+                    beforeSend: function(request) { 
+                        request.setRequestHeader("Authority", AVWX);
+                    },
                                     timeout: 5000,
                                     cache: false,
                                     dataType: 'json',
