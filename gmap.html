@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="script.js"></script>
 		<script type="text/javascript" src="script2.js"></script>
 		<script type="text/javascript" src="excanvas.min.js"></script>
+		<script type="text/javascript" src="liveatc.js"></script>
 		<link rel="stylesheet" href="material/material.min.css">
 		<script src="material/material.min.js"></script>
 		<link rel="stylesheet" href="material/font.css">
@@ -58,6 +59,10 @@
 			<!-- Raised button with ripple -->
 			<button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openMetar()">
 				METAR
+			</button>
+			<!-- Raised button with ripple -->
+			<button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
+				LiveATC
 			</button>
 			<span style="float: right;">
 				<span class="space-nopad center">
@@ -271,6 +276,9 @@
 						  </tbody>
 					  </table>					  
 				  </div>
+			</div>
+			<div id="atc_container" style="display: none">
+				<div id="atc_radio"></div>
 			</div>
 		</div> <!-- sidebar_container -->
 
