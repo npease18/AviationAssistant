@@ -18,6 +18,7 @@ function openATC() {
     document.getElementById("radar_container").style.display = "none"
     document.getElementById("atc_container").style.display = "block"
     TAB = "ATC"
+    listStations()
 }
 
 function readBatteryLevel() {
