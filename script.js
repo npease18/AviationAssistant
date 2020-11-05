@@ -227,6 +227,14 @@ function initialize() {
                         initialize_map();
                         start_load_history();
                 });
+                // Settings Modal
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                if (event.target == document.getElementById("settings_modal")) {
+                document.getElementById("settings_modal").style.display = "none";
+                }
+                }
 }
 
 var CurrentHistoryFetch = null;
