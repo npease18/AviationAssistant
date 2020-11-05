@@ -4,7 +4,7 @@ function openMetar() {
     document.getElementById("atc_container").style.display = "none"
     TAB = "METAR"
     var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
-    nearestStations(center[1],center[0])
+    nearestStations(center[1], center[0])
 }
 
 function openRadar() {
@@ -13,6 +13,7 @@ function openRadar() {
     document.getElementById("atc_container").style.display = "none"
     TAB = "RADAR"
 }
+
 function openATC() {
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "none"
@@ -22,29 +23,31 @@ function openATC() {
 }
 
 function readBatteryLevel() {
-    FetchPending = $.ajax({ url: 'data/battery.json',
-                                timeout: 5000,
-                                cache: false,
-                                dataType: 'json' });
+    FetchPending = $.ajax({
+        url: 'data/battery.json',
+        timeout: 5000,
+        cache: false,
+        dataType: 'json'
+    });
     FetchPending.done(function(data) {
         document.getElementById("percentage").innerHTML = data.percentage[0].level + "%"
         battery = data.adapter[0].status
         if (battery === "in") {
             document.getElementById('battery').innerHTML = "battery_charging_full"
-	    console.log("charging")
+            console.log("charging")
         } else if (data.percentage[0].level < 21) {
             document.getElementById('battery').innerHTML = "battery_alert"
-	    console.log("low")
+            console.log("low")
         } else {
             document.getElementById('battery').innerHTML = "battery_full"
             console.log("full")
-	}
+        }
     });
 
 }
 
 function celciusToF(number) {
-    return number * 9/5 + 32
+    return number * 9 / 5 + 32
 }
 
 function metersToF(number) {
@@ -59,4 +62,9 @@ function numToCompass(num) {
 
 function ktsToMPH(num) {
     return num * 1.15078
+}
+
+function showInformation() {
+    document.getElementById("settings_information").style.display = "block"
+
 }
