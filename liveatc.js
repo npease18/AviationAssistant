@@ -72,6 +72,9 @@ function selectState(state) {
                 document.getElementById("atc_selector").appendChild(node)
             }
         }
+        var node = document.createElement("div")
+        node.innerHTML = "<br><br><br>"
+        document.getElementById("atc_selector").appendChild(node)
     })
 }
 
@@ -109,6 +112,10 @@ function selectAirport(airport, state) {
                 node.setAttribute("onclick", "playPLS('"+data[airport].url+"','"+data[airport].name+"')")
                 node.innerHTML = "<b>"+data[airport].name+"</b>"
                 document.getElementById("atc_selector").appendChild(node)
+                
         }
+        var node = document.createElement("div")
+        node.innerHTML = "<br><br><br>"
+        document.getElementById("atc_selector").appendChild(node)
     })
 }
