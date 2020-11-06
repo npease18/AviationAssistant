@@ -8,9 +8,8 @@ def login():
    if request.method == 'POST':
       json = request.get_json()
       if json['direction']:
-          print("up")
-	  level = os.popen('vol +').read()
-          print("Reported Level: " + str(level))
+    	  level = os.popen('vol +').read()
+      print("Reported Level: " + str(level))
       return str(level)
 
 @app.after_request
