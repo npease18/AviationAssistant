@@ -9,7 +9,10 @@ def login():
       json = request.get_json()
       if json['direction']:
     	  level = os.popen('vol +').read()
-      print("Reported Level: " + str(level))
+      elif json['direction'] == 0:
+        level = os.popen('vol i').read()
+      elif json['direction'] == 2:
+        level = os.popen('vol').read()
       return str(level)
 
 @app.after_request
