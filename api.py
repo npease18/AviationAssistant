@@ -1,12 +1,24 @@
-from flask import Flask, json
+from flask import Flask, json, request
+import os
 
-companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+app = Flask(__name__)
 
-api = Flask(__name__)
+@app.route('/audio',methods = ['POST'])
+def login():
+   if request.method == 'POST':
+      json = request.get_json()
+      if json['direction']:
+          print("up")
+          os.system("vol +")
+      return "Received JSON File"
 
-@api.route('/companies', methods=['GET'])
-def get_companies():
-  return json.dumps(companies)
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'POST')
+  return response
+
 
 if __name__ == '__main__':
-    api.run()
+    app.run()
