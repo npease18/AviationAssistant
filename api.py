@@ -10,7 +10,7 @@ def login():
       if json['direction']:
     	  level = os.popen('vol +').read()
       elif json['direction'] == 0:
-        level = os.popen('vol i').read()
+        level = os.popen('vol -').read()
       elif json['direction'] == 2:
         level = os.popen('vol').read()
       return str(level)
