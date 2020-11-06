@@ -76,6 +76,7 @@ function volUp() {
     xhr.send(JSON.stringify({
         direction: 1
     }));
+    console.log(xhr.response)
     document.getElementById("volume_level").innerHTML = xhr.response
 }
 
@@ -86,6 +87,7 @@ function volDown() {
     xhr.send(JSON.stringify({
         direction: 0
     }));
+    console.log(xhr.response)
     document.getElementById("volume_level").innerHTML = xhr.response
 }
 
