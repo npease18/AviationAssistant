@@ -9,8 +9,8 @@ def login():
       json = request.get_json()
       if json['direction']:
           print("up")
-          os.system("vol +")
-      return "Received JSON File"
+          level = os.system("vol +")
+      return level
 
 @app.after_request
 def after_request(response):
