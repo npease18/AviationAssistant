@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/audio',methods = ['POST'])
-def login():
+def volume():
    if request.method == 'POST':
       json = request.get_json()
       if json['direction']:
@@ -14,6 +14,14 @@ def login():
       elif json['direction'] == 2:
         level = os.popen('vol').read()
       return str(level)
+
+@app.route('/cmd',methods = ['POST'])
+def command():
+   if request.method == 'POST':
+      json = request.get_json()
+      os.system(json['command'])
+      return "404 Good Request"
+
 
 @app.after_request
 def after_request(response):
