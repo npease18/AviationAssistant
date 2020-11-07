@@ -133,3 +133,12 @@ function offlineToggle() {
     }
 
 }
+
+function updates() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        command: "echo Hi"
+    }));
+}
