@@ -68,3 +68,49 @@ function showInformation() {
     document.getElementById("settings_information").style.display = "block"
 
 }
+
+function volUp() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log(xhr.response)
+            document.getElementById("volume_level").innerHTML = xhr.response
+        }
+    }
+    xhr.send(JSON.stringify({
+        direction: 1
+    }));
+
+}
+
+function volDown() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log(xhr.response)
+            document.getElementById("volume_level").innerHTML = xhr.response
+        }
+    }
+    xhr.send(JSON.stringify({
+        direction: 0
+    }));
+}
+
+function getInitialVolume() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log(xhr.response)
+            document.getElementById("volume_level").innerHTML = xhr.response
+        }
+    }
+    xhr.send(JSON.stringify({
+        direction: 2
+    }));
+}
