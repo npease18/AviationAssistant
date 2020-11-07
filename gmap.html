@@ -76,7 +76,7 @@
         </span>
         <span class="space center">
 			<!-- FAB button with ripple -->
-			<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="">
+			<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
 				<i class="material-icons">remove</i>
 			</button>
 			<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
@@ -85,11 +85,11 @@
         </label> -->
         </span>
         <span class="space center">
-			Volume
-		</span>
+			Volume - <span id="volume_level">N/A</span>%
+        </span>
         <span class="space center">
 	<!-- FAB button with ripple -->
-	<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="">
+	<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
 		<i class="material-icons">add</i>
 	</button>
 	<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
