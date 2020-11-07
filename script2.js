@@ -66,7 +66,13 @@ function ktsToMPH(num) {
 
 function showInformation() {
     document.getElementById("settings_information").style.display = "block"
+    document.getElementById("settings_default").style.display = "none"
 
+}
+
+function showDefault() {
+    document.getElementById("settings_default").style.display = "block"
+    document.getElementById("settings_information").style.display = "none"
 }
 
 function volUp() {
@@ -113,4 +119,17 @@ function getInitialVolume() {
     xhr.send(JSON.stringify({
         direction: 2
     }));
+}
+
+function offlineToggle() {
+    if (document.getElementById("switch-1").checked) {
+        openRadar()
+        document.getElementById("metar_button").disabled = true;
+        document.getElementById("liveatc_button").disabled = true;
+        document.getElementById("player").pause()
+    } else {
+        document.getElementById("metar_button").disabled = false;
+        document.getElementById("liveatc_button").disabled = false;
+    }
+
 }

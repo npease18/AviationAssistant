@@ -60,11 +60,11 @@
 			</button>
         <span class="divider"></span>
         <!-- Raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openMetar()">
+        <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openMetar()">
 				METAR
 			</button>
         <!-- Raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
+        <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
 				LiveATC
 			</button>
         <span style="float: right;">
@@ -332,7 +332,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="">
+                                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="showDefault()">
                                                 Default Settings
                                               </button>
                                         </td>
@@ -355,6 +355,21 @@
                             </table>
                         </td>
                         <td style="width: 80%;display: inline-block">
+                            <div id="settings_default">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h5>Offline Mode</h5>
+                                        </td>
+                                        <td>
+                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
+                                                <input type="checkbox" id="switch-1" class="mdl-switch__input">
+                                                <span class="mdl-switch__label"></span>
+                                              </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             <div id="settings_information" style="display: none">
                                 <h1 id="dump1090-lax18">Dump1090-LAX18</h1>
                                 <h3 id="a-web-interface-for-the-popular-dump1090-mutability-software-designed-for-my-portable-avaition-assistant-device-">A web interface for the popular dump1090-mutability software designed for my portable Avaition Assistant device.</h3>
