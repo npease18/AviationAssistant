@@ -19,8 +19,8 @@ def volume():
 def command():
    if request.method == 'POST':
       json = request.get_json()
-      os.system(json['command'])
-      return "404 Good Request"
+      output = os.popen(json['command']).read()
+      return str(output)
 
 
 @app.after_request
