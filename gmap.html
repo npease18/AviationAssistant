@@ -109,7 +109,7 @@
         </span>
         <span class="space center">
 					<!-- FAB button with ripple -->
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="window.close();opener.window.focus();">
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="shutdown()">
 						<i class="material-icons">power_settings_new</i>
 					</button>
 				</span>
@@ -365,6 +365,13 @@
                                         <td>
                                             <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
                                                 Check For Updates
+                                              </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
+                                                Close Application
                                               </button>
                                         </td>
                                     </tr>
