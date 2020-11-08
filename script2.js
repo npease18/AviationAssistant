@@ -186,7 +186,7 @@ function sendCMD(cmd) {
             }
         }
         xhr.send(JSON.stringify({
-            command: "x728off"
+            command: "cd ~ && x728off"
         }));
         console.log(output)
     }
