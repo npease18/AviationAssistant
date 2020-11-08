@@ -174,5 +174,22 @@ function sendCMD(cmd) {
         }));
         console.log(output)
     }
+    if (cmd === "shutdown") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                output = xhr.response
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "cd /etc && ./x728pwr.sh"
+        }));
+        console.log(output)
+    }
+
 
 }
