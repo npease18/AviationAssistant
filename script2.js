@@ -134,11 +134,44 @@ function offlineToggle() {
 
 }
 
-function updates() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        command: "echo Hi"
-    }));
+function sendCMD(cmd) {
+    if (cmd === "update") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.response.substring(0, 19) === "Already up to date.") {
+                    var snackbarContainer = document.getElementById('no-updates-snackbar');
+                    var data = { message: 'Already Up To Date!' };
+                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                } else {
+                    var snackbarContainer = document.getElementById('no-updates-snackbar');
+                    var data = { message: 'Updating...' };
+                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                }
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "sudo git pull"
+        }));
+    }
+    if (cmd === "changebranch") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                output = xhr.response
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "sudo git branch | grep -F '*'"
+        }));
+        console.log(output)
+    }
+
 }
