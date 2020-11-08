@@ -186,7 +186,7 @@ function sendCMD(cmd) {
             }
         }
         xhr.send(JSON.stringify({
-            command: "cd ~ && x728off"
+            command: "cd /usr/local/bin && sudo x728softsd.sh"
         }));
         console.log(output)
     }
