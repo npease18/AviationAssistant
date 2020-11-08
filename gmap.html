@@ -363,7 +363,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button class="mdl-button mdl-js-button mdl-button--raised" onclick="updates()">
+                                            <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
                                                 Check For Updates
                                               </button>
                                         </td>
@@ -393,6 +393,10 @@
     </div>
 
     <div id="container_splitter"></div>
+    <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
 </body>
 
 </html>
