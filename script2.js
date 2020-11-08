@@ -142,6 +142,7 @@ function sendCMD(cmd) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
+                console.log(xhr.response + "A")
                 if (xhr.response.substring(0, 19) === "Already up to date.") {
                     var snackbarContainer = document.getElementById('no-updates-snackbar');
                     var data = { message: 'Already Up To Date!' };
