@@ -19,6 +19,7 @@ def volume():
 def command():
    if request.method == 'POST':
       json = request.get_json()
+      os.system("cd /usr/share/dump1090-mutability/html")
       output = os.popen(json['command']).read()
       return str(output)
 
