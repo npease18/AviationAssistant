@@ -186,7 +186,7 @@ function sendCMD(cmd) {
             }
         }
         xhr.send(JSON.stringify({
-            command: "cd /etc && ./x728pwr.sh"
+            command: "x728off"
         }));
         console.log(output)
     }
