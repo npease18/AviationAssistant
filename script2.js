@@ -133,3 +133,81 @@ function offlineToggle() {
     }
 
 }
+
+function sendCMD(cmd) {
+    if (cmd === "update") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response + "A")
+                if (xhr.response.substring(0, 19) === "Already up to date.") {
+                    var snackbarContainer = document.getElementById('no-updates-snackbar');
+                    var data = { message: 'Already Up To Date!' };
+                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                } else {
+                    var snackbarContainer = document.getElementById('no-updates-snackbar');
+                    var data = { message: 'Updating...' };
+                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                }
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "sudo git pull"
+        }));
+    }
+    if (cmd === "getbranch") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                output = xhr.response
+                var current_branch = output.substr(2, output.length - 3)
+                if (current_branch === 'unstable') {
+                    document.getElementById("branch_name").innerHTML = "stable"
+                    document.getElementById("branch_button").setAttribute("onclick", "changeBranch('master')")
+                } else {
+                    document.getElementById("branch_name").innerHTML = "unstable"
+                    document.getElementById("branch_button").setAttribute("onclick", "changeBranch('unstable')")
+                }
+
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "sudo git branch | grep -F '*'"
+        }));
+
+    }
+    if (cmd === "shutdown") {
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                output = xhr.response
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "cd /usr/local/bin && sudo x728softsd.sh"
+        }));
+        console.log(output)
+    }
+
+
+}
+
+function changeBranch(branch) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        command: "git checkout " + branch
+    }));
+    sendCMD("getbranch")
+}
