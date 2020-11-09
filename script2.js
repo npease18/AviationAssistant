@@ -166,8 +166,15 @@ function sendCMD(cmd) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 output = xhr.response
-                    //var current_branch = output.substr(2, output.length - 2)
-                console.log(output)
+                var current_branch = output.substr(2, output.length - 3)
+                if (current_branch === 'unstable') {
+                    document.getElementById("branch_name").innerHTML = "stable"
+                    document.getElementById("branch_button").setAttribute("onclick", "changeBranch('master')")
+                } else {
+                    document.getElementById("branch_name").innerHTML = "unstable"
+                    document.getElementById("branch_button").setAttribute("onclick", "changeBranch('unstable')")
+                }
+
             }
         }
         xhr.send(JSON.stringify({
@@ -195,6 +202,12 @@ function sendCMD(cmd) {
 
 }
 
-function checkBranch() {
+function changeBranch(branch) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        command: "git checkout " + branch
+    }));
     sendCMD("getbranch")
 }
