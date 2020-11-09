@@ -1,2 +1,5 @@
 # All Scripts to be run at start
-sudo python battery.py
+unclutter &
+cd /usr/share/dump1090-mutability/html
+sudo python battery.py &
+sudo python api.py &
