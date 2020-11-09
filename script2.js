@@ -158,7 +158,7 @@ function sendCMD(cmd) {
             command: "sudo git pull"
         }));
     }
-    if (cmd === "changebranch") {
+    if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
@@ -167,12 +167,13 @@ function sendCMD(cmd) {
             if (xhr.readyState === 4) {
                 console.log(xhr.response)
                 output = xhr.response
+                return output
             }
         }
         xhr.send(JSON.stringify({
             command: "sudo git branch | grep -F '*'"
         }));
-        console.log(output)
+
     }
     if (cmd === "shutdown") {
         var output = ""
@@ -192,4 +193,9 @@ function sendCMD(cmd) {
     }
 
 
+}
+
+function checkBranch() {
+    var branch = sendCMD("getbranch")
+    console.log(branch)
 }
