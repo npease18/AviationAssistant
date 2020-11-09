@@ -19,8 +19,7 @@ def volume():
 def command():
    if request.method == 'POST':
       json = request.get_json()
-      #output = os.popen("cd /usr/share/dump1090-mutability/html && "+json['command']).read()
-      output = os.popen("cd /home/npease/Documents/Projects/avaitionassistant && "+json['command']).read()
+      output = os.popen("cd /usr/share/dump1090-mutability/html && "+json['command']).read(
       return str(output)
 
 
