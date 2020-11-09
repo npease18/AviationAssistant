@@ -167,7 +167,8 @@ function sendCMD(cmd) {
             if (xhr.readyState === 4) {
                 console.log(xhr.response)
                 output = xhr.response
-                return output
+                var current_branch = output.substr(2, output.length - 2)
+                console.log(current_branch)
             }
         }
         xhr.send(JSON.stringify({
