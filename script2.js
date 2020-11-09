@@ -197,5 +197,6 @@ function sendCMD(cmd) {
 
 function checkBranch() {
     var branch = sendCMD("getbranch")
-    console.log(branch)
+    var current_branch = branch.substr(2, branch.length - 2)
+    console.log(current_branch)
 }
