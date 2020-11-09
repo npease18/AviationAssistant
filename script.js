@@ -202,8 +202,10 @@ function initialize() {
         ReceiverClock.tick = (function() {})
     }
 
+    // Initialize my functions
     getInitialVolume()
     readBatteryLevel()
+    checkBranch()
     window.setInterval(readBatteryLevel, 1000);
 
     $("#loader").removeClass("hidden");
