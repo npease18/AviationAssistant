@@ -165,10 +165,9 @@ function sendCMD(cmd) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
-                console.log(xhr.response)
                 output = xhr.response
-                var current_branch = output.substr(2, output.length - 2)
-                console.log(current_branch)
+                    //var current_branch = output.substr(2, output.length - 2)
+                console.log(output)
             }
         }
         xhr.send(JSON.stringify({
