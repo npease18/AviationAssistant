@@ -205,7 +205,7 @@ function initialize() {
     // Initialize my functions
     getInitialVolume()
     readBatteryLevel()
-    checkBranch()
+    sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
 
     $("#loader").removeClass("hidden");
