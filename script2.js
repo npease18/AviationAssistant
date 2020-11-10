@@ -183,6 +183,9 @@ function sendCMD(cmd) {
 
     }
     if (cmd === "shutdown") {
+        var snackbarContainer = document.getElementById('no-updates-snackbar');
+        var data = { message: 'Shutting Down...' };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
