@@ -8,32 +8,7 @@ function createBaseLayers() {
     var timestamps = [];
     var online = [];
     var offline = [];
-
-    if (ChartBundleLayers) {
-        var chartbundleTypes = {
-            sec: "Sectional Charts",
-            tac: "Terminal Area Charts",
-            wac: "World Aeronautical Charts",
-            enrl: "IFR Enroute Low Charts",
-            enra: "IFR Area Charts",
-            enrh: "IFR Enroute High Charts"
-        };
-
-        for (var type in chartbundleTypes) {
-            online.push(new ol.layer.Tile({
-                source: new ol.source.TileWMS({
-                    url: 'http://wms.chartbundle.com/wms',
-                    params: { LAYERS: type },
-                    projection: 'EPSG:3857',
-                    attributions: 'Tiles courtesy of <a href="http://www.chartbundle.com/">ChartBundle</a>'
-                }),
-                name: 'chartbundle_' + type,
-                title: chartbundleTypes[type],
-                type: 'base',
-                group: 'chartbundle'
-            }));
-        }
-    }
+    var aircraft = [];
 
     online.push(new ol.layer.Tile({
         source: new ol.source.OSM(),
@@ -50,6 +25,32 @@ function createBaseLayers() {
         title: 'Satellite',
         type: 'base'
     }));
+
+    if (ChartBundleLayers) {
+        var chartbundleTypes = {
+            sec: "Sectional Charts",
+            tac: "Terminal Area Charts",
+            wac: "World Aeronautical Charts",
+            enrl: "IFR Enroute Low Charts",
+            enra: "IFR Area Charts",
+            enrh: "IFR Enroute High Charts"
+        };
+
+        for (var type in chartbundleTypes) {
+            aircraft.push(new ol.layer.Tile({
+                source: new ol.source.TileWMS({
+                    url: 'http://wms.chartbundle.com/wms',
+                    params: { LAYERS: type },
+                    projection: 'EPSG:3857',
+                    attributions: 'Tiles courtesy of <a href="http://www.chartbundle.com/">ChartBundle</a>'
+                }),
+                name: 'chartbundle_' + type,
+                title: chartbundleTypes[type],
+                type: 'base',
+                group: 'chartbundle'
+            }));
+        }
+    }
 
     offline.push(new ol.layer.Tile({
         source: new ol.source.XYZ({
@@ -113,6 +114,13 @@ function createBaseLayers() {
             name: 'Online Maps',
             title: 'Worldwide Online Maps + Overlays',
             layers: online
+        }));
+    }
+    if (aircraft.length > 0) {
+        layers.push(new ol.layer.Group({
+            name: 'Online Aircraft Maps',
+            title: 'Online Aircraft Maps',
+            layers: aircraft
         }));
     }
 
