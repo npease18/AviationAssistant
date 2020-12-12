@@ -214,3 +214,13 @@ function changeBranch(branch) {
     }));
     sendCMD("getbranch")
 }
+
+function goHome() {
+    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("home_page").style.display = "block"
+}
+
+function openRadar() {
+    document.getElementById("radar_page").style.display = "block"
+    document.getElementById("home_page").style.display = "none"
+}
