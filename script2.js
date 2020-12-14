@@ -220,7 +220,12 @@ function goHome() {
     document.getElementById("home_page").style.display = "block"
 }
 
-function openRadar() {
+function goRadar() {
     document.getElementById("radar_page").style.display = "block"
+    document.getElementById("home_page").style.display = "none"
+}
+
+function goSettings() {
+    document.getElementById("settings_page").style.display = "block"
     document.getElementById("home_page").style.display = "none"
 }

@@ -53,10 +53,55 @@
         <input id="airframes_post_icao" type="hidden" name="ica024" value="">
         <input type="hidden" name="submit" value="submit">
     </form>
-    <div id="home_page">
+    <div id="home_page" style="display: none;">
         <img src="/images/logo.png" class="logo">
+        <table class="home_table">
+            <tr>
+                <td onclick="goRadar()" class="pointer"><img src="images/radar.png"></td>
+                <td class="pointer"><img src="images/itinerary.png"></td>
+                <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
+            </tr>
+        </table>
     </div>
-    <div id="radar_page" style="display: none;">
+    </div>
+    <div id="settings_page" style="display: none;">
+        <span class="close" onclick="document.getElementById('settings_modal').style.display = 'none'">&times;</span>
+        <h4>Settings</h4>
+        <div id="settings_default">
+            <table>
+                <tr>
+                    <td>
+                        <h5>Offline Mode</h5>
+                    </td>
+                    <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
+                            <input type="checkbox" id="switch-1" class="mdl-switch__input">
+                            <span class="mdl-switch__label"></span>
+                          </label></td>
+                </tr>
+            </table>
+            <table style="width: 100%;position:absolute; bottom:0">
+                <tr>
+
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
+                                                Check For Updates
+                                              </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
+                                                Close Application
+                                              </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button" onclick="changeBranch()">
+                                                Change Branch to <span id="branch_name">N/A</span>
+                                              </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="radar_page">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
@@ -319,46 +364,7 @@
 
                 </div>
             </div>
-            <div id="settings_modal" class="modal">
-                <div class="modal-content" style="position: relative">
-                    <span class="close" onclick="document.getElementById('settings_modal').style.display = 'none'">&times;</span>
-                    <h4>Settings</h4>
-                    <div id="settings_default">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5>Offline Mode</h5>
-                                </td>
-                                <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
-                            <input type="checkbox" id="switch-1" class="mdl-switch__input">
-                            <span class="mdl-switch__label"></span>
-                          </label></td>
-                            </tr>
-                        </table>
-                        <table style="width: 100%;position:absolute; bottom:0">
-                            <tr>
 
-                                <td>
-                                    <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
-                                                Check For Updates
-                                              </button>
-                                </td>
-                                <td>
-                                    <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
-                                                Close Application
-                                              </button>
-                                </td>
-                                <td>
-                                    <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button" onclick="changeBranch()">
-                                                Change Branch to <span id="branch_name">N/A</span>
-                                              </button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
         </div>
         <!-- sidebar_container -->
 
@@ -377,6 +383,7 @@
             <button class="mdl-snackbar__action" type="button"></button>
         </div>
     </div>
+
 </body>
 
 </html>
