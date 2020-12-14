@@ -237,6 +237,8 @@ function initialize() {
         initialize_map();
         start_load_history();
     });
+
+
     // Settings Modal
 
     // When the user clicks anywhere outside of the modal, close it
@@ -627,6 +629,7 @@ function initialize_map() {
     request.fail(function(jqxhr, status, error) {
         // no rings available, do nothing
     });
+    goHome()
 }
 
 // This looks for planes to reap out of the master Planes variable
