@@ -342,6 +342,20 @@ td#seen {
     margin-top: 10%;
 }
 
+.settingslogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 2 %;
+}
+
+.settingstext {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .home_table {
     margin-left: auto;
     margin-right: auto;
