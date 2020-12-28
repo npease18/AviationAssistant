@@ -169,7 +169,6 @@ function initialize() {
 
     // Set page basics
     document.title = PageName;
-
     PlaneRowTemplate = document.getElementById("plane_row_template");
 
     if (!ShowClocks) {
@@ -496,9 +495,23 @@ function initialize_map() {
 
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
-        var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
         if (TAB === 'METAR') {
-            nearestStations(center[1], center[0])
+            var center = OLMap.getView().getCenter()
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://cors-anywhere.herokuapp.com/epsg.io/trans?x=" + center[0] + "&y=" + center[1] + "&s_srs=3857&t_srs=4326", true);
+            xhr.setRequestHeader('Content-Type', 'application/json', "mode", "cors");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.response)
+                    var output = xhr.response
+                    var coordinates = JSON.parse(output)
+                    var long = parseFloat(coordinates.x).toFixed(2)
+                    var lat = parseFloat(coordinates.y).toFixed(2)
+
+                    nearestStations(long, lat)
+                }
+            }
+            xhr.send()
         }
     })
 
