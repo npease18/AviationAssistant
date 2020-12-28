@@ -2,7 +2,7 @@ var baseurl = "https://avwx.rest/api/"
 
 function nearestStations(x, y) {
     FetchPending = $.ajax({
-        url: baseurl + 'metar/' + x + ',' + y + '?options=info&format=json',
+        url: baseurl + 'metar/' + y + ',' + x + '?options=info&format=json',
         timeout: 5000,
         cache: false,
         dataType: 'json',
