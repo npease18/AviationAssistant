@@ -1,7 +1,7 @@
 function playPLS(url, title) {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     var request = $.ajax({
-        url: 'liveatc.json',
+        url: 'json/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
