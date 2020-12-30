@@ -17,21 +17,34 @@ div.atc_state {
 }
 
 div#nav_bar {
-    float: top;
+    position: fixed;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 40px;
     border: 2px solid black;
     padding: 2px;
+    z-index: 1;
+    background: white;
 }
 
 div#map_container {
-    float: left;
+    position: fixed;
+    top: 50px;
     width: 100%;
     height: 100%;
 }
 
 div#map_canvas {
     margin-right: 325px;
+}
+
+div#sidebar_container {
+    position: absolute;
+    right: 0px;
+    top: 50px;
+    width: 325px;
+    height: 100%;
 }
 
 #nav_bar.divider {
@@ -77,13 +90,6 @@ div#map_canvas {
 .center {
     display: table-cell;
     vertical-align: middle;
-}
-
-div#sidebar_container {
-    float: left;
-    width: 325px;
-    margin-left: -325px;
-    height: 100%;
 }
 
 div#SpecialSquawkWarning {
