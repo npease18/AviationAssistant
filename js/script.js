@@ -496,6 +496,7 @@ function initialize_map() {
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
+        console.log(center)
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
