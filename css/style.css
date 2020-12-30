@@ -37,6 +37,7 @@ div#map_container {
 
 div#map_canvas {
     margin-right: 325px;
+    height: 100%;
 }
 
 div#sidebar_container {
