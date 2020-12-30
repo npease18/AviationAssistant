@@ -28,13 +28,11 @@ div#nav_bar {
 div#map_container {
     float: left;
     width: 100%;
-    height: 95%;
-    overflow: hidden
+    height: 100%;
 }
 
 div#map_canvas {
-    height: 100%;
-    margin-right: 420px;
+    margin-right: 325px;
 }
 
 #nav_bar.divider {
@@ -84,10 +82,9 @@ div#map_canvas {
 
 div#sidebar_container {
     float: left;
-    width: 410px;
-    margin-left: -410px;
+    width: 325px;
+    margin-left: -325px;
     height: 100%;
-    overflow: auto;
 }
 
 div#SpecialSquawkWarning {
