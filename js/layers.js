@@ -13,19 +13,45 @@ function createBaseLayers() {
     online.push(new ol.layer.Tile({
         source: new ol.source.OSM(),
         name: 'osm',
-        title: 'OpenStreetMap',
+        title: 'Street View (OSM)',
         type: 'base',
+    }));
+
+
+    online.push(new ol.layer.Tile({
+        name: 'bing',
+        title: 'Dark Street View (Bing)',
+        type: 'base',
+        source: new ol.source.BingMaps({
+            key: Bing,
+            imagerySet: 'CanvasDark',
+            // use maxZoom 19 to see stretched tiles instead of the BingMaps
+            // "no photos at this zoom level" tiles
+            maxZoom: 19
+        }),
     }));
 
     online.push(new ol.layer.Tile({
         source: new ol.source.XYZ({
-            url: 'https://1.aerial.maps.ls.hereapi.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?apiKey=***REMOVED***'
+            url: 'https://1.aerial.maps.ls.hereapi.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?apiKey=' + hereapi
         }),
         name: 'satellite',
         title: 'Satellite',
         type: 'base'
     }));
 
+    online.push(new ol.layer.Tile({
+        name: 'bing',
+        title: 'Satellite with Labels (Bing)',
+        type: 'base',
+        source: new ol.source.BingMaps({
+            key: Bing,
+            imagerySet: 'AerialWithLabelsOnDemand',
+            // use maxZoom 19 to see stretched tiles instead of the BingMaps
+            // "no photos at this zoom level" tiles
+            maxZoom: 19
+        }),
+    }));
     if (ChartBundleLayers) {
         var chartbundleTypes = {
             sec: "Sectional Charts",
