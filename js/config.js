@@ -7,7 +7,8 @@
 
 // API KEYS
 AVWX = "iQVBsTZ23RhmA3VFcq3F56bugGV0mdWiKGPmjjv-vtU";
-
+Bing = "AtcYqBYw7POt0hbsOzaly0Jk4KWee4kONk313tlEYYlm13LfWc1Tur2lrVOTf7H7"
+hereapi = "RHCqPHtxjzUA7yVk9pyirunxvo2QnxPNjMk7jx75FgM"
 
 // Open Page
 TAB = "RADAR"
@@ -33,8 +34,8 @@ ShowOtherUnits = true;
 // degrees.
 
 // Default center of the map.
-DefaultCenterLat = 45.0;
-DefaultCenterLon = 9.0;
+DefaultCenterLat = 44.845;
+DefaultCenterLon = -69.344;
 // The google maps zoom level, 0 - 16, lower is further out
 DefaultZoomLvl = 7;
 

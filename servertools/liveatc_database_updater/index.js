@@ -6,20 +6,23 @@ var json = {}
 var progress = 0
 
 function requestWebsite(airport, number) {
-    if (airport_json[airport].country === "US") {
-        var options = {
-            url: "https://www.liveatc.net/search/?icao=" + airport,
-            timeout: 0
+    var options = {
+        url: "https://www.liveatc.net/search/?icao=" + airport,
+        timeout: 0,
+        followRedirect: false,
+        headers: {
+            'Connection': 'keep-alive'
         }
-        request(options, function(err, res, body) {
-            if (err) {
-                console.error(err)
-            }
-            progress++
-            console.log("[GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
-            parseData(body, airport)
-        })
     }
+    request(options, function(err, res, body) {
+        if (err) {
+            console.error(err)
+        }
+        progress++
+        console.log("[GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
+        console.log(res.statusCode)
+        parseData(body, airport)
+    })
 }
 
 function parseData(body, airport) {
@@ -65,7 +68,9 @@ function parseData(body, airport) {
     }
 }
 for (airport in airport_json) {
-    requestWebsite(airport_json[airport].icao)
+    if (airport_json[airport].country === "US") {
+        requestWebsite(airport_json[airport].icao)
+    }
 }
 
 setTimeout(function() {
