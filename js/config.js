@@ -6,12 +6,19 @@
 // --------------------------------------------------------
 
 // API KEYS
-AVWX = "iQVBsTZ23RhmA3VFcq3F56bugGV0mdWiKGPmjjv-vtU";
-Bing = "AtcYqBYw7POt0hbsOzaly0Jk4KWee4kONk313tlEYYlm13LfWc1Tur2lrVOTf7H7"
-hereapi = "RHCqPHtxjzUA7yVk9pyirunxvo2QnxPNjMk7jx75FgM"
+var keys = {}
+    // API Keys
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "json/keys.json", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+        keys = JSON.parse(xhr.response)
+    }
+}
+xhr.send();
 
-// Open Page
-TAB = "RADAR"
+var TAB = "Radar"
 
 // -- Title Settings --------------------------------------
 // Show number of aircraft and/or messages per second in the page title

@@ -372,10 +372,37 @@ td#seen {
     width: 30%;
 }
 
-#home_page>table>tbody>tr>td {}
+#settingstext>table {
+    margin: auto;
+}
+
+#settingstext>table>tbody>tr>td {
+    padding: 15px;
+}
+
+#settingstext>table>tbody>tr:nth-child(2)>td {
+    position: relative;
+    top: 0;
+    left: -25%;
+}
+
+#brightness-text {
+    position: relative;
+    top: -17px;
+    left: 100px;
+}
+
+#settingstext>table>tbody>tr>td>button {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
 #home_page>table>tbody>tr>td>img {
-    width: 90%
+    width: 90%;
 }
 
 #arrivals {
