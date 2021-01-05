@@ -128,7 +128,7 @@ function readBrightnessLevel() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             brightness = parseFloat(xhr.response)
-            document.getElementById("brightness_level").innerHTML
+            document.getElementById("brightness_level").innerHTML = brightness
         }
     }
     xhr.send(JSON.stringify({
