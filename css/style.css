@@ -28,6 +28,13 @@ div#nav_bar {
     background: white;
 }
 
+div#itinerary_body {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 100%;
+}
+
 div#map_container {
     position: fixed;
     top: 50px;
@@ -363,5 +370,36 @@ td#seen {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
-    s
+}
+
+#arrivals {
+    margin: auto;
+    width: fit-content;
+    display: inline-table;
+    padding: 5px;
+}
+
+#departures {
+    margin: auto;
+    width: fit-content;
+    display: inline-table;
+    padding: 5px;
+}
+
+#sch-arrivals {
+    margin: auto;
+    width: fit-content;
+    display: inline-table;
+    padding: 5px;
+}
+
+#sch-departures {
+    margin: auto;
+    width: fit-content;
+    display: inline-table;
+    padding: 5px;
+}
+
+.airportBoard {
+    border: black solid 2px;
 }

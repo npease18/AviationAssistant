@@ -28,6 +28,7 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/script2.js"></script>
     <script type="text/javascript" src="js/excanvas.min.js"></script>
+    <script type="text/javascript" src="js/schedules.js"></script>
     <script type="text/javascript" src="js/liveatc.js"></script>
     <link rel="stylesheet" href="material/material.min.css">
     <script src="material/material.min.js"></script>
@@ -59,11 +60,28 @@
         <table class="home_table">
             <tr>
                 <td onclick="goRadar()" class="pointer"><img src="images/radar.png"></td>
-                <td class="pointer"><img src="images/itinerary.png"></td>
+                <td class="pointer" onclick="goItinerary()"><img src="images/itinerary.png"></td>
                 <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
             </tr>
         </table>
     </div>
+    <div id="itinerary_page" style="display: none;">
+        <div id="nav_bar">
+            <!-- Raised button with ripple -->
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+                <i class="material-icons">home</i>
+            </button>
+            <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()">
+              </select>
+            <select id="itinerary_airports" name="airports" style="display: none;" onchange="airportSchedule()">
+            </select>
+        </div>
+        <div id="itinerary_body">
+            <div id="arrivals"></div>
+            <div id="departures"></div><br>
+            <div id="sch-arrivals"></div>
+            <div id="sch-departures"></div>
+        </div>
     </div>
     <div id="settings_page" style="display: none;">
         <a href="javascript:goHome()"><img src="images/logo.png" class="settingslogo"></a>

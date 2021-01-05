@@ -216,18 +216,28 @@ function changeBranch(branch) {
 }
 
 function goHome() {
+    document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
 }
 
 function goRadar() {
+    document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "block"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
 }
 
+function goItinerary() {
+    document.getElementById("itinerary_page").style.display = "block"
+    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("home_page").style.display = "none"
+    document.getElementById("settings_page").style.display = "none"
+}
+
 function goSettings() {
+    document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
