@@ -38,7 +38,7 @@
 
 <body onload="initialize()" scroll="no">
     <div id="loader" class="hidden">
-        <img src="spinny.gif" id="spinny" alt="Loading...">
+        <img src="images/spinny.gif" id="spinny" alt="Loading...">
         <progress id="loader_progress"></progress>
     </div>
 
@@ -104,30 +104,31 @@
                     <td>
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
-                        </button> Brightness (<span id="brightness_level"></span>)
+                        </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
                     </td>
                 </tr>
-            </table>
-            <table style="width: 100%;position:absolute; bottom:0">
                 <tr>
-
                     <td>
                         <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
-                                                Check For Updates
-                                              </button>
+                            Check For Updates
+                          </button>
                     </td>
+                </tr>
+                <tr>
                     <td>
                         <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
-                                                Close Application
-                                              </button>
+                            Close Application
+                          </button>
                     </td>
+                </tr>
+                <tr>
                     <td>
                         <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button" onclick="changeBranch()">
-                                                Change Branch to <span id="branch_name">N/A</span>
-                                              </button>
+                            Change Branch to <span id="branch_name">N/A</span>
+                          </button>
                     </td>
                 </tr>
             </table>
