@@ -146,6 +146,7 @@ function setBrightness(direction) {
             xhr.send(JSON.stringify({
                 level: brightness
             }));
+            document.getElementById("brightness_level").innerHTML = brightness
         }
     }
     if (direction === "down") {
@@ -157,10 +158,10 @@ function setBrightness(direction) {
             xhr.send(JSON.stringify({
                 level: brightness
             }));
+            document.getElementById("brightness_level").innerHTML = brightness
         }
 
     }
-    docum
 }
 
 function offlineToggle() {
