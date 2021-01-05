@@ -403,3 +403,8 @@ td#seen {
 .airportBoard {
     border: black solid 2px;
 }
+
+#itinerary_loading {
+    width: 100%;
+    position: fixed
+}

@@ -74,13 +74,17 @@
             <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()">
               </select>
             <select id="itinerary_airports" name="airports" style="display: none;" onchange="airportSchedule()">
-            </select>
+            </select> Courtesy of https://flightaware.com/
         </div>
         <div id="itinerary_body">
-            <div id="arrivals"></div>
-            <div id="departures"></div><br>
-            <div id="sch-arrivals"></div>
-            <div id="sch-departures"></div>
+            <div id="itinerary_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+            <div id="arrivals" style="display: none;"></div>
+            <div id="departures" style="display: none;"></div><br>
+            <div id="sch-arrivals" style="display: none;"></div>
+            <div id="sch-departures" style="display: none;"></div>
+            <div id="itinerary_undefined" style="display: none;">
+                <h2>No Information Available or No Flight Data</h2>
+            </div>
         </div>
     </div>
     <div id="settings_page" style="display: none;">
