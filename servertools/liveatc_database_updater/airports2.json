@@ -1,0 +1,38 @@
+{
+    "KBMI": {
+        "icao": "KBMI",
+        "iata": "BMI",
+        "name": "Central Illinois Regional Airport at Bloomington-Normal",
+        "city": "Bloomington-Normal",
+        "state": "Illinois",
+        "country": "US",
+        "elevation": 871,
+        "lat": 40.47710037,
+        "lon": -88.91590118,
+        "tz": "America\/Chicago"
+    },
+    "KDEN": {
+        "icao": "KDEN",
+        "iata": "DEN",
+        "name": "Denver International Airport",
+        "city": "Denver",
+        "state": "Colorado",
+        "country": "US",
+        "elevation": 5431,
+        "lat": 39.8616981506,
+        "lon": -104.672996521,
+        "tz": "America\/Denver"
+    },
+    "KPYM": {
+        "icao": "KPYM",
+        "iata": "",
+        "name": "Plymouth Municipal Airport",
+        "city": "Plymouth",
+        "state": "Indiana",
+        "country": "US",
+        "elevation": 148,
+        "lat": 41.9090003967,
+        "lon": -70.7287979126,
+        "tz": "America\/New_York"
+    }
+}
