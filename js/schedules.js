@@ -56,6 +56,7 @@ function retrieveSchedule(airport) {
             if (page_nodes.find("#arrivals-board > div").html() === undefined || page_nodes.find("#arrivals-board > div > table > tbody > tr:nth-child(1) > td:nth-child(1)").html() === "&nbsp;") {
                 document.getElementById("itinerary_undefined").style.display = "block"
             } else {
+                document.getElementById("itinerary_undefined").style.display = "none"
                 document.getElementById("arrivals").style.display = "inline-table"
                 document.getElementById("departures").style.display = "inline-table"
                 document.getElementById("sch-arrivals").style.display = "inline-table"

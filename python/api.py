@@ -3,6 +3,17 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/brightness',methods = ['POST'])
+def brightness():
+   if request.method == 'POST':
+      json = request.get_json()
+      if json['level'] < 255 and json['level'] > 15:
+        status = os.popen('echo '+json['level']+' > /sys/class/backlight/rpi_backlight/brightness').read()
+      elif json['level'] == 256:
+        status = os.popen('sudo cat /sys/class/backlight/rpi_backlight/brightness').read()
+      return status
+
+
 @app.route('/audio',methods = ['POST'])
 def volume():
    if request.method == 'POST':
