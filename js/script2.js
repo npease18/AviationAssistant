@@ -121,6 +121,45 @@ function getInitialVolume() {
     }));
 }
 
+function readBrightnessLevel() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            brightness = parseFloat(xhr.response)
+            document.getElementById("brightness_level").innerHTML
+        }
+    }
+    xhr.send(JSON.stringify({
+        level: 256
+    }));
+}
+
+function setBrightness(direction) {
+    if (direction === "up") {
+        if (brightness + 5 <= 255) {
+            brightness = brightness + 5
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                level: brightness
+            }));
+        }
+    } else {
+        if (brightness - 5 <= 15) {
+            brightness = brighness - 5
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                level: brightness
+            }));
+        }
+    }
+}
+
 function offlineToggle() {
     if (document.getElementById("switch-1").checked) {
         openRadar()
