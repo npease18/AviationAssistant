@@ -206,6 +206,7 @@ function initialize() {
     readBatteryLevel()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
+    initializeSchedulesPage();
 
     $("#loader").removeClass("hidden");
 
