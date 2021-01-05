@@ -2,7 +2,7 @@ var us_airports = {}
 
 function initializeSchedulesPage() {
     FetchPending = $.ajax({
-        url: '/json/us_airports.json',
+        url: 'json/us_airports.json',
         timeout: 5000,
         cache: false,
         dataType: 'json',
