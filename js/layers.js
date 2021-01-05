@@ -41,7 +41,7 @@ function createBaseLayers() {
     }));
 
     online.push(new ol.layer.Tile({
-        name: 'bing',
+        name: 'bingaerial',
         title: 'Satellite with Labels (Bing)',
         type: 'base',
         source: new ol.source.BingMaps({
