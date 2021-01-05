@@ -2,6 +2,7 @@
 "use strict";
 
 // Define our global variables
+var brightness = 0
 var OLMap = null;
 var StaticFeatures = new ol.Collection();
 var PlaneIconFeatures = new ol.Collection();
@@ -21,7 +22,7 @@ var SpecialSquawks = {
 // Get current map settings
 var CenterLat, CenterLon, ZoomLvl, MapType;
 
-var Dump1090Version = "v.0.5";
+var Dump1090Version = "v.2.0";
 var RefreshInterval = 1000;
 
 var PlaneRowTemplate = null;
@@ -204,6 +205,7 @@ function initialize() {
     // Initialize my functions
     getInitialVolume()
     readBatteryLevel()
+    readBrightnessLevel()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
     initializeSchedulesPage();
