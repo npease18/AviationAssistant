@@ -6,9 +6,9 @@
 // --------------------------------------------------------
 
 // API KEYS
-AVWX = "***REMOVED***";
-Bing = "***REMOVED***"
-hereapi = "***REMOVED***"
+AVWX = "iQVBsTZ23RhmA3VFcq3F56bugGV0mdWiKGPmjjv-vtU";
+Bing = "AtcYqBYw7POt0hbsOzaly0Jk4KWee4kONk313tlEYYlm13LfWc1Tur2lrVOTf7H7"
+hereapi = "RHCqPHtxjzUA7yVk9pyirunxvo2QnxPNjMk7jx75FgM"
 
 // Open Page
 TAB = "RADAR"
