@@ -147,7 +147,8 @@ function setBrightness(direction) {
                 level: brightness
             }));
         }
-    } else {
+    }
+    if (direction === "down") {
         if (brightness - 5 <= 15) {
             brightness = brighness - 5
             var xhr = new XMLHttpRequest();
@@ -157,7 +158,9 @@ function setBrightness(direction) {
                 level: brightness
             }));
         }
+
     }
+    docum
 }
 
 function offlineToggle() {
