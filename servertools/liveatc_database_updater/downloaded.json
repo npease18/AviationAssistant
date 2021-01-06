@@ -1,1 +1,402 @@
-{}
+{
+    "Alaska": {
+        "airports": {
+            "00AK": {
+                "feeds": "ERROR"
+            },
+            "02AK": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Alabama": {
+        "airports": {
+            "00AL": {
+                "feeds": "ERROR"
+            },
+            "01AL": {
+                "feeds": "ERROR"
+            },
+            "02AL": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Arizona": {
+        "airports": {
+            "00AZ": {
+                "feeds": "ERROR"
+            },
+            "02AZ": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "California": {
+        "airports": {
+            "00CA": {
+                "feeds": "ERROR"
+            },
+            "01CL": {
+                "feeds": "ERROR"
+            },
+            "02CL": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Colorado": {
+        "airports": {
+            "00CO": {
+                "feeds": "ERROR"
+            },
+            "02CO": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Florida": {
+        "airports": {
+            "00FA": {
+                "feeds": "ERROR"
+            },
+            "00FL": {
+                "feeds": "ERROR"
+            },
+            "01FA": {
+                "feeds": "ERROR"
+            },
+            "01FL": {
+                "feeds": "ERROR"
+            },
+            "02FA": {
+                "feeds": "ERROR"
+            },
+            "02FL": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Georgia": {
+        "airports": {
+            "00GA": {
+                "feeds": "ERROR"
+            },
+            "01GE": {
+                "feeds": "ERROR"
+            },
+            "02GA": {
+                "feeds": "ERROR"
+            },
+            "02GE": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Idaho": {
+        "airports": {
+            "00ID": {
+                "feeds": "ERROR"
+            },
+            "01ID": {
+                "feeds": "ERROR"
+            },
+            "02ID": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Illinois": {
+        "airports": {
+            "00IL": {
+                "feeds": "ERROR"
+            },
+            "00IS": {
+                "feeds": "ERROR"
+            },
+            "01IS": {
+                "feeds": "ERROR"
+            },
+            "01LL": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Kansas": {
+        "airports": {
+            "00KS": {
+                "feeds": "ERROR"
+            },
+            "01KS": {
+                "feeds": "ERROR"
+            },
+            "02KS": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Kentucky": {
+        "airports": {
+            "00KY": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Louisiana": {
+        "airports": {
+            "00LS": {
+                "feeds": "ERROR"
+            },
+            "01LA": {
+                "feeds": "ERROR"
+            },
+            "01LS": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Maryland": {
+        "airports": {
+            "00MD": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Minnesota": {
+        "airports": {
+            "00MN": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Missouri": {
+        "airports": {
+            "00MO": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Montana": {
+        "airports": {
+            "00MT": {
+                "feeds": "ERROR"
+            },
+            "01MT": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "North Carolina": {
+        "airports": {
+            "00NC": {
+                "feeds": "ERROR"
+            },
+            "01NC": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "New York": {
+        "airports": {
+            "00NY": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Ohio": {
+        "airports": {
+            "00OH": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Pennsylvania": {
+        "airports": {
+            "00PN": {
+                "feeds": "ERROR"
+            },
+            "00PS": {
+                "feeds": "ERROR"
+            },
+            "01PN": {
+                "feeds": "ERROR"
+            },
+            "01PS": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "South Carolina": {
+        "airports": {
+            "00SC": {
+                "feeds": "ERROR"
+            },
+            "01SC": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Tennessee": {
+        "airports": {
+            "00TN": {
+                "feeds": "ERROR"
+            },
+            "01TN": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Texas": {
+        "airports": {
+            "00TS": {
+                "feeds": "ERROR"
+            },
+            "00XS": {
+                "feeds": "ERROR"
+            },
+            "01TE": {
+                "feeds": "ERROR"
+            },
+            "01TX": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Virginia": {
+        "airports": {
+            "00VA": {
+                "feeds": "ERROR"
+            },
+            "00VI": {
+                "feeds": "ERROR"
+            },
+            "01VA": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Washington": {
+        "airports": {
+            "00WA": {
+                "feeds": "ERROR"
+            },
+            "00WN": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Wisconsin": {
+        "airports": {
+            "00WI": {
+                "feeds": "ERROR"
+            },
+            "01WI": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "West Virginia": {
+        "airports": {
+            "00WV": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Iowa": {
+        "airports": {
+            "01IA": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Indiana": {
+        "airports": {
+            "01II": {
+                "feeds": "ERROR"
+            },
+            "02II": {
+                "feeds": "ERROR"
+            },
+            "02IN": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Nebraska": {
+        "airports": {
+            "01NE": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "New Hampshire": {
+        "airports": {
+            "01NH": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "New Mexico": {
+        "airports": {
+            "01NM": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Nevada": {
+        "airports": {
+            "01NV": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Oklahoma": {
+        "airports": {
+            "01OK": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Oregon": {
+        "airports": {
+            "01OR": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Utah": {
+        "airports": {
+            "01UT": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Wyoming": {
+        "airports": {
+            "01WY": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Arkansas": {
+        "airports": {
+            "02AR": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Mississippi": {
+        "airports": {
+            "02CD": {
+                "feeds": "ERROR"
+            }
+        }
+    },
+    "Maine": {
+        "airports": {
+            "02ME": {
+                "feeds": "ERROR"
+            }
+        }
+    }
+}
