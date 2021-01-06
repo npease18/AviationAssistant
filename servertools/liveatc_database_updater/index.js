@@ -1,17 +1,19 @@
 const request = require('request');
 const cheerio = require('cheerio');
-const airport_json = require('./airports.json')
+const airport_json = require('./us_airports.json')
 var fs = require("fs")
 var json = {}
 var progress = 0
+var tstatus = 0
 
-function requestWebsite(airport, number) {
+function requestWebsite(airport) {
     var options = {
-        url: "https://www.liveatc.net/search/?icao=" + airport,
+        url: "http://192.168.1.20:8080/www.liveatc.net/search/?icao=" + airport,
         timeout: 0,
         followRedirect: false,
         headers: {
-            'Connection': 'keep-alive'
+            'Connection': 'keep-alive',
+            'origin': '*'
         }
     }
     request(options, function(err, res, body) {
@@ -19,8 +21,7 @@ function requestWebsite(airport, number) {
             console.error(err)
         }
         progress++
-        console.log("[GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
-        console.log(res.statusCode)
+        console.log(res.statusCode + " [GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
         parseData(body, airport)
     })
 }
@@ -66,16 +67,22 @@ function parseData(body, airport) {
             }
         });
     }
+    if (progress === Object.keys(airport_json).length) {
+        writeFile()
+    }
 }
 for (airport in airport_json) {
-    if (airport_json[airport].country === "US") {
-        requestWebsite(airport_json[airport].icao)
-    }
-}
+    console.log("Progress: " + tstatus)
+    setTimeout((function(airport) {
+        return function() {
+            // console.log(airport)
+            requestWebsite(airport_json[airport].icao);
+        }
+    })(airport), tstatus * 450);
+    tstatus++
+};
 
-setTimeout(function() {
-    if (progress === Object.keys(airport_json).length) {
-        fs.writeFileSync('downloaded.json', JSON.stringify(json, 0, 4))
-        return;
-    }
-}, 50)
+function writeFile() {
+    fs.writeFileSync('downloaded.json', JSON.stringify(json, 0, 4))
+    console.log("File Written")
+}
