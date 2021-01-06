@@ -76,12 +76,12 @@ function parseData(body, airport) {
 
 const totalairports = io.metric({
     name: 'Total Airports'
-    id: 'app/airports/total',
+    id: 'totalAirports',
 })
 
 const currentAirportName = io.metric({
     name: 'Current Airport Name',
-    id: 'app/airports/current'
+    id: 'currentAirport'
 });
 
 
