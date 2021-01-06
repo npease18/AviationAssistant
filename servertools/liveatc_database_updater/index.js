@@ -24,6 +24,7 @@ function requestWebsite(airport) {
         progress++
         console.log(res.statusCode + " [GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
         currentAirportName.set(airport)
+        currentAirportNumber.set(progress)
         parseData(body, airport)
     })
 }
@@ -82,6 +83,9 @@ const currentAirportName = io.metric({
     name: 'Current Airport Name'
 });
 
+const currentAirportNumber = io.metric({
+    name: 'Current Airport Number'
+});
 
 totalairports.set(Object.keys(airport_json).length)
 
