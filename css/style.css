@@ -132,8 +132,8 @@ div#loader {
     bottom: 0;
     right: 0;
     background: #000;
-    opacity: 0.8;
-    filter: alpha(opacity=80);
+    opacity: 1;
+    filter: alpha(opacity=100);
 }
 
 #spinny {
