@@ -170,9 +170,15 @@ function offlineToggle() {
         document.getElementById("metar_button").disabled = true;
         document.getElementById("liveatc_button").disabled = true;
         document.getElementById("player").pause()
+        document.getElementById("itinerary_button").style.opacity = .4
+        document.getElementById("itinerary_button").classList.remove("pointer")
+        document.getElementById("itinerary_button").removeAttribute("onclick")
     } else {
         document.getElementById("metar_button").disabled = false;
         document.getElementById("liveatc_button").disabled = false;
+        document.getElementById("itinerary_button").style.opacity = 1
+        document.getElementById("itinerary_button").classList.add("pointer")
+        document.getElementById("itinerary_button").setAttribute("onclick", "goItinerary()")
     }
 
 }
