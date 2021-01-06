@@ -1,5 +1,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
+const io = require('@pm2/io')
 const airport_json = require('./us_airports.json')
 var fs = require("fs")
 var json = {}
@@ -22,6 +23,7 @@ function requestWebsite(airport) {
         }
         progress++
         console.log(res.statusCode + " [GET] " + airport + " " + progress + "/" + Object.keys(airport_json).length)
+        currentAirportName.set(airport)
         parseData(body, airport)
     })
 }
@@ -71,6 +73,20 @@ function parseData(body, airport) {
         writeFile()
     }
 }
+
+const totalairports = io.metric({
+    name: 'Total Airports'
+    id: 'app/airports/total',
+})
+
+const currentAirportName = io.metric({
+    name: 'Current Airport Name',
+    id: 'app/airports/current'
+});
+
+
+totalairports.set(Object.keys(airport_json).length)
+
 for (airport in airport_json) {
     console.log("Progress: " + tstatus)
     setTimeout((function(airport) {
