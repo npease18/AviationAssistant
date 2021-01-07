@@ -206,6 +206,7 @@ function initialize() {
     getInitialVolume()
     readBatteryLevel()
     readBrightnessLevel()
+    modal()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
     initializeSchedulesPage();
