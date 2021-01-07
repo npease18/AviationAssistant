@@ -100,6 +100,12 @@ div#sidebar_container {
     vertical-align: middle;
 }
 
+#info_button {
+    position: absolute;
+    right: 10px;
+    bottom: 5px
+}
+
 div#SpecialSquawkWarning {
     position: absolute;
     bottom: 25px;
