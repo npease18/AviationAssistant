@@ -106,6 +106,12 @@ div#sidebar_container {
     bottom: 5px
 }
 
+#info_icon {
+    position: absolute;
+    right: 10px;
+    bottom: 5px
+}
+
 div#SpecialSquawkWarning {
     position: absolute;
     bottom: 25px;
