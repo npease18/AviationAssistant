@@ -396,25 +396,16 @@ td#seen {
     padding: 15px;
 }
 
-#settingstext>table>tbody>tr:nth-child(3)>td {
+#settingstext>table:nth-child(1)>tbody>tr:nth-child(3)>td {
     position: relative;
     top: 0;
     left: -25%;
 }
 
-#brightness-text {
+#settingstext>table:nth-child(1)>tbody>tr:nth-child(3)>td {
     position: relative;
-    top: -17px;
-    left: 100px;
-}
-
-#settingstext>table>tbody>tr>td>button {
-    margin: 0;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: -25%;
 }
 
 #home_page>table>tbody>tr>td>img {
