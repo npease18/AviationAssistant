@@ -15,7 +15,23 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(6, GPIO.IN)
 
 app = Flask(__name__)
+def readVoltage(bus):
 
+     address = 0x36
+     read = bus.read_word_data(address, 2)
+     swapped = struct.unpack("<H", struct.pack(">H", read))[0]
+     voltage = swapped * 1.25 /1000/16
+     return voltage
+
+
+def readCapacity(bus):
+
+     address = 0x36
+     read = bus.read_word_data(address, 4)
+     swapped = struct.unpack("<H", struct.pack(">H", read))[0]
+     capacity = swapped/256
+     return capacity
+     
 @app.route('/battery',methods = ['POST','GET'])
 def writeJSON():
     capacity = readCapacity(bus)
@@ -80,19 +96,4 @@ def after_request(response):
 if __name__ == '__main__':
     app.run()
 
-def readVoltage(bus):
 
-     address = 0x36
-     read = bus.read_word_data(address, 2)
-     swapped = struct.unpack("<H", struct.pack(">H", read))[0]
-     voltage = swapped * 1.25 /1000/16
-     return voltage
-
-
-def readCapacity(bus):
-
-     address = 0x36
-     read = bus.read_word_data(address, 4)
-     swapped = struct.unpack("<H", struct.pack(">H", read))[0]
-     capacity = swapped/256
-     return capacity
