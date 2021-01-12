@@ -1,6 +1,8 @@
 from flask import Flask, json, request
 import os
 
+app = Flask(__name__)
+
 @app.route('/brightness',methods = ['POST'])
 def brightness():
    if request.method == 'POST':
@@ -43,5 +45,3 @@ def after_request(response):
 
 if __name__ == '__main__':
     app.run()
-
-
