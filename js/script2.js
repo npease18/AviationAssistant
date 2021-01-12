@@ -157,6 +157,7 @@ function getCPUTemp() {
         if (xhr.readyState === 4) {
             temp = xhr.response
             temp = temp.substring(5, temp.length - 5)
+            temp = celciusToF(parseFloat(temp))
             document.getElementById("temperature").innerHTML = temp
         }
     }
