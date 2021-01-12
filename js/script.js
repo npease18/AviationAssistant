@@ -209,6 +209,8 @@ function initialize() {
     modal()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
+    getCPUTemp()
+    window.setInterval(getCPUTemp, 30000)
     initializeSchedulesPage();
 
     $("#loader").removeClass("hidden");
