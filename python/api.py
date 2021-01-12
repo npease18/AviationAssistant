@@ -52,7 +52,7 @@ def battery():
     print("HERE")
     data['adapter'] = []
     data['adapter'].append({
-	'status': adapter
+	  'status': adapter
     })
     return data
 
