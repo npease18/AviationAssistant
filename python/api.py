@@ -44,7 +44,7 @@ def battery():
     else:
         # Power Adapter NOT plugged in
     	adapter = "out"
-      print("HERE")
+    print("HERE")
     data['percentage'] = []
     data['percentage'].append({
         'level': capacity,
