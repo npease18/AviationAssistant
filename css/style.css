@@ -43,7 +43,7 @@ div#map_container {
 }
 
 div#map_canvas {
-    margin-right: 385px;
+    margin-right: 390px;
     height: 100%;
 }
 
@@ -51,7 +51,7 @@ div#sidebar_container {
     position: absolute;
     right: 0px;
     top: 50px;
-    width: 385px;
+    width: 390px;
     height: 100%;
 }
 
