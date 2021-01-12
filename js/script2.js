@@ -149,6 +149,22 @@ function getInitialVolume() {
     }));
 }
 
+function getCPUTemp() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            temp = xhr.response
+            temp = temp.substring(5, temp.length - 5)
+            document.getElementById("temperature").innerHTML = temp
+        }
+    }
+    xhr.send(JSON.stringify({
+        command: "vcgencmd measure_temp"
+    }));
+}
+
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
