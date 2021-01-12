@@ -388,6 +388,10 @@ td#seen {
     overflow: hidden;
 }
 
+#settingstext {
+    overflow: hidden;
+}
+
 #settingstext>table {
     margin: auto;
 }
