@@ -35,10 +35,10 @@ def writeJSON():
     voltage = readVoltage(bus)
     if GPIO.input(6):
         # Power Adapter plugged in
-    	adapter = "out"
+    	adapter = "in"
     else:
         # Power Adapter NOT plugged in
-    	adapter = "in"
+    	adapter = "out"
     data['percentage'] = []
     data['percentage'].append({
         'level': capacity,
