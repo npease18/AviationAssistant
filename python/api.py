@@ -31,7 +31,7 @@ def readCapacity(bus):
      read = bus.read_word_data(address, 4)
      swapped = struct.unpack("<H", struct.pack(">H", read))[0]
      capacity = swapped/256
-     print(voltage)
+     print(capacity)
      return capacity
 
 @app.route('/battery',methods = ['POST','GET'])
