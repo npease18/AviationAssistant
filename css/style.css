@@ -42,6 +42,21 @@ div#map_container {
     height: 100%;
 }
 
+div#subtab_buttons {
+    position: absolute;
+    bottom: 60px;
+    width: 100%
+}
+
+div#atc_radio {
+    position: sticky;
+}
+
+div#subtab_buttons>button {
+    margin: auto;
+    width: 32%;
+}
+
 div#map_canvas {
     margin-right: 390px;
     height: 100%;

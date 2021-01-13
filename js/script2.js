@@ -336,3 +336,21 @@ function goSettings() {
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
 }
+
+function radarRadarTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "block"
+    document.getElementById("radar_flight_tab").style.display = "none"
+    document.getElementById("radar_aircraft_tab").style.display = "none"
+}
+
+function radarFlightTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "none"
+    document.getElementById("radar_flight_tab").style.display = "block"
+    document.getElementById("radar_aircraft_tab").style.display = "none"
+}
+
+function radarAircraftTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "none"
+    document.getElementById("radar_flight_tab").style.display = "none"
+    document.getElementById("radar_aircraft_tab").style.display = "block"
+}
