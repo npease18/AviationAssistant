@@ -52,6 +52,14 @@ div#atc_radio {
     position: sticky;
 }
 
+.graphs_iframe {
+    border: none;
+    position: absolute;
+    top: 30px;
+    height: 100%;
+    width: 100%
+}
+
 div#subtab_buttons>button {
     margin: auto;
     width: 32%;

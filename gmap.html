@@ -61,6 +61,7 @@
             <tr>
                 <td class="pointer" onclick="goRadar()"><img src="images/radar.png"></td>
                 <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img src="images/itinerary.png"></td>
+                <td class="pointer" onclick="goGraphs()"><img src="images/graphs.png"></td>
                 <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
             </tr>
         </table>
@@ -109,7 +110,7 @@
                         <h5>Internal Temperature:</h5>
                     </td>
                     <td>
-                        <h5><span id="temperature"></span> &#176; F</h5>
+                        <h5><span id="internal_temperature"></span> &#176; F</h5>
 
                     </td>
                 </tr>
@@ -447,6 +448,15 @@
         </div>
 
         <div id="container_splitter"></div>
+    </div>
+    <div id="graphs_page" style="display: none;height: 100%">
+        <div id="nav_bar">
+            <!-- Raised button with ripple -->
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+                <i class="material-icons">home</i>
+            </button>
+        </div>
+        <iframe src="http://192.168.1.21/graphs1090/" class="graphs_iframe"></iframe>
     </div>
     <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
