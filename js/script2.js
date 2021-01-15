@@ -158,7 +158,7 @@ function getCPUTemp() {
             temp = xhr.response
             temp = temp.substring(5, temp.length - 5)
             temp = celciusToF(parseFloat(temp))
-            document.getElementById("temperature").innerHTML = temp
+            document.getElementById("internal_temperature").innerHTML = temp
         }
     }
     xhr.send(JSON.stringify({
@@ -293,7 +293,6 @@ function sendCMD(cmd) {
         xhr.send(JSON.stringify({
             command: "cd /usr/local/bin && sudo x728softsd.sh"
         }));
-        console.log(output)
     }
 
 
@@ -314,6 +313,7 @@ function goHome() {
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goRadar() {
@@ -321,6 +321,7 @@ function goRadar() {
     document.getElementById("radar_page").style.display = "block"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goItinerary() {
@@ -328,6 +329,7 @@ function goItinerary() {
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goSettings() {
@@ -335,6 +337,16 @@ function goSettings() {
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
+}
+
+
+function goGraphs() {
+    document.getElementById("itinerary_page").style.display = "none"
+    document.getElementById("settings_page").style.display = "none"
+    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("home_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "block"
 }
 
 function radarRadarTabSwitch() {

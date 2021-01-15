@@ -1,436 +1,885 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- DOCUMENT TYPE DECLARATION END -->
+<!-- XHTML NAMESPACE DECLARATION BEGIN -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- XHTML NAMESPACE DECLARATION END -->
+<!--tracker.flightview.com -->
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" />
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
 
-    <link rel="stylesheet" href="ol3/ol-3.17.1.css" type="text/css" />
-    <script src="ol3/ol-3.17.1.js" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css" />
-    <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="material/material.min.css">
-    <script src="material/material.min.js"></script>
-    <link rel="stylesheet" href="material/font.css">
-    <title>DUMP1090</title>
-</head>
+    <!-- CHARACTER SPECIFICATION BEGIN -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <!-- CHARACTER SPECIFICATION END -->
 
-<body onload="initialize()" scroll="no">
-    <script id="__bs_script__">
-        //<![CDATA[
-        document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.26.7'><\/script>".replace("HOST", location.hostname));
-        //]]>
+    <script src="/lib/js/basic.js" type="text/javascript"></script>
+    <script src="/lib/js/window.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/styles/style-user_20200317.css" type="text/css" title="" media="screen" />
+    <link rel="stylesheet" href="/styles/style-print.css" type="text/css" title="" media="print" />
+    <link rel="stylesheet" href="/styles/style_202007.css" type="text/css" title="" media="screen" />
+    <script type="text/javascript" src="/lib/js/iepngfix_tilebg.js"></script>
+    <script data-ad-client="ca-pub-6255258779817355" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- For Drop Down Menu -->
+
+    <link rel="stylesheet" type="text/css" href="/styles/anylinkmenu.css" />
+
+    <script type="text/javascript">
+        var usermenu1 = {
+                divclass: 'anylinkmenu2',
+                inlinestyle: '',
+                linktarget: ''
+            } //First menu variable. Make sure "anylinkmenu1" is a unique name!
+        usermenu1.items = [
+            ["Profile", "https://www.flightview.com/user/EditProfile.aspx"],
+            ["Logout", "https://www.flightview.com/user/Logout.ashx"] //no comma following last entry!
+        ]
+        var emptymenu = {
+                divclass: 'anylinkmenu2',
+                inlinestyle: '',
+                linktarget: ''
+            } //First menu variable. Make sure "anylinkmenu1" is a unique name!
+        emptymenu.items = []
     </script>
 
-    <div id="loader" class="hidden">
-        <img src="images/spinny.gif" id="spinny" alt="Loading...">
-        <progress id="loader_progress"></progress>
-    </div>
+    <script type="text/javascript" src="/lib/js/anylinkmenu.js">
+        /***********************************************
+         * AnyLink JS Drop Down Menu v2.0- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+         * This notice MUST stay intact for legal use
+         * Visit Project Page at http://www.dynamicdrive.com/dynamicindex1/dropmenuindex.htm for full source code
+         ***********************************************/
+    </script>
 
-    <!--
-			This is hideous. airframes.org insists on getting a POST with a "submit" value specified,
-			but if we have an input control with that name then it shadows the submit() function that
-			we need. So steal the submit function off a different form. Surely there is a better way?!
-		-->
-    <form id="horrible_hack" class="hidden">
-    </form>
-    <form id="airframes_post" method="POST" action="http://www.airframes.org/" target="_blank" class="hidden">
-        <input type="hidden" name="reg1" value="">
-        <input type="hidden" name="selcal" value="">
-        <input id="airframes_post_icao" type="hidden" name="ica024" value="">
-        <input type="hidden" name="submit" value="submit">
-    </form>
-    <div id="home_page" style="display: none;">
-        <img src="images/logo.png" class="logo">
-        <table class="home_table">
-            <tr>
-                <td class="pointer" onclick="goRadar()"><img src="images/radar.png"></td>
-                <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img src="images/itinerary.png"></td>
-                <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
-            </tr>
-        </table>
-        <button class="mdl-button mdl-js-button mdl-button--icon" id="info_button" style="width: 40px; height: 40px; min-width: initial;">
-            <i class="material-icons md-36" id="info_icon">help_outline</i>
-          </button>
-        <div id="info_modal" class="modal">
+    <script type="text/javascript">
+        //anylinkmenu.init("menu_anchors_class") //Pass in the CSS class of anchor links (that contain a sub menu)
+        anylinkmenu.init("menuanchorclass")
+    </script>
+    <!-- End of Drop Down Menu Script -->
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close_modal">&times;</span>
-                <h2>About</h2>
-                <iframe src="./information.html" width="100%" height="80%" style="border: none"></iframe>
+    <!-- Hotjar Tracking Code for http://www.flightview.com/ -->
+    <script>
+        (function(h, o, t, j, a, r) {
+            h.hj = h.hj || function() {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            h._hjSettings = {
+                hjid: 1000811,
+                hjsv: 6
+            };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script');
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+
+    <title>Real Time Flight Tracking from flightview</title>
+    <meta name="Description" content="Track flights in real-time by flight number or route to see live flight status information.">
+    <meta name="Keywords" content="flight status info, track flight, flight tracker, live flight tracking">
+    <script src="/lib/js/portlets.js" type="text/javascript"></script>
+    <script src="/lib/js/aircraft.js" type="text/javascript"></script>
+    <script src="/lib/js/AirportInfo.js" type="text/javascript"></script>
+
+    <script src="/lib/js/CountryLookup.js" type="text/javascript"></script>
+    <script src="/lib/js/FVLive_20131114.js" type="text/javascript"></script>
+    <script src="/lib/js/FlightTracker.js" type="text/javascript"></script>
+
+    <!-- Pop-up Calendar for hipmunk-->
+    <!-- jQuery -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <!-- required plugins -->
+    <script type="text/javascript" src="/js/pop-up-calendar/date.js"></script>
+    <!-- jquery.datePicker.js -->
+    <script type="text/javascript" src="/js/pop-up-calendar/jquery.datePicker.js"></script>
+    <!-- datePicker required styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/styles/pop-up-calendar/datePicker.css">
+
+    <!-- page specific scripts -->
+    <script type="text/javascript" charset="utf-8">
+        Date.firstDayOfWeek = 0;
+        Date.format = 'mmm dd,yyyy';
+        $(function() {
+            $('.date-pick')
+                .datePicker()
+
+
+
+            $('#start-date').bind(
+                'dpClosed',
+                function(e, selectedDates) {
+                    var d = selectedDates[0];
+                    if (d) {
+                        d = new Date(d);
+                        $('#end-date').dpSetStartDate(d.addDays(1).asString());
+                    }
+                }
+            );
+            $('#end-date').bind(
+                'dpClosed',
+                function(e, selectedDates) {
+                    var d = selectedDates[0];
+                    if (d) {
+                        d = new Date(d);
+                        $('#start-date').dpSetEndDate(d.addDays(-1).asString());
+                    }
+                }
+            );
+            $('#start-date').dpSetOffset(-1, 0);
+            $('#end-date').dpSetOffset(-1, 0);
+        });
+
+
+
+        function doNext(el) {
+            //document.getElementById('dp-popup').style.display = 'none';
+            document.getElementById('end-date').blur();
+            $dp.dpClose();
+
+        }
+
+
+
+        function ftSubmitCityPair_hipmunk() {
+
+            //
+            // Validate first.
+            //
+            var depap = document.getElementById("txtFlightTrackerDepap");
+            var arrap = document.getElementById("txtFlightTrackerArrap");
+            var depdate = document.getElementById("start-date");
+            var arrdate = document.getElementById("end-date");
+            var numppl = document.getElementById("numppl");
+            var newURL;
+            var dateStr;
+
+            if (!depap) depap = document.getElementById("coddep");
+            //if( !depap && document.getElementById("namdep").value != "Enter airport name or code") depap = document.getElementById("namdep");
+            if (depap) {
+                depap.value = trim(depap.value)
+
+                if ((!checkCharacterValidity(depap.value)) ||
+                    (depap.value.length > 4) ||
+                    (depap.value.length < 3)) {
+                    alert("Enter a DEPARTURE AIRPORT name or its airport code.");
+                    return false;
+                }
+            }
+
+            if (!arrap) arrap = document.getElementById("codarr");
+            //if( !arrap && document.getElementById("namarr").value != "Enter airport name or code") arrap = document.getElementById("namarr");
+            if (arrap) {
+                arrap.value = trim(arrap.value);
+                if ((!checkCharacterValidity(arrap.value)) || (arrap.value.length > 4) || (arrap.value.length < 3)) {
+                    alert("Enter an ARRIVAL AIRPORT name or its airport code.");
+                    return false;
+                }
+            }
+
+            var whenHour = document.getElementById("start-date");
+            if (whenHour.value == "") {
+                alert("Select a DEPARTING DATE.");
+                return false;
+            }
+
+            //
+            // All good, submit.
+            //
+            if (arrdate.value == "") {
+                dateStr = depdate.value.substring(0, 3) + depdate.value.substring(4, 6)
+            } else {
+                dateStr = depdate.value.substring(0, 3) + depdate.value.substring(4, 6) + ',' + arrdate.value.substring(0, 3) + arrdate.value.substring(4, 6);
+            }
+
+            newURL = 'http://www.hipmunk.com/?referer=flightview0#!kind=flight&locations=' + depap.value + ',' + arrap.value + '&pax=' + numppl.options[numppl.selectedIndex].value + '&dates=' + dateStr;
+            window.open(newURL, "_blank");
+            //top.location.href = newURL;
+            return false;
+
+        }
+    </script>
+
+
+
+
+
+    <link rel="stylesheet" href="/styles/style-portlets.css" type="text/css" title="" media="screen" />
+    <link rel="stylesheet" href="/styles/style-portlets_20200915.css" type="text/css" title="" media="screen" />
+    <link rel="stylesheet" href="/styles/FTStyles.css" type="text/css" title="" media="screen" />
+    <link rel="stylesheet" href="/styles/FlightTracker.css" type="text/css" title="" media="screen" />
+    <link rel="stylesheet" href="/styles/toollinks.css" type="text/css" title="" media="screen" />
+
+
+
+    <script type="text/javascript">
+        var sdepapt = "ZRH";
+        var sarrapt = "JFK";
+
+        var airportHasWFPD = [
+            [false, false, false, false], // Weather, FIDS, Parking, Delay for dep apt
+            [false, false, false, false] // Weather, FIDS, Parking, Delay for arr apt
+        ];
+        //get JS to override above:
+    </script>
+    <script type="text/javascript" src="//tracker.flightview.com/CustomerSetup/FlightView/aptinfo.js.aspx?depap=ZRH&arrap=JFK"></script>
+    <script type="text/javascript">
+        function airportUrlOptimized(cod, label) {
+            var ret = label
+                .split("/").join("-")
+                .split(", ").join("-")
+                .split(" (").join("-(")
+                .split(" ").join("_")
+                .split("'").join("");
+            return "/airport/" + cod + "-" + ret + "/";
+        }
+
+        function urlFor(apt) {
+
+            return "";
+        }
+
+        function urlForAorD(apt, i, appurl) {
+            var lila = airportHasWFPD[i];
+            var ret = appurl;
+            if (lila[1]) {
+                ret += (i == 0) ? "departures" : "arrivals";
+            } else if (lila[3]) {
+                ret += "delay";
+            } else if (lila[0]) {
+                ret += "weather";
+            } else ret = "";
+            //console.log( "uFAOD()=" + ret ) ;
+            return ret;
+        }
+
+        function getToolbarContent(apt, i, aord, appurl) {
+            if (i > 1) return "";
+            var lila = airportHasWFPD[i];
+            if (lila[0] || lila[1] || lila[2] || lila[3]) {
+                var bigaord = "arrivals";
+                if (aord == "dep") bigaord = "departures";
+                var ret = "<div class=\"wrapper\">\n";
+                if (lila[0]) ret += "<a href=\"" + appurl + "weather\"  class=\"toollink weather\" target=\"_top\" id=\"" + aord + "Weather\">Weather</a>\n"
+                if (lila[1]) ret += "<a href=\"" + appurl + bigaord + "\" class=\"toollink arrdep\"  target=\"_top\" id=\"" + aord + "Fids\">Arr/Dep</a>\n"
+                if (lila[2]) ret += "<a href=\"" + appurl + "parking\"  class=\"toollink parking\" target=\"_top\" id=\"" + aord + "Parking\">Parking</a>\n"
+                if (lila[3]) ret += "<a href=\"" + appurl + "delay\"    class=\"toollink delay\"   target=\"_top\" id=\"" + aord + "Delay\">Delay</a>\n"
+                ret + "</div>\n";
+                return ret;
+            }
+            return "";
+        }
+
+        function getLocalServContent(apt, i, aord, dat, tim, appurl) {
+            if (i > 1) return "";
+            var lila = airportHasWFPD[i];
+            if (lila[2] || lila[3]) { // use has-parking OR has-delay as proxy for limo search (NA-centric)
+                var ret = "<div class=\"wrapper\">\n";
+                ret += "<a href=\"" + appurl + "limos?dir=" + aord + "&dat=" + dat + "&tim=" + tim + "\" class=\"toollink limos\" target=\"_top\" id=\"" + aord + "Limos\">Find a Limo</a>\n"
+                ret + "</div>\n";
+                return ret;
+            }
+            return "";
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        window.adHandler = window.adHandler || {};
+        window.adHandler.cmd = window.adHandler.cmd || [];
+        adHandler.cmd.push(function() {
+            adHandler.service.setTargeting('pageid', 'SFR');
+            adHandler.service.request();
+            adHandler.service.setTargeting('fltstat', 'AIR');
+            adHandler.service.request();
+            adHandler.service.setTargeting('al', 'LX');
+            adHandler.service.request();
+            adHandler.service.setTargeting('fn', '14');
+            adHandler.service.request();
+            adHandler.service.setTargeting('depapt', 'ZRH');
+            adHandler.service.request();
+            adHandler.service.setTargeting('arrapt', 'JFK');
+            adHandler.service.request();
+
+        });
+        //window.adClickPerfPageType = "Detail" ;
+    </script>
+
+</head>
+
+<body id="travel-tools">
+    <div id="center-pg">
+        <!-- TOP NAVIGATION BEGIN -->
+
+
+
+
+        <div id="site_header">
+            <a href="/"><img id="fvHeaderLogo" src="/res/img/header-flightview-logo_new.png" alt="flightview by OAG brand logo" /></a>
+            <div id="pageTopNav">
+                <!-- plusone removed 201902 -->
+                <a href="http://www.facebook.com/pages/FlightView-Inc/47655137930" target="_blank" class="socialIcon"><img src="/res/img/icon_facebook.png" alt="Like us on Facebook" title="Like us on Facebook" /></a>
+                <a href="http://twitter.com/#!/flightview" target="_blank" class="socialIcon"><img src="/res/img/icon_twitter.png" alt="Follow us on Twitter" title="Follow us on Twitter" /></a>
+
+
+                <div id="utilityNav">
+                    <a href="//mobile.flightview.com" style="border-right: 1px solid #fff;">Mobile Flight Tracker</a>
+                    <a href="/traveltools/" style="border-right: 1px solid #fff;">Travel Tools</a>
+                    <a href="https://flightview.oag.com/business-solutions" style="border-right: 1px solid #fff;;">Products &amp; Services</a>
+
+                    <a href="https://www.flightview.com/user/Register.aspx" style="border-right: 1px solid #fff;">Sign Up</a>
+                    <a href="https://www.flightview.com/user/Login.aspx" style="border-right: 0px;">Log In</a>
+
+                </div>
+
             </div>
 
+            <ul id="TabNav">
+                <!--<li class="home"><a href="/" class="topnav home " title="Home">Home</a></li>-->
+
+                <li class="mytrips"><a href="/user/itinerary/MyTrips.aspx" class="topnav mytrips " title="My Trips">My Trips</a></li>
+                <li class="flighttracker"><a href="/flighttracker/" class="topnav flighttracker " title="Flight Tracker">Flight Tracker</a></li>
+                <li class="traveltools"><a href="/traveltools/" class="topnav traveltools selected" title="Travel Tools">Travel Tools</a></li>
+                <li class="airports"><a href="/traveltools/airports.asp" class="topnav airports " title="Airports">Airports</a></li>
+                <li class="visas"><a href="/traveltools/visas.asp" class="topnav visas " title="Visa & Travel Restrictions">Visa & Travel Restrictions</a></li>
+                <li class="solutions"><a href="https://flightview.oag.com/business-solutions" class="topnav solutions " title="Solutions">Business Solutions</a></li>
+                <li class="contact"><a href="https://flightview.oag.com/contact-flightview" class="topnav contact" title="Contact Us">Contact</a></li>
+            </ul>
+
         </div>
-    </div>
-    <div id="itinerary_page" style="display: none;">
-        <div id="nav_bar">
-            <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
-                <i class="material-icons">home</i>
-            </button>
-            <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()">
-              </select>
-            <select id="itinerary_airports" name="airports" style="display: none;" onchange="airportSchedule()">
-            </select> Courtesy of https://flightaware.com/
-        </div>
-        <div id="itinerary_body">
-            <div id="itinerary_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-            <div id="arrivals" style="display: none;"></div>
-            <div id="departures" style="display: none;"></div><br>
-            <div id="sch-arrivals" style="display: none;"></div>
-            <div id="sch-departures" style="display: none;"></div>
-            <div id="itinerary_undefined" style="display: none;">
-                <h2>No Information Available or No Flight Data</h2>
+
+
+
+
+        <!-- TOP NAVIGATION END -->
+        <div id="narrow-pg">
+            <!-- loading D:\Inetpub\PublicSite\lib\FlightTracker\XSL\ACID.2.xsl -->
+
+            <div class="ad-970-250">
+                <!-- Google Ad Flightview - Top Banner -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6255258779817355" data-ad-slot="1431680798" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
-        </div>
-    </div>
-    <div id="settings_page" style="display: none;">
-        <a href="javascript:goHome()"><img src="images/logo.png" class="settingslogo"></a>
-        <div id="settingstext">
-            <table>
-                <tr>
-                    <td>
-                        <h5>Internal Temperature:</h5>
-                    </td>
-                    <td>
-                        <h5><span id="temperature"></span> &#176; F</h5>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h5>Offline Mode</h5>
-                    </td>
-                    <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
-                            <input type="checkbox" id="switch-1" class="mdl-switch__input">
-                            <span class="mdl-switch__label"></span>
-                          </label></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td></td>
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
-                            <i class="material-icons">remove</i>
-                        </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
-                            <i class="material-icons">add</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
-                            Check For Updates
-                          </button>
-                    </td>
 
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
-                            Close Application
-                          </button>
-                    </td>
+            <!--  <div id="travel-tools-airport-info">SWISS
+    Flight Number 14
+    (LX14)
+  </div>-->
+            <div id="travel-tools-airport-info">SWISS (LX) 14
 
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button" onclick="changeBranch()">
-                            Change Branch to <span id="branch_name">N/A</span>
-                          </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div id="radar_page">
-        <div id="nav_bar">
-            <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
-                <i class="material-icons">home</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openRadar()">
-				Radar
-			</button>
-            <span class="divider"></span>
-            <!-- Raised button with ripple -->
-            <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openMetar()">
-				METAR
-			</button>
-            <!-- Raised button with ripple -->
-            <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
-				LiveATC
-			</button>
-            <span style="float: right;">
-				<span class="space-nopad center">
-					<span id="percentage">N/A</span>
-            </span>
-            <span class="space-nopad center">
-					<span id="battery" class="material-icons" style="font-size: 36px;text-align: center;">N/A</span>
-            </span>
-            <span class="space center">
-			<!-- FAB button with ripple -->
-			<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
-				<i class="material-icons">remove</i>
-			</button>
-			<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-				<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
-				<span class="mdl-switch__label">Offline Mode</span>
-            </label> -->
-            </span>
-            <span class="space center">
-			Volume - <span id="volume_level">N/A</span>%
-            </span>
-            <span class="space center">
-	<!-- FAB button with ripple -->
-	<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
-		<i class="material-icons">add</i>
-	</button>
-	<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-		<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
-		<span class="mdl-switch__label">Offline Mode</span>
-            </label> -->
-            </span>
+            </div>
 
-            <span class="space center">
-					<!-- FAB button with ripple -->
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="sendCMD('shutdown')">
-						<i class="material-icons">power_settings_new</i>
-					</button>
-				</span>
-            </span>
-        </div>
 
-        <div id="map_container">
-            <div id="map_canvas"></div>
-        </div>
 
-        <div id="sidebar_container">
-            <div id="radar_container">
-                <div id="sidebar_canvas">
-                    <div id="dump1090_infoblock">
-                        <table style="width: 100%">
-                            <tr class="infoblock_heading">
-                                <td>
-                                    <b id="infoblock_name">Aircraft Radar</b>
-                                </td>
-                            </tr>
-                            <tr class="infoblock_heading">
-                                <td></td>
-                            </tr>
 
-                            <tr class="infoblock_body">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
 
-                            <tr class="infoblock_body dim">
-                                <td>No aircraft selected</td>
-                                <td>&nbsp;</td>
-                            </tr>
 
-                            <tr class="infoblock_body">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
+            <div id="sub-pg-flcol" class="float-left ad-160-600">
+                <!-- Google Ad Flightview - Left Banner -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6255258779817355" data-ad-slot="2448666492" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <!--sub-pg-flcol -->
+            <div id="sub-pg-lcol" class="float-left">
+                <div>
+                    <!-- SEARCH RESULTS BEGIN -->
+                    <div id="search-results">
+                        <div id="search-results-header">
+                            <h1>FLIGHT TRACKER</h1>
+                        </div>
 
-                            <tr class="infoblock_body">
-                                <td>Aircraft (total): <span id="dump1090_total_ac">N/A</span></td>
-                                <td>Messages: <span id="dump1090_message_rate">N/A</span>/sec</td>
-                            </tr>
 
-                            <tr class="infoblock_body">
-                                <td>(with positions): <span id="dump1090_total_ac_positions">N/A</span></td>
-                                <td>History: <span id="dump1090_total_history">N/A</span> positions</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- dump1090_infoblock -->
 
-                    <div id="selected_infoblock">
-                        <table style="width: 100%">
-                            <tr class="infoblock_heading">
-                                <td colspan="2">
-                                    <b>
-										<span id="selected_callsign" onclick="toggleFollowSelected();" class="pointer">n/a</span>
-									</b>
-                                    <span id="selected_follow" onclick="toggleFollowSelected();" class="pointer">&#x21D2;</span>
 
-                                    <span id="selected_flag">
-										<img style="width: 20px; height=12px" src="about:blank" alt="Flag">
-									</span>
 
-                                    <a href="http://www.airframes.org/" onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
-                                        <span id="selected_icao"></span>
-                                    </a>
-                                    <span id="selected_registration"></span>
-                                    <span id="selected_icaotype"></span>
-                                    <span id="selected_emergency"></span>
-                                    </span>
-                                </td>
-                            </tr>
 
-                            <tr id="infoblock_country" class="infoblock_body">
-                                <td colspan="2">Country of registration: <span id="selected_country">n/a</span></td>
-                            </tr>
-
-                            <tr class="infoblock_body">
-                                <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
-                                <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
-                            </tr>
-
-                            <tr class="infoblock_body">
-                                <td>Speed: <span id="selected_speed">n/a</span></td>
-                                <td>RSSI: <span id="selected_rssi">n/a</span></td>
-                            </tr>
-
-                            <tr class="infoblock_body">
-                                <td>Track: <span id="selected_track">n/a</span></td>
-                                <td>Last seen: <span id="selected_seen">n/a</span></td>
-                            </tr>
-
-                            <tr class="infoblock_body">
-                                <td colspan="2">Position: <span id="selected_position">n/a</span></td>
-                            </tr>
-
-                            <tr class="infoblock_body">
-                                <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- selected_infoblock -->
-
-                    <div id="planes_table">
-                        <table id="tableinfo" style="width: 100%">
-                            <thead style="background-color: #BBBBBB; cursor: pointer;">
+                        <div id="search-results-body-nobg">
+                            <div class="flightStatusBox">
+                                <div class="wrapFlightStatus">
+                                    <div class="dataFlightStatus">
+                                        <div class="labelFlightStatus">FLIGHT STATUS</div>
+                                        <div class="labelFlightStatusValue">In Air</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="search-results-image-tracker"><img src="/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&amp;acid=LX14&amp;depap=ZRH&amp;arrap=JFK&amp;depdate=20210114&amp;pctcomplete=87"></div>
+                            <table cellspacing="0" cellpadding="0" border="0" style="font-size:100%; margin-top:15px;">
                                 <tr>
-                                    <td id="icao" onclick="sortByICAO();">ICAO</td>
-                                    <td id="flag" onclick="sortByCountry()">
-                                        <!-- column for flag image -->
-                                    </td>
-                                    <td id="flight" onclick="sortByFlight();">Flight</td>
-                                    <td id="squawk" onclick="sortBySquawk();" style="text-align: right">Squawk</td>
-                                    <td id="altitude" onclick="sortByAltitude();" style="text-align: right">Altitude</td>
-                                    <td id="speed" onclick="sortBySpeed();" style="text-align: right">Speed</td>
-                                    <td id="distance" onclick="sortByDistance();" style="text-align: right">Distance</td>
-                                    <td id="track" onclick="sortByTrack();" style="text-align: right">Track</td>
-                                    <td id="msgs" onclick="sortByMsgs();" style="text-align: right">Msgs</td>
-                                    <td id="seen" onclick="sortBySeen();" style="text-align: right">Age</td>
+                                    <td><span class="search-results-flight-info-hdr">Departure</span></td>
+                                    <td class="ftResultIndividualStatus"></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr id="plane_row_template" class="plane_table_row hidden">
-                                    <td>ICAO</td>
-                                    <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
-                                    <td>FLIGHT</td>
-                                    <td style="text-align: right">SQUAWK</td>
-                                    <td style="text-align: right">ALTITUDE</td>
-                                    <td style="text-align: right">SPEED</td>
-                                    <td style="text-align: right">DISTANCE</td>
-                                    <td style="text-align: right">TRACK</td>
-                                    <td style="text-align: right">MSGS</td>
-                                    <td style="text-align: right">SEEN</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            </table>
+                            <div class="search-results-table">
+                                <table cellpadding="0" cellspacing="0" id="tbl_dep">
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td rowspan="10"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-hdr">Airport:</td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-data FlightTrackerData">
+                                            <div style="display:none;" id="txt_depapt">ZRH</div><span id="txt_depaptlnk"><script type="text/javascript" language="javascript">
+                  ftGetAirport("ZRH","ZURICH","","CH");
+                </script></span></td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td rowspan="10"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                    </tr>
+                                    <tr style="background-color: #ECF5FC;">
+                                        <td class="search-results-table-hdr">Scheduled Time:</td>
+                                        <td class="search-results-table-data FlightTrackerData">12:30 PM,&nbsp;Jan&nbsp;14
+                                            <div style="display:none">
+                                                &lt;script&gt;
+                                                <script type="text/javascript">
+                                                    _fvYyyyMmDdLast = new Array(2021, 1, 14);
+                                                </script> &lt;/script&gt;
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td class="search-results-table-hdr">Takeoff Time:</td>
+                                        <td class="search-results-table-data FlightTrackerData">3:36 PM,&nbsp;Jan&nbsp;14
+                                            <script>
+                                                _fvYyyyMmDdLast = new Array(2021, 1, 14);
+                                            </script>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#ECF5FC;">
+                                        <td class="search-results-table-hdr">Terminal - Gate:</td>
+                                        <td class="search-results-table-data FlightTrackerData">D55</td>
+                                    </tr>
+                                    <tr id="depToolBarRow" style="display:none;">
+                                        <td class="search-results-table-hdr" id="depToolBarLabel">More Airport Info:</td>
+                                        <td class="search-results-table-data FlightTrackerData" id="depToolBarContent"></td>
+                                    </tr>
+                                    <tr id="depLocalServRow">
+                                        <td class="search-results-table-hdr" id="depLocalServLabel">Local Services:</td>
+                                        <td class="search-results-table-data FlightTrackerData" id="depLocalServContent"></td>
+                                    </tr>
+                                </table>
+                            </div><br>
+                            <div class="search-results-flight-info-hdr">Arrival</div>
+                            <div class="search-results-table">
+                                <table cellpadding="0" cellspacing="0" id="tbl_arr">
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td rowspan="10"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-hdr">Airport:</td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-data FlightTrackerData">
+                                            <div style="display:none;" id="txt_arrapt">JFK</div>
+                                            <p id="txt_arrapt"><span id="txt_arraptlnk"><script type="text/javascript" language="javascript">
+                ftGetAirport("JFK","NEW YORK","NY","US");
+              </script></span></p>
+                                        </td>
+                                        <td rowspan="10" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td rowspan="10"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                    </tr>
+                                    <tr style="background-color: #ECF5FC;">
+                                        <td class="search-results-table-hdr">Scheduled Time:</td>
+                                        <td class="search-results-table-data FlightTrackerData">3:40 PM,&nbsp;Jan&nbsp;14
+                                            <div style="display:none">
+                                                &lt;script&gt;
+                                                <script type="text/javascript">
+                                                    _fvYyyyMmDdLast = new Array(2021, 1, 14);
+                                                </script> &lt;/script&gt;
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td class="search-results-table-hdr">Estimated Time:</td>
+                                        <td class="search-results-table-data FlightTrackerData">6:02 PM,&nbsp;Jan&nbsp;14
+                                            <script>
+                                                _fvYyyyMmDdLast = new Array(2021, 1, 14);
+                                            </script>
+                                            <p class="ftResultIndividualFlightViewLive">Track This Flight Live!
+                                                <a href="javascript:launchApplet('LX','14','20210114','ZRH','JFK')"><img src="/res/img/FlightTracker/launchliveorange.gif" alt="Launch Live!"></a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color: #ECF5FC;">
+                                        <td class="search-results-table-hdr">Time Remaining:</td>
+                                        <td class="search-results-table-data FlightTrackerData">1 hr 3 min</td>
+                                    </tr>
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td class="search-results-table-hdr">Terminal - Gate:</td>
+                                        <td class="search-results-table-data FlightTrackerData">Terminal 4</td>
+                                    </tr>
+                                    <tr id="arrToolBarRow" style="display:none;">
+                                        <td class="search-results-table-hdr" id="arrToolBarLabel">More Airport Info:</td>
+                                        <td class="search-results-table-data FlightTrackerData" id="arrToolBarContent"></td>
+                                    </tr>
+                                    <tr id="arrLocalServRow">
+                                        <td class="search-results-table-hdr" id="arrLocalServLabel">Local Services:</td>
+                                        <td class="search-results-table-data FlightTrackerData" id="arrLocalServContent"></td>
+                                    </tr>
+                                </table>
+                            </div><br>
+                            <div class="search-results-flight-info-hdr long">Aircraft's Previous Flight</div>
+                            <div class="search-results-table">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tr style="background-color: #D9EBFA;">
+                                        <form method="post" action="/TravelTools/FlightTrackerQueryResults.asp" name="form1"><input type="hidden" name="qtype" value="sfd"><input type="hidden" name="whenArrDep" value="arr"><input type="hidden" name="al" value="LX"><input type="hidden" name="fn" value="161"><input type="hidden" name="arrap"
+                                                value="ZRH"><input type="hidden" name="whendate" value="20210113">
+                                            <td rowspan="1"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                            <td rowspan="1" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                            <td class="search-results-table-hdr">Flight:</td>
+                                            <td rowspan="1" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                            <td class="search-results-table-data FlightTrackerData">SWISS 161 (<a href="javascript:document.form1.submit()">LX161</a>)</td>
+                                            <td rowspan="1" class="table-spacer"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                            <td rowspan="1"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        </form>
+                                    </tr>
+                                </table>
+                            </div><br>
+                            <div class="search-results-flight-info-hdr">Flight Details</div>
+                            <div class="search-results-table">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td rowspan="3"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="table-spacer" rowspan="3"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-hdr">Aircraft:</td>
+                                        <td class="table-spacer" rowspan="3"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td class="search-results-table-data FlightTrackerData">
+                                            <script type="text/javascript" language="javascript">
+                                                GetAc('B77W')
+                                            </script>
+                                        </td>
+                                        <td class="table-spacer" rowspan="3"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                        <td rowspan="3"><img src="/res/img/clear.gif" width="2" height="1" alt=""></td>
+                                    </tr>
+                                    <tr style="background-color: #ECF5FC;">
+                                        <td class="search-results-table-hdr">Ground Speed:</td>
+                                        <td class="search-results-table-data FlightTrackerData">529 mph</td>
+                                    </tr>
+                                    <tr style="background-color:#D9EBFA;">
+                                        <td class="search-results-table-hdr">Altitude:</td>
+                                        <td class="search-results-table-data FlightTrackerData">38000 feet</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- from DFP: -->
+                            <!-- 0 from http://pubads.g.doubleclick.net/gampad/adx?iu=9461283/FVPublic_PROMOTIONS&mob=js&sz=166x28&c=1597&ip=10.22.99.7&ua=Mozilla%2F5%2E0+%28X11%3B+Linux+x86%5F64%29+AppleWebKit%2F537%2E36+%28KHTML%2C+like+Gecko%29+Chrome%2F87%2E0%2E4280%2E141+Safari%2F537%2E36&t=prog1%3D3%26pageid%3DSFR%26fltstat%3DAIR%26al%3DLX%26fn%3D14%26depapt%3DZRH%26arrapt%3DJFK%26prog3%3Dw -->
+
+
+
+                            <div class="ftResultIndividualHelp">
+                                All times listed are local times unless otherwise stated.
+                                <a href="javascript:clickedHelpLink('./', 'fr');"><img src="/res/img/btn-portlet-help.gif" alt="" /></a>
+                            </div>
+                            <div class="ftResultIndividualTrackAnotherFlight">
+                                <a href="/TravelTools/"><img src="/res/img/FlightTracker/btn-track-another-flight.gif" width="156" height="20" alt="" /></a>
+                            </div>
+
+                        </div>
+                        <div id="search-results-footer">
+                            <span><i><br />
+            Flightview</i></span>
+                        </div>
+
                     </div>
 
-                    <!-- planes_table -->
-
-                </div>
-                <!-- sidebar_canvas -->
-            </div>
-            <div id="metar_container" style="display: none">
-                <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                <div id="metar_data" style="display: none">
-                    <h5>Local METAR Reporting Station:</h5>
-                    <h3 id="station_id"></h3>
-                    <h5 id="station_name"></h5>
-                    <h6 id="full_metar"><br><br><span id="updated_time"></span></h6>
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4><span id="temperature"></span> &#8457</h4>
-                                    Temperature
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="altimeter"></h4>
-                                    Altimeter
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="visibility"></h4>
-                                    Visibility
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4 id="wind_speed"></h4>
-                                    Wind Speed
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="wind_direction"></h4>
-                                    Wind Direction
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="wind_gusts"></h4>
-                                    Wind Gusts
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4><span id="dew_point"></span> &#8457</h4>
-                                    Dew Point
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="rules"></h4>
-                                    Flight Rules
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="size"></h4>
-                                    Airport Size
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="atc_container" style="display: none">
-                <div id="atc_radio">
-                    <h4 id="atc_title">No feed selected</h4>
-                    <audio id="player" controls>
-						<source type="audio/mpeg">
-					</audio>
-                </div>
-                <hr>
-                <div id="atc_selector">
 
                 </div>
             </div>
+            <div id="sub-pg-frcol" class="float-right">
+                <div class="ad-300-600">
+                    <!-- Google Ad Flightview - Right Banner -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6255258779817355" data-ad-slot="3693331951" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="content-box" style="width:370px; margin-top:10px; margin-left: 0px;">
+                    <a href="https://www.dpbolvw.net/click-100254631-10819601" target="_top">
+                        <img src="https://www.awltovhc.com/image-100254631-10819601" width="300" height="250" alt="Save On Airport Parking" border="0" /></a>
+                </div>
+            </div>
+            <!--sub-pg-flcol -->
+            <div id="sub-pg-rcol" class="float-right">
 
+                <!-- FLIGHTVIEW LIVE REMOVED -->
+                <!-- FORWARD TO A FRIEND REMOVED -->
+            </div>
+
+            <script>
+                //var shareWebPageUrl = "../lib/ShareThisWebpage/ShareThisWebpage.asp?al=LX&fn=14&date=2021-01-14&url=http://www.flightview.com/TravelTools/Default.asp?ftQtype=sfi%26ftal=LX%26ftfn=14%26ftwhendate=20210114";
+                //var shareWebPageAnchor = document.getElementById("link-send-pg");
+                //shareWebPageAnchor.setAttribute("onClick", "openSTWWindow('" + shareWebPageUrl + "');return false;");
+            </script>
+
+            <div class="clear-both"></div>
         </div>
-        <!-- sidebar_container -->
-
-        <div id="SpecialSquawkWarning" class="hidden">
-            <b>Squawk 7x00 is reported and shown.</b><br> This is most likely an error in receiving or decoding.<br> Please do not call the local authorities, they already know about it if it is a valid squawk.
-        </div>
-
-        <div id="update_error" class="hidden">
-            <b>Problem fetching data from dump1090.</b><br>
-            <span id="update_error_detail"></span><br> The displayed map data will be out of date.
-        </div>
-
-        <div id="container_splitter"></div>
     </div>
-    <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button class="mdl-snackbar__action" type="button"></button>
+
+
+    <script type="text/javascript">
+        //var sdepapt, sarrapt
+        //sdepapt = document.getElementById("txt_depapt").innerHTML ;
+        //sarrapt = document.getElementById("txt_arrapt").innerHTML ;
+    </script>
+    <script type="text/javascript">
+        //function updateToolBar(){
+        var sdepaptContent, sarraptContent
+        var sdepToolBarRow, sarrToolBarRow
+        var depLocalServRow, arrLocalServRow
+        var sdepToolTbl, sarrToolTbl
+        var sdepToBaBgcolor, sarrToBaBgcolor
+        var sdepLoSeBgcolor, sarrLoSeBgcolor
+        var sdepName, sarrName, sdivName
+        var sdepTRcountArray, sarrTRcountArray
+        var sdepAcountArray, sarrAcountArray
+
+
+        sdepToolBarRow = document.getElementById("depToolBarRow");
+        sarrToolBarRow = document.getElementById("arrToolBarRow");
+        depLocalServRow = document.getElementById("depLocalServRow");
+        arrLocalServRow = document.getElementById("arrLocalServRow");
+
+        sdepName = document.getElementById("txt_depaptlnk");
+        sarrName = document.getElementById("txt_arraptlnk");
+
+        sdepToolTbl = document.getElementById("tbl_dep");
+        sdepTRcountArray = sdepToolTbl.getElementsByTagName('tr');
+        sdepAcountArray = sdepName.getElementsByTagName('a');
+
+        if (sdepAcountArray.length) {
+            sdepToolBarRow.style.display = "";
+        } else {
+            sdepToolBarRow.style.display = "";
+        } //WTF
+
+        if (sdepTRcountArray.length % 2) {
+            sdepToolBarRow.style.backgroundColor = "#ECF5FC";
+            sdepToBaBgcolor = "ECF5FC";
+            depLocalServRow.style.backgroundColor = "#D9EBFA";
+            sdepLoSeBgcolor = "D9EBFA";
+        } else {
+            sdepToolBarRow.style.backgroundColor = "#D9EBFA";
+            sdepToBaBgcolor = "D9EBFA";
+            depLocalServRow.style.backgroundColor = "#ECF5FC";
+            sdepLoSeBgcolor = "ECF5FC";
+        }
+
+
+        sarrToolTbl = document.getElementById("tbl_arr");
+        sarrTRcountArray = sarrToolTbl.getElementsByTagName('tr');
+        sarrAcountArray = sarrName.getElementsByTagName('a');
+
+        if (sarrAcountArray.length) {
+            sarrToolBarRow.style.display = "";
+        } else {
+            sarrToolBarRow.style.display = "";
+        } //WTF
+
+        if (sarrTRcountArray.length % 2) {
+            sarrToolBarRow.style.backgroundColor = "#ECF5FC";
+            sarrToBaBgcolor = "ECF5FC";
+            arrLocalServRow.style.backgroundColor = "#D9EBFA";
+            sarrLoSeBgcolor = "D9EBFA";
+        } else {
+            sarrToolBarRow.style.backgroundColor = "#D9EBFA";
+            sarrToBaBgcolor = "D9EBFA";
+            arrLocalServRow.style.backgroundColor = "#ECF5FC";
+            sarrLoSeBgcolor = "ECF5FC";
+        }
+
+        /*
+        sdepaptContent = "<iframe frameborder='0' scrolling='no' id='depaptframe' src='//tracker.flightview.com/customersetup/FlightView/aptinfo.aspx?back=www.flightview.com&airport=" + sdepapt + "&dir=dep&bg=" + sdepToBaBgcolor + "' class='tooliframe' onload='checkairport(\"depaptframe\", \"depToolBarRow\");'>"
+        sarraptContent = "<iframe frameborder='0' scrolling='no' id='arraptframe' src='//tracker.flightview.com/customersetup/FlightView/aptinfo.aspx?back=www.flightview.com&airport=" + sarrapt + "&dir=arr&bg=" + sarrToBaBgcolor + "' class='tooliframe' onload='checkairport(\"arraptframe\", \"arrToolBarRow\");'>"
+        document.getElementById("depToolBarContent").innerHTML = sdepaptContent;
+        document.getElementById("arrToolBarContent").innerHTML = sarraptContent;
+        */
+        var cont;
+        // fix toolbar row:
+        cont = getToolbarContent(sdepapt, 0, "dep", "/airport/ZRH-Zurich-Switzerland/");
+        if (cont) document.getElementById("depToolBarContent").innerHTML = cont;
+        else document.getElementById("depToolBarRow").style.display = "none";
+        cont = getToolbarContent(sarrapt, 1, "arr", "/airport/JFK-New_York-NY-(Kennedy)/");
+        if (cont) document.getElementById("arrToolBarContent").innerHTML = cont;
+        else document.getElementById("arrToolBarRow").style.display = "none";
+        // fix local services row:
+        cont = getLocalServContent(sdepapt, 0, "dep", "20210114", "1230", "/airport/ZRH-Zurich-Switzerland/");
+        if (cont) document.getElementById("depLocalServContent").innerHTML = cont;
+        else document.getElementById("depLocalServRow").style.display = "none";
+        cont = getLocalServContent(sarrapt, 1, "arr", "20210114", "1540", "/airport/JFK-New_York-NY-(Kennedy)/");
+        if (cont) document.getElementById("arrLocalServContent").innerHTML = cont;
+        else document.getElementById("arrLocalServRow").style.display = "none";
+
+        //}
+    </script>
+
+
+
+
+    <!-- FOOTER BEGIN -->
+    <!-- @@@@@@ US04WW31H
+79107.27: page build
+79107.27: befor XML fetch
+79107.4: after XML fetch, fvXML from US04WX33F err=0, #flights=1
+79107.6: befor fetch http://pubads.g.doubleclick.net/gampad/adx?iu=9461283/FVPublic_PROMOTIONS&mob=js&sz=166x28&c=1597&ip=10.22.99.7&ua=Mozilla%2F5%2E0+%28X11%3B+Linux+x86%5F64%29+AppleWebKit%2F537%2E36+%28KHTML%2C+like+Gecko%29+Chrome%2F87%2E0%2E4280%2E141+Safari%2F537%2E36&t=prog1%3D3%26pageid%3DSFR%26fltstat%3DAIR%26al%3DLX%26fn%3D14%26depapt%3DZRH%26arrapt%3DJFK%26prog3%3Dw
+79107.64: after fetch http://pubads.g.doubleclick.net/gampad/adx?iu=9461283/FVPublic_PROMOTIONS&mob=js&sz=166x28&c=1597&ip=10.22.99.7&ua=Mozilla%2F5%2E0+%28X11%3B+Linux+x86%5F64%29+AppleWebKit%2F537%2E36+%28KHTML%2C+like+Gecko%29+Chrome%2F87%2E0%2E4280%2E141+Safari%2F537%2E36&t=prog1%3D3%26pageid%3DSFR%26fltstat%3DAIR%26al%3DLX%26fn%3D14%26depapt%3DZRH%26arrapt%3DJFK%26prog3%3Dw err: Object doesn't support this property or method -->
+
+    <div style="clear:both; height: 10px;">&nbsp;</div>
+
+
+    <div id="eea-confirmation-outer">
+        <div id="eea-confirmation-middl">
+            <div id="eea-confirmation-inner">
+                This website stores cookies on your computer. These cookies are used to improve your website and provide more personalised services to you, both on this website and through other media. To find out more about the cookies we use, see our
+                <a
+                    href="/cookienotice/">Cookie Notice</a>.&nbsp; OAG takes your privacy very seriously. For details, please see our recently updated <a href="/privacy-policy/">Privacy Notice</a>.
+                    <p/>
+                    <div id="eea-confirmation-button-div">
+                        <a href="javascript:void(0);" onclick="document.cookie='eea-accept=true; expires=Thu, 31 Dec 2099 23:00:00 UTC; path=/';document.getElementById('eea-confirmation-outer').style.display='none'; if(navigator.userAgent.indexOf('Firefox') !== -1) {batchSDK(api => api.ui.show('native', true));}"
+                            id="eea-confirmation-button">Accept</a>
+                    </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+    <div id="site-footer">
+        <div id="line-one">
+            <a href="/">Home</a>
+            <a href="/flighttracker/">Flight Tracker</a>
+            <a href="/traveltools/">Travel Tools</a>
+            <a href="/traveltools/airports.asp">Airports</a>
+            <a href="//mobile.flightview.com">Mobile</a>
+            <a href="https://flightview.oag.com/business-solutions">Business Solutions</a>
+            <a href="//www.oag.com/pressroom">News</a>
+
+            <a href="https://flightview.oag.com/contact-flightview">Contact</a>
+            <a href="https://www.flightview.com/user/Login.aspx">Log In</a>
+            <a href="https://www.flightview.com/user/Register.aspx" style="border-right: none;">Sign Up</a>
+
+        </div>
+        <div id="line-one">
+            <!--<a href="//corporate.flightview.com/site-map">Site Map</a>-->
+            <a href="//www.flightview.com/terms-of-use/">Terms of Use</a>
+            <a href="/privacy-policy/">Privacy Notice</a>
+            <a href="/privacy-policy/ccpa.asp">Privacy Notice (California)</a>
+            <a href="/cookienotice/" style="border-right: none;">Cookie Notice</a>
+        </div>
+        <div id="copyright">
+
+            <div class="canadadata">Canadian radar data from Environment Canada</div>
+            Copyright &copy; OAG. All rights reserved
+            <div style="padding:10px;padding-top:20px; margin-left:auto; margin-right:auto;"><img src="/img/interface/OAG White 2020 - JP.png" alt="OAG brand logo"></div>
+            flightview is a wholly owned subsidiary of OAG
+        </div>
+
+        <div id="siteswelike">
+            <table style="margin-left:auto; margin-right:auto;">
+                <tr>
+                    <td>
+                        <div class="icon"></div>
+                    </td>
+                    <td>
+                        <div class="sitelist"><a href="//www.aboutairportparking.com?affiliate_id=2019" target="_blank">AboutAirportParking.com</a> | <a href="//www.accuweather.com?partner=FLVIEW" target="_blank">AccuWeather.com</a> | <a href="//www.lowfares.com" target="_blank">Lowfares.com</a></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear-both" style="height: 60px;">&nbsp;</div>
+
+    <script type="text/javascript">
+        var userId = '';
+
+        /* Load remote Batch SDK JavaScript code */
+        (function(b, a, t, c, h, e, r) {
+            h = 'batchSDK';
+            b[h] = b[h] || function() {
+                (b[h].q = b[h].q || []).push(arguments)
+            };
+            e = a.createElement(t), r = a.getElementsByTagName(t)[0];
+            e.async = 1;
+            e.src = c;
+            r.parentNode.insertBefore(e, r);
+        })(window, document, 'script', 'https://via.batch.com/v2/bootstrap.min.js');
+
+        /* Initiate Batch SDK opt-in UI configuration (native prompt) */
+        var batchSDKUIConfig = {
+            native: {}
+        };
+
+        /* Finalize the Batch SDK setup */
+        batchSDK('setup', {
+            apiKey: '5374E905B5BE4A7FB085B8690441A047',
+            subdomain: 'flightview',
+            authKey: '2.f2dDcgG1jkL6luK88g7JxGXXd0rTMCQ1gV+gRBvWA1k=',
+            vapidPublicKey: 'BBWkTvjHBnh8ll5zN4E9fCCzriZYUmkoyxFfVOGM3lpRm9673rygtL45hXt1rPaveuIXwhzqwCJiYo5DuUQZKII=',
+            ui: {
+                native: {}
+            },
+            defaultIcon: '/android-chrome-192x192.png', // for Chrome desktop
+            smallIcon: '/small-icon-96x96.png', // for Chrome Android
+        });
+
+        batchSDK(function(api) {
+            api.setCustomUserID(userId);
+
+        });
+
+        batchSDK(api => {
+            api.on("subscriptionChanged", (api, s) => {
+                if (localStorage.getItem("com.batch.displayed_onboard_notif") !== "1" && s.subscribed === true) {
+                    localStorage.setItem("com.batch.displayed_onboard_notif", "1");
+                    navigator.serviceWorker.ready.then((reg) => {
+                        const deeplink = "https://www.oag.com/blog-reports-and-webinars#blog";
+                        reg.showNotification("Welcome to flightview by OAG", {
+                            body: "We'll keep you updated with the latest news and features on our website 🚀",
+                            icon: "/android-chrome-192x192.png",
+                            data: {
+                                title: " ",
+                                alert: " ",
+                                "com.batch": {
+                                    da: {
+                                        a: "batch.deeplink",
+                                        args: {
+                                            l: deeplink,
+                                            newTab: true
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript" src="//tag.apxlv.com/tag/partner/25?prid=fvps&amp;arrival_id=d]lXsXkW_kVmZabZa_&pageid=SFR&fltstat=AIR&al=LX&fn=14&depapt=ZRH&arrapt=JFK"></script>
+    <!-- FOOTER END -->
+    <script type="text/javascript">
+        revealCitySearch();
+    </script>
+    <!-- GOOGLE ANALYTICS BEGIN -->
+    <script src="//www.google-analytics.com/urchin.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        _uacct = "UA-1746620-1";
+        urchinTracker('/TravelTools/FlightTrackingResult/SingleFlightResult');
+    </script>
+    <!-- GOOGLE ANALYTICS END -->
+
 </body>
 
 </html>
