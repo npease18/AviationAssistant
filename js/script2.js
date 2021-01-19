@@ -303,7 +303,7 @@ function changeBranch(branch) {
     xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        command: "git checkout " + branch
+        command: "sudo git checkout " + branch
     }));
     sendCMD("getbranch")
 }
