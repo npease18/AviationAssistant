@@ -72,10 +72,10 @@ img.graphs {
 }
 
 img.graphs_s {
-    width: 85%;
+    width: 80%;
     height: 40%;
     position: relative;
-    left: 7%;
+    left: 10%;
     top: 30%
 }
 
