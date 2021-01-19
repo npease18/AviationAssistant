@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 
@@ -14,29 +15,17 @@
 
     <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css" />
     <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/proj4.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/liveatc.js"></script>
-    <script type="text/javascript" src="js/avwx.js"></script>
-    <script type="text/javascript" src="js/markers.js"></script>
-    <script type="text/javascript" src="js/dbloader.js"></script>
-    <script type="text/javascript" src="js/registrations.js"></script>
-    <script type="text/javascript" src="js/planeObject.js"></script>
-    <script type="text/javascript" src="js/formatter.js"></script>
-    <script type="text/javascript" src="js/flags.js"></script>
-    <script type="text/javascript" src="js/layers.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/script2.js"></script>
-    <script type="text/javascript" src="js/excanvas.min.js"></script>
-    <script type="text/javascript" src="js/schedules.js"></script>
-    <script type="text/javascript" src="js/liveatc.js"></script>
+   
     <link rel="stylesheet" href="material/material.min.css">
     <script src="material/material.min.js"></script>
     <link rel="stylesheet" href="material/font.css">
     <title>DUMP1090</title>
 </head>
 
-<body onload="initialize()" scroll="no">
+<body onload="initialize()" scroll="no"><script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.26.7'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
     <div id="loader" class="hidden">
         <img src="images/spinny.gif" id="spinny" alt="Loading...">
         <progress id="loader_progress"></progress>
@@ -61,7 +50,6 @@
             <tr>
                 <td class="pointer" onclick="goRadar()"><img src="images/radar.png"></td>
                 <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img src="images/itinerary.png"></td>
-                <td class="pointer" onclick="goGraphs()"><img src="images/graphs.png"></td>
                 <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
             </tr>
         </table>
@@ -110,7 +98,7 @@
                         <h5>Internal Temperature:</h5>
                     </td>
                     <td>
-                        <h5><span id="internal_temperature"></span> &#176; F</h5>
+                        <h5><span id="temperature"></span> &#176; F</h5>
 
                     </td>
                 </tr>
@@ -223,148 +211,136 @@
         <div id="sidebar_container">
             <div id="radar_container">
                 <div id="sidebar_canvas">
-                    <div id="radar_radar_tab">
-                        <div id="dump1090_infoblock">
-                            <table style="width: 100%">
-                                <tr class="infoblock_heading">
-                                    <td>
-                                        <b id="infoblock_name">Aircraft Radar</b>
-                                    </td>
-                                </tr>
-                                <tr class="infoblock_heading">
-                                    <td></td>
-                                </tr>
+                    <div id="dump1090_infoblock">
+                        <table style="width: 100%">
+                            <tr class="infoblock_heading">
+                                <td>
+                                    <b id="infoblock_name">Aircraft Radar</b>
+                                </td>
+                            </tr>
+                            <tr class="infoblock_heading">
+                                <td></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
 
-                                <tr class="infoblock_body dim">
-                                    <td>No aircraft selected</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                            <tr class="infoblock_body dim">
+                                <td>No aircraft selected</td>
+                                <td>&nbsp;</td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>Aircraft (total): <span id="dump1090_total_ac">N/A</span></td>
-                                    <td>Messages: <span id="dump1090_message_rate">N/A</span>/sec</td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td>Aircraft (total): <span id="dump1090_total_ac">N/A</span></td>
+                                <td>Messages: <span id="dump1090_message_rate">N/A</span>/sec</td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>(with positions): <span id="dump1090_total_ac_positions">N/A</span></td>
-                                    <td>History: <span id="dump1090_total_history">N/A</span> positions</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!-- dump1090_infoblock -->
+                            <tr class="infoblock_body">
+                                <td>(with positions): <span id="dump1090_total_ac_positions">N/A</span></td>
+                                <td>History: <span id="dump1090_total_history">N/A</span> positions</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- dump1090_infoblock -->
 
-                        <div id="selected_infoblock">
-                            <table style="width: 100%">
-                                <tr class="infoblock_heading">
-                                    <td colspan="2">
-                                        <b>
+                    <div id="selected_infoblock">
+                        <table style="width: 100%">
+                            <tr class="infoblock_heading">
+                                <td colspan="2">
+                                    <b>
 										<span id="selected_callsign" onclick="toggleFollowSelected();" class="pointer">n/a</span>
 									</b>
-                                        <span id="selected_follow" onclick="toggleFollowSelected();" class="pointer">&#x21D2;</span>
+                                    <span id="selected_follow" onclick="toggleFollowSelected();" class="pointer">&#x21D2;</span>
 
-                                        <span id="selected_flag">
+                                    <span id="selected_flag">
 										<img style="width: 20px; height=12px" src="about:blank" alt="Flag">
 									</span>
 
-                                        <a href="http://www.airframes.org/" onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
-                                            <span id="selected_icao"></span>
-                                        </a>
-                                        <span id="selected_registration"></span>
-                                        <span id="selected_icaotype"></span>
-                                        <span id="selected_emergency"></span>
-                                        </span>
-                                    </td>
-                                </tr>
+                                    <a href="http://www.airframes.org/" onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
+                                        <span id="selected_icao"></span>
+                                    </a>
+                                    <span id="selected_registration"></span>
+                                    <span id="selected_icaotype"></span>
+                                    <span id="selected_emergency"></span>
+                                    </span>
+                                </td>
+                            </tr>
 
-                                <tr id="infoblock_country" class="infoblock_body">
-                                    <td colspan="2">Country of registration: <span id="selected_country">n/a</span></td>
-                                </tr>
+                            <tr id="infoblock_country" class="infoblock_body">
+                                <td colspan="2">Country of registration: <span id="selected_country">n/a</span></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
-                                    <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
+                                <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>Speed: <span id="selected_speed">n/a</span></td>
-                                    <td>RSSI: <span id="selected_rssi">n/a</span></td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td>Speed: <span id="selected_speed">n/a</span></td>
+                                <td>RSSI: <span id="selected_rssi">n/a</span></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>Track: <span id="selected_track">n/a</span></td>
-                                    <td>Last seen: <span id="selected_seen">n/a</span></td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td>Track: <span id="selected_track">n/a</span></td>
+                                <td>Last seen: <span id="selected_seen">n/a</span></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td colspan="2">Position: <span id="selected_position">n/a</span></td>
-                                </tr>
+                            <tr class="infoblock_body">
+                                <td colspan="2">Position: <span id="selected_position">n/a</span></td>
+                            </tr>
 
-                                <tr class="infoblock_body">
-                                    <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!-- selected_infoblock -->
-
-                        <div id="planes_table">
-                            <table id="tableinfo" style="width: 100%">
-                                <thead style="background-color: #BBBBBB; cursor: pointer;">
-                                    <tr>
-                                        <td id="icao" onclick="sortByICAO();">ICAO</td>
-                                        <td id="flag" onclick="sortByCountry()">
-                                            <!-- column for flag image -->
-                                        </td>
-                                        <td id="flight" onclick="sortByFlight();">Flight</td>
-                                        <td id="squawk" onclick="sortBySquawk();" style="text-align: right">Squawk</td>
-                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: right">Altitude</td>
-                                        <td id="speed" onclick="sortBySpeed();" style="text-align: right">Speed</td>
-                                        <td id="distance" onclick="sortByDistance();" style="text-align: right">Distance</td>
-                                        <td id="track" onclick="sortByTrack();" style="text-align: right">Track</td>
-                                        <td id="msgs" onclick="sortByMsgs();" style="text-align: right">Msgs</td>
-                                        <td id="seen" onclick="sortBySeen();" style="text-align: right">Age</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="plane_row_template" class="plane_table_row hidden">
-                                        <td>ICAO</td>
-                                        <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
-                                        <td>FLIGHT</td>
-                                        <td style="text-align: right">SQUAWK</td>
-                                        <td style="text-align: right">ALTITUDE</td>
-                                        <td style="text-align: right">SPEED</td>
-                                        <td style="text-align: right">DISTANCE</td>
-                                        <td style="text-align: right">TRACK</td>
-                                        <td style="text-align: right">MSGS</td>
-                                        <td style="text-align: right">SEEN</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- planes_table -->
-
+                            <tr class="infoblock_body">
+                                <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
+                            </tr>
+                        </table>
                     </div>
+                    <!-- selected_infoblock -->
+
+                    <div id="planes_table">
+                        <table id="tableinfo" style="width: 100%">
+                            <thead style="background-color: #BBBBBB; cursor: pointer;">
+                                <tr>
+                                    <td id="icao" onclick="sortByICAO();">ICAO</td>
+                                    <td id="flag" onclick="sortByCountry()">
+                                        <!-- column for flag image -->
+                                    </td>
+                                    <td id="flight" onclick="sortByFlight();">Flight</td>
+                                    <td id="squawk" onclick="sortBySquawk();" style="text-align: right">Squawk</td>
+                                    <td id="altitude" onclick="sortByAltitude();" style="text-align: right">Altitude</td>
+                                    <td id="speed" onclick="sortBySpeed();" style="text-align: right">Speed</td>
+                                    <td id="distance" onclick="sortByDistance();" style="text-align: right">Distance</td>
+                                    <td id="track" onclick="sortByTrack();" style="text-align: right">Track</td>
+                                    <td id="msgs" onclick="sortByMsgs();" style="text-align: right">Msgs</td>
+                                    <td id="seen" onclick="sortBySeen();" style="text-align: right">Age</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="plane_row_template" class="plane_table_row hidden">
+                                    <td>ICAO</td>
+                                    <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
+                                    <td>FLIGHT</td>
+                                    <td style="text-align: right">SQUAWK</td>
+                                    <td style="text-align: right">ALTITUDE</td>
+                                    <td style="text-align: right">SPEED</td>
+                                    <td style="text-align: right">DISTANCE</td>
+                                    <td style="text-align: right">TRACK</td>
+                                    <td style="text-align: right">MSGS</td>
+                                    <td style="text-align: right">SEEN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- planes_table -->
+
                 </div>
-                <div id="subtab_buttons" style="display: none;">
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
-                        Radar
-                      </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()">
-                        Flight
-                      </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()">
-                        Aircraft
-                      </button>
-                </div>
+                <!-- sidebar_canvas -->
             </div>
             <div id="metar_container" style="display: none">
                 <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
@@ -426,10 +402,9 @@
                     <h4 id="atc_title">No feed selected</h4>
                     <audio id="player" controls>
 						<source type="audio/mpeg">
-                    </audio>
-                    <hr>
+					</audio>
                 </div>
-
+                <hr>
                 <div id="atc_selector">
 
                 </div>
@@ -448,15 +423,6 @@
         </div>
 
         <div id="container_splitter"></div>
-    </div>
-    <div id="graphs_page" style="display: none;height: 100%">
-        <div id="nav_bar">
-            <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
-                <i class="material-icons">home</i>
-            </button>
-        </div>
-        <iframe src="http://192.168.1.21/graphs1090/" class="graphs_iframe"></iframe>
     </div>
     <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
