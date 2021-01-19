@@ -215,6 +215,8 @@ function initialize() {
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
     initializeSchedulesPage();
+    document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
+    document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
 
     $("#loader").removeClass("hidden");
 

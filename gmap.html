@@ -471,20 +471,14 @@
             </select>
         </div>
         <div id="graphs_body">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-local_trailing_rate-2h.png" id="message_rate" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-aircraft-2h.png" id="aircraft_seen-tracked" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-tracks-2h.png" id="tracks_seen" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-signal-2h.png" id="signal_level" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-signal-2h.png" id="maxima" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-aircraft_message_rate-2h.png" id="rate_aircraft" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/dump1090-localhost-cpu-2h.png" id="cpu_usage" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-cpu-2h.png" id="cpu_usage" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-temperature-2h.png" id="max_temp" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-memory-2h.png" id="memory_usage" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-network_bandwidth-2h.png" id="net_bandwidth" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-df_root-2h.png" id="disk_usage" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-disk_io_iops-2h.png" id="disk_io" class="graphs">
-            <img src="http://localhost/graphs1090/graphs/system-localhost-disk_io_octets-2h.png" id="disk_bandwidth" class="graphs">
+            <img src="" id="graphs_holder" class="graphs"><br>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs" onclick="changeGraph(0)" disabled>
+                <i class="material-icons">arrow_back_ios</i>
+              </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs" onclick="changeGraph(1)">
+                <i class="material-icons">arrow_forward_ios</i>
+              </button>
+
         </div>
     </div>
     <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
