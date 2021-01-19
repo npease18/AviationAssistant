@@ -15,6 +15,7 @@ function playPLS(url, title) {
             .then(url => document.getElementById("player").setAttribute("src", url))
             .then(dat => document.getElementById("player").load())
             .then(dat => document.getElementById("atc_title").innerHTML = title)
+            .then(dat => document.getElementById("player").play())
     })
 }
 
