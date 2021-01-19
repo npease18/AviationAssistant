@@ -203,6 +203,9 @@ function initialize() {
     }
 
     // Initialize my functions
+    //document.getElementById("radar_flight_tab_button").disabled = true;
+    //document.getElementById("radar_aircraft_tab_button").disabled = true;
+    //document.getElementById("radar_radar_tab_button").disabled = true;
     getInitialVolume()
     readBatteryLevel()
     readBrightnessLevel()
@@ -968,25 +971,39 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
+        document.getElementById("radar_flight_tab_button").disabled = true;
+        document.getElementById("radar_aircraft_tab_button").disabled = true;
+        document.getElementById("radar_radar_tab_button").disabled = true;
     }
 
     if (hex !== null) {
         // Assign the new selected
         SelectedPlane = hex;
+        document.getElementById("radar_flight_tab_button").disabled = false;
+        document.getElementById("radar_aircraft_tab_button").disabled = false;
+        document.getElementById("radar_radar_tab_button").disabled = false;
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
     } else {
         SelectedPlane = null;
+        document.getElementById("radar_flight_tab_button").disabled = true;
+        document.getElementById("radar_aircraft_tab_button").disabled = true;
+        document.getElementById("radar_radar_tab_button").disabled = true;
     }
 
     if (SelectedPlane !== null && autofollow) {
         FollowSelected = true;
+        document.getElementById("radar_flight_tab_button").disabled = false;
+        document.getElementById("radar_aircraft_tab_button").disabled = false;
+        document.getElementById("radar_radar_tab_button").disabled = false;
         if (OLMap.getView().getZoom() < 8)
             OLMap.getView().setZoom(8);
     } else {
         FollowSelected = false;
+        document.getElementById("radar_flight_tab_button").disabled = true;
+        document.getElementById("radar_aircraft_tab_button").disabled = true;
     }
 
     refreshSelected();
