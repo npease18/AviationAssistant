@@ -366,3 +366,12 @@ function radarAircraftTabSwitch() {
     document.getElementById("radar_flight_tab").style.display = "none"
     document.getElementById("radar_aircraft_tab").style.display = "block"
 }
+
+function changeGraphsTime() {
+    var time = document.getElementById("graphs_time").value
+    var img_tags = document.getElementsByClassName("graphs")
+    for (var i = 0; i < img_tags.length; ++i) {
+        var item = img_tags[i];
+        item.setAttribute("src", "http://192.168.1.21/graphs1090/graphs" + graph_types[i] + time + ".png")
+    }
+}
