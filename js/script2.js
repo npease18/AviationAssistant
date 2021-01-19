@@ -149,6 +149,23 @@ function getInitialVolume() {
     }));
 }
 
+function getCPUTemp() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            temp = xhr.response
+            temp = temp.substring(5, temp.length - 5)
+            temp = celciusToF(parseFloat(temp))
+            document.getElementById("internal_temperature").innerHTML = temp
+        }
+    }
+    xhr.send(JSON.stringify({
+        command: "vcgencmd measure_temp"
+    }));
+}
+
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
@@ -276,7 +293,6 @@ function sendCMD(cmd) {
         xhr.send(JSON.stringify({
             command: "cd /usr/local/bin && sudo x728softsd.sh"
         }));
-        console.log(output)
     }
 
 
@@ -287,7 +303,7 @@ function changeBranch(branch) {
     xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        command: "git checkout " + branch
+        command: "sudo git checkout " + branch
     }));
     sendCMD("getbranch")
 }
@@ -297,6 +313,7 @@ function goHome() {
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goRadar() {
@@ -304,6 +321,7 @@ function goRadar() {
     document.getElementById("radar_page").style.display = "block"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goItinerary() {
@@ -311,6 +329,7 @@ function goItinerary() {
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
 }
 
 function goSettings() {
@@ -318,4 +337,32 @@ function goSettings() {
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "none"
+}
+
+
+function goGraphs() {
+    document.getElementById("itinerary_page").style.display = "none"
+    document.getElementById("settings_page").style.display = "none"
+    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("home_page").style.display = "none"
+    document.getElementById("graphs_page").style.display = "block"
+}
+
+function radarRadarTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "block"
+    document.getElementById("radar_flight_tab").style.display = "none"
+    document.getElementById("radar_aircraft_tab").style.display = "none"
+}
+
+function radarFlightTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "none"
+    document.getElementById("radar_flight_tab").style.display = "block"
+    document.getElementById("radar_aircraft_tab").style.display = "none"
+}
+
+function radarAircraftTabSwitch() {
+    document.getElementById("radar_radar_tab").style.display = "none"
+    document.getElementById("radar_flight_tab").style.display = "none"
+    document.getElementById("radar_aircraft_tab").style.display = "block"
 }
