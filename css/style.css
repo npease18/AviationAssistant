@@ -91,6 +91,10 @@ img.graphs_s {
     top: 40%;
 }
 
+html::-webkit-scrollbar {
+    display: none;
+}
+
 img#message_rate img#cpu_usage {
     width: 50%
 }
