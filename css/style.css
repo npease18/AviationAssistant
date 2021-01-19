@@ -82,13 +82,13 @@ img.graphs_s {
 #arrow_back_graphs {
     position: absolute;
     left: 10px;
-    top: 50%;
+    top: 40%;
 }
 
 #arrow_forward_graphs {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 40%;
 }
 
 img#message_rate img#cpu_usage {
