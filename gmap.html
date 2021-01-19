@@ -455,8 +455,37 @@
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
+            <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
+                <option value="2h">2 Hours</option>
+                <option value="8h">8 Hours</option>
+                <option value="24h">1 Day</option>
+                <option value="7d">1 Week</option>
+                <option value="14d">2 Weeks</option>
+                <option value="30d">1 Month</option>
+                <option value="90d">3 Months</option>
+                <option value="180d">6 Months</option>
+                <option value="365d">1 Year</option>
+                <option value="730d">2 Years</option>
+                <option value="1095d">3 Years</option>
+
+            </select>
         </div>
-        <iframe src="http://192.168.1.21/graphs1090/" class="graphs_iframe"></iframe>
+        <div id="graphs_body">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-local_trailing_rate-2h.png" id="message_rate" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-aircraft-2h.png" id="aircraft_seen-tracked" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-tracks-2h.png" id="tracks_seen" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-signal-2h.png" id="signal_level" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-signal-2h.png" id="maxima" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-aircraft_message_rate-2h.png" id="rate_aircraft" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/dump1090-localhost-cpu-2h.png" id="cpu_usage" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-cpu-2h.png" id="cpu_usage" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-temperature-2h.png" id="max_temp" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-memory-2h.png" id="memory_usage" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-network_bandwidth-2h.png" id="net_bandwidth" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-df_root-2h.png" id="disk_usage" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-disk_io_iops-2h.png" id="disk_io" class="graphs">
+            <img src="http://192.168.1.21/graphs1090/graphs/system-localhost-disk_io_octets-2h.png" id="disk_bandwidth" class="graphs">
+        </div>
     </div>
     <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>

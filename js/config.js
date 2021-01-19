@@ -20,8 +20,9 @@ xhr.send();
 
 var TAB = "Radar"
 
-// -- Title Settings --------------------------------------
-// Show number of aircraft and/or messages per second in the page title
+var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-signal-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
+    // -- Title Settings --------------------------------------
+    // Show number of aircraft and/or messages per second in the page title
 PlaneCountInTitle = true;
 MessageRateInTitle = false;
 
