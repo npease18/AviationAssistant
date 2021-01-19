@@ -20,9 +20,28 @@ xhr.send();
 
 var TAB = "Radar"
 
-var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-signal-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
-    // -- Title Settings --------------------------------------
-    // Show number of aircraft and/or messages per second in the page title
+var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
+    /* var graph_types = {
+        "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
+        "Aircraft Seen": "/dump1090-localhost-aircraft-",
+        "Track's Seen (8 Minute Moving Average)": "/dump1090-localhost-tracks-",
+        "Signal Level": "/dump1090-localhost-signal-",
+        "ADS-B Maxima": "dump1090-localhost-local_rate-",
+        "Message Rate / Aircraft": "/dump1090-localhost-aircraft_message_rate-",
+        "ADS-B CPU Usage": "/dump1090-localhost-cpu-",
+        "Overall CPU Usage": "/system-localhost-cpu-",
+        "Max Core Temp": "/system-localhost-temperature-",
+        "Memory Usage": "/system-localhost-memory-",
+        "Bandwidth Usage": "/system-localhost-network_bandwidth-",
+        "Disk Usage": "/system-localhost-df_root-",
+        "Disk I/O - IOPS": "/system-localhost-disk_io_iops-",
+        "Disk I/O - Bandwidth": "/system-localhost-disk_io_octets-"
+
+    } */
+var starting_graph = 0
+
+// -- Title Settings --------------------------------------
+// Show number of aircraft and/or messages per second in the page title
 PlaneCountInTitle = true;
 MessageRateInTitle = false;
 

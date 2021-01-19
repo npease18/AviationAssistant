@@ -369,9 +369,36 @@ function radarAircraftTabSwitch() {
 
 function changeGraphsTime() {
     var time = document.getElementById("graphs_time").value
-    var img_tags = document.getElementsByClassName("graphs")
-    for (var i = 0; i < img_tags.length; ++i) {
-        var item = img_tags[i];
-        item.setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[i] + time + ".png")
+    document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+}
+
+function changeGraph(direction) {
+
+    var time = document.getElementById("graphs_time").value
+    if (direction && starting_graph != graph_types.length - 1) {
+        starting_graph++
+        document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        console.log(starting_graph)
+    } else if (starting_graph != 0) {
+        starting_graph = starting_graph - 1
+        document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        console.log(starting_graph)
+    }
+
+    if (starting_graph === graph_types.length - 1) {
+        document.getElementById("arrow_forward_graphs").disabled = true;
+    } else if (starting_graph === 0) {
+        document.getElementById("arrow_back_graphs").disabled = true;
+    } else {
+        document.getElementById("arrow_back_graphs").disabled = false;
+        document.getElementById("arrow_forward_graphs").disabled = false;
+    }
+
+    if (starting_graph === 0) {
+        document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
+    } else if (starting_graph === 7) {
+        document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
+    } else {
+        document.getElementById("graphs_holder").setAttribute("class", "graphs")
     }
 }
