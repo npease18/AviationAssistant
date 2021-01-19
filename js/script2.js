@@ -372,6 +372,6 @@ function changeGraphsTime() {
     var img_tags = document.getElementsByClassName("graphs")
     for (var i = 0; i < img_tags.length; ++i) {
         var item = img_tags[i];
-        item.setAttribute("src", "http://192.168.1.21/graphs1090/graphs" + graph_types[i] + time + ".png")
+        item.setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[i] + time + ".png")
     }
 }
