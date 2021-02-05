@@ -21,9 +21,10 @@ function updateFlightTab() {
                 var data = data[0]
                 document.getElementById("flight_flightnum").innerHTML = data.flight.number
                 document.getElementById("flight_status").innerHTML = toTitleCase(data.status)
+                document.getElementById("flight_flighticaonum").innerHTML = data.flight.icaoNumber
                 document.getElementById("flight_airport_long_origin").innerHTML = world_airports[data.departure.icaoCode].name
                 document.getElementById("flight_airport_long_destination").innerHTML = world_airports[data.arrival.icaoCode].name
-                document.getElementById("flight_airline").innerHTML = world_airlines[data.airline.icaoCode].nameAirline
+                document.getElementById("flight_airline").innerHTML = world_airlines[data.airline.icaoCode].nameAirline + " "
                 document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
                 document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
                 getFlightProgress(data)
