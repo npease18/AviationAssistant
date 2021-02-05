@@ -219,9 +219,7 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
 
 
-    // REMOVE AFTER TESTING
-    SelectedPlane = "3C71A4"
-    updateFlightTab()
+
     $("#loader").removeClass("hidden");
 
     // Get receiver metadata, reconfigure using it, then continue
