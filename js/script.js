@@ -218,6 +218,10 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
 
+
+    // REMOVE AFTER TESTING
+    SelectedPlane = "3C71A4"
+    updateFlightTab()
     $("#loader").removeClass("hidden");
 
     // Get receiver metadata, reconfigure using it, then continue
@@ -507,7 +511,6 @@ function initialize_map() {
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
-        console.log(center)
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
@@ -988,6 +991,7 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
+        updateFlightTab()
     } else {
         SelectedPlane = null;
         document.getElementById("radar_flight_tab_button").disabled = true;

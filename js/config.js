@@ -18,8 +18,32 @@ xhr.onreadystatechange = function() {
 }
 xhr.send();
 
-var TAB = "Radar"
+var world_airports = {}
+var xhr1 = new XMLHttpRequest();
+xhr1.open("GET", "json/world_airports.json", true);
+xhr1.setRequestHeader('Content-Type', 'application/json');
+xhr1.onreadystatechange = function() {
+    if (xhr1.readyState === 4) {
+        world_airports = JSON.parse(xhr1.response)
+    }
+}
+xhr1.send();
 
+
+var world_airlines = {}
+var xhr2 = new XMLHttpRequest();
+xhr2.open("GET", "json/airlines.json", true);
+xhr2.setRequestHeader('Content-Type', 'application/json');
+xhr2.onreadystatechange = function() {
+    if (xhr2.readyState === 4) {
+        world_airlines = JSON.parse(xhr2.response)
+    }
+}
+xhr2.send();
+
+var flight_info = {}
+var TAB = "Radar"
+var DateTime = luxon.DateTime;
 var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
     /* var graph_types = {
         "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
@@ -138,10 +162,10 @@ SiteCircles = true; // true to show circles (only shown if the center marker is 
 SiteCirclesDistances = new Array(100, 150, 200);
 
 // Show the clocks at the top of the righthand pane? You can disable the clocks if you want here
-ShowClocks = true;
+ShowClocks = false;
 
 // Controls page title, righthand pane when nothing is selected
-PageName = "DUMP1090";
+PageName = "Aviation Assistant";
 
 // Show country flags by ICAO addresses?
 ShowFlags = true;
@@ -151,21 +175,3 @@ FlagPath = "flags-tiny/";
 
 // Set to true to enable the ChartBundle base layers (US coverage only)
 ChartBundleLayers = true;
-
-// Provide a Bing Maps API key here to enable the Bing imagery layer.
-// You can obtain a free key (with usage limits) at
-// https://www.bingmapsportal.com/ (you need a "basic key")
-//
-// Be sure to quote your key:
-//   BingMapsAPIKey = "your key here";
-//
-BingMapsAPIKey = null;
-
-// Provide a Mapzen API key here to enable the Mapzen vector tile layer.
-// You can obtain a free key at https://mapzen.com/developers/
-// (you need a "vector tiles" key)
-//
-// Be sure to quote your key:
-//   MapzenAPIKey = "your key here";
-//
-MapzenAPIKey = null;
