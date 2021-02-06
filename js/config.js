@@ -18,29 +18,6 @@ xhr.onreadystatechange = function() {
 }
 xhr.send();
 
-var world_airports = {}
-var xhr1 = new XMLHttpRequest();
-xhr1.open("GET", "json/world_airports.json", true);
-xhr1.setRequestHeader('Content-Type', 'application/json');
-xhr1.onreadystatechange = function() {
-    if (xhr1.readyState === 4) {
-        world_airports = JSON.parse(xhr1.response)
-    }
-}
-xhr1.send();
-
-
-var world_airlines = {}
-var xhr2 = new XMLHttpRequest();
-xhr2.open("GET", "json/airlines.json", true);
-xhr2.setRequestHeader('Content-Type', 'application/json');
-xhr2.onreadystatechange = function() {
-    if (xhr2.readyState === 4) {
-        world_airlines = JSON.parse(xhr2.response)
-    }
-}
-xhr2.send();
-
 var flight_info = {}
 var TAB = "Radar"
 var DateTime = luxon.DateTime;
