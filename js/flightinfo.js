@@ -1,38 +1,28 @@
 function updateFlightTab() {
-    if (flight_info[SelectedPlane] !== undefined) {
-        console.log(flight_info[SelectedPlane])
-        document.getElementById("flight_flightnum").innerHTML = flight_info[SelectedPlane].flight.number
-        document.getElementById("flight_status").innerHTML = toTitleCase(flight_info[SelectedPlane].status)
-        document.getElementById("flight_airport_long_origin").innerHTML = world_airports[flight_info[SelectedPlane].departure.icaoCode].name
-        document.getElementById("flight_airport_long_destination").innerHTML = world_airports[flight_info[SelectedPlane].arrival.icaoCode].name
-        document.getElementById("flight_airline").innerHTML = world_airlines[flight_info[SelectedPlane].airline.icaoCode].nameAirline
-        document.getElementById("flight_airport_short_origin").innerHTML = flight_info[SelectedPlane].departure.icaoCode
-        document.getElementById("flight_airport_short_destination").innerHTML = flight_info[SelectedPlane].arrival.icaoCode
-            //getFlightProgress(data)
-        document.getElementById("radar_flight_info").style.display = "block"
-        document.getElementById("radar_flight_loading").style.display = "none"
-    } else {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://aviation-edge.com/v2/public/flights?key=" + keys['AE'] + "&aircraftIcao24=" + SelectedPlane, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                var data = JSON.parse(xhr.response)
-                var data = data[0]
-                document.getElementById("flight_flightnum").innerHTML = data.flight.number
-                document.getElementById("flight_status").innerHTML = toTitleCase(data.status)
-                document.getElementById("flight_flighticaonum").innerHTML = data.flight.icaoNumber
-                document.getElementById("flight_airport_long_origin").innerHTML = world_airports[data.departure.icaoCode].name
-                document.getElementById("flight_airport_long_destination").innerHTML = world_airports[data.arrival.icaoCode].name
-                document.getElementById("flight_airline").innerHTML = world_airlines[data.airline.icaoCode].nameAirline + " "
-                document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
-                document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
-                getFlightProgress(data)
-                flight_info[SelectedPlane] = data
-            }
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://aviation-edge.com/v2/public/flights?key=" + keys['AE'] + "&aircraftIcao24=" + SelectedPlane, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            var data = JSON.parse(xhr.response)
+            var data = data[0]
+            $.getJSON('json/airlines.json', function(world_airlines) {
+                $.getJSON('json/world_airports.json', function(world_airports) {
+                    document.getElementById("flight_flightnum").innerHTML = data.flight.number
+                    document.getElementById("flight_status").innerHTML = toTitleCase(data.status)
+                    document.getElementById("flight_flighticaonum").innerHTML = data.flight.icaoNumber
+                    document.getElementById("flight_airport_long_origin").innerHTML = world_airports[data.departure.icaoCode].name
+                    document.getElementById("flight_airport_long_destination").innerHTML = world_airports[data.arrival.icaoCode].name
+                    document.getElementById("flight_airline").innerHTML = world_airlines[data.airline.icaoCode].nameAirline + " "
+                    document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
+                    document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
+                    getFlightProgress(data)
+                    flight_info[SelectedPlane] = data
+                });
+            });
         }
-        xhr.send();
     }
+    xhr.send();
 }
 
 function getFlightProgress(flightdata) {
