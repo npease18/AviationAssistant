@@ -41,9 +41,9 @@ function getFlightProgress(flightdata) {
                 document.getElementById("flight_arrival_time").innerHTML = ""
                 document.getElementById("flight_remaining_time").innerHTML = "N/A"
             } else {
-                var departure_time = DateTime.fromISO(data.departure.actualTime)
+                var departure_time = DateTime.fromISO(data.departure.estimatedTime)
                 document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
-                var arrival_time = DateTime.fromISO(data.arrival.estimatedTime)
+                var arrival_time = DateTime.fromISO(data.arrival.scheduledTime)
                 document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
                 var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
                 transit_time = transit_time.toObject()
