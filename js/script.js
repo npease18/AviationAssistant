@@ -968,6 +968,8 @@ function selectPlaneByHex(hex, autofollow) {
         $(Planes[SelectedPlane].tr).removeClass("selected");
     }
 
+
+
     // If we are clicking the same plane, we are deselecting it.
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
