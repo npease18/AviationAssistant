@@ -18,7 +18,28 @@ xhr.onreadystatechange = function() {
 }
 xhr.send();
 
+var flight_info = {}
 var TAB = "Radar"
+var DateTime = luxon.DateTime;
+var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
+    /* var graph_types = {
+        "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
+        "Aircraft Seen": "/dump1090-localhost-aircraft-",
+        "Track's Seen (8 Minute Moving Average)": "/dump1090-localhost-tracks-",
+        "Signal Level": "/dump1090-localhost-signal-",
+        "ADS-B Maxima": "dump1090-localhost-local_rate-",
+        "Message Rate / Aircraft": "/dump1090-localhost-aircraft_message_rate-",
+        "ADS-B CPU Usage": "/dump1090-localhost-cpu-",
+        "Overall CPU Usage": "/system-localhost-cpu-",
+        "Max Core Temp": "/system-localhost-temperature-",
+        "Memory Usage": "/system-localhost-memory-",
+        "Bandwidth Usage": "/system-localhost-network_bandwidth-",
+        "Disk Usage": "/system-localhost-df_root-",
+        "Disk I/O - IOPS": "/system-localhost-disk_io_iops-",
+        "Disk I/O - Bandwidth": "/system-localhost-disk_io_octets-"
+
+    } */
+var starting_graph = 0
 
 // -- Title Settings --------------------------------------
 // Show number of aircraft and/or messages per second in the page title
@@ -118,10 +139,10 @@ SiteCircles = true; // true to show circles (only shown if the center marker is 
 SiteCirclesDistances = new Array(100, 150, 200);
 
 // Show the clocks at the top of the righthand pane? You can disable the clocks if you want here
-ShowClocks = true;
+ShowClocks = false;
 
 // Controls page title, righthand pane when nothing is selected
-PageName = "DUMP1090";
+PageName = "Aviation Assistant";
 
 // Show country flags by ICAO addresses?
 ShowFlags = true;
@@ -131,21 +152,3 @@ FlagPath = "flags-tiny/";
 
 // Set to true to enable the ChartBundle base layers (US coverage only)
 ChartBundleLayers = true;
-
-// Provide a Bing Maps API key here to enable the Bing imagery layer.
-// You can obtain a free key (with usage limits) at
-// https://www.bingmapsportal.com/ (you need a "basic key")
-//
-// Be sure to quote your key:
-//   BingMapsAPIKey = "your key here";
-//
-BingMapsAPIKey = null;
-
-// Provide a Mapzen API key here to enable the Mapzen vector tile layer.
-// You can obtain a free key at https://mapzen.com/developers/
-// (you need a "vector tiles" key)
-//
-// Be sure to quote your key:
-//   MapzenAPIKey = "your key here";
-//
-MapzenAPIKey = null;

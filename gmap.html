@@ -14,7 +14,8 @@
 
     <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css" />
     <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/proj4.js"></script>
+    <script type="text/javascript" src="js/luxon.js"></script>
+    <script type="text/javascript" src="js/flightinfo.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/liveatc.js"></script>
     <script type="text/javascript" src="js/avwx.js"></script>
@@ -33,7 +34,7 @@
     <link rel="stylesheet" href="material/material.min.css">
     <script src="material/material.min.js"></script>
     <link rel="stylesheet" href="material/font.css">
-    <title>DUMP1090</title>
+    <title>Aviation Assistant</title>
 </head>
 
 <body onload="initialize()" scroll="no">
@@ -353,8 +354,52 @@
                         <!-- planes_table -->
 
                     </div>
+                    <div id="radar_flight_tab" style="display: none;">
+                        <div id="radar_flight_info" style="display: none;">
+                            <h3><span style="font-size: 24px;">Flight Information:</span></h3>
+                            <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span id="flight_flightnum" style="font-size: 28px;">Number</span><span style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
+                            <br><br>
+                            <i><span id="flight_status" style="font-size: 20px;">En Route</span></i><br><br>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="flight_airport_short_origin" style="font-size: 30px;">N/A</span><br>
+                                        <span id="flight_airport_long_origin" style="font-size: 16px;">N/A</span>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <span id="flight_airport_short_destination" style="font-size: 30px;">N/A</span><br>
+                                        <span id="flight_airport_long_destination" style="font-size: 16px;">N/A</span>
+                                    </td>
+                                </tr>
+                            </table><br>
+                            <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: left;" id="flight_depart_time" style="font-size: 10px;width: 50%;">
+                                        Depart Time
+                                    </td>
+                                    <td style="text-align: right;" id="flight_arrival_time" style="font-size: 10px;width: 50%;">
+                                        Arrival Time
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" style="font-size: 10px;">
+                                        Transit Time:<br><span id="flight_transit_time"></span>
+                                    </td>
+                                    <td style="text-align: right;" style="font-size: 10px;">
+                                        Time Remaining:<br><span id="flight_remaining_time"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                    </div>
+                    <div id="radar_aircraft_tab" style="display: none;">
+
+                    </div>
+
                 </div>
-                <div id="subtab_buttons" style="display: none;">
+                <div id="subtab_buttons">
                     <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
                         Radar
                       </button>
@@ -449,14 +494,37 @@
 
         <div id="container_splitter"></div>
     </div>
-    <div id="graphs_page" style="display: none;height: 100%">
+    <div id="graphs_page" style="display: none;height: 100%;">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
+            <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
+                <option value="2h">2 Hours</option>
+                <option value="8h">8 Hours</option>
+                <option value="24h">1 Day</option>
+                <option value="7d">1 Week</option>
+                <option value="14d">2 Weeks</option>
+                <option value="30d">1 Month</option>
+                <option value="90d">3 Months</option>
+                <option value="180d">6 Months</option>
+                <option value="365d">1 Year</option>
+                <option value="730d">2 Years</option>
+                <option value="1095d">3 Years</option>
+
+            </select>
         </div>
-        <iframe src="http://192.168.1.21/graphs1090/" class="graphs_iframe"></iframe>
+        <div id="graphs_body">
+            <img src="" id="graphs_holder" class="graphs"><br>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs" onclick="changeGraph(0)" disabled>
+                <i class="material-icons">arrow_back_ios</i>
+              </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs" onclick="changeGraph(1)">
+                <i class="material-icons">arrow_forward_ios</i>
+              </button>
+
+        </div>
     </div>
     <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
