@@ -215,6 +215,8 @@ function initialize() {
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
     initializeSchedulesPage();
+    document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
+    document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
 
     $("#loader").removeClass("hidden");
 
@@ -505,7 +507,6 @@ function initialize_map() {
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
-        console.log(center)
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
@@ -971,39 +972,31 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_flight_tab_button").disabled = true;
-        document.getElementById("radar_aircraft_tab_button").disabled = true;
-        document.getElementById("radar_radar_tab_button").disabled = true;
+
     }
 
     if (hex !== null) {
         // Assign the new selected
         SelectedPlane = hex;
-        document.getElementById("radar_flight_tab_button").disabled = false;
-        document.getElementById("radar_aircraft_tab_button").disabled = false;
-        document.getElementById("radar_radar_tab_button").disabled = false;
+
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
+        updateFlightTab()
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_flight_tab_button").disabled = true;
-        document.getElementById("radar_aircraft_tab_button").disabled = true;
-        document.getElementById("radar_radar_tab_button").disabled = true;
+
     }
 
     if (SelectedPlane !== null && autofollow) {
         FollowSelected = true;
-        document.getElementById("radar_flight_tab_button").disabled = false;
-        document.getElementById("radar_aircraft_tab_button").disabled = false;
-        document.getElementById("radar_radar_tab_button").disabled = false;
+
         if (OLMap.getView().getZoom() < 8)
             OLMap.getView().setZoom(8);
     } else {
         FollowSelected = false;
-        document.getElementById("radar_flight_tab_button").disabled = true;
-        document.getElementById("radar_aircraft_tab_button").disabled = true;
+
     }
 
     refreshSelected();

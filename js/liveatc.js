@@ -32,7 +32,7 @@ function listStations() {
             var node = document.createElement("div")
             node.setAttribute("id", "atc_" + state)
             node.setAttribute("class", "atc_state noselect pointer")
-            node.setAttribute("onclick", "selectState('" + state + "')")
+            node.setAttribute("onmousedown", "selectState('" + state + "')")
             node.innerHTML = "<b>" + state + "</b>"
             document.getElementById("atc_selector").appendChild(node)
         }
@@ -48,13 +48,13 @@ function selectState(state) {
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
     node.setAttribute("class", "atc_state noselect pointer")
-    node.setAttribute("onclick", "listStations()")
+    node.setAttribute("onmousedown", "listStations()")
     node.innerHTML = "<b>Go Back</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
     node.setAttribute("class", "atc_state noselect")
-    node.setAttribute("onclick", "selectState('" + state + "')")
+    node.setAttribute("onmousedown", "selectState('" + state + "')")
     node.innerHTML = "<b>" + state + "</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("hr")
@@ -74,7 +74,7 @@ function selectState(state) {
                 var node = document.createElement("div")
                 node.setAttribute("id", "atc_" + airport)
                 node.setAttribute("class", "atc_state noselect pointer")
-                node.setAttribute("onclick", "selectAirport('" + airport + "','" + state + "')")
+                node.setAttribute("onmousedown", "selectAirport('" + airport + "','" + state + "')")
                 node.innerHTML = "<b>" + airport + "</b>"
                 document.getElementById("atc_selector").appendChild(node)
             }
@@ -91,7 +91,7 @@ function selectAirport(airport, state) {
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
     node.setAttribute("class", "atc_state noselect pointer")
-    node.setAttribute("onclick", "selectState('" + state + "')")
+    node.setAttribute("onmousedown", "selectState('" + state + "')")
     node.innerHTML = "<b>Go Back</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("div")
@@ -118,7 +118,7 @@ function selectAirport(airport, state) {
             var node = document.createElement("div")
             node.setAttribute("id", "atc_" + airport)
             node.setAttribute("class", "atc_state noselect pointer")
-            node.setAttribute("onclick", "playPLS('" + data[airport].url + "','" + data[airport].name + "')")
+            node.setAttribute("onmousedown", "playPLS('" + data[airport].url + "','" + data[airport].name + "')")
             node.innerHTML = "<b>" + data[airport].name + "</b>"
             document.getElementById("atc_selector").appendChild(node)
 

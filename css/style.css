@@ -52,17 +52,62 @@ div#atc_radio {
     position: sticky;
 }
 
-.graphs_iframe {
-    border: none;
+div#graphs_body {
     position: absolute;
-    top: 30px;
+    top: 50px;
+    width: 100%;
     height: 100%;
-    width: 100%
+}
+
+div#graphs_body {
+    overflow: hidden;
+}
+
+img.graphs {
+    width: 80%;
+    height: 70%;
+    position: relative;
+    top: 5%;
+    left: 10%;
+}
+
+img.graphs_s {
+    width: 80%;
+    height: 40%;
+    position: relative;
+    left: 10%;
+    top: 30%
+}
+
+#arrow_back_graphs {
+    position: absolute;
+    left: 10px;
+    top: 40%;
+}
+
+#arrow_forward_graphs {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+img#message_rate img#cpu_usage {
+    width: 50%
 }
 
 div#subtab_buttons>button {
     margin: auto;
     width: 32%;
+}
+
+div#subtab_buttons {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 div#map_canvas {
@@ -75,7 +120,7 @@ div#sidebar_container {
     right: 0px;
     top: 50px;
     width: 390px;
-    height: 100%;
+    height: 90%;
 }
 
 #nav_bar.divider {
