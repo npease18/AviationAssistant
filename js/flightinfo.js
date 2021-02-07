@@ -33,29 +33,38 @@ function getFlightProgress(flightdata) {
         if (xhr.readyState === 4) {
             var data = JSON.parse(xhr.response)
             var data = data[0]
-            var departure_time = DateTime.fromISO(data.departure.actualTime)
-            document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
-            var arrival_time = DateTime.fromISO(data.arrival.estimatedTime)
-            document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
-            var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
-            transit_time = transit_time.toObject()
-            if (transit_time.days != 0) {
-                document.getElementById("flight_transit_time").innerHTML = transit_time.days + "D " + transit_time.hours + "H " + transit_time.minutes + "M"
+            if (JSON.parse(xhr.response).success === false) {
+                document.getElementById("radar_flight_info").style.display = "block"
+                document.getElementById("radar_flight_loading").style.display = "none"
+                document.getElementById("flight_transit_time").innerHTML = "N/A"
+                document.getElementById("flight_depart_time").innerHTML = ""
+                document.getElementById("flight_arrival_time").innerHTML = ""
+                document.getElementById("flight_remaining_time").innerHTML = "N/A"
             } else {
-                document.getElementById("flight_transit_time").innerHTML = transit_time.hours + "H " + transit_time.minutes + "M"
+                var departure_time = DateTime.fromISO(data.departure.actualTime)
+                document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
+                var arrival_time = DateTime.fromISO(data.arrival.estimatedTime)
+                document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
+                var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
+                transit_time = transit_time.toObject()
+                if (transit_time.days != 0) {
+                    document.getElementById("flight_transit_time").innerHTML = transit_time.days + "D " + transit_time.hours + "H " + transit_time.minutes + "M"
+                } else {
+                    document.getElementById("flight_transit_time").innerHTML = transit_time.hours + "H " + transit_time.minutes + "M"
+                }
+                var current_time = DateTime.local();
+                var time_remaining = arrival_time.diff(current_time, ["days", "hours", "minutes", "seconds"])
+                time_remaining = time_remaining.toObject()
+                if (time_remaining.days != 0) {
+                    document.getElementById("flight_remaining_time").innerHTML = time_remaining.days + "D " + time_remaining.hours + "H " + time_remaining.minutes + "M"
+                } else {
+                    document.getElementById("flight_remaining_time").innerHTML = time_remaining.hours + "H " + time_remaining.minutes + "M"
+                }
+                document.getElementById("radar_flight_info").style.display = "block"
+                document.getElementById("radar_flight_loading").style.display = "none"
+                flight_info[SelectedPlane].schedule = data
+                getTripProgress(arrival_time, departure_time)
             }
-            var current_time = DateTime.local();
-            var time_remaining = arrival_time.diff(current_time, ["days", "hours", "minutes", "seconds"])
-            time_remaining = time_remaining.toObject()
-            if (time_remaining.days != 0) {
-                document.getElementById("flight_remaining_time").innerHTML = time_remaining.days + "D " + time_remaining.hours + "H " + time_remaining.minutes + "M"
-            } else {
-                document.getElementById("flight_remaining_time").innerHTML = time_remaining.hours + "H " + time_remaining.minutes + "M"
-            }
-            document.getElementById("radar_flight_info").style.display = "block"
-            document.getElementById("radar_flight_loading").style.display = "none"
-            flight_info[SelectedPlane].schedule = data
-            getTripProgress(arrival_time, departure_time)
         }
     }
     xhr.send();
