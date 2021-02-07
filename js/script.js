@@ -220,9 +220,6 @@ function initialize() {
 
     $("#loader").removeClass("hidden");
 
-    SelectedPlane = "484CBC"
-    updateFlightTab()
-
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
     $.ajax({
