@@ -18,6 +18,17 @@ xhr.onreadystatechange = function() {
 }
 xhr.send();
 
+var country_names = {}
+var xhr1 = new XMLHttpRequest();
+xhr1.open("GET", "json/country_names.json", true);
+xhr1.setRequestHeader('Content-Type', 'application/json');
+xhr1.onreadystatechange = function() {
+    if (xhr1.readyState === 4) {
+        country_names = JSON.parse(xhr1.response)
+    }
+}
+xhr1.send();
+
 var flight_info = {}
 var TAB = "Radar"
 var DateTime = luxon.DateTime;

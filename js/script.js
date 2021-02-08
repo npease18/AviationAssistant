@@ -219,7 +219,7 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
 
     $("#loader").removeClass("hidden");
-    SelectedPlane = "4b8472"
+    SelectedPlane = "896209"
     updateFlightTab()
         // Get receiver metadata, reconfigure using it, then continue
         // with initialization
