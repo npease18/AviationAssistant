@@ -64,6 +64,7 @@ function getFlightProgress(flightdata) {
                 document.getElementById("radar_flight_loading").style.display = "none"
                 flight_info[SelectedPlane].schedule = data
                 getTripProgress(arrival_time, departure_time)
+                getPlaneImage(flightdata)
             }
         }
     }
@@ -76,4 +77,21 @@ function getTripProgress(arrival_time, departure_time) {
     var time_elapsed = current_time.diff(departure_time);
     var trip_progress = ((time_elapsed * 100) / total_time).toFixed(0)
     document.getElementById("flight_progress").MaterialProgress.setProgress(trip_progress);
+}
+
+function getPlaneImage(flightdata) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            var page_nodes = $($.parseHTML(xhr.response));
+            var img = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+            console.log(img)
+            document.getElementById("aircraft_image").setAttribute('src', img.attr('src'))
+        }
+    }
+    xhr.send(JSON.stringify({
+        command: "curl https://www.jetphotos.com/photo/keyword/" + flightdata.aircraft.regNumber
+    }));
 }
