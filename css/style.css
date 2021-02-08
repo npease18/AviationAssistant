@@ -35,6 +35,11 @@ div#itinerary_body {
     height: 100%;
 }
 
+img#aircraft_image {
+    max-width: 100%;
+    height: auto;
+}
+
 div#map_container {
     position: fixed;
     top: 50px;
