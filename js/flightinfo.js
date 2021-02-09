@@ -22,12 +22,20 @@ function updateFlightTab() {
                     getPlaneImage(data)
                     $.getJSON('json/airplanes.json', function(aircraft_information) {
                         var aircraft = aircraft_information[data.aircraft.iataCode]
-                        console.log(aircraft)
+
                         document.getElementById("aircraft_name").innerHTML = aircraft.productionLine
                         document.getElementById("aircraft_modelcode").innerHTML = aircraft.modelCode
                         document.getElementById("aircraft_engine").innerHTML = aircraft.enginesType
                         document.getElementById("aircraft_engine_count").innerHTML = aircraft.enginesCount
-                        document.getElementById("aircraft_status").innerHTML = aircraft.planeStatus
+                        document.getElementById("aircraft_status").innerHTML = toTitleCase(aircraft.planeStatus)
+                        document.getElementById("aircraft_age").innerHTML = aircraft.planeAge
+                        if (aircraft.rolloutDate) {
+                            document.getElementById("aircraft_rollout_date").innerHTML = DateTime.fromISO(aircraft.rolloutDate).toLocaleString("DATE_SHORT")
+                        }
+                        if (aircraft.firstFlight) {
+                            document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
+                        }
+
                     });
                     flight_info[SelectedPlane] = data
                 });
@@ -53,29 +61,59 @@ function getFlightProgress(flightdata) {
                 document.getElementById("flight_arrival_time").innerHTML = ""
                 document.getElementById("flight_remaining_time").innerHTML = "N/A"
             } else {
-                var departure_time = DateTime.fromISO(data.departure.estimatedTime)
-                document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
-                var arrival_time = DateTime.fromISO(data.arrival.scheduledTime)
-                document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
-                var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
-                transit_time = transit_time.toObject()
-                if (transit_time.days != 0) {
-                    document.getElementById("flight_transit_time").innerHTML = transit_time.days + "D " + transit_time.hours + "H " + transit_time.minutes + "M"
-                } else {
-                    document.getElementById("flight_transit_time").innerHTML = transit_time.hours + "H " + transit_time.minutes + "M"
-                }
-                var current_time = DateTime.local();
-                var time_remaining = arrival_time.diff(current_time, ["days", "hours", "minutes", "seconds"])
-                time_remaining = time_remaining.toObject()
-                if (time_remaining.days != 0) {
-                    document.getElementById("flight_remaining_time").innerHTML = time_remaining.days + "D " + time_remaining.hours + "H " + time_remaining.minutes + "M"
-                } else {
-                    document.getElementById("flight_remaining_time").innerHTML = time_remaining.hours + "H " + time_remaining.minutes + "M"
-                }
-                document.getElementById("radar_flight_info").style.display = "block"
-                document.getElementById("radar_flight_loading").style.display = "none"
-                flight_info[SelectedPlane].schedule = data
-                getTripProgress(arrival_time, departure_time)
+                $.getJSON('json/world_airports.json', function(world_airports) {
+                    arrival_timezone = world_airports[data.arrival.icaoCode].tz
+                    departure_timezone = world_airports[data.departure.icaoCode].tz
+
+                    if (data.departure.actualTime) {
+                        departure_time = DateTime.fromISO(data.departure.actualTime, {
+                            zone: departure_timezone
+                        });
+                    } else if (data.departure.estimatedTime) {
+                        departure_time = DateTime.fromISO(data.departure.estimatedTime, {
+                            zone: departure_timezone
+                        });
+                    } else if (data.departure.scheduledTime) {
+                        departure_time = DateTime.fromISO(data.departure.scheduledTime, {
+                            zone: departure_timezone
+                        });
+                    }
+                    if (data.arrival.actualTime) {
+                        arrival_time = DateTime.fromISO(data.arrival.actualTime, {
+                            zone: arrival_timezone
+                        });
+                    } else if (data.arrival.estimatedTime) {
+                        arrival_time = DateTime.fromISO(data.arrival.estimatedTime, {
+                            zone: arrival_timezone
+                        });
+                    } else if (data.arrival.scheduledTime) {
+                        arrival_time = DateTime.fromISO(data.arrival.scheduledTime, {
+                            zone: arrival_timezone
+                        });
+                    }
+                    document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
+                    document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
+                    var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
+                    transit_time = transit_time.toObject()
+                    if (transit_time.days != 0) {
+                        document.getElementById("flight_transit_time").innerHTML = transit_time.days + "D " + transit_time.hours + "H " + transit_time.minutes + "M"
+                    } else {
+                        document.getElementById("flight_transit_time").innerHTML = transit_time.hours + "H " + transit_time.minutes + "M"
+                    }
+                    var current_time = DateTime.local();
+                    var time_remaining = arrival_time.diff(current_time, ["days", "hours", "minutes", "seconds"])
+                    time_remaining = time_remaining.toObject()
+                    if (time_remaining.days != 0) {
+                        document.getElementById("flight_remaining_time").innerHTML = time_remaining.days + "D " + time_remaining.hours + "H " + time_remaining.minutes + "M"
+                    } else {
+                        document.getElementById("flight_remaining_time").innerHTML = time_remaining.hours + "H " + time_remaining.minutes + "M"
+                    }
+                    document.getElementById("radar_flight_info").style.display = "block"
+                    document.getElementById("radar_flight_loading").style.display = "none"
+                    flight_info[SelectedPlane].schedule = data
+                    getTripProgress(arrival_time, departure_time)
+                });
+
             }
         }
     }
