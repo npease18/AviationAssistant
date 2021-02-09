@@ -181,7 +181,12 @@ div#sidebar_container {
 
 #radar_aircraft_tab {
     line-height: 17px;
-    ;
+}
+
+#img_button {
+    position: fixed;
+    right: 10%;
+    bottom: 50px;
 }
 
 #info_button {
@@ -369,6 +374,12 @@ td#seen {
     font-size: medium;
 }
 
+#modal2_title {
+    font-size: 30px;
+    text-decoration: bold;
+    line-height: 40px;
+}
+
 .material-icons.md-18 {
     font-size: 18px;
 }
@@ -393,7 +404,7 @@ td#seen {
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 2;
     /* Sit on top */
     left: 0;
     top: 0;

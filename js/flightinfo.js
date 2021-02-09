@@ -18,7 +18,7 @@ function updateFlightTab() {
                     document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
                     document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
                     document.getElementById("flight_airport_loc_destination").innerHTML = world_airports[data.arrival.icaoCode].city + ", " + country_names[world_airports[data.arrival.icaoCode].country]
-                    getFlightProgress(data)
+                    getFlightProgress(data, world_airports)
                     getPlaneImage(data)
                     $.getJSON('json/airplanes.json', function(aircraft_information) {
                         var aircraft = aircraft_information[data.aircraft.iataCode]
@@ -45,7 +45,7 @@ function updateFlightTab() {
     xhr.send();
 }
 
-function getFlightProgress(flightdata) {
+function getFlightProgress(flightdata, world_airports) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://aviation-edge.com/v2/public/timetable?key=" + keys['AE'] + "&flight_icao=" + flightdata.flight.icaoNumber + "&status=active", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -112,8 +112,11 @@ function getFlightProgress(flightdata) {
                     }
                     document.getElementById("radar_flight_info").style.display = "block"
                     document.getElementById("radar_flight_loading").style.display = "none"
+                    document.getElementById("radar_aircraft_info").style.display = "block"
+                    document.getElementById("radar_aircraft_loading").style.display = "none"
                     flight_info[SelectedPlane].schedule = data
-                    getTripProgress(arrival_time, departure_time)
+                    var trip_progress = getTripProgress(arrival_time, departure_time)
+                    getFlightPlanImage(flightdata, trip_progress, world_airports)
                 });
 
             }
@@ -128,6 +131,7 @@ function getTripProgress(arrival_time, departure_time) {
     var time_elapsed = current_time.diff(departure_time);
     var trip_progress = ((time_elapsed * 100) / total_time).toFixed(0)
     document.getElementById("flight_progress").MaterialProgress.setProgress(trip_progress);
+    return trip_progress
 }
 
 function getPlaneImage(flightdata) {
@@ -145,4 +149,24 @@ function getPlaneImage(flightdata) {
     xhr.send(JSON.stringify({
         command: "curl https://www.jetphotos.com/photo/keyword/" + flightdata.aircraft.regNumber
     }));
+}
+
+function getFlightPlanImage(data, flight_progress, world_airports) {
+    var xhr = new XMLHttpRequest();
+    departure_timezone = world_airports[data.departure.icaoCode].tz
+    if (data.departure.actualTime) {
+        departure_time = DateTime.fromISO(data.departure.actualTime, {
+            zone: departure_timezone
+        });
+    } else if (data.departure.estimatedTime) {
+        departure_time = DateTime.fromISO(data.departure.estimatedTime, {
+            zone: departure_timezone
+        });
+    } else if (data.departure.scheduledTime) {
+        departure_time = DateTime.fromISO(data.departure.scheduledTime, {
+            zone: departure_timezone
+        });
+    }
+    var dep_date = departure_time.toFormat('yyyyMMdd')
+    document.getElementById("progress_image").setAttribute("src", "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress)
 }
