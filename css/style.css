@@ -60,10 +60,6 @@ div#subtab_buttons {
     width: 25%;
 }
 
-div#atc_radio {
-    position: sticky;
-}
-
 div#graphs_body {
     position: absolute;
     top: 50px;
@@ -112,14 +108,17 @@ img#message_rate img#cpu_usage {
 }
 
 div#subtab_buttons>button {
-    width: 28%;
-    margin-left: 10px;
+    width: 100px;
+    margin-left: 20px;
 }
 
 div#subtab_buttons {
-    position: absolute;
+    position: fixed;
     bottom: 5px;
     width: 100%;
+    padding: 2px;
+    z-index: 1;
+    background: white;
 }
 
 div#map_canvas {
