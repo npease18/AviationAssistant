@@ -91,6 +91,8 @@ function getFlightProgress(flightdata) {
                             zone: arrival_timezone
                         });
                     }
+                    arrival_time = arrival_time.setZone("America/New_York")
+                    departure_time = departure_time.setZone("America/New_York")
                     document.getElementById("flight_depart_time").innerHTML = departure_time.toLocaleString(DateTime.DATETIME_MED)
                     document.getElementById("flight_arrival_time").innerHTML = arrival_time.toLocaleString(DateTime.DATETIME_MED)
                     var transit_time = arrival_time.diff(departure_time, ["days", "hours", "minutes"])
