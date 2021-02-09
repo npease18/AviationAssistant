@@ -180,7 +180,8 @@ div#sidebar_container {
 }
 
 #radar_aircraft_tab {
-    overflow: hidden;
+    line-height: 17px;
+    ;
 }
 
 #info_button {
