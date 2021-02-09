@@ -117,7 +117,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h5>Offline Mode</h5>
+                        <h5>"Airplane" Mode</h5>
                     </td>
                     <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
                             <input type="checkbox" id="switch-1" class="mdl-switch__input">
@@ -387,44 +387,61 @@
                                     <td style="text-align: left;" style="font-size: 10px;">
                                         Transit Time:<br><span id="flight_transit_time"></span>
                                     </td>
+
                                     <td style="text-align: right;" style="font-size: 10px;">
                                         Time Remaining:<br><span id="flight_remaining_time"></span>
                                     </td>
                                 </tr>
                             </table>
+                            <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
+                                More Flight Information
+                              </button>
                         </div>
                         <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <div id="image_modal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close" id="close_modal2">&times;</span>
+                                <span id="modal2_title">Additional Flight Information</span><br>
+                                <img id="progress_image" src="">
+                            </div>
+
+                        </div>
                     </div>
                     <div id="radar_aircraft_tab" style="display: none;">
-                        <img src="" id="aircraft_image"><br><br>
-                        <span style="font-size: 30px;"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
-                        <table style="width: 100%">
-                            <tr>
-                                <th style="text-align: center">Engine Type</th>
-                                <th style="text-align: center">Engine Count</th>
-                                <th style="text-align: center">Plane Age</th>
-                                <th style="text-align: center">Plane Status</th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center" id="aircraft_engine"></td>
-                                <td style="text-align: center" id="aircraft_engine_count"></td>
-                                <td style="text-align: center" id="aircraft_age"></td>
-                                <td style="text-align: center" id="aircraft_status"></td>
-                            </tr>
-                            <tr>
-                                <th style="text-align: center">Rollout Date</th>
-                                <td></td>
-                                <td></td>
-                                <th style="text-align: center">First Flight</th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center" id="aircraft_first_flight"></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center" id="aircraft_rollout_date"></td>
-                            </tr>
+                        <div id="radar_aircraft_info" style="display: none;">
+                            <img src="" id="aircraft_image"><br><br>
+                            <span style="font-size: 30px;"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
+                            <table style="width: 100%">
+                                <tr>
+                                    <th style="text-align: center">Engine Type</th>
+                                    <th style="text-align: center">Engine Count</th>
+                                    <th style="text-align: center">Plane Age</th>
+                                    <th style="text-align: center">Plane Status</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" id="aircraft_engine"></td>
+                                    <td style="text-align: center" id="aircraft_engine_count"></td>
+                                    <td style="text-align: center" id="aircraft_age"></td>
+                                    <td style="text-align: center" id="aircraft_status"></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center">Rollout Date</th>
+                                    <td></td>
+                                    <td></td>
+                                    <th style="text-align: center">First Flight</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" id="aircraft_first_flight"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align: center" id="aircraft_rollout_date"></td>
+                                </tr>
 
-                        </table>
+                            </table>
+                        </div>
+                        <div id="radar_aircraft_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                     </div>
 
                 </div>
@@ -439,6 +456,7 @@
                         Aircraft
                       </button>
                 </div>
+
             </div>
             <div id="metar_container" style="display: none">
                 <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
