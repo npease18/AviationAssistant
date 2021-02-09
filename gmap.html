@@ -400,27 +400,42 @@
                         <span style="font-size: 30px;"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
                         <table style="width: 100%">
                             <tr>
+                                <th style="text-align: center">Engine Type</th>
+                                <th style="text-align: center">Engine Count</th>
+                                <th style="text-align: center">Plane Age</th>
+                                <th style="text-align: center">Plane Status</th>
+                            </tr>
+                            <tr>
                                 <td style="text-align: center" id="aircraft_engine"></td>
                                 <td style="text-align: center" id="aircraft_engine_count"></td>
+                                <td style="text-align: center" id="aircraft_age"></td>
                                 <td style="text-align: center" id="aircraft_status"></td>
                             </tr>
                             <tr>
-                                <th style="text-align: center">Engine Type</th>
-                                <th style="text-align: center">Engine Count</th>
-                                <th style="text-align: center">Plane Status</th>
+                                <th style="text-align: center">Rollout Date</th>
+                                <td></td>
+                                <td></td>
+                                <th style="text-align: center">First Flight</th>
                             </tr>
+                            <tr>
+                                <td style="text-align: center" id="aircraft_first_flight"></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: center" id="aircraft_rollout_date"></td>
+                            </tr>
+
                         </table>
                     </div>
 
                 </div>
                 <div id="subtab_buttons">
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
                         Radar
                       </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()">
                         Flight
                       </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()">
                         Aircraft
                       </button>
                 </div>
