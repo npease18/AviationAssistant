@@ -22,18 +22,20 @@ function updateFlightTab() {
                     getPlaneImage(data)
                     $.getJSON('json/airplanes.json', function(aircraft_information) {
                         var aircraft = aircraft_information[data.aircraft.iataCode]
+                        if (aircraft) {
+                            document.getElementById("aircraft_name").innerHTML = aircraft.productionLine
+                            document.getElementById("aircraft_modelcode").innerHTML = aircraft.modelCode
+                            document.getElementById("aircraft_engine").innerHTML = aircraft.enginesType
+                            document.getElementById("aircraft_engine_count").innerHTML = aircraft.enginesCount
+                            document.getElementById("aircraft_status").innerHTML = toTitleCase(aircraft.planeStatus)
+                            document.getElementById("aircraft_age").innerHTML = aircraft.planeAge
+                            if (aircraft.rolloutDate) {
+                                document.getElementById("aircraft_rollout_date").innerHTML = DateTime.fromISO(aircraft.rolloutDate).toLocaleString("DATE_SHORT")
+                            }
+                            if (aircraft.firstFlight) {
+                                document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
+                            }
 
-                        document.getElementById("aircraft_name").innerHTML = aircraft.productionLine
-                        document.getElementById("aircraft_modelcode").innerHTML = aircraft.modelCode
-                        document.getElementById("aircraft_engine").innerHTML = aircraft.enginesType
-                        document.getElementById("aircraft_engine_count").innerHTML = aircraft.enginesCount
-                        document.getElementById("aircraft_status").innerHTML = toTitleCase(aircraft.planeStatus)
-                        document.getElementById("aircraft_age").innerHTML = aircraft.planeAge
-                        if (aircraft.rolloutDate) {
-                            document.getElementById("aircraft_rollout_date").innerHTML = DateTime.fromISO(aircraft.rolloutDate).toLocaleString("DATE_SHORT")
-                        }
-                        if (aircraft.firstFlight) {
-                            document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
                         }
 
                     });
@@ -142,7 +144,8 @@ function getPlaneImage(flightdata) {
         if (xhr.readyState === 4) {
             var page_nodes = $($.parseHTML(xhr.response));
             var img = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
-            document.getElementById("aircraft_image").setAttribute('src', img.attr('src'))
+            document.getElementById("aircraft_image1").setAttribute('src', img.attr('src'))
+            document.getElementById("aircraft_image2").setAttribute('src', img.attr('src'))
             return
         }
     }
