@@ -411,8 +411,8 @@
                     </div>
                     <div id="radar_aircraft_tab" style="display: none;">
                         <div id="radar_aircraft_info" style="display: none;">
-                            <img src="" id="aircraft_image"><br><br>
-                            <span style="font-size: 30px;"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
+                            <img src="" id="aircraft_image1"><br><br>
+                            <span id="aircraft_name_css"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
                             <table style="width: 100%">
                                 <tr>
                                     <th style="text-align: center">Engine Type</th>
@@ -440,8 +440,21 @@
                                 </tr>
 
                             </table>
+                            <button class="mdl-button mdl-js-button mdl-button--raised" id="aircraft_button">
+                                More Information
+                              </button>
                         </div>
                         <div id="radar_aircraft_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <div id="aircraft_modal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close" id="close_modal3">&times;</span>
+                                <span id="modal3_title">Additional Aircraft Information</span><br>
+                                <img src="" id="aircraft_image2">
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>

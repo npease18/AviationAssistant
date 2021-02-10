@@ -189,6 +189,12 @@ div#sidebar_container {
     bottom: 50px;
 }
 
+#aircraft_button {
+    position: fixed;
+    right: 13.5%;
+    bottom: 49px;
+}
+
 #info_button {
     position: absolute;
     right: 10px;
@@ -375,6 +381,17 @@ td#seen {
 }
 
 #modal2_title {
+    font-size: 30px;
+    text-decoration: bold;
+    line-height: 40px;
+}
+
+#aircraft_name_css {
+    font-size: 30px;
+    line-height: 25px;
+}
+
+#modal3_title {
     font-size: 30px;
     text-decoration: bold;
     line-height: 40px;

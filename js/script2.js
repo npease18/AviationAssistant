@@ -139,6 +139,24 @@ function modal2() {
             modal.style.display = "none";
         }
     }
+    modal3()
+}
+
+function modal3() {
+    var modal = document.getElementById("aircraft_modal");
+    var btn = document.getElementById("aircraft_button");
+    var span = document.getElementById("close_modal3");
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 function getInitialVolume() {
