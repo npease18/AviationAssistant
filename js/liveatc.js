@@ -1,5 +1,5 @@
 function playPLS(url, title) {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const proxyurl = "https://localhost:5000/";
     var request = $.ajax({
         url: 'json/liveatc.json',
         timeout: 5000,
@@ -18,6 +18,7 @@ function playPLS(url, title) {
             .then(dat => document.getElementById("player").play())
     })
 }
+
 
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
