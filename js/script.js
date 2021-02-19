@@ -968,6 +968,10 @@ function selectPlaneByHex(hex, autofollow) {
         $(Planes[SelectedPlane].tr).removeClass("selected");
         document.getElementById("radar_flight_tab_button").disabled = true
         document.getElementById("radar_aircraft_tab_button").disabled = true
+        document.getElementById("radar_flight_info").style.display = "none"
+        document.getElementById("radar_flight_loading").style.display = "block"
+        document.getElementById("radar_aircraft_info").style.display = "none"
+        document.getElementById("radar_aircraft_loading").style.display = "block"
     }
 
 
@@ -978,6 +982,10 @@ function selectPlaneByHex(hex, autofollow) {
         hex = null;
         document.getElementById("radar_flight_tab_button").disabled = true
         document.getElementById("radar_aircraft_tab_button").disabled = true
+        document.getElementById("radar_flight_info").style.display = "none"
+        document.getElementById("radar_flight_loading").style.display = "block"
+        document.getElementById("radar_aircraft_info").style.display = "none"
+        document.getElementById("radar_aircraft_loading").style.display = "block"
     }
 
     if (hex !== null) {

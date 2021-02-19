@@ -13,6 +13,7 @@
     <script src="ol3/ol-3.17.1.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css" />
+    <link rel="stylesheet" href="css/css-circular-prog-bar.css" type="text/css" />
     <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/luxon.js"></script>
     <script type="text/javascript" src="js/flightinfo.js"></script>
@@ -405,6 +406,13 @@
                                 <span class="close" id="close_modal2">&times;</span>
                                 <span id="modal2_title">Additional Flight Information</span><br>
                                 <img id="progress_image" src="">
+                                <div class="progress-circle" id="flight_progress_circle">
+                                    <span id="flight_percentage_spinner"></span>
+                                    <div class="left-half-clipper">
+                                        <div class="first50-bar"></div>
+                                        <div class="value-bar"></div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -412,7 +420,7 @@
                     <div id="radar_aircraft_tab" style="display: none;">
                         <div id="radar_aircraft_info" style="display: none;">
                             <img src="" id="aircraft_image1"><br><br>
-                            <span id="aircraft_name_css"><span id="aircraft_name"></span> (<span id="aircraft_modelcode"></span>)</span><br><br>
+                            <span id="aircraft_name_css"><span id="aircraft_name"></span> </span><br><br>
                             <table style="width: 100%">
                                 <tr>
                                     <th style="text-align: center">Engine Type</th>
@@ -451,7 +459,7 @@
                             <div class="modal-content">
                                 <span class="close" id="close_modal3">&times;</span>
                                 <span id="modal3_title">Additional Aircraft Information</span><br>
-                                <img src="" id="aircraft_image2">
+                                <img src="" id="aircraft_image2">(<span id="aircraft_modelcode"></span>)
                             </div>
 
                         </div>
