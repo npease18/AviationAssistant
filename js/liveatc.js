@@ -1,5 +1,5 @@
 function playPLS(url, title) {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const proxyurl = "http://127.0.0.1:8080/";
     var request = $.ajax({
         url: 'json/liveatc.json',
         timeout: 5000,
@@ -18,7 +18,28 @@ function playPLS(url, title) {
             .then(dat => document.getElementById("player").play())
     })
 }
-
+/*
+function playPLS(url, title) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            var response = xhr.response
+            response = response.split('\n')
+            response = response[1]
+            response = response.substring(6, data.length)
+            document.getElementById("player").setAttribute("src", url)
+            document.getElementById("player").load()
+            document.getElementById("atc_title").innerHTML = title
+            document.getElementById("player").play()
+        }
+    }
+    xhr.send(JSON.stringify({
+        command: "curl http://www.liveatc.net"+url
+    }));
+}
+*/
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
     var request = $.ajax({
