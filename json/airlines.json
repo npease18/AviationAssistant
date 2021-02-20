@@ -655,6 +655,18 @@
     "statusAirline": "active",
     "type": "scheduled"
   },
+  "DLH": {
+    "airlineId": 220,
+    "callsign": "DLH",
+    "codeHub": "SCL",
+    "codeIataAirline": "DL",
+    "codeIcaoAirline": "DLH",
+    "codeIso2Country": "DE",
+    "nameAirline": "Lufthansa",
+    "nameCountry": "Germany",
+    "statusAirline": "active",
+    "type": "scheduled"
+  },
   "FLG": {
     "ageFleet": 0,
     "airlineId": 7037,
