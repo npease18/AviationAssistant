@@ -374,26 +374,28 @@
                                     </td>
                                 </tr>
                             </table><br>
-                            <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="text-align: left;" id="flight_depart_time" style="font-size: 10px;width: 50%;">
-                                        Depart Time
-                                    </td>
-                                    <td style="text-align: right;" id="flight_arrival_time" style="font-size: 10px;width: 50%;">
-                                        Arrival Time
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: left;" style="font-size: 10px;">
-                                        Transit Time:<br><span id="flight_transit_time"></span>
-                                    </td>
+                            <div id="flight_progress_div">
+                                <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="text-align: left;" id="flight_depart_time" style="font-size: 10px;width: 50%;">
+                                            Depart Time
+                                        </td>
+                                        <td style="text-align: right;" id="flight_arrival_time" style="font-size: 10px;width: 50%;">
+                                            Arrival Time
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" style="font-size: 10px;">
+                                            Terminal / Gate:<br><span id="flight_depart_terminal"></span><span id="flight_depart_gate"></span>
+                                        </td>
 
-                                    <td style="text-align: right;" style="font-size: 10px;">
-                                        Time Remaining:<br><span id="flight_remaining_time"></span>
-                                    </td>
-                                </tr>
-                            </table>
+                                        <td style="text-align: right;" style="font-size: 10px;">
+                                            Terminal / Gate:<br><span id="flight_arrival_terminal"></span><span id="flight_arrival_gate"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
                                 More Flight Information
                               </button>
@@ -406,12 +408,21 @@
                                 <span class="close" id="close_modal2">&times;</span>
                                 <span id="modal2_title">Additional Flight Information</span><br>
                                 <img id="progress_image" src="">
-                                <div class="progress-circle" id="flight_progress_circle">
-                                    <span id="flight_percentage_spinner"></span>
-                                    <div class="left-half-clipper">
-                                        <div class="first50-bar"></div>
-                                        <div class="value-bar"></div>
+                                <div id="additional_info_hidden">
+                                    <div class="progress-circle" id="flight_progress_circle">
+                                        <span id="flight_percentage_spinner"></span>
+                                        <div class="left-half-clipper">
+                                            <div class="first50-bar"></div>
+                                            <div class="value-bar"></div>
+                                        </div>
                                     </div>
+                                    <span id="flight_progress_title">Total Flight Progress</span>
+                                    <span id="flight_progress_remaining_title">Hours Remaining</span>
+                                    <span id="flight_progress_remaining_amount">18 Hours, 55 Minutes</span>
+                                    <span id="flight_progress_elapsed_title">Time Elapsed</span>
+                                    <span id="flight_progress_elapsed_amount">1 Hours, 55 Minutes</span>
+                                    <span id="flight_progress_time_title">Total Flight Time</span>
+                                    <span id="flight_progress_time_amount">12 Hours, 55 Minutes</span>
                                 </div>
                             </div>
 
@@ -459,7 +470,14 @@
                             <div class="modal-content">
                                 <span class="close" id="close_modal3">&times;</span>
                                 <span id="modal3_title">Additional Aircraft Information</span><br>
-                                <img src="" id="aircraft_image2">(<span id="aircraft_modelcode"></span>)
+                                <img src="" id="aircraft_image2">
+                                <span id="aircraft_name_title">Aircraft Name:</span>
+                                <span id="aircraft_name_addl"></span>
+                                <span id="aircraft_model_title">Aircraft Model:</span>
+                                <span id="aircraft_model"></span>
+                                <span id="aircraft_registration_title">Aircraft Registration:</span>
+                                <span id="aircraft_registration"></span>
+
                             </div>
 
                         </div>
