@@ -575,3 +575,100 @@ td#seen {
     right: 25%;
     top: 10%;
 }
+
+#flight_progress_title {
+    position: absolute;
+    right: 5%;
+    top: 22%;
+    font-size: 18px;
+}
+
+#flight_progress_elapsed_title {
+    font-size: 18px;
+    position: absolute;
+    top: 40%;
+    left: 68%;
+}
+
+#flight_progress_remaining_title {
+    font-size: 18px;
+    position: absolute;
+    top: 53%;
+    left: 67%;
+}
+
+#flight_progress_time_title {
+    font-size: 18px;
+    position: absolute;
+    top: 66%;
+    left: 67%;
+}
+
+#flight_progress_elapsed_amount {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 45%;
+    left: 64%;
+}
+
+#flight_progress_remaining_amount {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 58%;
+    left: 64%;
+}
+
+#flight_progress_time_amount {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 71%;
+    left: 64%;
+}
+
+#aircraft_name_title {
+    font-size: 18px;
+    position: absolute;
+    top: 20%;
+    left: 66%;
+}
+
+#aircraft_model_title {
+    font-size: 18px;
+    position: absolute;
+    top: 33%;
+    left: 66%;
+}
+
+#aircraft_registration_title {
+    font-size: 18px;
+    position: absolute;
+    top: 46%;
+    left: 64%;
+}
+
+#aircraft_name_addl {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 25%;
+    left: 67%;
+}
+
+#aircraft_model {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 38%;
+    left: 69.5%;
+}
+
+#aircraft_registration {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 51%;
+    left: 69%;
+}
