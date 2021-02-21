@@ -6,7 +6,7 @@ then
  sudo systemctl enable dump1090-mutability
  sudo mv /home/pi/.config/Start_Aircraft.desktop /home/pi/.config/autostart/Start_Aircraft.desktop
  sudo mv /home/pi/.config/autostart/Start_Radio.desktop /home/pi/.config/Start_Radio.desktop
- export DISPLAY=:0.0
+ env DISPLAY=:0.0
  sudo pcmanfm --set-wallpaper /usr/share/dump1090-mutability/html/images/logo.png
  
 fi
@@ -18,7 +18,7 @@ then
  sudo systemctl enable dump1090-mutability
  sudo mv /home/pi/.config/Start_Radio.desktop /home/pi/.config/autostart/Start_Radio.desktop
  sudo mv /home/pi/.config/autostart/Start_Aircraft.desktop /home/pi/.config/Start_Aircraft.desktop
- export DISPLAY=:0.0
+ env DISPLAY=:0.0
  sudo pcmanfm --set-wallpaper /usr/share/dump1090-mutability/html/images/psplogo.png
  
 fi
