@@ -7,7 +7,7 @@ then
  sudo mv /home/pi/.config/Start_Aircraft.desktop /home/pi/.config/autostart/Start_Aircraft.desktop
  sudo mv /home/pi/.config/autostart/Start_Radio.desktop /home/pi/.config/Start_Radio.desktop
  env DISPLAY=:0.0 pcmanfm -w /usr/share/dump1090-mutability/html/images/logo.png
- 
+ sudo reboot
 fi
 
 
@@ -18,5 +18,5 @@ then
  sudo mv /home/pi/.config/Start_Radio.desktop /home/pi/.config/autostart/Start_Radio.desktop
  sudo mv /home/pi/.config/autostart/Start_Aircraft.desktop /home/pi/.config/Start_Aircraft.desktop
  env DISPLAY=:0.0 pcmanfm -w /usr/share/dump1090-mutability/html/images/psplogo.png
- 
+ sudo reboot
 fi
