@@ -470,7 +470,10 @@
                             <div class="modal-content">
                                 <span class="close" id="close_modal3">&times;</span>
                                 <span id="modal3_title">Additional Aircraft Information</span><br>
-                                <img src="" id="aircraft_image2">
+                                <img src="" id="aircraft_image1-1">
+                                <a onmousedown="setBigImage('aircraft_image2')"><img src="" id="aircraft_image2"></a>
+                                <a onmousedown="setBigImage('aircraft_image3')"><img src="" id="aircraft_image3"></a>
+                                <a onmousedown="setBigImage('aircraft_image4')"><img src="" id="aircraft_image4"></a>
                                 <span id="aircraft_name_title">Aircraft Name:</span>
                                 <span id="aircraft_name_addl"></span>
                                 <span id="aircraft_model_title">Aircraft Model:</span>
@@ -488,10 +491,10 @@
                     <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
                         Radar
                       </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
                         Flight
                       </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
                         Aircraft
                       </button>
                 </div>

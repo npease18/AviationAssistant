@@ -188,10 +188,19 @@ function getPlaneImage(flightdata) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             var page_nodes = $($.parseHTML(xhr.response));
-            var img = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
-            document.getElementById("aircraft_image1").setAttribute('src', img.attr('src'))
-            document.getElementById("aircraft_image2").setAttribute('src', img.attr('src'))
-            flight_info[SelectedPlane].aircraft.imageurl = img.attr('src')
+            var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+            var img2 = page_nodes.find("#results > div:nth-child(3) > div.result__section.result__section--photo-wrapper > a > img")
+            var img3 = page_nodes.find("#results > div:nth-child(4) > div.result__section.result__section--photo-wrapper > a > img")
+            var img4 = page_nodes.find("#results > div:nth-child(5) > div.result__section.result__section--photo-wrapper > a > img")
+            document.getElementById("aircraft_image1").setAttribute('src', img1.attr('src'))
+            document.getElementById("aircraft_image1-1").setAttribute('src', img1.attr('src'))
+            document.getElementById("aircraft_image2").setAttribute('src', img2.attr('src'))
+            document.getElementById("aircraft_image3").setAttribute('src', img3.attr('src'))
+            document.getElementById("aircraft_image4").setAttribute('src', img4.attr('src'))
+            flight_info[SelectedPlane].aircraft.imageurl1 = img1.attr('src')
+            flight_info[SelectedPlane].aircraft.imageurl2 = img2.attr('src')
+            flight_info[SelectedPlane].aircraft.imageurl3 = img3.attr('src')
+            flight_info[SelectedPlane].aircraft.imageurl4 = img4.attr('src')
             return
         }
     }
@@ -222,4 +231,11 @@ function getFlightPlanImage(data, flight_progress, world_airports) {
     var dep_date = departure_time.toFormat('yyyyMMdd')
     document.getElementById("progress_image").setAttribute("src", "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress)
     flight_info[SelectedPlane].flightimage = "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress
+}
+
+function setBigImage(source) {
+    var source_url = document.getElementById(source).getAttribute("src")
+    var dest_url = document.getElementById("aircraft_image1-1").getAttribute("src")
+    document.getElementById("aircraft_image1-1").setAttribute("src", source_url)
+    document.getElementById(source).setAttribute("src", dest_url)
 }
