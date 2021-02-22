@@ -84,6 +84,9 @@ function getAircraftInfo(aircraft_information, data) {
             document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
         }
 
+    } else {
+        radarRadarTabSwitch()
+        document.getElementById("radar_aircraft_tab_button").disabled = true
     }
 }
 
@@ -192,15 +195,21 @@ function getPlaneImage(flightdata) {
             var img2 = page_nodes.find("#results > div:nth-child(3) > div.result__section.result__section--photo-wrapper > a > img")
             var img3 = page_nodes.find("#results > div:nth-child(4) > div.result__section.result__section--photo-wrapper > a > img")
             var img4 = page_nodes.find("#results > div:nth-child(5) > div.result__section.result__section--photo-wrapper > a > img")
+            if (img2) {
+                document.getElementById("aircraft_image2").setAttribute('src', img2.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl2 = img2.attr('src')
+            }
+            if (img3) {
+                document.getElementById("aircraft_image3").setAttribute('src', img3.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl3 = img3.attr('src')
+            }
+            if (img4) {
+                document.getElementById("aircraft_image4").setAttribute('src', img4.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl4 = img4.attr('src')
+            }
             document.getElementById("aircraft_image1").setAttribute('src', img1.attr('src'))
             document.getElementById("aircraft_image1-1").setAttribute('src', img1.attr('src'))
-            document.getElementById("aircraft_image2").setAttribute('src', img2.attr('src'))
-            document.getElementById("aircraft_image3").setAttribute('src', img3.attr('src'))
-            document.getElementById("aircraft_image4").setAttribute('src', img4.attr('src'))
             flight_info[SelectedPlane].aircraft.imageurl1 = img1.attr('src')
-            flight_info[SelectedPlane].aircraft.imageurl2 = img2.attr('src')
-            flight_info[SelectedPlane].aircraft.imageurl3 = img3.attr('src')
-            flight_info[SelectedPlane].aircraft.imageurl4 = img4.attr('src')
             return
         }
     }
