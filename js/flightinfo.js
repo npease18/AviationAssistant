@@ -199,25 +199,25 @@ function getPlaneImage(flightdata) {
             if (img2) {
                 document.getElementById("aircraft_image2").setAttribute('src', img2.attr('src'))
                 flight_info[SelectedPlane].aircraft.imageurl2 = img2.attr('src')
-                document.getElementById("aircraft_image3").style.display = block
+                document.getElementById("aircraft_image3").style.display = "block"
             } else {
-                document.getElementById("aircraft_image2").style.display = none
+                document.getElementById("aircraft_image2").style.display = "none"
             }
 
             if (img3) {
                 document.getElementById("aircraft_image3").setAttribute('src', img3.attr('src'))
                 flight_info[SelectedPlane].aircraft.imageurl3 = img3.attr('src')
-                document.getElementById("aircraft_image3").style.display = block
+                document.getElementById("aircraft_image3").style.display = "block"
             } else {
-                document.getElementById("aircraft_image3").style.display = none
+                document.getElementById("aircraft_image3").style.display = "none"
             }
 
             if (img4) {
-                document.getElementById("aircraft_image4").style.display = block
+                document.getElementById("aircraft_image4").style.display = "block"
                 document.getElementById("aircraft_image4").setAttribute('src', img4.attr('src'))
                 flight_info[SelectedPlane].aircraft.imageurl4 = img4.attr('src')
             } else {
-                document.getElementById("aircraft_image4").style.display = none
+                document.getElementById("aircraft_image4").style.display = "none"
             }
 
 
