@@ -1,17 +1,23 @@
 // Generic update function for radar subtabs
 function updateFlightTab() {
     if (flight_info[SelectedPlane]) {
-        var flightdata = flight_info[SelectedPlane]
-        var scheduledata = flight_info[SelectedPlane].schedule
-        aircraft_information[flightdata.aircraft.iataCode] = flight_info[SelectedPlane].aircraft.information
-        flightInfo(flightdata, world_airports, world_airlines)
-        flightProgress(flightdata, world_airports, scheduledata)
-        getAircraftInfo(aircraft_information, flightdata)
-        getPlaneImage(flightdata)
-        document.getElementById("radar_flight_info").style.display = "block"
-        document.getElementById("radar_flight_loading").style.display = "none"
-        document.getElementById("radar_aircraft_info").style.display = "block"
-        document.getElementById("radar_aircraft_loading").style.display = "none"
+        $.getJSON('json/airlines.json', function(world_airlines) {
+            $.getJSON('json/world_airports.json', function(world_airports) {
+                $.getJSON('json/airplanes.json', function(aircraft_information) {
+                    var flightdata = flight_info[SelectedPlane]
+                    var scheduledata = flight_info[SelectedPlane].schedule
+                    flightInfo(flightdata, world_airports, world_airlines)
+                    flightProgress(flightdata, world_airports, scheduledata)
+                    getAircraftInfo(aircraft_information, flightdata)
+                    getPlaneImage(flightdata)
+                    document.getElementById("radar_flight_info").style.display = "block"
+                    document.getElementById("radar_flight_loading").style.display = "none"
+                    document.getElementById("radar_aircraft_info").style.display = "block"
+                    document.getElementById("radar_aircraft_loading").style.display = "none"
+                })
+            });
+        });
+
     } else {
         $.getJSON("https://aviation-edge.com/v2/public/flights?key=" + keys['AE'] + "&aircraftIcao24=" + SelectedPlane, function(flightdata) {
             flightdata = flightdata[0]
