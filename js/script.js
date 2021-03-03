@@ -217,7 +217,8 @@ function initialize() {
     initializeSchedulesPage();
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
-
+    SelectedPlane = "A9BD9A"
+    updateFlightTab()
     $("#loader").removeClass("hidden");
 
     // Get receiver metadata, reconfigure using it, then continue
