@@ -57,6 +57,10 @@
         <input id="airframes_post_icao" type="hidden" name="ica024" value="">
         <input type="hidden" name="submit" value="submit">
     </form>
+    <div id="external_connected" class="centered" style="display: none;" onclick="document.getElementById('external_connected').style.display = 'none'">
+        <img src="images/connection.png" id="external_image">
+<span id="external_title">EXTERNAL MODE ACTIVATED</span>
+    </div>
     <div id="home_page" style="display: none;">
         <img src="images/logo.png" class="logo">
         <table class="home_table">
@@ -124,6 +128,13 @@
                             <input type="checkbox" id="switch-1" class="mdl-switch__input">
                             <span class="mdl-switch__label"></span>
                           </label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="document.getElementById('external_connected').style.display = 'block'" id="external_mode_button">
+                            Enable External Mode
+                          </button>
+                    </td>
                 </tr>
             </table>
             <table>
