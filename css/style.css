@@ -715,14 +715,14 @@ td#seen {
     animation: blinkingText 1s infinite;
     position: absolute;
     top: 55%;
-    left: 35%;
+    left: 22%;
 }
 
 #external_image {
     animation: blinkingText 1s infinite;
     position: absolute;
-    top: 40%;
-    left: 48%;
+    top: 30%;
+    left: 43%;
 }
 
 @keyframes blinkingText {
