@@ -509,6 +509,12 @@ td#seen {
     margin: auto;
 }
 
+#external_mode_button {
+    position: relative;
+    left: 50%;
+    right: 50%;
+}
+
 #settingstext>table>tbody>tr>td {
     padding: 15px;
 }
@@ -693,3 +699,40 @@ td#seen {
     top: 51%;
     left: 69%;
 }
+
+#external_connected {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: red;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    
+}
+
+#external_title {
+    animation: blinkingText 1s infinite;
+    position: absolute;
+    top: 55%;
+    left: 35%;
+}
+
+#external_image {
+    animation: blinkingText 1s infinite;
+    position: absolute;
+    top: 40%;
+    left: 48%;
+}
+
+@keyframes blinkingText {
+   
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
