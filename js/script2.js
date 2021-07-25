@@ -29,7 +29,7 @@ function readBatteryLevel() {
         cache: false,
         dataType: 'json'
     });
-    FetchPending.done(function(data) {
+    FetchPending.done(function (data) {
         document.getElementById("percentage").innerHTML = data.percentage[0].level + "%"
         battery = data.adapter[0].status
         if (battery === "in") {
@@ -79,7 +79,7 @@ function volUp() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.response)
             document.getElementById("volume_level").innerHTML = xhr.response
@@ -95,7 +95,7 @@ function volDown() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.response)
             document.getElementById("volume_level").innerHTML = xhr.response
@@ -110,13 +110,13 @@ function modal() {
     var modal = document.getElementById("info_modal");
     var btn = document.getElementById("info_button");
     var span = document.getElementById("close_modal");
-    btn.onclick = function() {
+    btn.onclick = function () {
         modal.style.display = "block";
     }
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
@@ -128,13 +128,13 @@ function modal2() {
     var modal = document.getElementById("image_modal");
     var btn = document.getElementById("img_button");
     var span = document.getElementById("close_modal2");
-    btn.onclick = function() {
+    btn.onclick = function () {
         modal.style.display = "block";
     }
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
@@ -146,13 +146,13 @@ function modal3() {
     var modal = document.getElementById("aircraft_modal");
     var btn = document.getElementById("aircraft_button");
     var span = document.getElementById("close_modal3");
-    btn.onclick = function() {
+    btn.onclick = function () {
         modal.style.display = "block";
     }
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
@@ -163,7 +163,7 @@ function getInitialVolume() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.response)
             document.getElementById("volume_level").innerHTML = xhr.response
@@ -178,7 +178,7 @@ function getCPUTemp() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             temp = xhr.response
             temp = temp.substring(5, temp.length - 5)
@@ -195,7 +195,7 @@ function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             brightness = parseFloat(xhr.response)
             document.getElementById("brightness_level").innerHTML = brightness
@@ -259,16 +259,20 @@ function sendCMD(cmd) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 console.log(xhr.response + "A")
                 if (xhr.response.substring(0, 19) === "Already up to date.") {
                     var snackbarContainer = document.getElementById('no-updates-snackbar');
-                    var data = { message: 'Already Up To Date!' };
+                    var data = {
+                        message: 'Already Up To Date!'
+                    };
                     snackbarContainer.MaterialSnackbar.showSnackbar(data);
                 } else {
                     var snackbarContainer = document.getElementById('no-updates-snackbar');
-                    var data = { message: 'Updating...' };
+                    var data = {
+                        message: 'Updating...'
+                    };
                     snackbarContainer.MaterialSnackbar.showSnackbar(data);
                 }
             }
@@ -282,7 +286,7 @@ function sendCMD(cmd) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 output = xhr.response
                 var current_branch = output.substr(2, output.length - 3)
@@ -303,13 +307,15 @@ function sendCMD(cmd) {
     }
     if (cmd === "shutdown") {
         var snackbarContainer = document.getElementById('no-updates-snackbar');
-        var data = { message: 'Shutting Down...' };
+        var data = {
+            message: 'Shutting Down...'
+        };
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 console.log(xhr.response)
                 output = xhr.response
@@ -430,7 +436,23 @@ function changeGraph(direction) {
 
 
 function toTitleCase(str) {
-    return str.toLowerCase().split(' ').map(function(word) {
+    return str.toLowerCase().split(' ').map(function (word) {
         return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ');
+}
+
+
+// Begin Internet Aircraft Data Collection
+function fetchInternetAircraft() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", 'http://localhost:8080/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=46.119%2C43.301%2C-71.629%2C-66.255&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1', true);
+    xhr.setRequestHeader('x-requested-with', 'XMLHttpRequest');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var data = xhr.response
+            var json = JSON.parse(data)
+            processReceiverUpdate(json)
+        }
+    }
+    xhr.send();
 }

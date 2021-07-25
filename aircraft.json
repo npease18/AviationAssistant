@@ -1,0 +1,80 @@
+{
+  "now": 1627172219.3,
+  "messages": 1491,
+  "aircraft": [{
+      "hex": "000000",
+      "squawk": "6025",
+      "mlat": [],
+      "tisb": [],
+      "messages": 2,
+      "seen": 13.9,
+      "rssi": -21.6
+    },
+    {
+      "hex": "c05ee1",
+      "flight": "ACA678  ",
+      "lat": 45.373209,
+      "lon": -71.112827,
+      "nucp": 7,
+      "seen_pos": 28.6,
+      "altitude": 28900,
+      "vert_rate": 1408,
+      "track": 87,
+      "speed": 452,
+      "category": "A3",
+      "mlat": [],
+      "tisb": [],
+      "messages": 61,
+      "seen": 4.6,
+      "rssi": -14.7
+    },
+    {
+      "hex": "02013c",
+      "mlat": [],
+      "tisb": [],
+      "messages": 300,
+      "seen": 2.1,
+      "rssi": -13.2
+    },
+    {
+      "hex": "06a0eb",
+      "mlat": [],
+      "tisb": [],
+      "messages": 29,
+      "seen": 225.6,
+      "rssi": -15.3
+    },
+    {
+      "hex": "abcda2",
+      "mlat": [],
+      "tisb": [],
+      "messages": 137,
+      "seen": 3.9,
+      "rssi": -14.8
+    },
+    {
+      "hex": "c06a39",
+      "mlat": [],
+      "tisb": [],
+      "messages": 358,
+      "seen": 274.3,
+      "rssi": -9.6
+    },
+    {
+      "hex": "a57458",
+      "mlat": [],
+      "tisb": [],
+      "messages": 89,
+      "seen": 265.3,
+      "rssi": -13.7
+    },
+    {
+      "hex": "c01725",
+      "mlat": [],
+      "tisb": [],
+      "messages": 388,
+      "seen": 259.7,
+      "rssi": -14.2
+    }
+  ]
+}
