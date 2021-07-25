@@ -2,6 +2,9 @@ const request = require('request');
 const fs = require('fs')
 var json = {}
 
+setTimeout(getData, 10000);
+
+function getData() {
   const options = {
     url: 'http://localhost:7000/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=46.119%2C43.301%2C-71.629%2C-66.255&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1',
     headers: {
@@ -13,8 +16,7 @@ request(options, function (error, response, body) {
       parseData(body)
   }
 });
-
-
+}
 
 function parseData(data) {
     data = JSON.parse(data)
