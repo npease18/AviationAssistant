@@ -30,7 +30,7 @@ function parseData(data) {
   for (element in data) {
     if (element != "stats" && element != "full_count" && element != "version") {
       json.aircraft.push({
-        hex: data[element][0],
+        hex: data[element][0].toLowerCase(),
         flight: data[element][16],
         lat: data[element][1],
         lon: data[element][2],
@@ -47,7 +47,7 @@ function parseData(data) {
     }
   }
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
-  console.log(json)
+  //console.log(json)
 }
 
 getData()
