@@ -2,9 +2,7 @@ const request = require('request');
 const fs = require('fs')
 var json = {}
 
-setTimeout(function() {
-  getData()
-}, 10000);
+
 
 function getData() {
   const options = {
@@ -13,40 +11,43 @@ function getData() {
       'x-requested-with': 'request'
     }
   };
-request(options, function (error, response, body) {
-  if (body) {
+  request(options, function (error, response, body) {
+    if (body) {
       parseData(body)
-  }
-});
+    }
+  });
+  setTimeout(function () {
+    getData()
+  }, 10000);
 }
 
 function parseData(data) {
-    data = JSON.parse(data)
-    json.now = new Date()
-    json.now = json.now.getTime()-json.now.getMilliseconds()/1000
-    json.messages = 0
-    json.aircraft = []
-    for (element in data) {
-        if (element != "stats" && element != "full_count" && element != "version") {
-           json.aircraft.push({
-               hex: data[element][0],
-               flight: data[element][16],
-               lat: data[element][1],
-               lon: data[element][2],
-               altitude: data[element][4],
-               track: data[element][3],
-               speed: data[element][5],
-               squawk: data[element][6],
-               "seen_pos": 0,
-               "seen": 0
-           })
-            // console.log(element)
-            //console.log(data[element][1])
-            //console.log(data[element][2])
-        }
+  data = JSON.parse(data)
+  json.now = new Date()
+  json.now = json.now.getTime() - json.now.getMilliseconds() / 1000
+  json.messages = 0
+  json.aircraft = []
+  for (element in data) {
+    if (element != "stats" && element != "full_count" && element != "version") {
+      json.aircraft.push({
+        hex: data[element][0],
+        flight: data[element][16],
+        lat: data[element][1],
+        lon: data[element][2],
+        altitude: data[element][4],
+        track: data[element][3],
+        speed: data[element][5],
+        squawk: data[element][6],
+        "seen_pos": 0,
+        "seen": 0
+      })
+      // console.log(element)
+      //console.log(data[element][1])
+      //console.log(data[element][2])
     }
-    fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
-    console.log(json)
+  }
+  fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
+  console.log(json)
 }
 
 getData()
