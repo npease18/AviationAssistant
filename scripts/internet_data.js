@@ -2,7 +2,9 @@ const request = require('request');
 const fs = require('fs')
 var json = {}
 
-setTimeout(getData, 10000);
+setTimeout(function() {
+  getData()
+}, 10000);
 
 function getData() {
   const options = {
