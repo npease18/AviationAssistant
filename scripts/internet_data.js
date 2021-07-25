@@ -46,3 +46,5 @@ function parseData(data) {
     fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
     console.log(json)
 }
+
+getData()
