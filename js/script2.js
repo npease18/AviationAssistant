@@ -451,6 +451,7 @@ function fetchInternetAircraft() {
         if (xhr.readyState === 4) {
             var data = xhr.response
             var json = JSON.parse(data)
+            console.log(json)
             processReceiverUpdate(json)
         }
     }
