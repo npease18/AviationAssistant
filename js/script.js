@@ -217,7 +217,6 @@ function initialize() {
     initializeSchedulesPage();
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
-
     $("#loader").removeClass("hidden");
 
     // Get receiver metadata, reconfigure using it, then continue
@@ -998,11 +997,19 @@ function selectPlaneByHex(hex, autofollow) {
         $(Planes[SelectedPlane].tr).addClass("selected");
         document.getElementById("radar_flight_tab_button").disabled = false
         document.getElementById("radar_aircraft_tab_button").disabled = false
+        document.getElementById("radar_flight_info").style.display = "none"
+        document.getElementById("radar_flight_loading").style.display = "block"
+        document.getElementById("radar_aircraft_info").style.display = "none"
+        document.getElementById("radar_aircraft_loading").style.display = "block"
         updateFlightTab()
     } else {
         SelectedPlane = null;
         document.getElementById("radar_flight_tab_button").disabled = true
         document.getElementById("radar_aircraft_tab_button").disabled = true
+        document.getElementById("radar_flight_info").style.display = "none"
+        document.getElementById("radar_flight_loading").style.display = "block"
+        document.getElementById("radar_aircraft_info").style.display = "none"
+        document.getElementById("radar_aircraft_loading").style.display = "block"
     }
 
     if (SelectedPlane !== null && autofollow) {
