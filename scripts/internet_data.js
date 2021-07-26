@@ -39,8 +39,7 @@ function parseData(data) {
         speed: data[element][5],
         squawk: data[element][6],
         seen: 1,
-        seen_pos: 0,
-        nucp: 7
+        seen_pos: 1
       })
       // console.log(element)
       //console.log(data[element][1])
