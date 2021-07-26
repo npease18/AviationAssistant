@@ -1,28 +1,48 @@
 // Generic update function for radar subtabs
 function updateFlightTab() {
-    $.getJSON("https://aviation-edge.com/v2/public/flights?key=" + keys['AE'] + "&aircraftIcao24=" + SelectedPlane, function(flightdata) {
-        flightdata = flightdata[0]
-        $.getJSON("https://aviation-edge.com/v2/public/timetable?key=" + keys['AE'] + "&flight_icao=" + flightdata.flight.icaoNumber + "&status=active", function(scheduledata) {
-            scheduledata = scheduledata[0]
-            $.getJSON('json/airlines.json', function(world_airlines) {
-                $.getJSON('json/world_airports.json', function(world_airports) {
-                    $.getJSON('json/airplanes.json', function(aircraft_information) {
-                        flight_info[SelectedPlane] = flightdata
-                        flight_info[SelectedPlane].schedule = scheduledata
-                        flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
-                        flightInfo(flightdata, world_airports, world_airlines)
-                        flightProgress(flightdata, world_airports, scheduledata)
-                        getAircraftInfo(aircraft_information, flightdata)
-                        getPlaneImage(flightdata)
-                        document.getElementById("radar_flight_info").style.display = "block"
-                        document.getElementById("radar_flight_loading").style.display = "none"
-                        document.getElementById("radar_aircraft_info").style.display = "block"
-                        document.getElementById("radar_aircraft_loading").style.display = "none"
-                    })
+    if (flight_info[SelectedPlane]) {
+        $.getJSON('json/airlines.json', function(world_airlines) {
+            $.getJSON('json/world_airports.json', function(world_airports) {
+                $.getJSON('json/airplanes.json', function(aircraft_information) {
+                    var flightdata = flight_info[SelectedPlane]
+                    var scheduledata = flight_info[SelectedPlane].schedule
+                    flightInfo(flightdata, world_airports, world_airlines)
+                    flightProgress(flightdata, world_airports, scheduledata)
+                    getAircraftInfo(aircraft_information, flightdata)
+                    getPlaneImage(flightdata)
+                    document.getElementById("radar_flight_info").style.display = "block"
+                    document.getElementById("radar_flight_loading").style.display = "none"
+                    document.getElementById("radar_aircraft_info").style.display = "block"
+                    document.getElementById("radar_aircraft_loading").style.display = "none"
+                })
+            });
+        });
+
+    } else {
+        $.getJSON("https://aviation-edge.com/v2/public/flights?key=" + keys['AE'] + "&aircraftIcao24=" + SelectedPlane, function(flightdata) {
+            flightdata = flightdata[0]
+            $.getJSON("https://aviation-edge.com/v2/public/timetable?key=" + keys['AE'] + "&flight_icao=" + flightdata.flight.icaoNumber + "&status=active", function(scheduledata) {
+                scheduledata = scheduledata[0]
+                $.getJSON('json/airlines.json', function(world_airlines) {
+                    $.getJSON('json/world_airports.json', function(world_airports) {
+                        $.getJSON('json/airplanes.json', function(aircraft_information) {
+                            flight_info[SelectedPlane] = flightdata
+                            flight_info[SelectedPlane].schedule = scheduledata
+                            flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
+                            flightInfo(flightdata, world_airports, world_airlines)
+                            flightProgress(flightdata, world_airports, scheduledata)
+                            getAircraftInfo(aircraft_information, flightdata)
+                            getPlaneImage(flightdata)
+                            document.getElementById("radar_flight_info").style.display = "block"
+                            document.getElementById("radar_flight_loading").style.display = "none"
+                            document.getElementById("radar_aircraft_info").style.display = "block"
+                            document.getElementById("radar_aircraft_loading").style.display = "none"
+                        })
+                    });
                 });
             });
         });
-    });
+    }
 }
 
 // handles information of flight itself
@@ -31,19 +51,32 @@ function flightInfo(data, world_airports, world_airlines) {
         document.getElementById("flight_flightnum").innerHTML = data.flight.number
         document.getElementById("flight_status").innerHTML = toTitleCase(data.status)
         document.getElementById("flight_flighticaonum").innerHTML = data.flight.icaoNumber
-        document.getElementById("flight_airport_long_origin").innerHTML = world_airports[data.departure.icaoCode].name
-        document.getElementById("flight_airport_long_destination").innerHTML = world_airports[data.arrival.icaoCode].name
-        document.getElementById("flight_airport_loc_origin").innerHTML = world_airports[data.departure.icaoCode].city + ", " + country_names[world_airports[data.departure.icaoCode].country]
+        try {
+            document.getElementById("flight_airport_long_origin").innerHTML = world_airports[data.departure.icaoCode].name
+            document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
+            document.getElementById("flight_airport_loc_origin").innerHTML = world_airports[data.departure.icaoCode].city + ", " + country_names[world_airports[data.departure.icaoCode].country]
+        } catch {
+            document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
+            document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
+            document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+        }
+
+        try {
+            document.getElementById("flight_airport_long_destination").innerHTML = world_airports[data.arrival.icaoCode].name
+            document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
+            document.getElementById("flight_airport_loc_destination").innerHTML = world_airports[data.arrival.icaoCode].city + ", " + country_names[world_airports[data.arrival.icaoCode].country]
+        } catch {
+            document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
+            document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
+            document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+        }
+
+
         try {
             document.getElementById("flight_airline").innerHTML = world_airlines[data.airline.icaoCode].nameAirline + " "
         } catch {
             document.getElementById("flight_airline").innerHTML = "N/A "
         }
-
-        document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
-        document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
-        document.getElementById("flight_airport_loc_destination").innerHTML = world_airports[data.arrival.icaoCode].city + ", " + country_names[world_airports[data.arrival.icaoCode].country]
-
     } catch {
         radarRadarTabSwitch()
         document.getElementById("radar_flight_tab_button").disabled = true
@@ -69,6 +102,10 @@ function getAircraftInfo(aircraft_information, data) {
         if (aircraft.firstFlight) {
             document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
         }
+
+    } else {
+        radarRadarTabSwitch()
+        document.getElementById("radar_aircraft_tab_button").disabled = true
 
     }
 }
@@ -174,10 +211,39 @@ function getPlaneImage(flightdata) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             var page_nodes = $($.parseHTML(xhr.response));
-            var img = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
-            document.getElementById("aircraft_image1").setAttribute('src', img.attr('src'))
-            document.getElementById("aircraft_image2").setAttribute('src', img.attr('src'))
-            flight_info[SelectedPlane].aircraft.imageurl = img.attr('src')
+            var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+            var img2 = page_nodes.find("#results > div:nth-child(3) > div.result__section.result__section--photo-wrapper > a > img")
+            var img3 = page_nodes.find("#results > div:nth-child(4) > div.result__section.result__section--photo-wrapper > a > img")
+            var img4 = page_nodes.find("#results > div:nth-child(5) > div.result__section.result__section--photo-wrapper > a > img")
+            if (img2) {
+                document.getElementById("aircraft_image2").setAttribute('src', img2.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl2 = img2.attr('src')
+                document.getElementById("aircraft_image3").style.display = "block"
+            } else {
+                document.getElementById("aircraft_image2").style.display = "none"
+            }
+
+            if (img3) {
+                document.getElementById("aircraft_image3").setAttribute('src', img3.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl3 = img3.attr('src')
+                document.getElementById("aircraft_image3").style.display = "block"
+            } else {
+                document.getElementById("aircraft_image3").style.display = "none"
+            }
+
+            if (img4) {
+                document.getElementById("aircraft_image4").style.display = "block"
+                document.getElementById("aircraft_image4").setAttribute('src', img4.attr('src'))
+                flight_info[SelectedPlane].aircraft.imageurl4 = img4.attr('src')
+            } else {
+                document.getElementById("aircraft_image4").style.display = "none"
+            }
+
+
+
+            document.getElementById("aircraft_image1").setAttribute('src', img1.attr('src'))
+            document.getElementById("aircraft_image1-1").setAttribute('src', img1.attr('src'))
+            flight_info[SelectedPlane].aircraft.imageurl1 = img1.attr('src')
             return
         }
     }
@@ -188,8 +254,9 @@ function getPlaneImage(flightdata) {
 
 // get image of whole flight path
 function getFlightPlanImage(data, flight_progress, world_airports) {
-    departure_timezone = world_airports[data.departure.icaoCode].tz
-        /*
+    try {
+        departure_timezone = world_airports[data.departure.icaoCode].tz
+            /*
     if (data.departure.actualTime) {
         departure_time = DateTime.fromISO(data.departure.actualTime, {
             zone: departure_timezone
@@ -204,8 +271,20 @@ function getFlightPlanImage(data, flight_progress, world_airports) {
         });
     }
 */
-    departure_time = DateTime.local();
-    var dep_date = departure_time.toFormat('yyyyMMdd')
-    document.getElementById("progress_image").setAttribute("src", "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress)
-    flight_info[SelectedPlane].flightimage = "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress
+        departure_time = DateTime.local();
+        var dep_date = departure_time.toFormat('yyyyMMdd')
+        document.getElementById("progress_image").setAttribute("src", "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress)
+        flight_info[SelectedPlane].flightimage = "https://www.flightview.com/fvPublicSiteFT/FlightViewCGI.exe?qtype=gif&acid=" + data.flight.iataNumber + "&depap=" + data.departure.iataCode + "&arrap=" + data.arrival.iataCode + "&depdate=" + dep_date + "&pctcomplete=" + flight_progress
+        document.getElementById("img_button").disabled = false
+    } catch {
+        document.getElementById("image_modal").style.display = "none"
+        document.getElementById("img_button").disabled = true
+    }
+}
+
+function setBigImage(source) {
+    var source_url = document.getElementById(source).getAttribute("src")
+    var dest_url = document.getElementById("aircraft_image1-1").getAttribute("src")
+    document.getElementById("aircraft_image1-1").setAttribute("src", source_url)
+    document.getElementById(source).setAttribute("src", dest_url)
 }
