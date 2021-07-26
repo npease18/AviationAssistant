@@ -38,7 +38,7 @@ function parseData(data) {
         track: data[element][3],
         speed: data[element][5],
         squawk: data[element][6],
-        seen: 0,
+        seen: 1,
         seen_pos: 0
       })
       // console.log(element)
