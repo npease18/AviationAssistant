@@ -120,7 +120,7 @@ function fetchData() {
     }
 
     FetchPending = $.ajax({
-        url: 'data/aircraft.json',
+        url: 'data/aircraft1.json',
         timeout: 5000,
         cache: false,
         dataType: 'json'
@@ -214,7 +214,7 @@ function initialize() {
     window.setInterval(readBatteryLevel, 1000);
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
-    window.setInterval(fetchInternetAircraft, 1000)
+    //window.setInterval(fetchInternetAircraft, 1000)
     initializeSchedulesPage();
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
