@@ -38,8 +38,8 @@ function parseData(data) {
         track: data[element][3],
         speed: data[element][5],
         squawk: data[element][6],
-        seen: 60,
-        seen_pos: 60,
+        seen: 55,
+        seen_pos: 55,
         rssi: 0,
         messages: 10
       })
