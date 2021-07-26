@@ -1,7 +1,7 @@
 const request = require('request');
 const fs = require('fs')
 var json = {}
-
+var database = {}
 
 
 function getData() {
@@ -29,6 +29,11 @@ function parseData(data) {
   json.aircraft = []
   for (element in data) {
     if (element != "stats" && element != "full_count" && element != "version") {
+      if (database[element]) {
+        database[element].number = database[element].number + 1
+      } else {
+        database[element].number = 1
+      }
       json.aircraft.push({
         hex: data[element][0].toLowerCase(),
         flight: data[element][16],
@@ -38,8 +43,8 @@ function parseData(data) {
         track: data[element][3],
         speed: data[element][5],
         squawk: data[element][6],
-        "seen_pos": 0,
-        "seen": 0
+        seen: 0,
+        messages: database[element].number
       })
       // console.log(element)
       //console.log(data[element][1])
