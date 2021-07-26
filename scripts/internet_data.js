@@ -40,7 +40,8 @@ function parseData(data) {
         squawk: data[element][6],
         seen: 1,
         seen_pos: 1,
-        rssi: 0
+        rssi: 0,
+        messages: 10
       })
       // console.log(element)
       //console.log(data[element][1])
