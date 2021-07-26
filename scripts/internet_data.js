@@ -19,6 +19,9 @@ function getData() {
   setTimeout(function () {
     getData()
   }, 10000);
+  setTimeout(function () {
+    changeTime()
+  }, 1000);
 }
 
 function parseData(data) {
@@ -38,8 +41,8 @@ function parseData(data) {
         track: data[element][3],
         speed: data[element][5],
         squawk: data[element][6],
-        seen: 55,
-        seen_pos: 55,
+        seen: 0,
+        seen_pos: 0,
         rssi: 0,
         messages: 10
       })
@@ -51,5 +54,20 @@ function parseData(data) {
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
   console.log(json)
 }
+
+function changeTime() {
+  fs.readFile('/run/dump1090-mutability/aircraft1.json', 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    data = JSON.parse(data)
+    for (element in data.aircraft) {
+      data.aircraft[element].seen =  data.aircraft[element].seen + 1
+      data.aircraft[element].seen_pos =  data.aircraft[element].seen_pos +1
+    }
+    fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(data))
+  });
+}
+
 
 getData()
