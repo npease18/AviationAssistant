@@ -117,12 +117,17 @@ function changeMapBounds() {
         }
     }
     xhr.send(JSON.stringify({
-        start_lat: 0,
-        start_lon: 0,
-        end_lat: 0,
-        end_lon: 0
+        lat_north: 0,
+        lat_south: 0,
+        long_east: 0,
+        long_west: 0
     }));
 }
+
+function getBounds() {
+    const extent = OLMap.getView().calculateExtent(OLMap.getSize())
+    return transformExtent(extent, 'EPSG:3857', 'EPSG:4326')
+  }
 
 function modal() {
     var modal = document.getElementById("info_modal");
