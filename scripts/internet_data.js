@@ -49,11 +49,7 @@ function parseData(data) {
     if (json.aircraft[element].messages != 0) {
       json.aircraft[element] = {}
     } else {
-      if (json.aircraft[element].messages) {
-        json.aircraft[element].messages =  json.aircraft[element].messages +1
-      } else {
-        json.aircraft[element].messages =  0
-      }
+      json.aircraft[element].messages =  json.aircraft[element].messages +1
     }
   }
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
