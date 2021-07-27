@@ -219,6 +219,7 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
     $("#loader").removeClass("hidden");
+    getBounds()
 
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
@@ -510,6 +511,7 @@ function initialize_map() {
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
+        getBounds()
     })
 
     OLMap.getView().on('change:center', function(event) {
