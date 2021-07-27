@@ -25,6 +25,7 @@ function getData() {
 }
 
 function parseData(data) {
+  console.log("Update")
   data = JSON.parse(data)
   json.now = new Date()
   json.now = json.now.getTime() - json.now.getMilliseconds() / 1000
@@ -56,7 +57,7 @@ function parseData(data) {
 }
 
 function changeTime() {
-  console.log("Run")
+  console.log("Time Change")
   fs.readFile('/run/dump1090-mutability/aircraft1.json', 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
