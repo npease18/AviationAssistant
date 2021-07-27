@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 
 function getData() {
   const options = {
-    url: 'http://localhost:7000/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds='+bounds.lat_north+'%2C'+bounds.lat_south+'%2C'+bounds.long_west+'%2C'+bounds.long_east+'&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1',
+    url: 'http://localhost:7000/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1',
     headers: {
       'x-requested-with': 'request'
     }
@@ -92,11 +92,3 @@ setInterval(function () {
   changeTime()
 }, 1000);
 
-app.post('/internet', (req, res) => {
-  bounds = req.body
-  console.log(req.body.lat_north)
-  return res.send('Received a POST HTTP method');
-});
-
-app.listen(8000, function () {
-});
