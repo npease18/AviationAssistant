@@ -673,6 +673,22 @@ function reaper() {
             plane.tr = null;
             delete Planes[plane.icao];
             plane.destroy();
+        } else if (plane.hasOwnProperty("internet") && internet_mode === 0) {
+            // Reap it.                                
+            //console.log("Reaping " + plane.icao);
+            //console.log("parent " + plane.tr.parentNode);
+            plane.tr.parentNode.removeChild(plane.tr);
+            plane.tr = null;
+            delete Planes[plane.icao];
+            plane.destroy();
+        } else if (plane.hasOwnProperty("internet") !== true && internet_mode === 1) {
+            // Reap it.                                
+            //console.log("Reaping " + plane.icao);
+            //console.log("parent " + plane.tr.parentNode);
+            plane.tr.parentNode.removeChild(plane.tr);
+            plane.tr = null;
+            delete Planes[plane.icao];
+            plane.destroy();
         } else {
             // Keep it.
             newPlanes.push(plane);
