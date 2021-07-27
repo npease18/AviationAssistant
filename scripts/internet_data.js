@@ -8,8 +8,11 @@ var bounds = {
   long_west: 0
 }
 const express = require('express')
+const bodyParser = require("body-parser");
 const app = express()
-;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -31,7 +34,6 @@ function getData() {
 }
 
 function parseData(data) {
-  console.log("Update")
   data = JSON.parse(data)
   json.now = new Date()
   json.now = json.now.getTime() - json.now.getMilliseconds() / 1000
@@ -70,7 +72,6 @@ function parseData(data) {
 }
 
 function changeTime() {
-  console.log("Time Change")
   fs.readFile('/run/dump1090-mutability/aircraft1.json', 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
@@ -92,3 +93,11 @@ setInterval(function () {
   changeTime()
 }, 1000);
 
+app.post("/internet", function(req, res) {
+  console.log(req.body)
+  return res.send("Hello There!")
+})
+
+app.listen(8000, () =>
+console.log(`Example app listening on port 8000!`),
+);
