@@ -1,7 +1,9 @@
 const request = require('request');
 const fs = require('fs')
 var json = {}
-
+import 'dotenv/config';
+import express from 'express';
+const app = express();
 
 
 function getData() {
