@@ -520,6 +520,7 @@ function initialize_map() {
             nearestStations(center[1], center[0])
         }
         getBounds()
+        fetchData()
     })
 
     OLMap.getView().on('change:center', function(event) {
@@ -535,11 +536,14 @@ function initialize_map() {
                 refreshSelected();
             }
         }
+        getBounds()
+        fetchData()
     });
 
     OLMap.getView().on('change:resolution', function(event) {
         localStorage['ZoomLvl'] = OLMap.getView().getZoom();
         getBounds()
+        fetchData()
     });
 
     OLMap.on(['click', 'dblclick'], function(evt) {
