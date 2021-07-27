@@ -479,20 +479,3 @@ function toTitleCase(str) {
         return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ');
 }
-
-
-// Begin Internet Aircraft Data Collection
-function fetchInternetAircraft() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", '/dump1090/data/aircraft1.json', true);
-    xhr.setRequestHeader('x-requested-with', 'XMLHttpRequest');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var data = xhr.response
-            var json = JSON.parse(data)
-            console.log(json)
-            processReceiverUpdate(json)
-        }
-    }
-    xhr.send();
-}

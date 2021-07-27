@@ -97,6 +97,7 @@ setInterval(function () {
 app.post("/internet", function(req, res) {
   console.log(req.body)
   bounds = req.body
+  getData()
   return res.send("Recieved")
 })
 
