@@ -126,10 +126,10 @@ function changeMapBounds() {
 
 function getBounds() {
     const extent = OLMap.getView().calculateExtent(OLMap.getSize())
-    point = ol.proj.toLonLat(extent, OLMap.getView().getProjection())
-    
-    console.log(point)
-    console.log(extent[2], extent[3])
+    point1 = ol.proj.toLonLat(extent[0], extent[1], OLMap.getView().getProjection())
+    point2 = ol.proj.toLonLat(extent[2], extent[3], OLMap.getView().getProjection())
+    console.log(point1, point2)
+    //console.log(extent[2], extent[3])
   }
 
 function modal() {
