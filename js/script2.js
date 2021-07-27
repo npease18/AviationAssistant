@@ -126,9 +126,9 @@ function changeMapBounds(coord1, coord2) {
 
 function getBounds() {
     const extent = OLMap.getView().calculateExtent(OLMap.getSize())
-    var coord1 = [extent[0], extent[1]]
+    var coord1 = [extent[1], extent[0]]
     var point1 = ol.proj.toLonLat(coord1, OLMap.getView().getProjection())
-    var coord2 = [extent[2], extent[3]]
+    var coord2 = [extent[3], extent[2]]
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
     //changeMapBounds(coord1, coord2)
     console.log(point1, point2)
