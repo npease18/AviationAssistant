@@ -108,7 +108,7 @@ function volDown() {
 
 function changeMapBounds() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://aa:7000/aa/internet", true);
+    xhr.open("POST", "http://aa:7000/192.168.0.14/internet", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
