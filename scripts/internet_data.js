@@ -49,6 +49,8 @@ function parseData(data) {
   for (element in json.aircraft) {
     if (json.aircraft[element].messages != 0) {
       json.aircraft[element] = {}
+    } else {
+      json.aircraft[element].messages =  json.aircraft[element].messages +1
     }
   }
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
@@ -65,7 +67,6 @@ function changeTime() {
     for (element in data.aircraft) {
       data.aircraft[element].seen =  data.aircraft[element].seen + 1
       data.aircraft[element].seen_pos =  data.aircraft[element].seen_pos +1
-      data.aircraft[element].messages =  data.aircraft[element].messages +1
     }
     fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(data))
   });
