@@ -83,13 +83,9 @@ setInterval(function () {
 }, 1000);
 
 app.post('/internet', (req, res) => {
+  console.log(req)
   return res.send('Received a POST HTTP method');
 });
 
-app.get('/internet', (req, res) => {
-  return res.send('Received a GET HTTP method');
-});
-
 app.listen(8000, function () {
-  console.log('Example app listening on port ' + 8000 + '!');
 });
