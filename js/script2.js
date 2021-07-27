@@ -131,7 +131,7 @@ function getBounds() {
     var coord2 = [extent[3], extent[2]]
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
     //changeMapBounds(coord1, coord2)
-    console.log(extent[2], extent[3])
+    console.log(point1, point2)
   }
 
 function modal() {
