@@ -39,7 +39,7 @@ function parseData(data) {
         seen: 0,
         seen_pos: 0,
         rssi: 0,
-        messages: 10
+        messages: 0
       })
       // console.log(element)
       //console.log(data[element][1])
@@ -60,6 +60,7 @@ function changeTime() {
     for (element in data.aircraft) {
       data.aircraft[element].seen =  data.aircraft[element].seen + 1
       data.aircraft[element].seen_pos =  data.aircraft[element].seen_pos +1
+      data.aircraft[element].messages =  data.aircraft[element].messages +1
     }
     fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(data))
   });
