@@ -219,7 +219,6 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
     $("#loader").removeClass("hidden");
-    getBounds()
 
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
@@ -504,7 +503,7 @@ function initialize_map() {
         loadTilesWhileInteracting: true
     });
 
-
+    getBounds()
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
