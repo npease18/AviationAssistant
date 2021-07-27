@@ -511,7 +511,7 @@ function initialize_map() {
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
-    getBounds()
+    
     
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
@@ -603,6 +603,8 @@ function initialize_map() {
             }
         }
     }
+
+    getBounds()
 
     // Add terrain-limit rings. To enable this:
     //
