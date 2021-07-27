@@ -520,7 +520,7 @@ function initialize_map() {
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
-        
+        getBounds()
     })
 
     OLMap.getView().on('change:center', function(event) {
