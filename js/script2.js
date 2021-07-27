@@ -124,6 +124,16 @@ function changeMapBounds(btm_left, top_right) {
     }));
 }
 
+function toggleInternet() {
+    if (internet_mode === 0) {
+        internet_mode = 1
+        document.getElementById("internet_mode").innerHTML = "network_cell"
+    } else if (internet_mode === 1) {
+        internet_mode = 0
+        document.getElementById("internet_mode").innerHTML = "signal_cellular_off"
+    }
+}
+
 function getBounds() {
     const extent = OLMap.getView().calculateExtent(OLMap.getSize())
     var coord1 = [extent[0], extent[1]]

@@ -119,12 +119,22 @@ function fetchData() {
         return;
     }
 
-    FetchPending = $.ajax({
-        url: 'data/aircraft1.json',
-        timeout: 5000,
-        cache: false,
-        dataType: 'json'
-    });
+    if (internet_mode === 1) {
+        FetchPending = $.ajax({
+            url: 'data/aircraft1.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        });
+    } else if (internet_mode === 0) {
+        FetchPending = $.ajax({
+            url: 'data/aircraft.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        });
+    }
+
     FetchPending.done(function(data) {
         var now = data.now;
 
@@ -503,14 +513,14 @@ function initialize_map() {
         loadTilesWhileInteracting: true
     });
 
-    getBounds()
+    
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
-        getBounds()
+        
     })
 
     OLMap.getView().on('change:center', function(event) {
