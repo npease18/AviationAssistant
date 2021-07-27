@@ -91,5 +91,5 @@ app.get('/internet', (req, res) => {
 });
 
 app.listen(8000, function () {
-  console.log('Example app listening on port ' + port + '!');
+  console.log('Example app listening on port ' + 8000 + '!');
 });
