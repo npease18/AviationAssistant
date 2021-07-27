@@ -126,7 +126,9 @@ function changeMapBounds() {
 
 function getBounds() {
     const extent = OLMap.getView().calculateExtent(OLMap.getSize())
-    console.log(extent[0], extent[1], extent[2], extent[3])
+    point = new OpenLayers.LonLat(extent[0],extent[1]).transform('EPSG:4326', 'EPSG:3857');
+    console.log(point)
+    console.log(extent[2], extent[3])
   }
 
 function modal() {
