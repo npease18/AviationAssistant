@@ -1,10 +1,15 @@
 const request = require('request');
 const fs = require('fs')
 var json = {}
-var bounds = {}
+var bounds = {
+  lat_north: 0,
+  lat_south: 0,
+  long_east: 0,
+  long_west: 0
+}
 const express = require('express')
 const app = express()
-const cors = require('cors');
+;
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
