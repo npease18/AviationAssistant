@@ -3,8 +3,9 @@ const fs = require('fs')
 var json = {}
 const express = require('express')
 const app = express()
-const express_port = 8000
-
+const cors = require('cors');
+app.use(cors());
+res.header("Access-Control-Allow-Origin", "*");
 
 function getData() {
   const options = {
