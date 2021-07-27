@@ -229,7 +229,6 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
     $("#loader").removeClass("hidden");
-
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
     $.ajax({
@@ -512,7 +511,7 @@ function initialize_map() {
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
-
+    getBounds()
     
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
@@ -540,6 +539,7 @@ function initialize_map() {
 
     OLMap.getView().on('change:resolution', function(event) {
         localStorage['ZoomLvl'] = OLMap.getView().getZoom();
+        getBounds()
     });
 
     OLMap.on(['click', 'dblclick'], function(evt) {
