@@ -16,10 +16,10 @@ function getData() {
       parseData(body)
     }
   });
-  setTimeout(function () {
+  setInterval(function () {
     getData()
   }, 10000);
-  setTimeout(function () {
+  setInterval(function () {
     changeTime()
   }, 1000);
 }
