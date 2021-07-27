@@ -116,21 +116,22 @@ function changeMapBounds(btm_left, top_right) {
             document.getElementById("volume_level").innerHTML = xhr.response
         }
     }
-    xhr.send(JSON.stringify({
-        lat_north: top_right[2],
-        lat_south: btm_left[2],
-        long_east: btm_left[1],
-        long_west: top_right[1]
-    }));
+    var json = {
+        lat_north: top_right[1],
+        lat_south: btm_left[1],
+        long_east: btm_left[0],
+        long_west: top_right[0]
+    }
+    xhr.send(JSON.stringify(json));
 }
 
 function toggleInternet() {
     if (internet_mode === 0) {
         internet_mode = 1
-        document.getElementById("internet_mode").innerHTML = "network_cell"
+        document.getElementById("internet_mode").innerHTML = "wifi"
     } else if (internet_mode === 1) {
         internet_mode = 0
-        document.getElementById("internet_mode").innerHTML = "signal_cellular_off"
+        document.getElementById("internet_mode").innerHTML = "router"
     }
 }
 
@@ -140,7 +141,7 @@ function getBounds() {
     var point1 = ol.proj.toLonLat(coord1, OLMap.getView().getProjection())
     var coord2 = [extent[2], extent[3]]
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
-    changeMapBounds(coord1, coord2)
+    changeMapBounds(point1, point2)
     console.log(point1, point2)
   }
 
