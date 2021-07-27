@@ -38,8 +38,7 @@ function parseData(data) {
         squawk: data[element][6],
         seen: 0,
         seen_pos: 0,
-        rssi: 0,
-        messages: 0
+        rssi: 0
       })
       // console.log(element)
       //console.log(data[element][1])
@@ -50,7 +49,11 @@ function parseData(data) {
     if (json.aircraft[element].messages != 0) {
       json.aircraft[element] = {}
     } else {
-      json.aircraft[element].messages =  json.aircraft[element].messages +1
+      if (json.aircraft[element].messages) {
+        json.aircraft[element].messages =  json.aircraft[element].messages +1
+      } else {
+        json.aircraft[element].messages =  0
+      }
     }
   }
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
