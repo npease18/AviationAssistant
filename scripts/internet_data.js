@@ -1,8 +1,9 @@
 const request = require('request');
 const fs = require('fs')
 var json = {}
-const express from 'express';
-const app = express();
+const express = require('express')
+const app = express()
+const express_port = 8000
 
 
 function getData() {
@@ -80,3 +81,7 @@ setInterval(function () {
 setInterval(function () {
   changeTime()
 }, 1000);
+
+app.post('/internet', (req, res) => {
+  return res.send('Received a POST HTTP method');
+});
