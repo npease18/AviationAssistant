@@ -106,7 +106,7 @@ function volDown() {
     }));
 }
 
-function changeMapBounds() {
+function changeMapBounds(coord1, coord2) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:8000/internet", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -126,11 +126,11 @@ function changeMapBounds() {
 
 function getBounds() {
     const extent = OLMap.getView().calculateExtent(OLMap.getSize())
-    var coord1 = [extent[0], extent[1]]
+    var coord1 = [extent[1], extent[0]]
     var point1 = ol.proj.toLonLat(coord1, OLMap.getView().getProjection())
-    var coord2 = [extent[2], extent[3]]
+    var coord2 = [extent[3], extent[2]]
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
-    console.log(point1, point2)
+    changeMapBounds(coord1, coord2)
     //console.log(extent[2], extent[3])
   }
 
