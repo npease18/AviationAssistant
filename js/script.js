@@ -120,7 +120,7 @@ function fetchData() {
     }
 
     FetchPending = $.ajax({
-        url: 'scripts/aircraft1.json',
+        url: 'data/aircraft1.json',
         timeout: 5000,
         cache: false,
         dataType: 'json'
