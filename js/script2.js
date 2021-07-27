@@ -106,6 +106,24 @@ function volDown() {
     }));
 }
 
+function changeMapBounds() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://aa:8000/internet", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.response)
+            document.getElementById("volume_level").innerHTML = xhr.response
+        }
+    }
+    xhr.send(JSON.stringify({
+        start_lat: 0,
+        start_lon: 0,
+        end_lat: 0,
+        end_lon: 0
+    }));
+}
+
 function modal() {
     var modal = document.getElementById("info_modal");
     var btn = document.getElementById("info_button");
