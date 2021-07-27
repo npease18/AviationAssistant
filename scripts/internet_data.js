@@ -94,8 +94,8 @@ setInterval(function () {
 
 app.post('/internet', (req, res) => {
   bounds = req.body
-  console.log(req.body)
-  //return res.send('Received a POST HTTP method');
+  console.log(req.body.lat_north)
+  return res.send('Received a POST HTTP method');
 });
 
 app.listen(8000, function () {
