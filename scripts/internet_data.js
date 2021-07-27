@@ -19,6 +19,9 @@ function getData() {
   setTimeout(function () {
     getData()
   }, 10000);
+  setTimeout(function () {
+    changeTime()
+  }, 1000);
 }
 
 function parseData(data) {
@@ -50,13 +53,10 @@ function parseData(data) {
   }
   fs.writeFileSync("/run/dump1090-mutability/aircraft1.json", JSON.stringify(json))
   //console.log(json)
-  setTimeout(function () {
-    changeTime()
-  }, 1000);
-  changeTime()
 }
 
 function changeTime() {
+  console.log("Run")
   fs.readFile('/run/dump1090-mutability/aircraft1.json', 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
@@ -70,5 +70,5 @@ function changeTime() {
   });
 }
 
-
 getData()
+changeTime()
