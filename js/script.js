@@ -536,8 +536,6 @@ function initialize_map() {
                 refreshSelected();
             }
         }
-        getBounds()
-        fetchData()
     });
 
     OLMap.getView().on('change:resolution', function(event) {
