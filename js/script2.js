@@ -34,13 +34,13 @@ function readBatteryLevel() {
         battery = data.adapter[0].status
         if (battery === "in") {
             document.getElementById('battery').innerHTML = "battery_charging_full"
-            console.log("charging")
+
         } else if (data.percentage[0].level < 21) {
             document.getElementById('battery').innerHTML = "battery_alert"
-            console.log("low")
+
         } else {
             document.getElementById('battery').innerHTML = "battery_full"
-            console.log("full")
+
         }
     });
 
@@ -113,7 +113,6 @@ function changeMapBounds(btm_left, top_right) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.response)
-            document.getElementById("volume_level").innerHTML = xhr.response
         }
     }
     var json = {
