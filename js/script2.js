@@ -129,11 +129,11 @@ function toggleInternet() {
     if (internet_mode === 0) {
         internet_mode = 1
         document.getElementById("internet_mode").innerHTML = "wifi"
-        reaper()
+        document.querySelector("#tableinfo > tbody").innerHTML = ""
     } else if (internet_mode === 1) {
         internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
-        reaper()
+        document.querySelector("#tableinfo > tbody").innerHTML = ""
     }
 }
 
