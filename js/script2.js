@@ -135,6 +135,7 @@ function toggleInternet() {
         document.getElementById("internet_mode").innerHTML = "router"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
         for (plane in PlanesOrdered) {
+            console.log(plane)
             plane.tr.parentNode.removeChild(plane.tr);
             plane.tr = null;
             delete Planes[plane.icao];
