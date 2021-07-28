@@ -55,7 +55,9 @@ function parseData(data) {
         seen_pos: 0,
         rssi: 0,
         messages: 0,
-        internet: true
+        internet: true,
+        dep: data[element][11],
+        arr: data[element][12]
       })
       // console.log(element)
       //console.log(data[element][1])
