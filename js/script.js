@@ -12,6 +12,7 @@ var PlanesOrdered = [];
 var SelectedPlane = null;
 var FollowSelected = false;
 var OfflineMode = false;
+var internet_mode_data = {}
 
 var SpecialSquawks = {
     '7500': { cssClass: 'squawk7500', markerColor: 'rgb(255, 85, 85)', text: 'Aircraft Hijacking' },
@@ -137,7 +138,9 @@ function fetchData() {
 
     FetchPending.done(function(data) {
         var now = data.now;
-
+        if (internet_mode) {
+            internet_mode_data = data.aircraft
+        }
         processReceiverUpdate(data);
 
         // update timestamps, visibility, history track for all planes - not only those updated
