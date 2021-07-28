@@ -665,6 +665,7 @@ function reaper() {
     var newPlanes = [];
     for (var i = 0; i < PlanesOrdered.length; ++i) {
         var plane = PlanesOrdered[i];
+        console.log(plane.internet)
         if (plane.seen > 300) {
             // Reap it.                                
             //console.log("Reaping " + plane.icao);
