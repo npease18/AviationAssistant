@@ -127,6 +127,7 @@ function changeMapBounds(btm_left, top_right) {
 
 function toggleInternet() {
     if (internet_mode === 0) {
+        getBounds()
         internet_mode = 1
         document.getElementById("internet_mode").innerHTML = "wifi"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
