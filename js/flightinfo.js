@@ -29,6 +29,11 @@ function updateFlightTab() {
                             flight_info[SelectedPlane] = flightdata
                             flight_info[SelectedPlane].schedule = scheduledata
                             flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
+                            for (element in PlanesOrdered) {
+                                if (element.icao === SelectedPlane && element.internet) {
+                                    console.log("Internet Plane")
+                                }
+                            }
                             flightInfo(flightdata, world_airports, world_airlines)
                             flightProgress(flightdata, world_airports, scheduledata)
                             getAircraftInfo(aircraft_information, flightdata)
