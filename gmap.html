@@ -177,6 +177,9 @@
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" onclick="toggleInternet()">
+                <i class="material-icons" id="internet_mode">router</i>
+              </button>
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openRadar()">
 				Radar
 			</button>
@@ -189,7 +192,9 @@
             <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
 				LiveATC
 			</button>
+           
             <span style="float: right;">
+                
 				<span class="space-nopad center">
 					<span id="percentage">N/A</span>
             </span>
