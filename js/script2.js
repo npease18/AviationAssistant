@@ -138,7 +138,8 @@ function toggleInternet() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 console.log(xhr.response)
-                document.getElementById("volume_level").innerHTML = xhr.response
+                fetchData()
+                internet_mode = 0
             }
         }
         var json = {
@@ -148,8 +149,6 @@ function toggleInternet() {
             long_west: 0
         }
         xhr.send(JSON.stringify(json));
-        fetchData()
-        internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
     }
 }
