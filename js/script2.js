@@ -134,7 +134,12 @@ function toggleInternet() {
         internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
-        reaper()
+        for (plane in PlanesOrdered) {
+            plane.tr.parentNode.removeChild(plane.tr);
+            plane.tr = null;
+            delete Planes[plane.icao];
+            plane.destroy();  
+        }
     }
 }
 
