@@ -134,6 +134,7 @@ function toggleInternet() {
         internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
+        reaper()
     }
 }
 
