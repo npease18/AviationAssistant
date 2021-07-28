@@ -665,7 +665,7 @@ function reaper() {
     var newPlanes = [];
     for (var i = 0; i < PlanesOrdered.length; ++i) {
         var plane = PlanesOrdered[i];
-        if (plane.seen > 300) {
+        if (plane.seen > 300 || plane.seen < 0) {
             // Reap it.                                
             //console.log("Reaping " + plane.icao);
             //console.log("parent " + plane.tr.parentNode);
