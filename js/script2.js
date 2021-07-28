@@ -131,16 +131,25 @@ function toggleInternet() {
         document.getElementById("internet_mode").innerHTML = "wifi"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
     } else if (internet_mode === 1) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:8000/internet", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                document.getElementById("volume_level").innerHTML = xhr.response
+            }
+        }
+        var json = {
+            lat_north: 0,
+            lat_south: 0,
+            long_east: 0,
+            long_west: 0
+        }
+        xhr.send(JSON.stringify(json));
+        fetchData()
         internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
-        document.querySelector("#tableinfo > tbody").innerHTML = ""
-        for (plane in PlanesOrdered) {
-            console.log(plane)
-            plane.tr.parentNode.removeChild(plane.tr);
-            plane.tr = null;
-            delete Planes[plane.icao];
-            plane.destroy();  
-        }
     }
 }
 
@@ -152,7 +161,7 @@ function getBounds() {
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
     changeMapBounds(point1, point2)
     console.log(point1, point2)
-  }
+}
 
 function modal() {
     var modal = document.getElementById("info_modal");
