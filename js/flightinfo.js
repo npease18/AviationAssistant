@@ -31,7 +31,7 @@ function updateFlightTab() {
                             flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
                             if (internet_mode) {
                                 console.log("Internet Plane")
-                                console.log(internet_mode_data[SelectedPlane])
+                                console.log(internet_mode_data, SelectedPlane)
                                 // Planes[SelectedPlane] gives 
                                 document.getElementById("flight_progress_div").style.display = "none"
                                 document.getElementById('additional_info_hidden').style.display = "none"
