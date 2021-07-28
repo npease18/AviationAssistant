@@ -665,7 +665,7 @@ function reaper() {
     var newPlanes = [];
     for (var i = 0; i < PlanesOrdered.length; ++i) {
         var plane = PlanesOrdered[i];
-        if (plane.seen > 300 || plane.seen < 0) {
+        if (plane.seen > 300) {
             // Reap it.                                
             //console.log("Reaping " + plane.icao);
             //console.log("parent " + plane.tr.parentNode);
@@ -673,6 +673,14 @@ function reaper() {
             plane.tr = null;
             delete Planes[plane.icao];
             plane.destroy();
+        } else if(plane.internet || internet_mode === 0) {
+            // Reap it.                                
+            //console.log("Reaping " + plane.icao);
+            //console.log("parent " + plane.tr.parentNode);
+            plane.tr.parentNode.removeChild(plane.tr);
+            plane.tr = null;
+            delete Planes[plane.icao];
+            plane.destroy();            
         } else {
             // Keep it.
             newPlanes.push(plane);
