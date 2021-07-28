@@ -130,10 +130,12 @@ function toggleInternet() {
         internet_mode = 1
         document.getElementById("internet_mode").innerHTML = "wifi"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
+        reaper()
     } else if (internet_mode === 1) {
         internet_mode = 0
         document.getElementById("internet_mode").innerHTML = "router"
         document.querySelector("#tableinfo > tbody").innerHTML = ""
+        reaper()
     }
 }
 
