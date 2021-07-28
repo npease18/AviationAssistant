@@ -119,12 +119,22 @@ function fetchData() {
         return;
     }
 
-    FetchPending = $.ajax({
-        url: 'data/aircraft.json',
-        timeout: 5000,
-        cache: false,
-        dataType: 'json'
-    });
+    if (internet_mode === 1) {
+        FetchPending = $.ajax({
+            url: 'data/aircraft1.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        });
+    } else if (internet_mode === 0) {
+        FetchPending = $.ajax({
+            url: 'data/aircraft.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        });
+    }
+
     FetchPending.done(function(data) {
         var now = data.now;
 
@@ -214,11 +224,11 @@ function initialize() {
     window.setInterval(readBatteryLevel, 1000);
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
+    //window.setInterval(fetchInternetAircraft, 1000)
     initializeSchedulesPage();
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
     $("#loader").removeClass("hidden");
-
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
     $.ajax({
@@ -501,14 +511,16 @@ function initialize_map() {
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
-
-
+    
+    
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
         }
+        getBounds()
+        fetchData()
     })
 
     OLMap.getView().on('change:center', function(event) {
@@ -528,6 +540,8 @@ function initialize_map() {
 
     OLMap.getView().on('change:resolution', function(event) {
         localStorage['ZoomLvl'] = OLMap.getView().getZoom();
+        getBounds()
+        fetchData()
     });
 
     OLMap.on(['click', 'dblclick'], function(evt) {
@@ -587,6 +601,8 @@ function initialize_map() {
             }
         }
     }
+
+    getBounds()
 
     // Add terrain-limit rings. To enable this:
     //
@@ -649,6 +665,7 @@ function reaper() {
     var newPlanes = [];
     for (var i = 0; i < PlanesOrdered.length; ++i) {
         var plane = PlanesOrdered[i];
+       
         if (plane.seen > 300) {
             // Reap it.                                
             //console.log("Reaping " + plane.icao);
@@ -656,7 +673,7 @@ function reaper() {
             plane.tr.parentNode.removeChild(plane.tr);
             plane.tr = null;
             delete Planes[plane.icao];
-            plane.destroy();
+            plane.destroy();          
         } else {
             // Keep it.
             newPlanes.push(plane);
