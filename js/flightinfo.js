@@ -32,7 +32,35 @@ function updateFlightTab() {
                             if (internet_mode) {
                                 for (element in internet_mode_data) {
                                     if (internet_mode_data[element].hex === SelectedPlane) {
+                                        var data = internet_mode_data[element]
                                         console.log(internet_mode_data[element])
+
+                                        for (airport in world_airports) {
+                                            if (airport.iata === internet_mode_data[element].arr) {
+                                                document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
+                                                document.getElementById("flight_status").innerHTML = ""
+                                                document.getElementById("flight_flighticaonum").innerHTML = data.flight
+                                                try {
+                                                    document.getElementById("flight_airline").innerHTML = world_airlines[data.airline].nameAirline + " "
+                                                } catch {
+                                                    document.getElementById("flight_airline").innerHTML = "N/A "
+                                                }
+
+                                                try {
+                                                    document.getElementById("flight_airport_long_destination").innerHTML = airport.name
+                                                    document.getElementById("flight_airport_short_destination").innerHTML = airport.icao
+                                                    document.getElementById("flight_airport_loc_destination").innerHTML = airport.city + ", " + country_names[airport.country]
+                                                } catch {
+                                                    document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
+                                                    document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
+                                                    document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+                                                }
+                                            }
+
+                                            if (airport.iata === internet_mode_data[element].dep) {
+
+                                            }
+                                        }
                                     }
                                 }
                                 // Planes[SelectedPlane] gives 
