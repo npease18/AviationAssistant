@@ -53,6 +53,10 @@ function updateFlightTab() {
                                             document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
                                             document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
                                         }
+                                    } else if (internet_mode_data[element].arr === "") {
+                                        document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
                                     }
 
                                     if (world_airports[airport_search].iata === internet_mode_data[element].dep && internet_mode_data[element].dep != "") {
@@ -75,6 +79,10 @@ function updateFlightTab() {
                                             document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
                                             document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
                                         }
+                                    } else if (internet_mode_data[element].dep === "") {
+                                        document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
                                     }
                                 }
                             }
