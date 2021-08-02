@@ -28,6 +28,12 @@ function updateFlightTab() {
                         document.getElementById('additional_info_hidden').style.display = "none"
                         document.getElementById("img_button").disabled = true
                         document.getElementById("radar_aircraft_tab_button").disabled = true
+                        document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
                         for (element in internet_mode_data) {
                             if (internet_mode_data[element].hex === SelectedPlane) {
                                 var data = internet_mode_data[element]
@@ -49,7 +55,7 @@ function updateFlightTab() {
                                     document.getElementById("flight_airline").innerHTML = data.flight
                                 }
                                 for (airport_search in world_airports) {
-                                    if (world_airports[airport_search].iata === internet_mode_data[element].arr && internet_mode_data[element].arr != "") {                                       
+                                    if (world_airports[airport_search].iata === internet_mode_data[element].arr && internet_mode_data[element].arr != "") {
                                         var airport = world_airports[airport_search]
                                         try {
                                             document.getElementById("flight_airport_long_destination").innerHTML = airport.name
