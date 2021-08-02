@@ -57,7 +57,8 @@ function parseData(data) {
         messages: 0,
         internet: true,
         dep: data[element][11],
-        arr: data[element][12]
+        arr: data[element][12],
+        airline: data[element][18]
       })
       // console.log(element)
       //console.log(data[element][1])
