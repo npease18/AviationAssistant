@@ -31,9 +31,10 @@ function updateFlightTab() {
                         document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
                         document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
                         document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
-                        document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
-                        document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
-                        document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+                        document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
+                        document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
+                        document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+
                         for (element in internet_mode_data) {
                             if (internet_mode_data[element].hex === SelectedPlane) {
                                 var data = internet_mode_data[element]
