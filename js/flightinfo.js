@@ -44,6 +44,7 @@ function updateFlightTab() {
                                 } else {
                                     //document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                     document.getElementById("flight_status").innerHTML = ""
+                                    document.getElementById("flight_flightnum").innerHTML = ""
                                     document.getElementById("flight_flighticaonum").innerHTML = data.flight
                                     document.getElementById("flight_airline").innerHTML = data.flight
                                 }
