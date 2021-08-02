@@ -31,7 +31,7 @@ function updateFlightTab() {
                             flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
                             if (internet_mode) {
                                 for (element in internet_mode_data) {
-                                    console.log(element)
+                                    console.log(internet_mode_data[element])
                                     if (element.hex === SelectedPlane) {
                                         console.log(element)
                                     }
