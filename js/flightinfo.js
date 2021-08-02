@@ -35,8 +35,8 @@ function updateFlightTab() {
                                         var data = internet_mode_data[element]
                                         console.log(internet_mode_data[element])
 
-                                        for (airport in world_airports) {
-                                            if (world_airports[airport].iata === internet_mode_data[element].arr) {
+                                        for (airport_search in world_airports) {
+                                            if (world_airports[airport_search].iata === internet_mode_data[element].arr) {
                                                 var airport = world_airports[airport]
                                                 document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                                 document.getElementById("flight_status").innerHTML = ""
@@ -58,7 +58,7 @@ function updateFlightTab() {
                                                 }
                                             }
 
-                                            if (world_airports[airport].iata === internet_mode_data[element].dep) {
+                                            if (world_airports[airport_search].iata === internet_mode_data[element].dep) {
                                                 var airport = world_airports[airport]
                                                 document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                                 document.getElementById("flight_status").innerHTML = ""
