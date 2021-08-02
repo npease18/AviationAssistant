@@ -26,6 +26,7 @@ function updateFlightTab() {
                         // Planes[SelectedPlane] gives 
                         document.getElementById("flight_progress_div").style.display = "none"
                         document.getElementById('additional_info_hidden').style.display = "none"
+                        document.getElementById("img_button").disabled = true
                         document.getElementById("radar_aircraft_tab_button").disabled = true
                         for (element in internet_mode_data) {
                             if (internet_mode_data[element].hex === SelectedPlane) {
