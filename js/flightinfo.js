@@ -107,6 +107,7 @@ function updateFlightTab() {
                                 document.getElementById("radar_flight_loading").style.display = "none"
                                 document.getElementById("radar_aircraft_info").style.display = "block"
                                 document.getElementById("radar_aircraft_loading").style.display = "none"
+                                document.getElementById("img_button").disabled = false
                             })
                         });
                     });
