@@ -30,8 +30,11 @@ function updateFlightTab() {
                             flight_info[SelectedPlane].schedule = scheduledata
                             flight_info[SelectedPlane].aircraft.information = aircraft_information[flightdata.aircraft.iataCode]
                             if (internet_mode) {
-                                console.log("Internet Plane")
-                                console.log(internet_mode_data, SelectedPlane)
+                                for (element in internet_mode_data) {
+                                    if (element.hex === SelectedPlane) {
+                                        console.log(element)
+                                    }
+                                }
                                 // Planes[SelectedPlane] gives 
                                 document.getElementById("flight_progress_div").style.display = "none"
                                 document.getElementById('additional_info_hidden').style.display = "none"

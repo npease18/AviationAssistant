@@ -112,7 +112,7 @@ function changeMapBounds(btm_left, top_right) {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-            console.log(xhr.response)
+            //console.log(xhr.response)
         }
     }
     var json = {
@@ -141,7 +141,7 @@ function getBounds() {
     var coord2 = [extent[2], extent[3]]
     var point2 = ol.proj.toLonLat(coord2, OLMap.getView().getProjection())
     changeMapBounds(point1, point2)
-    console.log(point1, point2)
+    //console.log(point1, point2)
 }
 
 function modal() {
