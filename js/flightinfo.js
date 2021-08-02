@@ -58,8 +58,26 @@ function updateFlightTab() {
                                                 }
                                             }
 
-                                            if (airport.iata === internet_mode_data[element].dep) {
+                                            if (world_airports[airport].iata === internet_mode_data[element].dep) {
+                                                var airport = world_airports[airport]
+                                                document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
+                                                document.getElementById("flight_status").innerHTML = ""
+                                                document.getElementById("flight_flighticaonum").innerHTML = data.flight
+                                                try {
+                                                    document.getElementById("flight_airline").innerHTML = world_airlines[data.airline].nameAirline + " "
+                                                } catch {
+                                                    document.getElementById("flight_airline").innerHTML = "N/A "
+                                                }
 
+                                                try {
+                                                    document.getElementById("flight_airport_long_origin").innerHTML = airport.name
+                                                    document.getElementById("flight_airport_short_origin").innerHTML = airport.icao
+                                                    document.getElementById("flight_airport_loc_origin").innerHTML = airport.city + ", " + country_names[airport.country]
+                                                } catch {
+                                                    document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
+                                                    document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
+                                                    document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+                                                }
                                             }
                                         }
                                     }
