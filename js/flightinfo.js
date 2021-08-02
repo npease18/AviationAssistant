@@ -36,7 +36,8 @@ function updateFlightTab() {
                                         console.log(internet_mode_data[element])
 
                                         for (airport in world_airports) {
-                                            if (airport.iata === internet_mode_data[element].arr) {
+                                            if (world_airports[airport].iata === internet_mode_data[element].arr) {
+                                                var airport = world_airports[airport]
                                                 document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                                 document.getElementById("flight_status").innerHTML = ""
                                                 document.getElementById("flight_flighticaonum").innerHTML = data.flight
