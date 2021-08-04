@@ -30,11 +30,15 @@ body {
     color: white;
 }
 
-#flight_button {
+#radar_flight_tab_button {
     color: white;
 }
 
-#aircraft_subtab_button {
+#radar_aircraft_tab_button {
+    color: white;
+}
+
+#radar_radar_tab_button {
     color: white;
 }
 
