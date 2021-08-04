@@ -358,7 +358,8 @@ div#loader {
 
 .plane_table_row {
     cursor: pointer;
-    border: white
+    border: white;
+    background-color: black;
 }
 
 .hidden {
