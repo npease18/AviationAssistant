@@ -2,6 +2,7 @@
 "use strict";
 
 // Define our global variables
+var dark_mode = false
 var brightness = 0
 var OLMap = null;
 var StaticFeatures = new ol.Collection();

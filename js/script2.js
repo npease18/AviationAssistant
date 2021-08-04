@@ -367,6 +367,32 @@ function sendCMD(cmd) {
 
 }
 
+function changeColorMode() {
+    console.log("Changed")
+    const themeStylesheet = document.getElementById('theme')
+    //const themeToggle = document.getElementById('theme-toggle')
+    if (themeStylesheet.href.includes('light')) {
+        document.getElementById("logo").setAttribute("src", "images/dark/logo.png")
+        document.getElementById("radar_image").setAttribute("src", "images/dark/radar.png")
+        document.getElementById("itinerary_image").setAttribute("src", "images/dark/itinerary.png")
+        document.getElementById("graphs_image").setAttribute("src", "images/dark/graphs.png")
+        document.getElementById("settings_image").setAttribute("src", "images/dark/settings.png")
+        document.getElementById("settings_logo").setAttribute("src", "images/dark/logo.png")
+        themeStylesheet.href = 'css/style-dark.css'
+       // themeToggle.innerText = 'Switch to light mode'
+    } else {
+        // if it's dark -> go light
+        themeStylesheet.href = 'css/style-light.css'
+        document.getElementById("logo").setAttribute("src", "images/light/logo.png")
+        document.getElementById("radar_image").setAttribute("src", "images/light/radar.png")
+        document.getElementById("itinerary_image").setAttribute("src", "images/light/itinerary.png")
+        document.getElementById("graphs_image").setAttribute("src", "images/light/graphs.png")
+        document.getElementById("settings_image").setAttribute("src", "images/light/settings.png")
+        document.getElementById("settings_logo").setAttribute("src", "images/light/logo.png")
+        //themeToggle.innerText = 'Switch to dark mode'
+    }
+}
+
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
