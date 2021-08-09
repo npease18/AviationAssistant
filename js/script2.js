@@ -220,8 +220,10 @@ function getCPUTemp() {
         if (xhr.readyState === 4) {
             temp = xhr.response
             temp = temp.substring(5, temp.length - 5)
-            temp = celciusToF(parseFloat(temp))
+            var temp_percentage = temp / 85 * 100
+            temp = celciusToF(parseFloat(temp));
             document.getElementById("internal_temperature").innerHTML = temp
+            document.getElementById("internal_temperature").style.color = hsl_col_perc(temp_percentage, 0, 120)
         }
     }
     xhr.send(JSON.stringify({
@@ -368,10 +370,10 @@ function sendCMD(cmd) {
 }
 
 function changeColorMode() {
-    console.log("Changed")
     const themeStylesheet = document.getElementById('theme')
     //const themeToggle = document.getElementById('theme-toggle')
     if (themeStylesheet.href.includes('light')) {
+        
         document.getElementById("logo").setAttribute("src", "images/dark/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/dark/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/dark/itinerary.png")
@@ -379,7 +381,7 @@ function changeColorMode() {
         document.getElementById("settings_image").setAttribute("src", "images/dark/settings.png")
         document.getElementById("settings_logo").setAttribute("src", "images/dark/logo.png")
         themeStylesheet.href = 'css/style-dark.css'
-       // themeToggle.innerText = 'Switch to light mode'
+        // themeToggle.innerText = 'Switch to light mode'
     } else {
         // if it's dark -> go light
         themeStylesheet.href = 'css/style-light.css'
@@ -503,4 +505,14 @@ function toTitleCase(str) {
     return str.toLowerCase().split(' ').map(function (word) {
         return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ');
+}
+
+function hsl_col_perc(percent, start, end) {
+    var a = percent / 100,
+        b = (end - start) * a,
+        c = b + start;
+
+    // Return a CSS HSL string
+    return 'hsl(' + c + ', 100%, 50%)';
+    // hsl_col_perc(bed_percent, 0, 120)
 }
