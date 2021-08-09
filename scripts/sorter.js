@@ -1,5 +1,5 @@
 var fs = require("fs")
-const airlines = require('./json/airplanes.json');
+const airlines = require('../json/airplanes.json');
 var corrected_json = {}
 
 airlines.forEach(function(json) {
