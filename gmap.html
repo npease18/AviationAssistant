@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="css/style-light.css" />
     <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
@@ -62,13 +62,13 @@
 <span id="external_title">EXTERNAL MODE ACTIVATED</span>
     </div>
     <div id="home_page" style="display: none;">
-        <img src="images/logo.png" class="logo">
+        <img id="logo" src="images/light/logo.png" class="logo">
         <table class="home_table">
             <tr>
-                <td class="pointer" onclick="goRadar()"><img src="images/radar.png"></td>
-                <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img src="images/itinerary.png"></td>
-                <td class="pointer" onclick="goGraphs()"><img src="images/graphs.png"></td>
-                <td class="pointer" onclick="goSettings()"><img src="images/settings.png"></td>
+                <td class="pointer" onclick="goRadar()"><img id="radar_image" src="images/light/radar.png"></td>
+                <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img id="itinerary_image" src="images/light/itinerary.png"></td>
+                <td class="pointer" onclick="goGraphs()"><img id="graphs_image" src="images/light/graphs.png"></td>
+                <td class="pointer" onclick="goSettings()"><img id="settings_image" src="images/light/settings.png"></td>
             </tr>
         </table>
         <button class="mdl-button mdl-js-button mdl-button--icon" id="info_button" style="width: 40px; height: 40px; min-width: initial;">
@@ -79,8 +79,7 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close" id="close_modal">&times;</span>
-                <h2>About</h2>
-                <iframe src="./information.html" width="100%" height="80%" style="border: none"></iframe>
+                <iframe src="./information.html" width="100%" height="100%" style="border: none"></iframe>
             </div>
 
         </div>
@@ -88,7 +87,7 @@
     <div id="itinerary_page" style="display: none;">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
             <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()">
@@ -108,7 +107,7 @@
         </div>
     </div>
     <div id="settings_page" style="display: none;">
-        <a href="javascript:goHome()"><img src="images/logo.png" class="settingslogo"></a>
+        <a href="javascript:goHome()"><img id="settings_logo" src="images/light/logo.png" class="settingslogo" id="fexte"></a>
         <div id="settingstext">
             <table>
                 <tr>
@@ -122,10 +121,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <h5>"Airplane" Mode</h5>
+                        <h5>Dark Mode</h5>
                     </td>
-                    <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" onclick="offlineToggle()">
-                            <input type="checkbox" id="switch-1" class="mdl-switch__input">
+                    <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                            <input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="changeColorMode()">
                             <span class="mdl-switch__label"></span>
                           </label></td>
                 </tr>
@@ -141,23 +140,23 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
                         </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
                             Check For Updates
                           </button>
                     </td>
 
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
                             Close Application
                           </button>
                     </td>
@@ -174,22 +173,22 @@
     <div id="radar_page">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" onclick="toggleInternet()">
+            <button id="internet_mode_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" onclick="toggleInternet()">
                 <i class="material-icons" id="internet_mode">router</i>
               </button>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openRadar()">
+            <button id="radar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openRadar()">
 				Radar
 			</button>
             <span class="divider"></span>
             <!-- Raised button with ripple -->
-            <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openMetar()">
+            <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openMetar()">
 				METAR
 			</button>
             <!-- Raised button with ripple -->
-            <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="openATC	()">
+            <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openATC()">
 				LiveATC
 			</button>
            
@@ -203,7 +202,7 @@
             </span>
             <span class="space center">
 			<!-- FAB button with ripple -->
-			<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
+			<button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
 				<i class="material-icons">remove</i>
 			</button>
 			<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
@@ -216,7 +215,7 @@
             </span>
             <span class="space center">
 	<!-- FAB button with ripple -->
-	<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
+	<button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
 		<i class="material-icons">add</i>
 	</button>
 	<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
@@ -227,7 +226,7 @@
 
             <span class="space center">
 					<!-- FAB button with ripple -->
-					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="sendCMD('shutdown')">
+					<button id="power_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="sendCMD('shutdown')">
 						<i class="material-icons">power_settings_new</i>
 					</button>
 				</span>
@@ -336,7 +335,7 @@
 
                         <div id="planes_table">
                             <table id="tableinfo" style="width: 100%">
-                                <thead style="background-color: #BBBBBB; cursor: pointer;">
+                                <thead id="planes_table">
                                     <tr>
                                         <td id="icao" onclick="sortByICAO();">ICAO</td>
                                         <td id="flag" onclick="sortByCountry()">
@@ -602,7 +601,7 @@
     <div id="graphs_page" style="display: none;height: 100%;">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
             <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
