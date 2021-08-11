@@ -107,14 +107,6 @@ div#map_container {
     height: 100%;
 }
 
-div#subtab_buttons {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding: 2px;
-    z-index: 1;
-    background: black;
-}
 
 .subtab_button {
     width: 25%;
@@ -174,9 +166,9 @@ div#subtab_buttons>button {
 
 div#subtab_buttons {
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
-    padding: 2px;
+    padding: 5px;
     z-index: 1;
     background: black;
 }
@@ -225,6 +217,11 @@ div#sidebar_container {
     margin: auto;
     width: fit-content;
     display: inline-block;
+}
+
+#planes_table > tr > td {
+    border-bottom: solid white .5px;
+    text-align: center;
 }
 
 .space-nopad {
