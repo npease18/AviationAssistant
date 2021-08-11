@@ -401,22 +401,8 @@
                             </table>
                         </div>
                         <!-- planes_table -->
-                        <div id="subtab_buttons">
-                            <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                                id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
-                                Radar
-                            </button>
-                            <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                                id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
-                                Flight
-                            </button>
-                            <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                                id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
-                                Aircraft
-                            </button>
-                        </div>
+
                     </div>
-                    
                     <div id="radar_flight_tab" style="display: none;">
                         <div id="radar_flight_info" style="display: none;"><br>
                             <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span
@@ -559,7 +545,20 @@
                     </div>
 
                 </div>
-               
+                <div id="subtab_buttons">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
+                        Radar
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
+                        Flight
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
+                        Aircraft
+                    </button>
+                </div>
 
             </div>
             <div id="metar_container" style="display: none">
