@@ -458,6 +458,7 @@ function initialize_map() {
 
     var foundType = false;
 
+    /*
     ol.control.LayerSwitcher.forEachRecursive(layers, function(lyr) {
         if (!lyr.get('name'))
             return;
@@ -498,7 +499,7 @@ function initialize_map() {
             }
         });
     }
-
+*/
     OLMap = new ol.Map({
         target: 'map_canvas',
         layers: layers,
@@ -516,8 +517,18 @@ function initialize_map() {
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
-    
-    
+
+    ol3d = new olcs.OLCesium({
+        map: OLMap,
+      });
+
+      var layerSwitcher = new LayerSwitcher({
+        reverse: false,
+        groupSelectStyle: 'group',
+        activationMode: 'mouseover'
+      });
+      OLMap.addControl(layerSwitcher);
+
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());

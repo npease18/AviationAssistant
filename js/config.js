@@ -18,6 +18,8 @@ xhr.onreadystatechange = function() {
 }
 xhr.send();
 
+var ol3d
+var cesuim_active = false
 var internet_mode = 0
 
 var country_names = {}
