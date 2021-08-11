@@ -510,16 +510,16 @@ function initialize_map() {
         controls: [new ol.control.Zoom(),
             new ol.control.Rotate(),
             new ol.control.Attribution({ collapsed: true }),
-            new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" })
+            new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" }),
+            new ol.control.FullScreen()
         ],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
 
-    var ol3d = new olcs.OLCesium({
+    ol3d = new olcs.OLCesium({
         map: OLMap,
       });
-     // ol3d.setEnabled(true);
 
       var layerSwitcher = new LayerSwitcher({
         reverse: false,
