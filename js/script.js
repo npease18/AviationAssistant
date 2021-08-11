@@ -123,7 +123,7 @@ function fetchData() {
 
     if (internet_mode === 1) {
         FetchPending = $.ajax({
-            url: 'aircraft1.json',
+            url: 'data/aircraft1.json',
             timeout: 5000,
             cache: false,
             dataType: 'json'
