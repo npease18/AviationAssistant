@@ -511,6 +511,7 @@ function initialize_map() {
             new ol.control.Rotate(),
             new ol.control.Attribution({ collapsed: true }),
             new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" }),
+            new ol.control.LayerSwitcher(),
             new ol.control.FullScreen()
         ],
         loadTilesWhileAnimating: true,
