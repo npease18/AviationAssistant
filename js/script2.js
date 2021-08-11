@@ -516,3 +516,15 @@ function hsl_col_perc(percent, start, end) {
     return 'hsl(' + c + ', 100%, 50%)';
     // hsl_col_perc(bed_percent, 0, 120)
 }
+
+function toggleCesium() {
+    if (cesuim_active) {
+        ol3d.setEnabled(false);
+        cesuim_active = false
+        document.getElementById("cesium").innerHTML = "language"
+    } else {
+        ol3d.setEnabled(true);
+        cesuim_active = true
+        document.getElementById("cesium").innerHTML = "map"
+    }
+}

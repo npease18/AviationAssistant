@@ -15,6 +15,7 @@ function createBaseLayers() {
         name: 'osm',
         title: 'Street View (OSM)',
         type: 'base',
+        visible: true
     }));
 
 
@@ -22,6 +23,7 @@ function createBaseLayers() {
         name: 'bing',
         title: 'Dark Street View (Bing)',
         type: 'base',
+        visible: false,
         source: new ol.source.BingMaps({
             key: keys["Bing"],
             imagerySet: 'CanvasDark',
@@ -37,13 +39,15 @@ function createBaseLayers() {
         }),
         name: 'satellite',
         title: 'Satellite',
-        type: 'base'
+        type: 'base',
+        visible: false
     }));
 
     online.push(new ol.layer.Tile({
         name: 'bingaerial',
         title: 'Satellite with Labels (Bing)',
         type: 'base',
+        visible: false,
         source: new ol.source.BingMaps({
             key: keys['Bing'],
             imagerySet: 'AerialWithLabelsOnDemand',
@@ -73,7 +77,8 @@ function createBaseLayers() {
                 name: 'chartbundle_' + type,
                 title: chartbundleTypes[type],
                 type: 'base',
-                group: 'chartbundle'
+                group: 'chartbundle',
+                visible: false
             }));
         }
     }
@@ -84,7 +89,8 @@ function createBaseLayers() {
         }),
         name: 'offline',
         title: 'Offline Maps',
-        type: 'base'
+        type: 'base',
+        visible: false
     }));
 
     var nexrad = new ol.layer.Tile({
@@ -139,6 +145,7 @@ function createBaseLayers() {
         layers.push(new ol.layer.Group({
             name: 'Online Maps',
             title: 'Worldwide Online Maps + Overlays',
+            fold: 'open',
             layers: online
         }));
     }
@@ -146,6 +153,7 @@ function createBaseLayers() {
         layers.push(new ol.layer.Group({
             name: 'Online Aircraft Maps',
             title: 'Online Aircraft Maps',
+            fold: 'close',
             layers: aircraft
         }));
     }
@@ -154,6 +162,7 @@ function createBaseLayers() {
         layers.push(new ol.layer.Group({
             name: 'Offline Maps',
             title: 'Offline Maps',
+            fold: 'close',
             layers: offline
         }));
     }
