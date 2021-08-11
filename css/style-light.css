@@ -29,9 +29,13 @@ div#nav_bar {
 }
 
 #planes_table {
-    background-color: #BBBBBB;
     cursor: pointer;
-    height: 90%;
+}
+
+#planes_table > tr > td {
+
+    border-bottom: solid black .5px;
+    text-align: center;
 }
 
 div#itinerary_body {
