@@ -53,10 +53,10 @@ div#map_container {
 }
 
 div#subtab_buttons {
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     width: 100%;
-    padding: 2px;
+    padding: 3px;
     z-index: 1;
     background: white;
 }
