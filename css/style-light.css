@@ -52,15 +52,6 @@ div#map_container {
     height: 100%;
 }
 
-div#subtab_buttons {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    padding: 3px;
-    z-index: 1;
-    background: white;
-}
-
 .subtab_button {
     width: 25%;
 }
@@ -119,9 +110,9 @@ div#subtab_buttons>button {
 
 div#subtab_buttons {
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
-    padding: 2px;
+    padding: 5px;
     z-index: 1;
     background: white;
 }
