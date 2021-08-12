@@ -195,6 +195,24 @@ function modal3() {
             modal.style.display = "none";
         }
     }
+    modal4()
+}
+
+function modal4() {
+    var modal = document.getElementById("power_modal");
+    var btn = document.getElementById("power_button");
+    var span = document.getElementById("close_modal4");
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 function getInitialVolume() {
@@ -363,6 +381,26 @@ function sendCMD(cmd) {
         }
         xhr.send(JSON.stringify({
             command: "cd /usr/local/bin && sudo x728softsd.sh"
+        }));
+    }
+    if (cmd === "restart") {
+        var snackbarContainer = document.getElementById('no-updates-snackbar');
+        var data = {
+            message: 'Shutting Down...'
+        };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                output = xhr.response
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "cd /usr/local/bin && sudo reboot"
         }));
     }
 

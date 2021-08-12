@@ -90,6 +90,7 @@
             </div>
 
         </div>
+        
     </div>
     <div id="itinerary_page" style="display: none;">
         <div id="nav_bar">
@@ -254,7 +255,7 @@
                 <span class="space center">
                     <!-- FAB button with ripple -->
                     <button id="power_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        style="width: 40px; height: 40px; min-width: initial;" onclick="sendCMD('shutdown')">
+                        style="width: 40px; height: 40px; min-width: initial;">
                         <i class="material-icons">power_settings_new</i>
                     </button>
                 </span>
@@ -645,6 +646,38 @@
         </div>
 
         <div id="container_splitter"></div>
+        <div id="power_modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                Power Options
+                <table id="power_table">
+                    <tr>
+                        <td>
+                            <button onclick="sendCMD('shutdown')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">power_settings_new</i>
+                              </button>
+                        </td>
+                        <td>
+                            <button onclick="sendCMD('restart')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">refresh</i>
+                              </button>
+                        </td>
+                        <td>
+                            <button id="close_modal4" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">close</i>
+                              </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shutdown</td>
+                        <td>Restart</td>
+                        <td>Exit</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
     </div>
     <div id="graphs_page" style="display: none;height: 100%;">
         <div id="nav_bar">

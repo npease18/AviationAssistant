@@ -8,6 +8,22 @@ body {
     height: 100%;
 }
 
+#power_modal > .modal-content {
+    width: 50%;
+    height: 30%;
+    top: 25%;
+    left: 25%;  
+    position: absolute;
+    text-align: center;
+    line-height: 45px;
+    font-size: 18px;
+}
+
+#power_table {
+    width: 100%;
+
+}
+
 div.atc_state {
     background-color: lightgray;
     height: 20px;
@@ -31,6 +47,8 @@ div#nav_bar {
 #planes_table {
     cursor: pointer;
 }
+
+
 
 #planes_table > tr > td {
     border-bottom: solid black .5px;
