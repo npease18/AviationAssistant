@@ -77,7 +77,7 @@ function showDefault() {
 
 function volUp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -93,7 +93,7 @@ function volUp() {
 
 function volDown() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -199,7 +199,7 @@ function modal3() {
 
 function getInitialVolume() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -214,7 +214,7 @@ function getInitialVolume() {
 
 function getCPUTemp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.host+":5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -233,7 +233,7 @@ function getCPUTemp() {
 
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -251,7 +251,7 @@ function setBrightness(direction) {
         if (brightness + 5 <= 255) {
             brightness = brightness + 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -263,7 +263,7 @@ function setBrightness(direction) {
         if (brightness - 5 >= 15) {
             brightness = brightness - 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -297,7 +297,7 @@ function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -324,7 +324,7 @@ function sendCMD(cmd) {
     if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -353,7 +353,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -397,7 +397,7 @@ function changeColorMode() {
 
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         command: "sudo git checkout " + branch
