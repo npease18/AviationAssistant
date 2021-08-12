@@ -386,7 +386,7 @@ function sendCMD(cmd) {
     if (cmd === "restart") {
         var snackbarContainer = document.getElementById('no-updates-snackbar');
         var data = {
-            message: 'Shutting Down...'
+            message: 'Restarting...'
         };
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
