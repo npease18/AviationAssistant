@@ -66,6 +66,34 @@ body {
     background-color: white;
 }
 
+#power_modal > .modal-content {
+    width: 50%;
+    height: 30%;
+    top: 25%;
+    left: 25%;  
+    position: absolute;
+    text-align: center;
+    line-height: 45px;
+    font-size: 18px;
+    background-color: #000;
+}
+
+#power_table {
+    width: 100%;
+
+}
+
+#power_table > tbody > tr:nth-child(1) > td:nth-child(1) > button {
+    background-color: white;
+}
+#power_table > tbody > tr:nth-child(1) > td:nth-child(2) > button {
+    background-color: white;
+}
+
+#power_table > tbody > tr:nth-child(1) > td:nth-child(3) > button {
+    background-color: white;
+}
+
 div.atc_state {
     background-color: black;
     height: 20px;
