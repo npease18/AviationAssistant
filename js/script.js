@@ -458,6 +458,7 @@ function initialize_map() {
 
     var foundType = false;
 
+    /*
     ol.control.LayerSwitcher.forEachRecursive(layers, function(lyr) {
         if (!lyr.get('name'))
             return;
@@ -498,7 +499,7 @@ function initialize_map() {
             }
         });
     }
-
+*/
     OLMap = new ol.Map({
         target: 'map_canvas',
         layers: layers,
@@ -510,13 +511,24 @@ function initialize_map() {
             new ol.control.Rotate(),
             new ol.control.Attribution({ collapsed: true }),
             new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" }),
-            new ol.control.LayerSwitcher()
+            new ol.control.LayerSwitcher(),
+            new ol.control.FullScreen()
         ],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
-    
-    
+
+    ol3d = new olcs.OLCesium({
+        map: OLMap,
+      });
+
+      var layerSwitcher = new LayerSwitcher({
+        reverse: false,
+        groupSelectStyle: 'group',
+        activationMode: 'mouseover'
+      });
+      OLMap.addControl(layerSwitcher);
+
     // Listeners for newly created Map
     OLMap.on("moveend", function() {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
@@ -553,7 +565,7 @@ function initialize_map() {
             function(feature, layer) {
                 return feature.hex;
             },
-            null,
+            20,
             function(layer) {
                 return (layer === iconsLayer);
             },
@@ -992,6 +1004,7 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
+        document.getElementById("lock_button").disabled = false
     }
 
 
@@ -1006,6 +1019,7 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
+        document.getElementById("lock_button").disabled = false
     }
 
     if (hex !== null) {

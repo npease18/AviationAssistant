@@ -9,12 +9,15 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
 
-    <link rel="stylesheet" href="ol3/ol-3.17.1.css" type="text/css" />
-    <script src="ol3/ol-3.17.1.js" type="text/javascript"></script>
-
-    <link rel="stylesheet" href="ol3/ol3-layerswitcher.css" type="text/css" />
+    <script src="ol/ol.js"></script>
+    <link rel="stylesheet"
+        href="ol/ol.css">
+    <script src="https://cdn.jsdelivr.net/npm/cesium@1.81.0/Build/CesiumUnminified/Cesium.js" crossorigin="anonymous">
+    </script>
+    <script src="js/olcesium.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.8.3"></script>
+    <link rel="stylesheet" href="css/ol-layerswitcher.css" />
     <link rel="stylesheet" href="css/css-circular-prog-bar.css" type="text/css" />
-    <script src="ol3/ol3-layerswitcher.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/luxon.js"></script>
     <script type="text/javascript" src="js/flightinfo.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
@@ -57,23 +60,27 @@
         <input id="airframes_post_icao" type="hidden" name="ica024" value="">
         <input type="hidden" name="submit" value="submit">
     </form>
-    <div id="external_connected" class="centered" style="display: none;" onclick="document.getElementById('external_connected').style.display = 'none'">
+    <div id="external_connected" class="centered" style="display: none;"
+        onclick="document.getElementById('external_connected').style.display = 'none'">
         <img src="images/connection.png" id="external_image">
-<span id="external_title">EXTERNAL MODE ACTIVATED</span>
+        <span id="external_title">EXTERNAL MODE ACTIVATED</span>
     </div>
     <div id="home_page" style="display: none;">
         <img id="logo" src="images/light/logo.png" class="logo">
         <table class="home_table">
             <tr>
                 <td class="pointer" onclick="goRadar()"><img id="radar_image" src="images/light/radar.png"></td>
-                <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img id="itinerary_image" src="images/light/itinerary.png"></td>
+                <td class="pointer" onclick="goItinerary()" id="itinerary_button"><img id="itinerary_image"
+                        src="images/light/itinerary.png"></td>
                 <td class="pointer" onclick="goGraphs()"><img id="graphs_image" src="images/light/graphs.png"></td>
-                <td class="pointer" onclick="goSettings()"><img id="settings_image" src="images/light/settings.png"></td>
+                <td class="pointer" onclick="goSettings()"><img id="settings_image" src="images/light/settings.png">
+                </td>
             </tr>
         </table>
-        <button class="mdl-button mdl-js-button mdl-button--icon" id="info_button" style="width: 40px; height: 40px; min-width: initial;">
+        <button class="mdl-button mdl-js-button mdl-button--icon" id="info_button"
+            style="width: 40px; height: 40px; min-width: initial;">
             <i class="material-icons md-36" id="info_icon">help_outline</i>
-          </button>
+        </button>
         <div id="info_modal" class="modal">
 
             <!-- Modal content -->
@@ -83,15 +90,17 @@
             </div>
 
         </div>
+        
     </div>
     <div id="itinerary_page" style="display: none;">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
             <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()">
-              </select>
+            </select>
             <select id="itinerary_airports" name="airports" style="display: none;" onchange="airportSchedule()">
             </select> Courtesy of https://flightaware.com/
         </div>
@@ -107,7 +116,8 @@
         </div>
     </div>
     <div id="settings_page" style="display: none;">
-        <a href="javascript:goHome()"><img id="settings_logo" src="images/light/logo.png" class="settingslogo" id="fexte"></a>
+        <a href="javascript:goHome()"><img id="settings_logo" src="images/light/logo.png" class="settingslogo"
+                id="fexte"></a>
         <div id="settingstext">
             <table>
                 <tr>
@@ -126,13 +136,15 @@
                     <td><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
                             <input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="changeColorMode()">
                             <span class="mdl-switch__label"></span>
-                          </label></td>
+                        </label></td>
                 </tr>
                 <tr>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="document.getElementById('external_connected').style.display = 'block'" id="external_mode_button">
+                        <button class="mdl-button mdl-js-button mdl-button--raised"
+                            onclick="document.getElementById('external_connected').style.display = 'block'"
+                            id="external_mode_button">
                             Enable External Mode
-                          </button>
+                        </button>
                     </td>
                 </tr>
             </table>
@@ -140,31 +152,36 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                            style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
                         </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                            style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised" onclick="sendCMD('update')">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised"
+                            onclick="sendCMD('update')">
                             Check For Updates
-                          </button>
+                        </button>
                     </td>
 
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised" onclick="window.close();opener.window.focus();">
+                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised"
+                            onclick="window.close();opener.window.focus();">
                             Close Application
-                          </button>
+                        </button>
                     </td>
 
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button" onclick="changeBranch()">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="branch_button"
+                            onclick="changeBranch()">
                             Change Branch to <span id="branch_name">N/A</span>
-                          </button>
+                        </button>
                     </td>
                 </tr>
             </table>
@@ -173,63 +190,75 @@
     <div id="radar_page">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
-            <button id="internet_mode_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" onclick="toggleInternet()">
+            <button id="internet_mode_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+                onclick="toggleInternet()">
                 <i class="material-icons" id="internet_mode">router</i>
-              </button>
-            <button id="radar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openRadar()">
-				Radar
-			</button>
+            </button>
+            <button id="cesium_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+                onclick="toggleCesium()">
+                <i class="material-icons" id="cesium">language</i>
+            </button>
+            <button id="radar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button"
+                onclick="openRadar()">
+                Radar
+            </button>
             <span class="divider"></span>
             <!-- Raised button with ripple -->
-            <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openMetar()">
-				METAR
-			</button>
+            <button id="metar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button"
+                onclick="openMetar()">
+                METAR
+            </button>
             <!-- Raised button with ripple -->
-            <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button" onclick="openATC()">
-				LiveATC
-			</button>
-           
+            <button id="liveatc_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button"
+                onclick="openATC()">
+                LiveATC
+            </button>
+
             <span style="float: right;">
-                
-				<span class="space-nopad center">
-					<span id="percentage">N/A</span>
-            </span>
-            <span class="space-nopad center">
-					<span id="battery" class="material-icons" style="font-size: 36px;text-align: center;">N/A</span>
-            </span>
-            <span class="space center">
-			<!-- FAB button with ripple -->
-			<button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
-				<i class="material-icons">remove</i>
-			</button>
-			<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+
+                <span class="space-nopad center">
+                    <span id="percentage">N/A</span>
+                </span>
+                <span class="space-nopad center">
+                    <span id="battery" class="material-icons" style="font-size: 36px;text-align: center;">N/A</span>
+                </span>
+                <span class="space center">
+                    <!-- FAB button with ripple -->
+                    <button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
+                        <i class="material-icons">remove</i>
+                    </button>
+                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
 				<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
 				<span class="mdl-switch__label">Offline Mode</span>
             </label> -->
-            </span>
-            <span class="space center">
-			Volume - <span id="volume_level">N/A</span>%
-            </span>
-            <span class="space center">
-	<!-- FAB button with ripple -->
-	<button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
-		<i class="material-icons">add</i>
-	</button>
-	<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                </span>
+                <span class="space center">
+                    Volume - <span id="volume_level">N/A</span>%
+                </span>
+                <span class="space center">
+                    <!-- FAB button with ripple -->
+                    <button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
+                        <i class="material-icons">add</i>
+                    </button>
+                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
 		<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
 		<span class="mdl-switch__label">Offline Mode</span>
             </label> -->
-            </span>
+                </span>
 
-            <span class="space center">
-					<!-- FAB button with ripple -->
-					<button id="power_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="sendCMD('shutdown')">
-						<i class="material-icons">power_settings_new</i>
-					</button>
-				</span>
+                <span class="space center">
+                    <!-- FAB button with ripple -->
+                    <button id="power_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        style="width: 40px; height: 40px; min-width: initial;">
+                        <i class="material-icons">power_settings_new</i>
+                    </button>
+                </span>
             </span>
         </div>
 
@@ -285,15 +314,18 @@
                                 <tr class="infoblock_heading">
                                     <td colspan="2">
                                         <b>
-										<span id="selected_callsign" onclick="toggleFollowSelected();" class="pointer">n/a</span>
-									</b>
-                                        <span id="selected_follow" onclick="toggleFollowSelected();" class="pointer">&#x21D2;</span>
+                                            <span id="selected_callsign" onclick="toggleFollowSelected();"
+                                                class="pointer">n/a</span>
+                                        </b>
+                                        <span id="selected_follow" onclick="toggleFollowSelected();"
+                                            class="pointer">&#x21D2;</span>
 
                                         <span id="selected_flag">
-										<img style="width: 20px; height=12px" src="about:blank" alt="Flag">
-									</span>
+                                            <img style="width: 20px; height=12px" src="about:blank" alt="Flag">
+                                        </span>
 
-                                        <a href="http://www.airframes.org/" onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
+                                        <a href="http://www.airframes.org/"
+                                            onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
                                             <span id="selected_icao"></span>
                                         </a>
                                         <span id="selected_registration"></span>
@@ -330,6 +362,7 @@
                                     <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
                                 </tr>
                             </table>
+                            <button id="lock_button" onclick="lockPlane()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
                         </div>
                         <!-- selected_infoblock -->
 
@@ -342,13 +375,15 @@
                                             <!-- column for flag image -->
                                         </td>
                                         <td id="flight" onclick="sortByFlight();">Flight</td>
-                                        <td id="squawk" onclick="sortBySquawk();" style="text-align: right">Squawk</td>
-                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: right">Altitude</td>
-                                        <td id="speed" onclick="sortBySpeed();" style="text-align: right">Speed</td>
-                                        <td id="distance" onclick="sortByDistance();" style="text-align: right">Distance</td>
-                                        <td id="track" onclick="sortByTrack();" style="text-align: right">Track</td>
-                                        <td id="msgs" onclick="sortByMsgs();" style="text-align: right">Msgs</td>
-                                        <td id="seen" onclick="sortBySeen();" style="text-align: right">Age</td>
+                                        <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
+                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: center">Altitude
+                                        </td>
+                                        <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
+                                        <td id="distance" onclick="sortByDistance();" style="text-align: center">Distance
+                                        </td>
+                                        <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
+                                        <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
+                                        <td id="seen" onclick="sortBySeen();" style="text-align: center">Age</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -356,23 +391,26 @@
                                         <td>ICAO</td>
                                         <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
                                         <td>FLIGHT</td>
-                                        <td style="text-align: right">SQUAWK</td>
-                                        <td style="text-align: right">ALTITUDE</td>
-                                        <td style="text-align: right">SPEED</td>
-                                        <td style="text-align: right">DISTANCE</td>
-                                        <td style="text-align: right">TRACK</td>
-                                        <td style="text-align: right">MSGS</td>
-                                        <td style="text-align: right">SEEN</td>
+                                        <td style="text-align: center">SQUAWK</td>
+                                        <td style="text-align: center">ALTITUDE</td>
+                                        <td style="text-align: center">SPEED</td>
+                                        <td style="text-align: center">DISTANCE</td>
+                                        <td style="text-align: center">TRACK</td>
+                                        <td style="text-align: center">MSGS</td>
+                                        <td style="text-align: center">SEEN</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <br><br><br>
                         </div>
                         <!-- planes_table -->
 
                     </div>
                     <div id="radar_flight_tab" style="display: none;">
                         <div id="radar_flight_info" style="display: none;"><br>
-                            <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span id="flight_flightnum" style="font-size: 28px;">Number</span><span style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
+                            <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span
+                                id="flight_flightnum" style="font-size: 28px;">Number</span><span
+                                style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
                             <br><br>
                             <i><span id="flight_status" style="font-size: 20px;">En Route</span></i><br><br>
                             <table style="width: 100%">
@@ -383,8 +421,10 @@
                                         <span id="flight_airport_loc_origin" style="font-size: 14px;">N/A</span>
                                     </td>
                                     <td style="text-align: right">
-                                        <span id="flight_airport_short_destination" style="font-size: 30px;">N/A</span><br>
-                                        <span id="flight_airport_long_destination" style="font-size: 16px;">N/A</span><br>
+                                        <span id="flight_airport_short_destination"
+                                            style="font-size: 30px;">N/A</span><br>
+                                        <span id="flight_airport_long_destination"
+                                            style="font-size: 16px;">N/A</span><br>
                                         <span id="flight_airport_loc_destination" style="font-size: 14px;">N/A</span>
                                     </td>
                                 </tr>
@@ -393,29 +433,34 @@
                                 <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
                                 <table style="width: 100%">
                                     <tr>
-                                        <td style="text-align: left;" id="flight_depart_time" style="font-size: 10px;width: 50%;">
+                                        <td style="text-align: left;" id="flight_depart_time"
+                                            style="font-size: 10px;width: 50%;">
                                             Depart Time
                                         </td>
-                                        <td style="text-align: right;" id="flight_arrival_time" style="font-size: 10px;width: 50%;">
+                                        <td style="text-align: right;" id="flight_arrival_time"
+                                            style="font-size: 10px;width: 50%;">
                                             Arrival Time
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;" style="font-size: 10px;">
-                                            Terminal / Gate:<br><span id="flight_depart_terminal"></span><span id="flight_depart_gate"></span>
+                                            Terminal / Gate:<br><span id="flight_depart_terminal"></span><span
+                                                id="flight_depart_gate"></span>
                                         </td>
 
                                         <td style="text-align: right;" style="font-size: 10px;">
-                                            Terminal / Gate:<br><span id="flight_arrival_terminal"></span><span id="flight_arrival_gate"></span>
+                                            Terminal / Gate:<br><span id="flight_arrival_terminal"></span><span
+                                                id="flight_arrival_gate"></span>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                             <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
                                 More Flight Information
-                              </button>
+                            </button>
                         </div>
-                        <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+                        </div>
                         <div id="image_modal" class="modal">
 
                             <!-- Modal content -->
@@ -476,9 +521,10 @@
                             </table>
                             <button class="mdl-button mdl-js-button mdl-button--raised" id="aircraft_button">
                                 More Information
-                              </button>
+                            </button>
                         </div>
-                        <div id="radar_aircraft_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <div id="radar_aircraft_loading"
+                            class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         <div id="aircraft_modal" class="modal">
 
                             <!-- Modal content -->
@@ -503,15 +549,18 @@
 
                 </div>
                 <div id="subtab_buttons">
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
                         Radar
-                      </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
                         Flight
-                      </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button" id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
+                        id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
                         Aircraft
-                      </button>
+                    </button>
                 </div>
 
             </div>
@@ -574,7 +623,7 @@
                 <div id="atc_radio">
                     <h4 id="atc_title">No feed selected</h4>
                     <audio id="player" controls>
-						<source type="audio/mpeg">
+                        <source type="audio/mpeg">
                     </audio>
                     <hr>
                 </div>
@@ -588,7 +637,8 @@
         <!-- sidebar_container -->
 
         <div id="SpecialSquawkWarning" class="hidden">
-            <b>Squawk 7x00 is reported and shown.</b><br> This is most likely an error in receiving or decoding.<br> Please do not call the local authorities, they already know about it if it is a valid squawk.
+            <b>Squawk 7x00 is reported and shown.</b><br> This is most likely an error in receiving or decoding.<br>
+            Please do not call the local authorities, they already know about it if it is a valid squawk.
         </div>
 
         <div id="update_error" class="hidden">
@@ -597,11 +647,44 @@
         </div>
 
         <div id="container_splitter"></div>
+        <div id="power_modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                Power Options
+                <table id="power_table">
+                    <tr>
+                        <td>
+                            <button onclick="sendCMD('shutdown')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">power_settings_new</i>
+                              </button>
+                        </td>
+                        <td>
+                            <button onclick="sendCMD('restart')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">refresh</i>
+                              </button>
+                        </td>
+                        <td>
+                            <button id="close_modal4" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">close</i>
+                              </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shutdown</td>
+                        <td>Restart</td>
+                        <td>Exit</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
     </div>
     <div id="graphs_page" style="display: none;height: 100%;">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
             <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
@@ -621,12 +704,14 @@
         </div>
         <div id="graphs_body">
             <img src="" id="graphs_holder" class="graphs"><br>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs" onclick="changeGraph(0)" disabled>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs"
+                onclick="changeGraph(0)" disabled>
                 <i class="material-icons">arrow_back_ios</i>
-              </button>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs" onclick="changeGraph(1)">
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs"
+                onclick="changeGraph(1)">
                 <i class="material-icons">arrow_forward_ios</i>
-              </button>
+            </button>
 
         </div>
     </div>

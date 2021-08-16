@@ -1,5 +1,5 @@
 function playPLS(url, title) {
-    const proxyurl = "http://127.0.0.1:7000/";
+    const proxyurl = "http://"+window.location.hostname+":7000/";
     var request = $.ajax({
         url: 'json/liveatc.json',
         timeout: 5000,
