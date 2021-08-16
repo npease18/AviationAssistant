@@ -311,6 +311,10 @@ function offlineToggle() {
 
 }
 
+function lockPlane() {
+    selectPlaneByHex(SelectedPlane, true);
+}
+
 function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
