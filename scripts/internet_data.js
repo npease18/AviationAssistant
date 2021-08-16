@@ -90,7 +90,6 @@ function changeTime() {
   });
 }
 
-getData()
 setInterval(function () {
   getData()
 }, 10000);
