@@ -77,7 +77,7 @@ function showDefault() {
 
 function volUp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -93,7 +93,7 @@ function volUp() {
 
 function volDown() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -108,7 +108,7 @@ function volDown() {
 
 function changeMapBounds(btm_left, top_right) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:8000/internet", true);
+    xhr.open("POST", "http://"+window.location.hostname+":8000/internet", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -195,11 +195,29 @@ function modal3() {
             modal.style.display = "none";
         }
     }
+    modal4()
+}
+
+function modal4() {
+    var modal = document.getElementById("power_modal");
+    var btn = document.getElementById("power_button");
+    var span = document.getElementById("close_modal4");
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 function getInitialVolume() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/audio", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -214,7 +232,7 @@ function getInitialVolume() {
 
 function getCPUTemp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -233,7 +251,7 @@ function getCPUTemp() {
 
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -251,7 +269,7 @@ function setBrightness(direction) {
         if (brightness + 5 <= 255) {
             brightness = brightness + 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -263,7 +281,7 @@ function setBrightness(direction) {
         if (brightness - 5 >= 15) {
             brightness = brightness - 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/brightness", true);
+            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -293,11 +311,16 @@ function offlineToggle() {
 
 }
 
+function lockPlane() {
+    selectPlaneByHex(SelectedPlane, true);
+    document.getElementById("lock_button").disabled = true
+}
+
 function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -324,7 +347,7 @@ function sendCMD(cmd) {
     if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -353,7 +376,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -363,6 +386,26 @@ function sendCMD(cmd) {
         }
         xhr.send(JSON.stringify({
             command: "cd /usr/local/bin && sudo x728softsd.sh"
+        }));
+    }
+    if (cmd === "restart") {
+        var snackbarContainer = document.getElementById('no-updates-snackbar');
+        var data = {
+            message: 'Restarting...'
+        };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        var output = ""
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                output = xhr.response
+            }
+        }
+        xhr.send(JSON.stringify({
+            command: "cd /usr/local/bin && sudo reboot"
         }));
     }
 
@@ -397,7 +440,7 @@ function changeColorMode() {
 
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         command: "sudo git checkout " + branch
@@ -466,7 +509,7 @@ function radarAircraftTabSwitch() {
 
 function changeGraphsTime() {
     var time = document.getElementById("graphs_time").value
-    document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+    document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
 }
 
 function changeGraph(direction) {
@@ -474,11 +517,11 @@ function changeGraph(direction) {
     var time = document.getElementById("graphs_time").value
     if (direction && starting_graph != graph_types.length - 1) {
         starting_graph++
-        document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     } else if (starting_graph != 0) {
         starting_graph = starting_graph - 1
-        document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     }
 
@@ -515,4 +558,16 @@ function hsl_col_perc(percent, start, end) {
     // Return a CSS HSL string
     return 'hsl(' + c + ', 100%, 50%)';
     // hsl_col_perc(bed_percent, 0, 120)
+}
+
+function toggleCesium() {
+    if (cesuim_active) {
+        ol3d.setEnabled(false);
+        cesuim_active = false
+        document.getElementById("cesium").innerHTML = "language"
+    } else {
+        ol3d.setEnabled(true);
+        cesuim_active = true
+        document.getElementById("cesium").innerHTML = "map"
+    }
 }
