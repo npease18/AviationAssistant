@@ -1004,6 +1004,7 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
+        document.getElementById("lock_button").disabled = false
     }
 
 
@@ -1018,6 +1019,7 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
+        document.getElementById("lock_button").disabled = false
     }
 
     if (hex !== null) {

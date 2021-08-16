@@ -313,6 +313,7 @@ function offlineToggle() {
 
 function lockPlane() {
     selectPlaneByHex(SelectedPlane, true);
+    document.getElementById("lock_button").disabled = true
 }
 
 function sendCMD(cmd) {
