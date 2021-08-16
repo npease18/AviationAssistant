@@ -565,7 +565,7 @@ function initialize_map() {
             function(feature, layer) {
                 return feature.hex;
             },
-            10,
+            20,
             function(layer) {
                 return (layer === iconsLayer);
             },
