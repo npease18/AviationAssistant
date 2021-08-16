@@ -21,7 +21,15 @@ body {
 
 #power_table {
     width: 100%;
+}
 
+#lock_button {
+    position: relative;
+    left: 70%;
+    top: -70px;
+    z-index: 1;
+    line-height: 0%;
+    margin-bottom: -80px;
 }
 
 div.atc_state {
