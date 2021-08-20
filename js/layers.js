@@ -10,13 +10,15 @@ function createBaseLayers() {
     var offline = [];
     var aircraft = [];
 
-    online.push(new ol.layer.Tile({
+    var lightMODE = new ol.layer.Tile({
         source: new ol.source.OSM(),
         name: 'osm',
         title: 'Street View (OSM)',
         type: 'base',
         visible: true
-    }));
+    })
+
+    online.push(lightMODE);
 
 
     online.push(new ol.layer.Tile({
