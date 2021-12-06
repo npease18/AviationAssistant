@@ -36,6 +36,12 @@ body {
     padding-left: 2px;
 }
 
+#audioControl {
+    position: absolute;
+    right: 25px;
+    top: 30px;
+}
+
 div.atc_state {
     background-color: #ffffffa6;
     height: 20px;

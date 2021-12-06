@@ -623,9 +623,12 @@
                 <div id="atc_radio">
                     <h4 id="atc_title">No feed selected</h4>
                     <span id="atc_location"></span><br><br>
-                    <audio id="player" controls>
+                    <audio id="player">
                         <source type="audio/mpeg">
                     </audio>
+                    <button id="audioControl" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="playPause()" style="display: none;">
+                        <i class="material-icons" id="audioControl_icon">pause</i>
+                      </button>
                     <hr>
                 </div>
 
