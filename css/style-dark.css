@@ -18,6 +18,10 @@ body {
     cursor: pointer;
 }
 
+#metar_loading {
+    top: 4px;
+}
+
 #liveatc_button {
     color: white;
 }
@@ -95,11 +99,14 @@ body {
 }
 
 div.atc_state {
-    background-color: black;
+    background-color: #000;
     height: 20px;
-    border: 2px solid white;
+    border: 1px solid white;
     padding: 4px;
+    padding-left: 10px;
     margin: 4px;
+    border-radius: 25px;
+    text-decoration: none;
 }
 
 #branch_button {
