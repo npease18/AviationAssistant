@@ -10,8 +10,7 @@
     <script src="js/jquery-ui.min.js"></script>
 
     <script src="ol/ol.js"></script>
-    <link rel="stylesheet"
-        href="ol/ol.css">
+    <link rel="stylesheet" href="ol/ol.css">
     <script src="https://cdn.jsdelivr.net/npm/cesium@1.81.0/Build/CesiumUnminified/Cesium.js" crossorigin="anonymous">
     </script>
     <script src="js/olcesium.js"></script>
@@ -90,7 +89,7 @@
             </div>
 
         </div>
-        
+
     </div>
     <div id="itinerary_page" style="display: none;">
         <div id="nav_bar">
@@ -362,7 +361,8 @@
                                     <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
                                 </tr>
                             </table>
-                            <button id="lock_button" onclick="lockPlane()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
+                            <button id="lock_button" onclick="lockPlane()"
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
                         </div>
                         <!-- selected_infoblock -->
 
@@ -376,10 +376,12 @@
                                         </td>
                                         <td id="flight" onclick="sortByFlight();">Flight</td>
                                         <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
-                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: center">Altitude
+                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: center">
+                                            Altitude
                                         </td>
                                         <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
-                                        <td id="distance" onclick="sortByDistance();" style="text-align: center">Distance
+                                        <td id="distance" onclick="sortByDistance();" style="text-align: center">
+                                            Distance
                                         </td>
                                         <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
                                         <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
@@ -622,13 +624,14 @@
             <div id="atc_container" style="display: none">
                 <div id="atc_radio">
                     <h4 id="atc_title">No feed selected</h4>
-                    <span id="atc_location"></span><br><br>
+                    <span id="atc_location" style="display: none;"></span><br id="atc_spacer" style="display: none;"><br id="atc_spacer" style="display: none;">
                     <audio id="player">
                         <source type="audio/mpeg">
                     </audio>
-                    <button id="audioControl" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="playPause()" style="display: none;">
+                    <button id="audioControl" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        onclick="playPause()" style="display: none;">
                         <i class="material-icons" id="audioControl_icon">pause</i>
-                      </button>
+                    </button>
                     <hr>
                 </div>
 
@@ -659,19 +662,22 @@
                 <table id="power_table">
                     <tr>
                         <td>
-                            <button onclick="sendCMD('shutdown')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                            <button onclick="sendCMD('shutdown')"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
                                 <i class="material-icons">power_settings_new</i>
-                              </button>
+                            </button>
                         </td>
                         <td>
-                            <button onclick="sendCMD('restart')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                            <button onclick="sendCMD('restart')"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
                                 <i class="material-icons">refresh</i>
-                              </button>
+                            </button>
                         </td>
                         <td>
-                            <button id="close_modal4" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                            <button id="close_modal4"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
                                 <i class="material-icons">close</i>
-                              </button>
+                            </button>
                         </td>
                     </tr>
                     <tr>

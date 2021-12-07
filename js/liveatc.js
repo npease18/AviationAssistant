@@ -1,6 +1,8 @@
 function playPLS(url, title) {
+    document.getElementById("atc_spacer").style.display = "block"
     document.getElementById("audioControl").style.display = "block"
     document.getElementById("atc_location").innerHTML = ""
+    document.getElementById("atc_location").style.display = "block"
     document.getElementById("atc_title").innerHTML = ""
     document.getElementById("atc_title").innerHTML = title
     var airport = $("#atc_airport_code").text()
