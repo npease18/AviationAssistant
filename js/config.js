@@ -9,7 +9,7 @@
 var keys = {}
     // API Keys
 var xhr = new XMLHttpRequest();
-xhr.open("GET", "tiles/keys.json", true);
+xhr.open("GET", "json/keys.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
