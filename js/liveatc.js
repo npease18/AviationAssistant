@@ -1,22 +1,47 @@
 function playPLS(url, title) {
-    const proxyurl = "http://"+window.location.hostname+":7000/";
-    var request = $.ajax({
-        url: 'json/liveatc.json',
-        timeout: 5000,
-        cache: true,
-        dataType: 'json'
-    });
-    request.done(function(data) {
-        fetch(proxyurl + 'http://www.liveatc.net' + url, { mode: 'cors' })
-            .then(response => response.text())
-            .then(native => native.split('\n'))
-            .then(split => split[1])
-            .then(data => data.substring(6, data.length))
-            .then(url => document.getElementById("player").setAttribute("src", url))
-            .then(dat => document.getElementById("player").load())
-            .then(dat => document.getElementById("atc_title").innerHTML = title)
-            .then(dat => document.getElementById("player").play())
+    document.getElementById("atc_spacer").style.display = "block"
+    document.getElementById("audioControl").style.display = "block"
+    document.getElementById("atc_location").innerHTML = ""
+    document.getElementById("atc_location").style.display = "block"
+    document.getElementById("atc_title").innerHTML = ""
+    document.getElementById("atc_title").innerHTML = title
+    var airport = $("#atc_airport_code").text()
+    $.getJSON('json/world_airports.json', function (world_airports) {
+        var city = world_airports[airport].city
+        var state = world_airports[airport].state
+        document.getElementById("atc_location").innerHTML = city + ", " + state
+        const proxyurl = "http://" + window.location.hostname + ":7000/";
+        var request = $.ajax({
+            url: 'json/liveatc.json',
+            timeout: 5000,
+            cache: true,
+            dataType: 'json'
+        });
+        request.done(function (data) {
+            fetch(proxyurl + 'http://www.liveatc.net' + url, {
+                    mode: 'cors'
+                })
+                .then(response => response.text())
+                .then(native => native.split('\n'))
+                .then(split => split[1])
+                .then(data => data.substring(6, data.length))
+                .then(url => document.getElementById("player").setAttribute("src", url))
+                .then(dat => document.getElementById("player").load())
+                .then(dat => document.getElementById("player").play())
+        })
     })
+
+}
+
+function playPause() {
+    var text = document.getElementById("audioControl_icon").innerHTML
+    if (text === "play_arrow") {
+        document.getElementById("player").play()
+        document.getElementById("audioControl_icon").innerHTML = "pause"
+    } else if (text === "pause") {
+        document.getElementById("player").pause()
+        document.getElementById("audioControl_icon").innerHTML = "play_arrow"
+    }
 }
 /*
 function playPLS(url, title) {
@@ -48,7 +73,7 @@ function listStations() {
         cache: true,
         dataType: 'json'
     });
-    request.done(function(data) {
+    request.done(function (data) {
         for (state in data) {
             var node = document.createElement("div")
             node.setAttribute("id", "atc_" + state)
@@ -86,7 +111,7 @@ function selectState(state) {
         cache: true,
         dataType: 'json'
     });
-    request.done(function(data) {
+    request.done(function (data) {
         data = data[state].airports
         for (airport in data) {
             if (data[airport].feeds === 'ERROR') {
@@ -123,7 +148,7 @@ function selectAirport(airport, state) {
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + airport)
     node.setAttribute("class", "atc_state noselect")
-    node.innerHTML = "<b>" + airport + "</b>"
+    node.innerHTML = "<b id='atc_airport_code'>" + airport + "</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("hr")
     document.getElementById("atc_selector").appendChild(node)
@@ -133,7 +158,7 @@ function selectAirport(airport, state) {
         cache: true,
         dataType: 'json'
     });
-    request.done(function(data) {
+    request.done(function (data) {
         data = data[state].airports[airport].feeds
         for (airport in data) {
             var node = document.createElement("div")
@@ -150,7 +175,7 @@ function selectAirport(airport, state) {
     })
 }
 
-//DEPRACATED
+//DEPRACATED - NOT USED - GENERATES FILE
 function startPulling() {
     var json = {}
 
@@ -160,14 +185,14 @@ function startPulling() {
         cache: false,
         dataType: 'json',
     });
-    FetchPending.done(function(data) {
+    FetchPending.done(function (data) {
         var us_airports = data
         for (state in us_airports) {
             for (airport in us_airports[state].airports) {
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onreadystatechange = function() {
+                xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         console.log(xhr.response)
                         let a = $(data);
