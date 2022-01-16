@@ -264,6 +264,8 @@ function readBrightnessLevel() {
     }));
 }
 
+
+
 function setBrightness(direction) {
     if (direction === "up") {
         if (brightness + 5 <= 255) {

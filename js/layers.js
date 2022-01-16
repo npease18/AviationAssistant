@@ -61,11 +61,15 @@ function createBaseLayers() {
 
     online.push(new ol.layer.Vector({
         title: 'World Airports',
+        visible: false,
         source: new ol.source.Vector({
            url: 'json/wa_geojson.json',
            format: new ol.format.GeoJSON()
         })
     }))
+
+    
+
 
     if (ChartBundleLayers) {
         var chartbundleTypes = {
