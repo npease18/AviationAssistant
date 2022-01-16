@@ -2,72 +2,10 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: #000000;
-    color: white;
+    background-color: #ffffff;
     font-family: Tahoma, Sans-Serif;
     font-size: 10pt;
     height: 100%;
-}
-
-#map_container {
-    color: black
-}
-
-#planes_table {
-    background-color: black;
-    cursor: pointer;
-}
-
-#metar_loading {
-    top: 4px;
-}
-
-#liveatc_button {
-    color: white;
-}
-
-#metar_button {
-    color: white;
-}
-
-#radar_button {
-    color: white;
-}
-
-#radar_flight_tab_button {
-    color: white;
-}
-
-#radar_aircraft_tab_button {
-    color: white;
-}
-
-#radar_radar_tab_button {
-    color: white;
-}
-
-#vol_down_button {
-    background-color: white;
-}
-
-#power_button {
-    background-color: white;
-}
-
-#vol_up_button {
-    background-color: white;
-}
-
-#home_button {
-    background-color: white;
-}
-
-#internet_mode_button {
-    background-color: white;
-}
-
-#cesium_button {
-    background-color: white;
 }
 
 #power_modal > .modal-content {
@@ -79,38 +17,41 @@ body {
     text-align: center;
     line-height: 45px;
     font-size: 18px;
-    background-color: #000;
 }
 
 #power_table {
     width: 100%;
-
 }
 
-#power_table > tbody > tr:nth-child(1) > td:nth-child(1) > button {
-    background-color: white;
-}
-#power_table > tbody > tr:nth-child(1) > td:nth-child(2) > button {
-    background-color: white;
+#lock_button {
+    position: relative;
+    left: 70%;
+    top: -70px;
+    z-index: 1;
+    line-height: 0%;
+    margin-bottom: -80px;
 }
 
-#power_table > tbody > tr:nth-child(1) > td:nth-child(3) > button {
-    background-color: white;
+#atc_title, #atc_location {
+    padding-left: 2px;
+}
+
+#audioControl {
+    position: absolute;
+    right: 25px;
+    top: 30px;
 }
 
 div.atc_state {
-    background-color: #000;
+    background-color: #ffffffa6;
     height: 20px;
-    border: 1px solid white;
+    border: 1px solid black;
     padding: 4px;
     padding-left: 10px;
     margin: 4px;
     border-radius: 25px;
     text-decoration: none;
-}
-
-#branch_button {
-    background-color: white;
+    
 }
 
 div#nav_bar {
@@ -119,13 +60,22 @@ div#nav_bar {
     left: 0px;
     width: 100%;
     height: 40px;
-    border-bottom: 2px solid white;
+    border: 2px solid black;
     padding: 5px;
     z-index: 1;
-    background: black;
-    color: white;
+    background: white;
 }
 
+#planes_table {
+    cursor: pointer;
+}
+
+
+
+#planes_table > tr > td {
+    border-bottom: solid black .5px;
+    text-align: center;
+}
 
 div#itinerary_body {
     position: absolute;
@@ -145,7 +95,6 @@ div#map_container {
     width: 100%;
     height: 100%;
 }
-
 
 .subtab_button {
     width: 25%;
@@ -209,7 +158,7 @@ div#subtab_buttons {
     width: 100%;
     padding: 5px;
     z-index: 1;
-    background: black;
+    background: white;
 }
 
 div#map_canvas {
@@ -256,11 +205,6 @@ div#sidebar_container {
     margin: auto;
     width: fit-content;
     display: inline-block;
-}
-
-#planes_table > tr > td {
-    border-bottom: solid white .5px;
-    text-align: center;
 }
 
 .space-nopad {
@@ -393,8 +337,6 @@ div#loader {
 
 .plane_table_row {
     cursor: pointer;
-    border: white;
-    background-color: black;
 }
 
 .hidden {
@@ -610,7 +552,6 @@ td#seen {
     position: relative;
     left: 50%;
     right: 50%;
-    background-color: white;
 }
 
 #settingstext>table>tbody>tr>td {
@@ -662,7 +603,7 @@ td#seen {
 }
 
 .airportBoard {
-    border: white solid 2px;
+    border: black solid 2px;
 }
 
 #aircraft_image1 {
@@ -688,6 +629,10 @@ td#seen {
     position: absolute;
     left: 56%;
     bottom: 12%;
+}
+
+#metar_loading {
+    top: 4px;
 }
 
 #itinerary_loading {
@@ -834,3 +779,4 @@ td#seen {
     100% {
         opacity: 0;
     }
+}

@@ -425,11 +425,11 @@ function changeColorMode() {
         document.getElementById("graphs_image").setAttribute("src", "images/dark/graphs.png")
         document.getElementById("settings_image").setAttribute("src", "images/dark/settings.png")
         document.getElementById("settings_logo").setAttribute("src", "images/dark/logo.png")
-        themeStylesheet.href = 'css/style-dark.css'
+        themeStylesheet.href = 'css/ui1-dark.css'
         // themeToggle.innerText = 'Switch to light mode'
     } else {
         // if it's dark -> go light
-        themeStylesheet.href = 'css/style-light.css'
+        themeStylesheet.href = 'css/ui1-light.css'
         document.getElementById("logo").setAttribute("src", "images/light/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/light/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/light/itinerary.png")
