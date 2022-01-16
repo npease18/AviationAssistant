@@ -10,13 +10,15 @@ function createBaseLayers() {
     var offline = [];
     var aircraft = [];
 
-    online.push(new ol.layer.Tile({
+    var lightMODE = new ol.layer.Tile({
         source: new ol.source.OSM(),
         name: 'osm',
         title: 'Street View (OSM)',
         type: 'base',
         visible: true
-    }));
+    })
+
+    online.push(lightMODE);
 
 
     online.push(new ol.layer.Tile({
@@ -56,6 +58,19 @@ function createBaseLayers() {
             maxZoom: 19
         }),
     }));
+
+    online.push(new ol.layer.Vector({
+        title: 'World Airports',
+        visible: false,
+        source: new ol.source.Vector({
+           url: 'json/wa_geojson.json',
+           format: new ol.format.GeoJSON()
+        })
+    }))
+
+    
+
+
     if (ChartBundleLayers) {
         var chartbundleTypes = {
             sec: "Sectional Charts",
