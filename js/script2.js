@@ -77,7 +77,7 @@ function showDefault() {
 
 function volUp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -93,7 +93,7 @@ function volUp() {
 
 function volDown() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -108,7 +108,7 @@ function volDown() {
 
 function changeMapBounds(btm_left, top_right) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":8000/internet", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":8000/internet", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -217,7 +217,7 @@ function modal4() {
 
 function getInitialVolume() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -232,7 +232,7 @@ function getInitialVolume() {
 
 function getCPUTemp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -251,7 +251,7 @@ function getCPUTemp() {
 
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -271,7 +271,7 @@ function setBrightness(direction) {
         if (brightness + 5 <= 255) {
             brightness = brightness + 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+            xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -283,7 +283,7 @@ function setBrightness(direction) {
         if (brightness - 5 >= 15) {
             brightness = brightness - 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+            xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -322,7 +322,7 @@ function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -349,7 +349,7 @@ function sendCMD(cmd) {
     if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -378,7 +378,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -398,7 +398,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -415,24 +415,31 @@ function sendCMD(cmd) {
 }
 
 function tabBackgroundImage() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var page_nodes = $($.parseHTML(xhr.response));
-            var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
-            if (img1.attr('src') !== undefined) {
-            document.getElementById("aircraft_tab_background").setAttribute('src', img1.attr('src'))
-            } else {
-                document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+    if (Planes[SelectedPlane].registration !== null) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                var page_nodes = $($.parseHTML(xhr.response));
+                var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+                if (img1.attr('src') !== undefined) {
+                    document.getElementById("aircraft_tab_background").setAttribute('src', img1.attr('src'))
+                    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+                } else {
+                    document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+                    document.getElementById("sidebar_close").style.color = "rgba(255,255,255,.7)"
+                }
+                return
             }
-            return
         }
+        xhr.send(JSON.stringify({
+            command: "curl https://www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration
+        }));
+    } else {
+        document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+        document.getElementById("sidebar_close").style.color = "rgba(255,255,255,.7)"
     }
-    xhr.send(JSON.stringify({
-        command: "curl https://www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration
-    }));
 }
 
 function expandSidebar() {
@@ -449,7 +456,7 @@ function changeColorMode() {
     const themeStylesheet = document.getElementById('theme')
     //const themeToggle = document.getElementById('theme-toggle')
     if (themeStylesheet.href.includes('light')) {
-        
+
         document.getElementById("logo").setAttribute("src", "images/dark/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/dark/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/dark/itinerary.png")
@@ -473,7 +480,7 @@ function changeColorMode() {
 
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         command: "sudo git checkout " + branch
@@ -542,7 +549,7 @@ function radarAircraftTabSwitch() {
 
 function changeGraphsTime() {
     var time = document.getElementById("graphs_time").value
-    document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+    document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
 }
 
 function changeGraph(direction) {
@@ -550,11 +557,11 @@ function changeGraph(direction) {
     var time = document.getElementById("graphs_time").value
     if (direction && starting_graph != graph_types.length - 1) {
         starting_graph++
-        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     } else if (starting_graph != 0) {
         starting_graph = starting_graph - 1
-        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     }
 

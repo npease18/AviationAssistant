@@ -23,6 +23,7 @@ var ol3d
 var cesuim_active = false
 var internet_mode = 0
 
+
 var country_names = {}
 var xhr1 = new XMLHttpRequest();
 xhr1.open("GET", "json/country_names.json", true);
