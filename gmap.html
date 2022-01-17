@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
-    <link id="theme" rel="stylesheet" type="text/css" href="css/ui1-light.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="css/ui2-light.css" />
     <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
@@ -14,7 +14,7 @@
     <script src="js/Cesium.js" crossorigin="anonymous">
     </script>
     <script src="js/olcesium.js"></script>
-    <script src="https://unpkg.com/ol-layerswitcher@3.8.3"></script>
+    <script src="js/ol-layerswitcher.js"></script>
     <link rel="stylesheet" href="css/ol-layerswitcher.css" />
     <link rel="stylesheet" href="css/css-circular-prog-bar.css" type="text/css" />
     <script type="text/javascript" src="js/luxon.js"></script>
@@ -189,18 +189,19 @@
     <div id="radar_page">
         <div id="nav_bar">
             <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--icon"
                 style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
-            <button id="internet_mode_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
-                onclick="toggleInternet()">
+            <button id="internet_mode_button" class="mdl-button mdl-js-button mdl-button--icon"
+                style="width: 40px; height: 40px; min-width: initial;" onclick="toggleInternet()">
                 <i class="material-icons" id="internet_mode">router</i>
             </button>
-            <button id="cesium_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+            <!-- <button id="cesium_button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
                 onclick="toggleCesium()">
                 <i class="material-icons" id="cesium">language</i>
-            </button>
+            </button> 
+        -->
             <button id="radar_button" class="mdl-button mdl-js-button mdl-js-ripple-effect nav-button"
                 onclick="openRadar()">
                 Radar
@@ -220,44 +221,30 @@
             <span style="float: right;">
 
                 <span class="space-nopad center">
-                    <span id="percentage">N/A</span>
+                    <span id="percentage"></span>
                 </span>
                 <span class="space-nopad center">
-                    <span id="battery" class="material-icons" style="font-size: 36px;text-align: center;">N/A</span>
+                    <span id="battery" class="material-icons" style="font-size: 36px;text-align: center;"></span>
                 </span>
-                <span class="space center">
-                    <!-- FAB button with ripple -->
-                    <button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
-                        <i class="material-icons">remove</i>
-                    </button>
-                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-				<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
-				<span class="mdl-switch__label">Offline Mode</span>
-            </label> -->
-                </span>
-                <span class="space center">
-                    Volume - <span id="volume_level">N/A</span>%
-                </span>
-                <span class="space center">
-                    <!-- FAB button with ripple -->
-                    <button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
-                        <i class="material-icons">add</i>
-                    </button>
-                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-		<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="toggleOffline()">
-		<span class="mdl-switch__label">Offline Mode</span>
-            </label> -->
-                </span>
+                <!-- FAB button with ripple -->
+                <button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
+                    <i class="material-icons">remove</i>
+                </button>
+                <span id="volume_text">Volume - <span id="volume_level"></span>%</span>
+                <!-- FAB button with ripple -->
+                <button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
+                    <i class="material-icons">add</i>
+                </button>
 
-                <span class="space center">
-                    <!-- FAB button with ripple -->
-                    <button id="power_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        style="width: 40px; height: 40px; min-width: initial;">
-                        <i class="material-icons">power_settings_new</i>
-                    </button>
-                </span>
+
+                <!-- FAB button with ripple -->
+                <button id="power_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;">
+                    <i class="material-icons">power_settings_new</i>
+                </button>
+
             </span>
         </div>
 
@@ -265,6 +252,9 @@
             <div id="map_canvas"></div>
         </div>
         <div id="sidebar_container">
+            <div id="sidebar_close" onclick="closeSidebar()"><span class="material-icons">
+                    close
+                </span></div>
             <div id="radar_container">
                 <div id="sidebar_canvas">
                     <div id="radar_radar_tab">
@@ -272,21 +262,8 @@
                             <table style="width: 100%">
                                 <tr class="infoblock_heading">
                                     <td>
-                                        <b id="infoblock_name">Aircraft Radar</b>
+                                        <b id="infoblock_name">Current Aircraft on Screen</b>
                                     </td>
-                                </tr>
-                                <tr class="infoblock_heading">
-                                    <td></td>
-                                </tr>
-
-                                <tr class="infoblock_body">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-
-                                <tr class="infoblock_body dim">
-                                    <td>No aircraft selected</td>
-                                    <td>&nbsp;</td>
                                 </tr>
 
                                 <tr class="infoblock_body">
@@ -305,105 +282,125 @@
                                 </tr>
                             </table>
                         </div>
+
                         <!-- dump1090_infoblock -->
 
                         <div id="selected_infoblock">
-                            <table style="width: 100%">
-                                <tr class="infoblock_heading">
-                                    <td colspan="2">
-                                        <b>
+                            <img src="" id="aircraft_tab_background">
+                            
+                            <span id="aircraft_info_overlay">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span id="selected_flag">
+                                                <img style="width: 40px; height=24px" src="about:blank" alt="Flag">
+                                                </span>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>
                                             <span id="selected_callsign" onclick="toggleFollowSelected();"
-                                                class="pointer">n/a</span>
-                                        </b>
-                                        <span id="selected_follow" onclick="toggleFollowSelected();"
-                                            class="pointer">&#x21D2;</span>
+                                            class="pointer">n/a</span><br>
+                                            <span id="flight_airline" style="font-size: 12px;"></span><span
+                                id="flight_flightnum" style="font-size: 12px;"></span>
+                                </span>
+                                        </td>
+                                    </tr>
+                                </table>                                    
+                            <div style="display: none">
+                                <table style="width: 100%">
+                                    <tr class="infoblock_heading">
+                                        <td colspan="2">
+                                            <span id="selected_registration"></span>
+                                            <span id="selected_follow" onclick="toggleFollowSelected();"
+                                                class="pointer">&#x21D2;</span>
 
-                                        <span id="selected_flag">
-                                            <img style="width: 20px; height=12px" src="about:blank" alt="Flag">
-                                        </span>
+                                            <span id="selected_flag">
+                                                <img style="width: 20px; height=12px" src="about:blank" alt="Flag">
+                                            </span>
 
-                                        <a href="http://www.airframes.org/"
-                                            onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
-                                            <span id="selected_icao"></span>
-                                        </a>
-                                        <span id="selected_registration"></span>
-                                        <span id="selected_icaotype"></span>
-                                        <span id="selected_emergency"></span>
-                                        </span>
-                                    </td>
-                                </tr>
+                                            <a href="http://www.airframes.org/"
+                                                onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
+                                                <span id="selected_icao"></span>
+                                            </a>
+                                            
+                                            <span id="selected_icaotype"></span>
+                                            <span id="selected_emergency"></span>
+                                        </td>
+                                    </tr>
 
-                                <tr id="infoblock_country" class="infoblock_body">
-                                    <td colspan="2">Country of registration: <span id="selected_country">n/a</span></td>
-                                </tr>
+                                    <tr id="infoblock_country" class="infoblock_body">
+                                        <td colspan="2">Country of registration: <span id="selected_country">n/a</span>
+                                        </td>
+                                    </tr>
 
-                                <tr class="infoblock_body">
-                                    <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
-                                    <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
-                                </tr>
+                                    <tr class="infoblock_body">
+                                        <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
+                                        <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
+                                    </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>Speed: <span id="selected_speed">n/a</span></td>
-                                    <td>RSSI: <span id="selected_rssi">n/a</span></td>
-                                </tr>
+                                    <tr class="infoblock_body">
+                                        <td>Speed: <span id="selected_speed">n/a</span></td>
+                                        <td>RSSI: <span id="selected_rssi">n/a</span></td>
+                                    </tr>
 
-                                <tr class="infoblock_body">
-                                    <td>Track: <span id="selected_track">n/a</span></td>
-                                    <td>Last seen: <span id="selected_seen">n/a</span></td>
-                                </tr>
+                                    <tr class="infoblock_body">
+                                        <td>Track: <span id="selected_track">n/a</span></td>
+                                        <td>Last seen: <span id="selected_seen">n/a</span></td>
+                                    </tr>
 
-                                <tr class="infoblock_body">
-                                    <td colspan="2">Position: <span id="selected_position">n/a</span></td>
-                                </tr>
+                                    <tr class="infoblock_body">
+                                        <td colspan="2">Position: <span id="selected_position">n/a</span></td>
+                                    </tr>
 
-                                <tr class="infoblock_body">
-                                    <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
-                                </tr>
-                            </table>
+                                    <tr class="infoblock_body">
+                                        <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
+                                    </tr>
+                                </table>
+                            </div>
                             <button id="lock_button" onclick="lockPlane()"
                                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
                         </div>
                         <!-- selected_infoblock -->
 
-                        <div id="planes_table">
-                            <table id="tableinfo" style="width: 100%">
-                                <thead id="planes_table">
-                                    <tr>
-                                        <td id="icao" onclick="sortByICAO();">ICAO</td>
-                                        <td id="flag" onclick="sortByCountry()">
-                                            <!-- column for flag image -->
-                                        </td>
-                                        <td id="flight" onclick="sortByFlight();">Flight</td>
-                                        <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
-                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: center">
-                                            Altitude
-                                        </td>
-                                        <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
-                                        <td id="distance" onclick="sortByDistance();" style="text-align: center">
-                                            Distance
-                                        </td>
-                                        <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
-                                        <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
-                                        <td id="seen" onclick="sortBySeen();" style="text-align: center">Age</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="plane_row_template" class="plane_table_row hidden">
-                                        <td>ICAO</td>
-                                        <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
-                                        <td>FLIGHT</td>
-                                        <td style="text-align: center">SQUAWK</td>
-                                        <td style="text-align: center">ALTITUDE</td>
-                                        <td style="text-align: center">SPEED</td>
-                                        <td style="text-align: center">DISTANCE</td>
-                                        <td style="text-align: center">TRACK</td>
-                                        <td style="text-align: center">MSGS</td>
-                                        <td style="text-align: center">SEEN</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br><br><br>
-                        </div>
+
+                        <table id="tableinfo" style="width: 100%">
+                            <thead id="planes_table">
+                                <tr>
+                                    <td id="icao" onclick="sortByICAO();">ICAO</td>
+                                    <td id="flag" onclick="sortByCountry()">
+                                        <!-- column for flag image -->
+                                    </td>
+                                    <td id="flight" onclick="sortByFlight();">Flight</td>
+                                    <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
+                                    <td id="altitude" onclick="sortByAltitude();" style="text-align: center">
+                                        Altitude
+                                    </td>
+                                    <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
+                                    <td id="distance" onclick="sortByDistance();" style="text-align: center">
+                                        Distance
+                                    </td>
+                                    <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
+                                    <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
+                                    <td id="seen" onclick="sortBySeen();" style="text-align: center">Age</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="plane_row_template" class="plane_table_row hidden">
+                                    <td>ICAO</td>
+                                    <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
+                                    <td>FLIGHT</td>
+                                    <td style="text-align: center">SQUAWK</td>
+                                    <td style="text-align: center">ALTITUDE</td>
+                                    <td style="text-align: center">SPEED</td>
+                                    <td style="text-align: center">DISTANCE</td>
+                                    <td style="text-align: center">TRACK</td>
+                                    <td style="text-align: center">MSGS</td>
+                                    <td style="text-align: center">SEEN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
                         <!-- planes_table -->
 
                     </div>
@@ -623,7 +620,8 @@
             <div id="atc_container" style="display: none">
                 <div id="atc_radio">
                     <h4 id="atc_title">No feed selected</h4>
-                    <span id="atc_location" style="display: none;"></span><br id="atc_spacer" style="display: none;"><br id="atc_spacer" style="display: none;">
+                    <span id="atc_location" style="display: none;"></span><br id="atc_spacer" style="display: none;"><br
+                        id="atc_spacer" style="display: none;">
                     <audio id="player">
                         <source type="audio/mpeg">
                     </audio>
@@ -639,6 +637,11 @@
                 </div>
             </div>
 
+        </div>
+        <div id="sidebar_open_button" onclick="expandSidebar()">
+            <span id="expand_icon" class="material-icons">
+                arrow_back_ios
+            </span>
         </div>
         <!-- sidebar_container -->
 
