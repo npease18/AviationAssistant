@@ -823,7 +823,7 @@ function refreshSelected() {
     } else {
         var mlat_bit = (selected.position_from_mlat ? "MLAT: " : "");
         if (selected.seen_pos > 1) {
-            $('#selected_position').text(mlat_bit + format_latlng(selected.position) + " (" + selected.seen_pos.toFixed(1) + "s)");
+            $('#selected_position').text("("+mlat_bit + format_latlng(selected.position)+")");
         } else {
             $('#selected_position').text(mlat_bit + format_latlng(selected.position));
         }
