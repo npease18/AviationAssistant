@@ -217,9 +217,6 @@ function initialize() {
     }
 
     // Initialize my functions
-    //document.getElementById("radar_flight_tab_button").disabled = true;
-    //document.getElementById("radar_aircraft_tab_button").disabled = true;
-    //document.getElementById("radar_radar_tab_button").disabled = true;
     getInitialVolume()
     readBatteryLevel()
     readBrightnessLevel()
@@ -997,8 +994,6 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].clearLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).removeClass("selected");
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
@@ -1006,7 +1001,6 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("lock_button").disabled = false
         closeSidebar()
         document.getElementById("tableinfo").style.display = "block"
-        document.getElementById("subtab_buttons").style.display = "none"
     }
 
     
@@ -1015,8 +1009,6 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
@@ -1025,7 +1017,7 @@ function selectPlaneByHex(hex, autofollow) {
         closeSidebar()
         radarRadarTabSwitch()
         document.getElementById("tableinfo").style.display = "block"
-        document.getElementById("subtab_buttons").style.display = "none"
+
     }
 
     if (hex !== null) {
@@ -1034,23 +1026,18 @@ function selectPlaneByHex(hex, autofollow) {
         tabBackgroundImage()
         expandSidebar()
         radarRadarTabSwitch()
-        document.getElementById("subtab_buttons").style.display = "block"
+        updateFlightTab()
         document.getElementById("tableinfo").style.display = "none"
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
-        document.getElementById("radar_flight_tab_button").disabled = false
-        document.getElementById("radar_aircraft_tab_button").disabled = false
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
-        updateFlightTab()
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
