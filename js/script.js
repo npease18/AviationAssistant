@@ -1023,6 +1023,7 @@ function selectPlaneByHex(hex, autofollow) {
     if (hex !== null) {
         // Assign the new selected
         SelectedPlane = hex;
+        document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
         tabBackgroundImage()
         expandSidebar()
         radarRadarTabSwitch()
