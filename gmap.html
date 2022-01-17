@@ -256,10 +256,6 @@
         <div id="map_container">
             <div id="map_canvas"></div>
         </div>
-        <div id="popup" class="ol-popup">
-            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-            <div id="popup-content"></div>
-        </div>
         <div id="sidebar_container">
             <div id="sidebar_close" onclick="closeSidebar()"><span class="material-icons">
                     close
@@ -612,7 +608,7 @@
             </div>
             <div id="atc_container" style="display: none">
                 <div id="atc_radio">
-                    <h4 id="atc_title">No feed selected</h4>
+                    <h4 id="atc_title"></h4>
                     <span id="atc_location" style="display: none;"></span><br id="atc_spacer" style="display: none;"><br
                         id="atc_spacer" style="display: none;">
                     <audio id="player">
@@ -622,14 +618,13 @@
                         onclick="playPause()" style="display: none;">
                         <i class="material-icons" id="audioControl_icon">pause</i>
                     </button>
-                    <hr>
                 </div>
 
                 <div id="atc_selector">
 
                 </div>
             </div>
-
+            
         </div>
         <!-- sidebar_container -->
 
