@@ -509,10 +509,9 @@ function initialize_map() {
         }),
         controls: [new ol.control.Zoom(),
             new ol.control.Rotate(),
-            new ol.control.Attribution({ collapsed: true }),
+            new ol.control.FullScreen(),
             new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" }),
-            new ol.control.LayerSwitcher(),
-            new ol.control.FullScreen()
+            new ol.control.LayerSwitcher()
         ],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
@@ -753,7 +752,7 @@ function refreshSelected() {
         } else {
             $('#dump1090_message_rate').text("n/a");
         }
-
+        
         return;
     }
 
@@ -1005,9 +1004,12 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
+        closeSidebar()
+        document.getElementById("tableinfo").style.display = "block"
+        document.getElementById("subtab_buttons").style.display = "none"
     }
 
-
+    
 
     // If we are clicking the same plane, we are deselecting it.
     // (unless it was a doubleclick..)
@@ -1020,12 +1022,20 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
+        closeSidebar()
+        radarRadarTabSwitch()
+        document.getElementById("tableinfo").style.display = "block"
+        document.getElementById("subtab_buttons").style.display = "none"
     }
 
     if (hex !== null) {
         // Assign the new selected
         SelectedPlane = hex;
-
+        tabBackgroundImage()
+        expandSidebar()
+        radarRadarTabSwitch()
+        document.getElementById("subtab_buttons").style.display = "block"
+        document.getElementById("tableinfo").style.display = "none"
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();

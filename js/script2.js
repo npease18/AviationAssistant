@@ -414,6 +414,37 @@ function sendCMD(cmd) {
 
 }
 
+function tabBackgroundImage() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var page_nodes = $($.parseHTML(xhr.response));
+            var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+            if (img1.attr('src') !== undefined) {
+            document.getElementById("aircraft_tab_background").setAttribute('src', img1.attr('src'))
+            } else {
+                document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+            }
+            return
+        }
+    }
+    xhr.send(JSON.stringify({
+        command: "curl https://www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration
+    }));
+}
+
+function expandSidebar() {
+    document.getElementById("sidebar_container").style.display = "block"
+    document.getElementById("sidebar_open_button").style.display = "none"
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar_container").style.display = "none"
+    document.getElementById("sidebar_open_button").style.display = "block"
+}
+
 function changeColorMode() {
     const themeStylesheet = document.getElementById('theme')
     //const themeToggle = document.getElementById('theme-toggle')
