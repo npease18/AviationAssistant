@@ -16,6 +16,9 @@ function openRadar() {
     document.getElementById("atc_container").style.display = "none"
     TAB = "RADAR"
     document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastMETAR === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function openATC() {
@@ -26,6 +29,9 @@ function openATC() {
     TAB = "ATC"
     listStations()
     document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastMETAR === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function readBatteryLevel() {

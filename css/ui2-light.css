@@ -413,7 +413,7 @@
 }
 
 #sidebar_close {
-    color: rgba(0,0,0,.7);
+    color: rgba(0, 0, 0, .7);
     cursor: pointer;
     position: fixed;
     right: 5px;
@@ -422,9 +422,9 @@
 
 #sidebar_open_button {
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
     height: 25%;
     padding: 2px;
@@ -782,17 +782,46 @@ div#update_error {
 }
 
 div.atc_state {
-    background-color: #ffffffa6;
-    border: 1px solid black;
-    border-radius: 25px;
-    height: 20px;
-    margin: 4px;
-    padding: 4px;
-    padding-left: 10px;
-    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 5px;
+    width: 28%;
+    height: 50px;
+    float: left;
+    display: flex;
+    align-items:center;
+    justify-content:center;
 }
 
-#station_id, #station_name, #full_metar {
+.atc_state > b {
+    
+}
+
+div.atc_header {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 5px;
+    width: 44%;
+    display: inline-block;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+div.atc_header1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 5px;
+    width: 28%;
+    display: inline-block;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#station_id,
+#station_name,
+#full_metar {
     text-align: center;
 }
 

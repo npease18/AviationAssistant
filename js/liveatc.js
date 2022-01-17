@@ -93,13 +93,13 @@ function selectState(state) {
     document.getElementById("atc_selector").innerHTML = ""
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
-    node.setAttribute("class", "atc_state noselect pointer")
+    node.setAttribute("class", "atc_header noselect pointer")
     node.setAttribute("onmousedown", "listStations()")
     node.innerHTML = "<b>Go Back</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
-    node.setAttribute("class", "atc_state noselect")
+    node.setAttribute("class", "atc_header noselect")
     node.setAttribute("onmousedown", "selectState('" + state + "')")
     node.innerHTML = "<b>" + state + "</b>"
     document.getElementById("atc_selector").appendChild(node)
@@ -136,18 +136,18 @@ function selectAirport(airport, state) {
     document.getElementById("atc_selector").innerHTML = ""
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
-    node.setAttribute("class", "atc_state noselect pointer")
+    node.setAttribute("class", "atc_header1 noselect pointer")
     node.setAttribute("onmousedown", "selectState('" + state + "')")
     node.innerHTML = "<b>Go Back</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + state)
-    node.setAttribute("class", "atc_state noselect")
+    node.setAttribute("class", "atc_header1 noselect")
     node.innerHTML = "<b>" + state + "</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("div")
     node.setAttribute("id", "atc_" + airport)
-    node.setAttribute("class", "atc_state noselect")
+    node.setAttribute("class", "atc_header1 noselect")
     node.innerHTML = "<b id='atc_airport_code'>" + airport + "</b>"
     document.getElementById("atc_selector").appendChild(node)
     var node = document.createElement("hr")
@@ -175,7 +175,7 @@ function selectAirport(airport, state) {
     })
 }
 
-//DEPRACATED - NOT USED - GENERATES FILE
+//DEPRECATED - NOT USED - GENERATES FILE
 function startPulling() {
     var json = {}
 
