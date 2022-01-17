@@ -1,25 +1,31 @@
 function openMetar() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "block"
     document.getElementById("radar_container").style.display = "none"
     document.getElementById("atc_container").style.display = "none"
     TAB = "METAR"
     var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
     nearestStations(center[1], center[0])
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
 }
 
 function openRadar() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "block"
     document.getElementById("atc_container").style.display = "none"
     TAB = "RADAR"
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
 }
 
 function openATC() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "none"
     document.getElementById("atc_container").style.display = "block"
     TAB = "ATC"
     listStations()
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
 }
 
 function readBatteryLevel() {
