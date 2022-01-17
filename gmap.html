@@ -287,143 +287,38 @@
 
                         <div id="selected_infoblock">
                             <img src="" id="aircraft_tab_background">
-                            
+
                             <span id="aircraft_info_overlay">
                                 <table>
                                     <tr>
                                         <td>
                                             <span id="selected_flag">
                                                 <img style="width: 40px; height=24px" src="about:blank" alt="Flag">
-                                                </span>
+                                            </span>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td>
                                             <span id="selected_callsign" onclick="toggleFollowSelected();"
-                                            class="pointer">n/a</span><br>
+                                                class="pointer">n/a</span><br>
                                             <span id="flight_airline" style="font-size: 12px;"></span><span
-                                id="flight_flightnum" style="font-size: 12px;"></span>
-                                </span>
+                                                id="flight_flightnum" style="font-size: 12px;"></span>
                                         </td>
-                                    </tr>
-                                </table>                                    
-                            <div style="display: none">
-                                <table style="width: 100%">
-                                    <tr class="infoblock_heading">
-                                        <td colspan="2">
-                                            <span id="selected_registration"></span>
-                                            <span id="selected_follow" onclick="toggleFollowSelected();"
-                                                class="pointer">&#x21D2;</span>
-
-                                            <span id="selected_flag">
-                                                <img style="width: 20px; height=12px" src="about:blank" alt="Flag">
-                                            </span>
-
-                                            <a href="http://www.airframes.org/"
-                                                onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
-                                                <span id="selected_icao"></span>
-                                            </a>
-                                            
-                                            <span id="selected_icaotype"></span>
-                                            <span id="selected_emergency"></span>
-                                        </td>
-                                    </tr>
-
-                                    <tr id="infoblock_country" class="infoblock_body">
-                                        <td colspan="2">Country of registration: <span id="selected_country">n/a</span>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="infoblock_body">
-                                        <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
-                                        <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
-                                    </tr>
-
-                                    <tr class="infoblock_body">
-                                        <td>Speed: <span id="selected_speed">n/a</span></td>
-                                        <td>RSSI: <span id="selected_rssi">n/a</span></td>
-                                    </tr>
-
-                                    <tr class="infoblock_body">
-                                        <td>Track: <span id="selected_track">n/a</span></td>
-                                        <td>Last seen: <span id="selected_seen">n/a</span></td>
-                                    </tr>
-
-                                    <tr class="infoblock_body">
-                                        <td colspan="2">Position: <span id="selected_position">n/a</span></td>
-                                    </tr>
-
-                                    <tr class="infoblock_body">
-                                        <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span></td>
                                     </tr>
                                 </table>
-                            </div>
-                            <button id="lock_button" onclick="lockPlane()"
-                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
-                        </div>
-                        <!-- selected_infoblock -->
-
-
-                        <table id="tableinfo" style="width: 100%">
-                            <thead id="planes_table">
-                                <tr>
-                                    <td id="icao" onclick="sortByICAO();">ICAO</td>
-                                    <td id="flag" onclick="sortByCountry()">
-                                        <!-- column for flag image -->
-                                    </td>
-                                    <td id="flight" onclick="sortByFlight();">Flight</td>
-                                    <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
-                                    <td id="altitude" onclick="sortByAltitude();" style="text-align: center">
-                                        Altitude
-                                    </td>
-                                    <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
-                                    <td id="distance" onclick="sortByDistance();" style="text-align: center">
-                                        Distance
-                                    </td>
-                                    <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
-                                    <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
-                                    <td id="seen" onclick="sortBySeen();" style="text-align: center">Age</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id="plane_row_template" class="plane_table_row hidden">
-                                    <td>ICAO</td>
-                                    <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
-                                    <td>FLIGHT</td>
-                                    <td style="text-align: center">SQUAWK</td>
-                                    <td style="text-align: center">ALTITUDE</td>
-                                    <td style="text-align: center">SPEED</td>
-                                    <td style="text-align: center">DISTANCE</td>
-                                    <td style="text-align: center">TRACK</td>
-                                    <td style="text-align: center">MSGS</td>
-                                    <td style="text-align: center">SEEN</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <!-- planes_table -->
-
-                    </div>
-                    <div id="radar_flight_tab" style="display: none;">
-                        <div id="radar_flight_info" style="display: none;"><br>
-                            <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span
-                                id="flight_flightnum" style="font-size: 28px;">Number</span><span
-                                style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
-                            <br><br>
-                            <i><span id="flight_status" style="font-size: 20px;">En Route</span></i><br><br>
+                            </span>
                             <table style="width: 100%">
                                 <tr>
                                     <td style="text-align: left">
-                                        <span id="flight_airport_short_origin" style="font-size: 30px;">N/A</span><br>
-                                        <span id="flight_airport_long_origin" style="font-size: 16px;">N/A</span><br>
-                                        <span id="flight_airport_loc_origin" style="font-size: 14px;">N/A</span>
+                                        <b><span id="flight_airport_short_origin" style="font-size: 18px;">N/A</span></b><br>
+                                        <span id="flight_airport_long_origin" style="font-size: 12px;">N/A</span><br>
+                                        <span id="flight_airport_loc_origin" style="font-size: 10px;">N/A</span>
                                     </td>
                                     <td style="text-align: right">
-                                        <span id="flight_airport_short_destination"
-                                            style="font-size: 30px;">N/A</span><br>
+                                        <b><span id="flight_airport_short_destination"
+                                            style="font-size: 18px;">N/A</span></b><br>
                                         <span id="flight_airport_long_destination"
-                                            style="font-size: 16px;">N/A</span><br>
-                                        <span id="flight_airport_loc_destination" style="font-size: 14px;">N/A</span>
+                                            style="font-size: 12px;">N/A</span><br>
+                                        <span id="flight_airport_loc_destination" style="font-size: 10px;">N/A</span>
                                     </td>
                                 </tr>
                             </table><br>
@@ -452,285 +347,426 @@
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
-                                More Flight Information
-                            </button>
-                        </div>
-                        <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
-                        </div>
-                        <div id="image_modal" class="modal">
+                                <div style="display: none">
+                                    <table style="width: 100%">
+                                        <tr class="infoblock_heading">
+                                            <td colspan="2">
+                                                <span id="selected_registration"></span>
+                                                <span id="selected_follow" onclick="toggleFollowSelected();"
+                                                    class="pointer">&#x21D2;</span>
 
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close" id="close_modal2">&times;</span>
-                                <span id="modal2_title">Additional Flight Information</span><br>
-                                <img id="progress_image" src="">
-                                <div id="additional_info_hidden">
-                                    <div class="progress-circle" id="flight_progress_circle">
-                                        <span id="flight_percentage_spinner"></span>
-                                        <div class="left-half-clipper">
-                                            <div class="first50-bar"></div>
-                                            <div class="value-bar"></div>
-                                        </div>
-                                    </div>
-                                    <span id="flight_progress_title">Total Flight Progress</span>
-                                    <span id="flight_progress_remaining_title">Hours Remaining</span>
-                                    <span id="flight_progress_remaining_amount"></span>
-                                    <span id="flight_progress_elapsed_title">Time Elapsed</span>
-                                    <span id="flight_progress_elapsed_amount"></span>
-                                    <span id="flight_progress_time_title">Total Flight Time</span>
-                                    <span id="flight_progress_time_amount"></span>
+                                                <span id="selected_flag">
+                                                    <img style="width: 20px; height=12px" src="about:blank" alt="Flag">
+                                                </span>
+
+                                                <a href="http://www.airframes.org/"
+                                                    onclick="document.getElementById('horrible_hack').submit.call(document.getElementById('airframes_post')); return false;">
+                                                    <span id="selected_icao"></span>
+                                                </a>
+
+                                                <span id="selected_icaotype"></span>
+                                                <span id="selected_emergency"></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr id="infoblock_country" class="infoblock_body">
+                                            <td colspan="2">Country of registration: <span
+                                                    id="selected_country">n/a</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="infoblock_body">
+                                            <td style="width: 55%">Altitude: <span id="selected_altitude"></span></td>
+                                            <td style="width: 45%">Squawk: <span id="selected_squawk"></span></td>
+                                        </tr>
+
+                                        <tr class="infoblock_body">
+                                            <td>Speed: <span id="selected_speed">n/a</span></td>
+                                            <td>RSSI: <span id="selected_rssi">n/a</span></td>
+                                        </tr>
+
+                                        <tr class="infoblock_body">
+                                            <td>Track: <span id="selected_track">n/a</span></td>
+                                            <td>Last seen: <span id="selected_seen">n/a</span></td>
+                                        </tr>
+
+                                        <tr class="infoblock_body">
+                                            <td colspan="2">Position: <span id="selected_position">n/a</span></td>
+                                        </tr>
+
+                                        <tr class="infoblock_body">
+                                            <td colspan="2">Distance from Site: <span id="selected_sitedist">n/a</span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
+                                <button id="lock_button" onclick="lockPlane()"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Lock</button>
                             </div>
+                            <!-- selected_infoblock -->
 
-                        </div>
-                    </div>
-                    <div id="radar_aircraft_tab" style="display: none;">
-                        <div id="radar_aircraft_info" style="display: none;">
-                            <img src="" id="aircraft_image1"><br><br>
-                            <span id="aircraft_name_css"><span id="aircraft_name"></span> </span><br><br>
-                            <table style="width: 100%">
-                                <tr>
-                                    <th style="text-align: center">Engine Type</th>
-                                    <th style="text-align: center">Engine Count</th>
-                                    <th style="text-align: center">Plane Age</th>
-                                    <th style="text-align: center">Plane Status</th>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" id="aircraft_engine"></td>
-                                    <td style="text-align: center" id="aircraft_engine_count"></td>
-                                    <td style="text-align: center" id="aircraft_age"></td>
-                                    <td style="text-align: center" id="aircraft_status"></td>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: center">Rollout Date</th>
-                                    <td></td>
-                                    <td></td>
-                                    <th style="text-align: center">First Flight</th>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" id="aircraft_first_flight"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center" id="aircraft_rollout_date"></td>
-                                </tr>
 
+                            <table id="tableinfo" style="width: 100%">
+                                <thead id="planes_table">
+                                    <tr>
+                                        <td id="icao" onclick="sortByICAO();">ICAO</td>
+                                        <td id="flag" onclick="sortByCountry()">
+                                            <!-- column for flag image -->
+                                        </td>
+                                        <td id="flight" onclick="sortByFlight();">Flight</td>
+                                        <td id="squawk" onclick="sortBySquawk();" style="text-align: center">Squawk</td>
+                                        <td id="altitude" onclick="sortByAltitude();" style="text-align: center">
+                                            Altitude
+                                        </td>
+                                        <td id="speed" onclick="sortBySpeed();" style="text-align: center">Speed</td>
+                                        <td id="distance" onclick="sortByDistance();" style="text-align: center">
+                                            Distance
+                                        </td>
+                                        <td id="track" onclick="sortByTrack();" style="text-align: center">Track</td>
+                                        <td id="msgs" onclick="sortByMsgs();" style="text-align: center">Msgs</td>
+                                        <td id="seen" onclick="sortBySeen();" style="text-align: center">Age</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="plane_row_template" class="plane_table_row hidden">
+                                        <td>ICAO</td>
+                                        <td><img style="width: 20px; height=12px" src="about:blank" alt="Flag"></td>
+                                        <td>FLIGHT</td>
+                                        <td style="text-align: center">SQUAWK</td>
+                                        <td style="text-align: center">ALTITUDE</td>
+                                        <td style="text-align: center">SPEED</td>
+                                        <td style="text-align: center">DISTANCE</td>
+                                        <td style="text-align: center">TRACK</td>
+                                        <td style="text-align: center">MSGS</td>
+                                        <td style="text-align: center">SEEN</td>
+                                    </tr>
+                                </tbody>
                             </table>
-                            <button class="mdl-button mdl-js-button mdl-button--raised" id="aircraft_button">
-                                More Information
-                            </button>
-                        </div>
-                        <div id="radar_aircraft_loading"
-                            class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                        <div id="aircraft_modal" class="modal">
 
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close" id="close_modal3">&times;</span>
-                                <span id="modal3_title">Additional Aircraft Information</span><br>
-                                <img src="" id="aircraft_image1-1">
-                                <a onmousedown="setBigImage('aircraft_image2')"><img src="" id="aircraft_image2"></a>
-                                <a onmousedown="setBigImage('aircraft_image3')"><img src="" id="aircraft_image3"></a>
-                                <a onmousedown="setBigImage('aircraft_image4')"><img src="" id="aircraft_image4"></a>
-                                <span id="aircraft_name_title">Aircraft Name:</span>
-                                <span id="aircraft_name_addl"></span>
-                                <span id="aircraft_model_title">Aircraft Model:</span>
-                                <span id="aircraft_model"></span>
-                                <span id="aircraft_registration_title">Aircraft Registration:</span>
-                                <span id="aircraft_registration"></span>
+
+                            <!-- planes_table -->
+
+                        </div>
+                        <div id="radar_flight_tab" style="display: none;">
+                            <div id="radar_flight_info" style="display: none;"><br>
+                                <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span
+                                    id="flight_flightnum" style="font-size: 28px;">Number</span><span
+                                    style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
+                                <br><br>
+                                <i><span id="flight_status" style="font-size: 20px;">En Route</span></i><br><br>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="flight_airport_short_origin"
+                                                style="font-size: 30px;">N/A</span><br>
+                                            <span id="flight_airport_long_origin"
+                                                style="font-size: 16px;">N/A</span><br>
+                                            <span id="flight_airport_loc_origin" style="font-size: 14px;">N/A</span>
+                                        </td>
+                                        <td style="text-align: right">
+                                            <span id="flight_airport_short_destination"
+                                                style="font-size: 30px;">N/A</span><br>
+                                            <span id="flight_airport_long_destination"
+                                                style="font-size: 16px;">N/A</span><br>
+                                            <span id="flight_airport_loc_destination"
+                                                style="font-size: 14px;">N/A</span>
+                                        </td>
+                                    </tr>
+                                </table><br>
+                                <div id="flight_progress_div">
+                                    <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="text-align: left;" id="flight_depart_time"
+                                                style="font-size: 10px;width: 50%;">
+                                                Depart Time
+                                            </td>
+                                            <td style="text-align: right;" id="flight_arrival_time"
+                                                style="font-size: 10px;width: 50%;">
+                                                Arrival Time
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;" style="font-size: 10px;">
+                                                Terminal / Gate:<br><span id="flight_depart_terminal"></span><span
+                                                    id="flight_depart_gate"></span>
+                                            </td>
+
+                                            <td style="text-align: right;" style="font-size: 10px;">
+                                                Terminal / Gate:<br><span id="flight_arrival_terminal"></span><span
+                                                    id="flight_arrival_gate"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
+                                    More Flight Information
+                                </button>
+                            </div>
+                            <div id="radar_flight_loading"
+                                class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+                            </div>
+                            <div id="image_modal" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close" id="close_modal2">&times;</span>
+                                    <span id="modal2_title">Additional Flight Information</span><br>
+                                    <img id="progress_image" src="">
+                                    <div id="additional_info_hidden">
+                                        <div class="progress-circle" id="flight_progress_circle">
+                                            <span id="flight_percentage_spinner"></span>
+                                            <div class="left-half-clipper">
+                                                <div class="first50-bar"></div>
+                                                <div class="value-bar"></div>
+                                            </div>
+                                        </div>
+                                        <span id="flight_progress_title">Total Flight Progress</span>
+                                        <span id="flight_progress_remaining_title">Hours Remaining</span>
+                                        <span id="flight_progress_remaining_amount"></span>
+                                        <span id="flight_progress_elapsed_title">Time Elapsed</span>
+                                        <span id="flight_progress_elapsed_amount"></span>
+                                        <span id="flight_progress_time_title">Total Flight Time</span>
+                                        <span id="flight_progress_time_amount"></span>
+                                    </div>
+                                </div>
 
                             </div>
-
                         </div>
+                        <div id="radar_aircraft_tab" style="display: none;">
+                            <div id="radar_aircraft_info" style="display: none;">
+                                <img src="" id="aircraft_image1"><br><br>
+                                <span id="aircraft_name_css"><span id="aircraft_name"></span> </span><br><br>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <th style="text-align: center">Engine Type</th>
+                                        <th style="text-align: center">Engine Count</th>
+                                        <th style="text-align: center">Plane Age</th>
+                                        <th style="text-align: center">Plane Status</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center" id="aircraft_engine"></td>
+                                        <td style="text-align: center" id="aircraft_engine_count"></td>
+                                        <td style="text-align: center" id="aircraft_age"></td>
+                                        <td style="text-align: center" id="aircraft_status"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center">Rollout Date</th>
+                                        <td></td>
+                                        <td></td>
+                                        <th style="text-align: center">First Flight</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center" id="aircraft_first_flight"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: center" id="aircraft_rollout_date"></td>
+                                    </tr>
+
+                                </table>
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id="aircraft_button">
+                                    More Information
+                                </button>
+                            </div>
+                            <div id="radar_aircraft_loading"
+                                class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                            <div id="aircraft_modal" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close" id="close_modal3">&times;</span>
+                                    <span id="modal3_title">Additional Aircraft Information</span><br>
+                                    <img src="" id="aircraft_image1-1">
+                                    <a onmousedown="setBigImage('aircraft_image2')"><img src=""
+                                            id="aircraft_image2"></a>
+                                    <a onmousedown="setBigImage('aircraft_image3')"><img src=""
+                                            id="aircraft_image3"></a>
+                                    <a onmousedown="setBigImage('aircraft_image4')"><img src=""
+                                            id="aircraft_image4"></a>
+                                    <span id="aircraft_name_title">Aircraft Name:</span>
+                                    <span id="aircraft_name_addl"></span>
+                                    <span id="aircraft_model_title">Aircraft Model:</span>
+                                    <span id="aircraft_model"></span>
+                                    <span id="aircraft_registration_title">Aircraft Registration:</span>
+                                    <span id="aircraft_registration"></span>
+
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-                <div id="subtab_buttons">
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                        id="radar_radar_tab_button" onclick="radarRadarTabSwitch()">
-                        Radar
-                    </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                        id="radar_flight_tab_button" onclick="radarFlightTabSwitch()" disabled>
-                        Flight
-                    </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised subtab_button"
-                        id="radar_aircraft_tab_button" onclick="radarAircraftTabSwitch()" disabled>
-                        Aircraft
-                    </button>
+                <div id="metar_container" style="display: none">
+                    <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                    <div id="metar_data" style="display: none">
+                        <h5>Local METAR Reporting Station:</h5>
+                        <h3 id="station_id"></h3>
+                        <h5 id="station_name"></h5>
+                        <h6 id="full_metar"><br><br><span id="updated_time"></span></h6>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center">
+                                        <h4><span id="temperature"></span> &#8457</h4>
+                                        Temperature
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="altimeter"></h4>
+                                        Altimeter
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="visibility"></h4>
+                                        Visibility
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">
+                                        <h4 id="wind_speed"></h4>
+                                        Wind Speed
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="wind_direction"></h4>
+                                        Wind Direction
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="wind_gusts"></h4>
+                                        Wind Gusts
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">
+                                        <h4><span id="dew_point"></span> &#8457</h4>
+                                        Dew Point
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="rules"></h4>
+                                        Flight Rules
+                                    </td>
+                                    <td style="text-align: center">
+                                        <h4 id="size"></h4>
+                                        Airport Size
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="atc_container" style="display: none">
+                    <div id="atc_radio">
+                        <h4 id="atc_title">No feed selected</h4>
+                        <span id="atc_location" style="display: none;"></span><br id="atc_spacer"
+                            style="display: none;"><br id="atc_spacer" style="display: none;">
+                        <audio id="player">
+                            <source type="audio/mpeg">
+                        </audio>
+                        <button id="audioControl" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                            onclick="playPause()" style="display: none;">
+                            <i class="material-icons" id="audioControl_icon">pause</i>
+                        </button>
+                        <hr>
+                    </div>
+
+                    <div id="atc_selector">
+
+                    </div>
                 </div>
 
             </div>
-            <div id="metar_container" style="display: none">
-                <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                <div id="metar_data" style="display: none">
-                    <h5>Local METAR Reporting Station:</h5>
-                    <h3 id="station_id"></h3>
-                    <h5 id="station_name"></h5>
-                    <h6 id="full_metar"><br><br><span id="updated_time"></span></h6>
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4><span id="temperature"></span> &#8457</h4>
-                                    Temperature
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="altimeter"></h4>
-                                    Altimeter
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="visibility"></h4>
-                                    Visibility
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4 id="wind_speed"></h4>
-                                    Wind Speed
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="wind_direction"></h4>
-                                    Wind Direction
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="wind_gusts"></h4>
-                                    Wind Gusts
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                    <h4><span id="dew_point"></span> &#8457</h4>
-                                    Dew Point
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="rules"></h4>
-                                    Flight Rules
-                                </td>
-                                <td style="text-align: center">
-                                    <h4 id="size"></h4>
-                                    Airport Size
-                                </td>
-                            </tr>
-                        </tbody>
+            <div id="sidebar_open_button" onclick="expandSidebar()">
+                <span id="expand_icon" class="material-icons">
+                    arrow_back_ios
+                </span>
+            </div>
+            <!-- sidebar_container -->
+
+            <div id="SpecialSquawkWarning" class="hidden">
+                <b>Squawk 7x00 is reported and shown.</b><br> This is most likely an error in receiving or decoding.<br>
+                Please do not call the local authorities, they already know about it if it is a valid squawk.
+            </div>
+
+            <div id="update_error" class="hidden">
+                <b>Problem fetching data from dump1090.</b><br>
+                <span id="update_error_detail"></span><br> The displayed map data will be out of date.
+            </div>
+
+            <div id="container_splitter"></div>
+            <div id="power_modal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    Power Options
+                    <table id="power_table">
+                        <tr>
+                            <td>
+                                <button onclick="sendCMD('shutdown')"
+                                    class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                    <i class="material-icons">power_settings_new</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="sendCMD('restart')"
+                                    class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                    <i class="material-icons">refresh</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button id="close_modal4"
+                                    class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Shutdown</td>
+                            <td>Restart</td>
+                            <td>Exit</td>
+                        </tr>
                     </table>
                 </div>
+
             </div>
-            <div id="atc_container" style="display: none">
-                <div id="atc_radio">
-                    <h4 id="atc_title">No feed selected</h4>
-                    <span id="atc_location" style="display: none;"></span><br id="atc_spacer" style="display: none;"><br
-                        id="atc_spacer" style="display: none;">
-                    <audio id="player">
-                        <source type="audio/mpeg">
-                    </audio>
-                    <button id="audioControl" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        onclick="playPause()" style="display: none;">
-                        <i class="material-icons" id="audioControl_icon">pause</i>
-                    </button>
-                    <hr>
-                </div>
+        </div>
+        <div id="graphs_page" style="display: none;height: 100%;">
+            <div id="nav_bar">
+                <!-- Raised button with ripple -->
+                <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                    style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
+                    <i class="material-icons">home</i>
+                </button>
+                <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
+                    <option value="2h">2 Hours</option>
+                    <option value="8h">8 Hours</option>
+                    <option value="24h">1 Day</option>
+                    <option value="7d">1 Week</option>
+                    <option value="14d">2 Weeks</option>
+                    <option value="30d">1 Month</option>
+                    <option value="90d">3 Months</option>
+                    <option value="180d">6 Months</option>
+                    <option value="365d">1 Year</option>
+                    <option value="730d">2 Years</option>
+                    <option value="1095d">3 Years</option>
 
-                <div id="atc_selector">
-
-                </div>
+                </select>
             </div>
+            <div id="graphs_body">
+                <img src="" id="graphs_holder" class="graphs"><br>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs"
+                    onclick="changeGraph(0)" disabled>
+                    <i class="material-icons">arrow_back_ios</i>
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs"
+                    onclick="changeGraph(1)">
+                    <i class="material-icons">arrow_forward_ios</i>
+                </button>
 
-        </div>
-        <div id="sidebar_open_button" onclick="expandSidebar()">
-            <span id="expand_icon" class="material-icons">
-                arrow_back_ios
-            </span>
-        </div>
-        <!-- sidebar_container -->
-
-        <div id="SpecialSquawkWarning" class="hidden">
-            <b>Squawk 7x00 is reported and shown.</b><br> This is most likely an error in receiving or decoding.<br>
-            Please do not call the local authorities, they already know about it if it is a valid squawk.
-        </div>
-
-        <div id="update_error" class="hidden">
-            <b>Problem fetching data from dump1090.</b><br>
-            <span id="update_error_detail"></span><br> The displayed map data will be out of date.
-        </div>
-
-        <div id="container_splitter"></div>
-        <div id="power_modal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                Power Options
-                <table id="power_table">
-                    <tr>
-                        <td>
-                            <button onclick="sendCMD('shutdown')"
-                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-                                <i class="material-icons">power_settings_new</i>
-                            </button>
-                        </td>
-                        <td>
-                            <button onclick="sendCMD('restart')"
-                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-                                <i class="material-icons">refresh</i>
-                            </button>
-                        </td>
-                        <td>
-                            <button id="close_modal4"
-                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-                                <i class="material-icons">close</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Shutdown</td>
-                        <td>Restart</td>
-                        <td>Exit</td>
-                    </tr>
-                </table>
             </div>
-
         </div>
-    </div>
-    <div id="graphs_page" style="display: none;height: 100%;">
-        <div id="nav_bar">
-            <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
-                <i class="material-icons">home</i>
-            </button>
-            <select id="graphs_time" name="Times" onchange="changeGraphsTime()">
-                <option value="2h">2 Hours</option>
-                <option value="8h">8 Hours</option>
-                <option value="24h">1 Day</option>
-                <option value="7d">1 Week</option>
-                <option value="14d">2 Weeks</option>
-                <option value="30d">1 Month</option>
-                <option value="90d">3 Months</option>
-                <option value="180d">6 Months</option>
-                <option value="365d">1 Year</option>
-                <option value="730d">2 Years</option>
-                <option value="1095d">3 Years</option>
-
-            </select>
+        <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
         </div>
-        <div id="graphs_body">
-            <img src="" id="graphs_holder" class="graphs"><br>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_back_graphs"
-                onclick="changeGraph(0)" disabled>
-                <i class="material-icons">arrow_back_ios</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="arrow_forward_graphs"
-                onclick="changeGraph(1)">
-                <i class="material-icons">arrow_forward_ios</i>
-            </button>
-
-        </div>
-    </div>
-    <div id="no-updates-snackbar" class="mdl-js-snackbar mdl-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button class="mdl-snackbar__action" type="button"></button>
-    </div>
 </body>
 
 </html>

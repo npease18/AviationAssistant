@@ -731,6 +731,10 @@ td#seen {
     position: fixed
 }
 
+#flight_progress_div {
+    color: black
+}
+
 #flight_progress_circle {
     position: absolute;
     right: 25%;
