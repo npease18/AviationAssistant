@@ -68,9 +68,6 @@ function createBaseLayers() {
         })
     }))
 
-    
-
-
     if (ChartBundleLayers) {
         var chartbundleTypes = {
             sec: "Sectional Charts",
@@ -134,6 +131,7 @@ function createBaseLayers() {
         name: 'Radar',
         title: 'Radar',
         type: 'overlay',
+        visible: false
     });
 
     online.push(radar);
@@ -143,7 +141,7 @@ function createBaseLayers() {
         apiRequest.open("GET", "https://api.rainviewer.com/public/maps.json", true);
         apiRequest.onload = function(e) {
 
-            // save available timestamps and show the latest frame: "-1" means "timestamp.lenght - 1"
+            // save available timestamps and show the latest frame: "-1" means "timestamp.length - 1"
             timestamps = JSON.parse(apiRequest.response);
 
             radar.setSource(new ol.source.XYZ({
@@ -159,7 +157,7 @@ function createBaseLayers() {
     if (online.length > 0) {
         layers.push(new ol.layer.Group({
             name: 'Online Maps',
-            title: 'Worldwide Online Maps + Overlays',
+            title: 'Worldwide Online Maps/Overlays',
             fold: 'open',
             layers: online
         }));

@@ -256,6 +256,10 @@
         <div id="map_container">
             <div id="map_canvas"></div>
         </div>
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
         <div id="sidebar_container">
             <div id="sidebar_close" onclick="closeSidebar()"><span class="material-icons">
                     close
@@ -330,7 +334,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            
+
                             <b><span id="selected_position">n/a</span></b>
                             <table style="width: 100%">
                                 <tr>
@@ -554,7 +558,6 @@
             <div id="metar_container" style="display: none">
                 <div id="metar_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                 <div id="metar_data" style="display: none">
-                    <h5>Local METAR Reporting Station:</h5>
                     <h3 id="station_id"></h3>
                     <h5 id="station_name"></h5>
                     <h6 id="full_metar"><br><br><span id="updated_time"></span></h6>
@@ -604,6 +607,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
                 </div>
             </div>
             <div id="atc_container" style="display: none">
