@@ -791,11 +791,34 @@ div.atc_state {
     display: flex;
     align-items:center;
     justify-content:center;
+    overflow: hidden;
 }
 
-.atc_state > b {
-    
+#atc_ready_state {
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    font-size: 50px;
 }
+
+#atc_current_time {
+    position: absolute;
+    left: 11px;
+    top: 68px;
+}
+
+#atc_location {
+    position: relative;
+    top: -25px;
+    left: 8px;
+}
+
+#atc_title {
+    position: relative;
+    left: 25px;
+    top: -10px;
+}
+
 
 div.atc_header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

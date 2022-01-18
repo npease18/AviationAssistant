@@ -13,10 +13,10 @@ function nearestStations(x, y) {
                 radius: 7,
                 snapToPixel: false,
                 fill: new ol.style.Fill({
-                    color: 'black'
+                    color: 'green'
                 }),
                 stroke: new ol.style.Stroke({
-                    color: 'white',
+                    color: 'black',
                     width: 2
                 })
             })

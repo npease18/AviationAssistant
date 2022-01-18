@@ -1,5 +1,16 @@
 function playPLS(url, title) {
+    window.setInterval(function () {
+        if (document.getElementById("player").readyState === 3 || document.getElementById("player").readyState === 4) {
+            document.getElementById("atc_ready_state").style.color = "green"
+        } else {
+            document.getElementById("atc_ready_state").style.color = "red"
+        }
+        var time = document.getElementById("player").currentTime
+        document.getElementById("atc_current_time").innerHTML = HHMMSS(time)
+    }, 1000)
     document.getElementById("atc_spacer").style.display = "block"
+    document.getElementById("atc_ready_state").style.display = "block"
+    document.getElementById("atc_current_time").style.display = "block"
     document.getElementById("audioControl").style.display = "block"
     document.getElementById("atc_location").innerHTML = ""
     document.getElementById("atc_location").style.display = "block"
@@ -10,6 +21,28 @@ function playPLS(url, title) {
         var city = world_airports[airport].city
         var state = world_airports[airport].state
         document.getElementById("atc_location").innerHTML = city + ", " + state
+        // MAP MARKER INFO
+        var markerStyle = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                snapToPixel: false,
+                fill: new ol.style.Fill({
+                    color: 'blue'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 2
+                })
+            })
+        });
+
+        var feature = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([world_airports[airport].lon, world_airports[airport].lat])));
+        feature.setStyle(markerStyle);
+        lastATC = StaticFeatures.push(feature) - 1
+        if (lastATC === 1) {
+            StaticFeatures.removeAt(0)
+        }
+        // PLS INFO
         const proxyurl = "http://" + window.location.hostname + ":7000/";
         var request = $.ajax({
             url: 'json/liveatc.json',
@@ -43,28 +76,7 @@ function playPause() {
         document.getElementById("audioControl_icon").innerHTML = "play_arrow"
     }
 }
-/*
-function playPLS(url, title) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            var response = xhr.response
-            response = response.split('\n')
-            response = response[1]
-            response = response.substring(6, data.length)
-            document.getElementById("player").setAttribute("src", url)
-            document.getElementById("player").load()
-            document.getElementById("atc_title").innerHTML = title
-            document.getElementById("player").play()
-        }
-    }
-    xhr.send(JSON.stringify({
-        command: "curl http://www.liveatc.net"+url
-    }));
-}
-*/
+
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
     var request = $.ajax({
@@ -173,6 +185,7 @@ function selectAirport(airport, state) {
         node.innerHTML = "<br><br><br>"
         document.getElementById("atc_selector").appendChild(node)
     })
+
 }
 
 //DEPRECATED - NOT USED - GENERATES FILE
@@ -238,4 +251,22 @@ function startPulling() {
             }
         }
     })
+}
+
+function HHMMSS(time) {
+    var sec_num = parseInt(time, 10); // don't forget the second param
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
 }
