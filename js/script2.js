@@ -7,6 +7,9 @@ function openMetar() {
     var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
     nearestStations(center[1], center[0])
     document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastATC === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function openRadar() {
@@ -17,6 +20,9 @@ function openRadar() {
     TAB = "RADAR"
     document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
     if (lastMETAR === 1) {
+        StaticFeatures.removeAt(0)
+    }
+    if (lastATC === 1) {
         StaticFeatures.removeAt(0)
     }
 }
@@ -623,3 +629,4 @@ function toggleCesium() {
         document.getElementById("cesium").innerHTML = "map"
     }
 }
+

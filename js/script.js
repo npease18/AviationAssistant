@@ -502,7 +502,7 @@ function initialize_map() {
     var layerSwitcher = new LayerSwitcher({
         reverse: false,
         groupSelectStyle: 'group',
-        activationMode: 'mouseover'
+        activationMode: 'click'
     });
     OLMap.addControl(layerSwitcher);
 
