@@ -99,7 +99,7 @@ function changeTime() {
 
 setInterval(function () {
     getData()
-}, 10000);
+}, 15000);
 setInterval(function () {
     changeTime()
 }, 1000);

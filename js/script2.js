@@ -507,7 +507,7 @@ function changeBranch(branch) {
 }
 
 function goHome() {
-    document.getElementById("itinerary_page").style.display = "none"
+   // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
@@ -515,23 +515,32 @@ function goHome() {
 }
 
 function goRadar() {
-    document.getElementById("itinerary_page").style.display = "none"
+    //document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "block"
+    document.getElementById("itin_nav_bar").style.display = "none"
+    document.getElementById("nav_bar").style.display = "block"
+    document.getElementById("radar_container").style.display = "block"
+    document.getElementById("itinerary_container").style.display = "none"
+
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("graphs_page").style.display = "none"
 }
 
 function goItinerary() {
-    document.getElementById("itinerary_page").style.display = "block"
-    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("radar_page").style.display = "block"
+    document.getElementById("itin_nav_bar").style.display = "block"
+    document.getElementById("nav_bar").style.display = "none"
+    document.getElementById("radar_container").style.display = "none"
+    document.getElementById("itinerary_container").style.display = "block"
+
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("graphs_page").style.display = "none"
 }
 
 function goSettings() {
-    document.getElementById("itinerary_page").style.display = "none"
+   // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
@@ -540,7 +549,7 @@ function goSettings() {
 
 
 function goGraphs() {
-    document.getElementById("itinerary_page").style.display = "none"
+    //document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"

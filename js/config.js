@@ -23,6 +23,7 @@ var ol3d
 var cesuim_active = false
 var internet_mode = 0
 var lastMETAR = 0
+var lastItin = 0
 var liveATC = 0
 
 var country_names = {}
