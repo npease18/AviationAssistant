@@ -263,9 +263,20 @@
     right: 10px;
 }
 
+#arrivals {
+    
+}
+
 #itinerary_loading {
     position: fixed;
-    width: 100%;
+    width: 80%;
+    left: 10%;
+    top: 55px;
+}
+
+#itinerary_states {
+    border-radius: 6px;
+    height: 20px;
 }
 
 #loader_progress {
@@ -282,8 +293,8 @@
     line-height: 0%;
     margin-bottom: -80px;
     position: absolute;
-    right: 2%;
-    top: 44%;
+    right: 6px;
+    top: 181px;
     z-index: 1;
     z-index: 2;
 }
@@ -722,6 +733,26 @@ div#nav_bar {
     z-index: 1;
 }
 
+div#itin_nav_bar {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 40px;
+    left: 10%;
+    padding: 5px;
+    position: fixed;
+    top: 5px;
+    width: 80%;
+    z-index: 1;
+}
+
+#itin_title {
+    position: absolute;
+    right: 10px;
+    top: -18px;
+    color: rgba(0, 0, 0, .7);
+}
+
 div#sidebar_container {
     background-color: rgba(255, 255, 255, .9);
     border-radius: 8px;
@@ -784,8 +815,9 @@ div#update_error {
 div.atc_state {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 5px;
-    margin: 5px;
-    width: 28%;
+    margin: 8px;
+    margin-left: 15px;
+    width: 24%;
     height: 50px;
     float: left;
     display: flex;
@@ -793,6 +825,85 @@ div.atc_state {
     justify-content:center;
     overflow: hidden;
 }
+
+.itin_state {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 8px;
+    margin-left: 15px;
+    width: 24%;
+    height: 50px;
+    float: left;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.itin_header {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin-left: 10px;
+    margin: 5px;
+    width: 44%;
+    display: inline-block;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.itin_header1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 5px;
+    width: 28%;
+    display: inline-block;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#itin_airport_name {
+    font-size: 46px;
+    position: absolute;
+    top: 20px;
+    left: 5px;  
+}
+
+#itin_air_info {
+    position: absolute;
+    left: 90px;
+    top: 85px;
+}
+
+#itin_arrivals {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+#itin_back {
+    position: absolute;
+    left: 10px;
+    top: 85px;
+}
+
+#itin_departures {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+#itin_airport_city {
+    font-size: 18px;
+    position: absolute;
+    top: 55px;
+    left: 15px;
+    font-style: italic;
+    font-weight: 10;
+}
+
 
 #atc_ready_state {
     position: absolute;
@@ -823,6 +934,7 @@ div.atc_state {
 div.atc_header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 5px;
+    margin-left: 10px;
     margin: 5px;
     width: 44%;
     display: inline-block;
