@@ -556,6 +556,16 @@ function goGraphs() {
     document.getElementById("graphs_page").style.display = "block"
 }
 
+function itinAirportArrivals() {
+    document.getElementById("itin_arr").style.display = "block"
+    document.getElementById("itin_info").style.display = "none"
+}
+
+function itinAirportDepartures() {
+    document.getElementById("itin_dep").style.display = "block"
+    document.getElementById("itin_info").style.display = "none"
+}
+
 function radarRadarTabSwitch() {
     document.getElementById("radar_radar_tab").style.display = "block"
     document.getElementById("radar_flight_tab").style.display = "none"

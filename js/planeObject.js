@@ -306,7 +306,8 @@ PlaneObject.prototype.updateIcon = function() {
                                 rotateWithView: true
                         });
                         this.markerStyle = new ol.style.Style({
-                                image: this.markerIcon
+                                image: this.markerIcon,
+                                
                         });
                 } else {
                         this.markerIcon = icon;

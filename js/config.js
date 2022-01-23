@@ -25,6 +25,7 @@ var internet_mode = 0
 var lastMETAR = 0
 var lastItin = 0
 var liveATC = 0
+var exclude = 1
 
 var country_names = {}
 var xhr1 = new XMLHttpRequest();
