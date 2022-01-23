@@ -26,6 +26,7 @@ var lastMETAR = 0
 var lastItin = 0
 var liveATC = 0
 var exclude = 1
+var text_labels = 1
 
 var country_names = {}
 var xhr1 = new XMLHttpRequest();

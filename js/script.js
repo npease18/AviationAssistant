@@ -495,10 +495,6 @@ function initialize_map() {
         loadTilesWhileInteracting: true
     });
 
-    ol3d = new olcs.OLCesium({
-        map: OLMap,
-    });
-
     var layerSwitcher = new LayerSwitcher({
         reverse: false,
         groupSelectStyle: 'group',
