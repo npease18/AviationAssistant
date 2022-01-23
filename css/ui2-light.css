@@ -263,21 +263,7 @@
     right: 10px;
 }
 
-#arrivals {
-    
-}
-
-#itinerary_loading {
-    position: fixed;
-    width: 80%;
-    left: 10%;
-    top: 55px;
-}
-
-#itinerary_states {
-    border-radius: 6px;
-    height: 20px;
-}
+#arrivals {}
 
 #loader_progress {
     height: 20px;
@@ -483,8 +469,91 @@
     top: 17px;
 }
 
+.secondaryHeader th {
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.itinheader {
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    padding-left: 25px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.secondaryHeader th:nth-child(2) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 220px;
+}
+
+.airportBoard thead tr td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 200px;
+    
+}
+
+.airportBoard thead tr td:nth-child(3) {
+    text-align: right;
+}
+
+.airportBoard thead tr td:nth-child(1) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 60px;
+}
+
+.airportBoard tbody tr td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 200px;
+    
+}
+
+#itin_back_chart {
+    font-size: 16px; 
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.airportBoard tbody tr td:nth-child(3) {
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.airportBoard tbody tr td:nth-child(1) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 60px;
+}
+
+
+.secondaryHeader th:nth-child(1) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 65px;
+}
+
 .airportBoard {
-    border: black solid 2px;
+    color: rgba(255, 255, 255, .8);
+    table-layout: fixed;
+    width: 100%;
+}
+
+.mainHeader {
+    display: none;
 }
 
 .center {
@@ -747,10 +816,10 @@ div#itin_nav_bar {
 }
 
 #itin_title {
+    color: rgba(0, 0, 0, .7);
     position: absolute;
     right: 10px;
     top: -18px;
-    color: rgba(0, 0, 0, .7);
 }
 
 div#sidebar_container {
@@ -813,145 +882,176 @@ div#update_error {
 }
 
 div.atc_state {
+    align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
+    display: flex;
+    float: left;
+    height: 50px;
+    justify-content: center;
     margin: 8px;
     margin-left: 15px;
-    width: 24%;
-    height: 50px;
-    float: left;
-    display: flex;
-    align-items:center;
-    justify-content:center;
     overflow: hidden;
+    padding: 5px;
+    width: 24%;
 }
 
 .itin_state {
+    align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    float: left;
+    height: 50px;
+    justify-content: center;
     margin: 8px;
     margin-left: 15px;
-    width: 24%;
-    height: 50px;
-    float: left;
-    display: flex;
-    align-items:center;
-    justify-content:center;
     overflow: hidden;
-    cursor: pointer;
+    padding: 5px;
+    width: 24%;
 }
 
 .itin_header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
-    margin-left: 10px;
-    margin: 5px;
-    width: 44%;
     display: inline-block;
     height: 50px;
-    text-align: center;
     line-height: 50px;
+    margin: 5px;
+    margin-left: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 42%;
 }
 
 .itin_header1 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
-    margin: 5px;
-    width: 28%;
     display: inline-block;
     height: 50px;
-    text-align: center;
     line-height: 50px;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 28%;
 }
 
 #itin_airport_name {
     font-size: 46px;
+    font-weight: bold;
+    left: 5px;
     position: absolute;
-    top: 20px;
-    left: 5px;  
+    top: 15px;
 }
 
 #itin_air_info {
+    bottom: 55px;
     position: absolute;
-    left: 90px;
-    top: 85px;
+    right: 10px;
 }
 
 #itin_arrivals {
-    position: absolute;
-    left: 10px;
     bottom: 10px;
+    left: 10px;
+    position: absolute;
 }
 
 #itin_back {
-    position: absolute;
+    bottom: 55px;
     left: 10px;
-    top: 85px;
+    position: absolute;
 }
 
 #itin_departures {
+    bottom: 10px;
     position: absolute;
     right: 10px;
-    bottom: 10px;
+}
+
+#itin_info button {
+    background-color: rgba(255, 255, 255, .7);
+}
+
+#itin_info {
+    color: rgba(255, 255, 255, .7);
+}
+
+#itin_img {
+    border-bottom-left-radius: 8px;
+    filter: brightness(50%);
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    width: 100%;
 }
 
 #itin_airport_city {
     font-size: 18px;
-    position: absolute;
-    top: 55px;
-    left: 15px;
     font-style: italic;
     font-weight: 10;
+    position: absolute;
+    right: 30px;
+    top: 2px;
 }
 
+#itin_airport_loc {
+    font-weight: 10;
+    position: absolute;
+    right: 5px;
+    top: 25px;
+}
+
+#itin_airport_long_name {
+    font-size: 16px;
+    font-weight: 50;
+    left: 8px;
+    position: absolute;
+    top: 45px;
+}
 
 #atc_ready_state {
-    position: absolute;
-    left: 5px;
-    top: 20px;
     font-size: 50px;
+    left: 5px;
+    position: absolute;
+    top: 20px;
 }
 
 #atc_current_time {
-    position: absolute;
     left: 11px;
+    position: absolute;
     top: 68px;
 }
 
 #atc_location {
+    left: 8px;
     position: relative;
     top: -25px;
-    left: 8px;
 }
 
 #atc_title {
-    position: relative;
     left: 25px;
+    position: relative;
     top: -10px;
 }
 
-
 div.atc_header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
-    margin-left: 10px;
-    margin: 5px;
-    width: 44%;
     display: inline-block;
     height: 50px;
-    text-align: center;
     line-height: 50px;
+    margin: 5px;
+    margin-left: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 43%;
 }
 
 div.atc_header1 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
-    margin: 5px;
-    width: 28%;
     display: inline-block;
     height: 50px;
-    text-align: center;
     line-height: 50px;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 28%;
 }
 
 #station_id,
@@ -962,7 +1062,6 @@ div.atc_header1 {
 
 html,
 body {
-    background-color: #ffffff;
     font-family: Tahoma, Sans-Serif;
     font-size: 10pt;
     height: 100%;
