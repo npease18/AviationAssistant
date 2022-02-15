@@ -7,7 +7,27 @@ function nearestStations(x, y) {
         cache: false,
         dataType: 'json',
     });
-    FetchPending.done(function(data) {
+    FetchPending.done(function (data) {
+        var markerStyle = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                snapToPixel: false,
+                fill: new ol.style.Fill({
+                    color: 'green'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 2
+                })
+            })
+        });
+       
+        var feature = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([data.info.longitude, data.info.latitude])));
+        feature.setStyle(markerStyle);
+        lastMETAR = StaticFeatures.push(feature) - 1
+        if (lastMETAR === 1) {
+            StaticFeatures.removeAt(0)
+        }
         document.getElementById('metar_loading').style.display = "none"
         document.getElementById('metar_data').style.display = "block"
         document.getElementById('station_id').innerHTML = data.station

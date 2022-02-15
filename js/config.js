@@ -7,11 +7,11 @@
 
 // API KEYS
 var keys = {}
-    // API Keys
+// API Keys
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "tiles/keys.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
         keys = JSON.parse(xhr.response)
     }
@@ -22,12 +22,17 @@ xhr.send();
 var ol3d
 var cesuim_active = false
 var internet_mode = 0
+var lastMETAR = 0
+var lastItin = 0
+var liveATC = 0
+var exclude = 1
+var text_labels = 1
 
 var country_names = {}
 var xhr1 = new XMLHttpRequest();
 xhr1.open("GET", "json/country_names.json", true);
 xhr1.setRequestHeader('Content-Type', 'application/json');
-xhr1.onreadystatechange = function() {
+xhr1.onreadystatechange = function () {
     if (xhr1.readyState === 4) {
         country_names = JSON.parse(xhr1.response)
     }
@@ -38,23 +43,23 @@ var flight_info = {}
 var TAB = "Radar"
 var DateTime = luxon.DateTime;
 var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
-    /* var graph_types = {
-        "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
-        "Aircraft Seen": "/dump1090-localhost-aircraft-",
-        "Track's Seen (8 Minute Moving Average)": "/dump1090-localhost-tracks-",
-        "Signal Level": "/dump1090-localhost-signal-",
-        "ADS-B Maxima": "dump1090-localhost-local_rate-",
-        "Message Rate / Aircraft": "/dump1090-localhost-aircraft_message_rate-",
-        "ADS-B CPU Usage": "/dump1090-localhost-cpu-",
-        "Overall CPU Usage": "/system-localhost-cpu-",
-        "Max Core Temp": "/system-localhost-temperature-",
-        "Memory Usage": "/system-localhost-memory-",
-        "Bandwidth Usage": "/system-localhost-network_bandwidth-",
-        "Disk Usage": "/system-localhost-df_root-",
-        "Disk I/O - IOPS": "/system-localhost-disk_io_iops-",
-        "Disk I/O - Bandwidth": "/system-localhost-disk_io_octets-"
+/* var graph_types = {
+    "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
+    "Aircraft Seen": "/dump1090-localhost-aircraft-",
+    "Track's Seen (8 Minute Moving Average)": "/dump1090-localhost-tracks-",
+    "Signal Level": "/dump1090-localhost-signal-",
+    "ADS-B Maxima": "dump1090-localhost-local_rate-",
+    "Message Rate / Aircraft": "/dump1090-localhost-aircraft_message_rate-",
+    "ADS-B CPU Usage": "/dump1090-localhost-cpu-",
+    "Overall CPU Usage": "/system-localhost-cpu-",
+    "Max Core Temp": "/system-localhost-temperature-",
+    "Memory Usage": "/system-localhost-memory-",
+    "Bandwidth Usage": "/system-localhost-network_bandwidth-",
+    "Disk Usage": "/system-localhost-df_root-",
+    "Disk I/O - IOPS": "/system-localhost-disk_io_iops-",
+    "Disk I/O - Bandwidth": "/system-localhost-disk_io_octets-"
 
-    } */
+} */
 var starting_graph = 0
 
 // -- Title Settings --------------------------------------
@@ -97,10 +102,18 @@ SiteName = "My Radar Site"; // tooltip of the marker
 // All color values are given as Hue (0-359) / Saturation (0-100) / Lightness (0-100)
 ColorByAlt = {
     // HSL for planes with unknown altitude:
-    unknown: { h: 0, s: 0, l: 40 },
+    unknown: {
+        h: 0,
+        s: 0,
+        l: 40
+    },
 
     // HSL for planes that are on the ground:
-    ground: { h: 120, s: 100, l: 30 },
+    ground: {
+        h: 120,
+        s: 100,
+        l: 30
+    },
 
     air: {
         // These define altitude-to-hue mappings
@@ -116,22 +129,43 @@ ColorByAlt = {
         // hue of the first entry; altitudes above
         // the last entry use the hue of the last
         // entry.
-        h: [{ alt: 2000, val: 20 }, // orange
-            { alt: 10000, val: 140 }, // light green
-            { alt: 40000, val: 300 }
+        h: [{
+                alt: 2000,
+                val: 20
+            }, // orange
+            {
+                alt: 10000,
+                val: 140
+            }, // light green
+            {
+                alt: 40000,
+                val: 300
+            }
         ], // magenta
         s: 85,
         l: 50,
     },
 
     // Changes added to the color of the currently selected plane
-    selected: { h: 0, s: -10, l: +20 },
+    selected: {
+        h: 0,
+        s: -10,
+        l: +20
+    },
 
     // Changes added to the color of planes that have stale position info
-    stale: { h: 0, s: -10, l: +30 },
+    stale: {
+        h: 0,
+        s: -10,
+        l: +30
+    },
 
     // Changes added to the color of planes that have positions from mlat
-    mlat: { h: 0, s: -10, l: -10 }
+    mlat: {
+        h: 0,
+        s: -10,
+        l: -10
+    }
 };
 
 // For a monochrome display try this:

@@ -16,9 +16,21 @@ var OfflineMode = false;
 var internet_mode_data = {}
 
 var SpecialSquawks = {
-    '7500': { cssClass: 'squawk7500', markerColor: 'rgb(255, 85, 85)', text: 'Aircraft Hijacking' },
-    '7600': { cssClass: 'squawk7600', markerColor: 'rgb(0, 255, 255)', text: 'Radio Failure' },
-    '7700': { cssClass: 'squawk7700', markerColor: 'rgb(255, 255, 0)', text: 'General Emergency' }
+    '7500': {
+        cssClass: 'squawk7500',
+        markerColor: 'rgb(255, 85, 85)',
+        text: 'Aircraft Hijacking'
+    },
+    '7600': {
+        cssClass: 'squawk7600',
+        markerColor: 'rgb(0, 255, 255)',
+        text: 'Radio Failure'
+    },
+    '7700': {
+        cssClass: 'squawk7700',
+        markerColor: 'rgb(255, 255, 0)',
+        text: 'General Emergency'
+    }
 };
 
 // Get current map settings
@@ -61,7 +73,10 @@ function processReceiverUpdate(data) {
     }
 
     // Note the message count in the history
-    MessageCountHistory.push({ 'time': now, 'messages': data.messages });
+    MessageCountHistory.push({
+        'time': now,
+        'messages': data.messages
+    });
     // .. and clean up any old values
     if ((now - MessageCountHistory[0].time) > 30)
         MessageCountHistory.shift();
@@ -96,12 +111,12 @@ function processReceiverUpdate(data) {
                 $('img', plane.tr.cells[1]).css('display', 'none');
             }
 
-            plane.tr.addEventListener('click', function(h, evt) {
+            plane.tr.addEventListener('click', function (h, evt) {
                 selectPlaneByHex(h, false);
                 evt.preventDefault();
             }.bind(undefined, hex));
 
-            plane.tr.addEventListener('dblclick', function(h, evt) {
+            plane.tr.addEventListener('dblclick', function (h, evt) {
                 selectPlaneByHex(h, true);
                 evt.preventDefault();
             }.bind(undefined, hex));
@@ -137,7 +152,7 @@ function fetchData() {
         });
     }
 
-    FetchPending.done(function(data) {
+    FetchPending.done(function (data) {
         var now = data.now;
         if (internet_mode) {
             internet_mode_data = data.aircraft
@@ -172,7 +187,7 @@ function fetchData() {
         }
     });
 
-    FetchPending.fail(function(jqxhr, status, error) {
+    FetchPending.fail(function (jqxhr, status, error) {
         $("#update_error_detail").text("AJAX call failed (" + status + (error ? (": " + error) : "") + "). Maybe dump1090 is no longer running?");
         $("#update_error").css('display', 'block');
     });
@@ -213,19 +228,17 @@ function initialize() {
         });
 
         // disable ticking on the receiver clock, we will update it ourselves
-        ReceiverClock.tick = (function() {})
+        ReceiverClock.tick = (function () {})
     }
 
     // Initialize my functions
-    //document.getElementById("radar_flight_tab_button").disabled = true;
-    //document.getElementById("radar_aircraft_tab_button").disabled = true;
-    //document.getElementById("radar_radar_tab_button").disabled = true;
     getInitialVolume()
     readBatteryLevel()
     readBrightnessLevel()
     modal()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
+    window.setInterval(getBounds, 60000)
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
     //window.setInterval(fetchInternetAircraft, 1000)
@@ -236,36 +249,36 @@ function initialize() {
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
     $.ajax({
-        url: 'data/receiver.json',
-        timeout: 5000,
-        cache: false,
-        dataType: 'json'
-    })
+            url: 'data/receiver.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        })
 
-    .done(function(data) {
-        if (typeof data.lat !== "undefined") {
-            SiteShow = true;
-            SiteLat = data.lat;
-            SiteLon = data.lon;
-            DefaultCenterLat = data.lat;
-            DefaultCenterLon = data.lon;
-        }
+        .done(function (data) {
+            if (typeof data.lat !== "undefined") {
+                SiteShow = true;
+                SiteLat = data.lat;
+                SiteLon = data.lon;
+                DefaultCenterLat = data.lat;
+                DefaultCenterLon = data.lon;
+            }
 
-        Dump1090Version = data.version;
-        RefreshInterval = data.refresh;
-        PositionHistorySize = data.history;
-    })
+            Dump1090Version = data.version;
+            RefreshInterval = data.refresh;
+            PositionHistorySize = data.history;
+        })
 
-    .always(function() {
-        initialize_map();
-        start_load_history();
-    });
+        .always(function () {
+            initialize_map();
+            start_load_history();
+        });
 
 
     // Settings Modal
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == document.getElementById("settings_modal")) {
             document.getElementById("settings_modal").style.display = "none";
         }
@@ -295,21 +308,21 @@ function load_history_item(i) {
     $("#loader_progress").attr('value', i);
 
     $.ajax({
-        url: 'data/history_' + i + '.json',
-        timeout: 5000,
-        cache: false,
-        dataType: 'json'
-    })
+            url: 'data/history_' + i + '.json',
+            timeout: 5000,
+            cache: false,
+            dataType: 'json'
+        })
 
-    .done(function(data) {
-        PositionHistoryBuffer.push(data);
-        load_history_item(i + 1);
-    })
+        .done(function (data) {
+            PositionHistoryBuffer.push(data);
+            load_history_item(i + 1);
+        })
 
-    .fail(function(jqxhr, status, error) {
-        // No more history
-        end_load_history();
-    });
+        .fail(function (jqxhr, status, error) {
+            // No more history
+            end_load_history();
+        });
 }
 
 function end_load_history() {
@@ -322,7 +335,9 @@ function end_load_history() {
 
         // Sort history by timestamp
         console.log("Sorting history");
-        PositionHistoryBuffer.sort(function(x, y) { return (x.now - y.now); });
+        PositionHistoryBuffer.sort(function (x, y) {
+            return (x.now - y.now);
+        });
 
         // Process history
         for (var h = 0; h < PositionHistoryBuffer.length; ++h) {
@@ -433,6 +448,8 @@ function initialize_map() {
 
     layers.push(new ol.layer.Group({
         title: 'Overlays',
+        name: "Overlays",
+        fold: 'close',
         layers: [
             new ol.layer.Vector({
                 name: 'site_pos',
@@ -452,54 +469,14 @@ function initialize_map() {
                 })
             }),
 
+
             iconsLayer
         ]
     }));
 
     var foundType = false;
 
-    /*
-    ol.control.LayerSwitcher.forEachRecursive(layers, function(lyr) {
-        if (!lyr.get('name'))
-            return;
 
-        if (lyr.get('type') === 'base') {
-            if (MapType === lyr.get('name')) {
-                foundType = true;
-                lyr.setVisible(true);
-            } else {
-                lyr.setVisible(false);
-            }
-
-            lyr.on('change:visible', function(evt) {
-                if (evt.target.getVisible()) {
-                    MapType = localStorage['MapType'] = evt.target.get('name');
-                }
-            });
-        } else if (lyr.get('type') === 'overlay') {
-            var visible = localStorage['layer_' + lyr.get('name')];
-            if (visible != undefined) {
-                // javascript, why must you taunt me with gratuitous type problems
-                lyr.setVisible(visible === "true");
-            }
-
-            lyr.on('change:visible', function(evt) {
-                localStorage['layer_' + evt.target.get('name')] = evt.target.getVisible();
-            });
-        }
-    })
-
-    if (!foundType) {
-        ol.control.LayerSwitcher.forEachRecursive(layers, function(lyr) {
-            if (foundType)
-                return;
-            if (lyr.get('type') === 'base') {
-                lyr.setVisible(true);
-                foundType = true;
-            }
-        });
-    }
-*/
     OLMap = new ol.Map({
         target: 'map_canvas',
         layers: layers,
@@ -509,28 +486,25 @@ function initialize_map() {
         }),
         controls: [new ol.control.Zoom(),
             new ol.control.Rotate(),
-            new ol.control.Attribution({ collapsed: true }),
-            new ol.control.ScaleLine({ units: Metric ? "metric" : "nautical" }),
-            new ol.control.LayerSwitcher(),
-            new ol.control.FullScreen()
+            new ol.control.FullScreen(),
+            new ol.control.ScaleLine({
+                units: Metric ? "metric" : "nautical"
+            }),
+            new ol.control.LayerSwitcher()
         ],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true
     });
 
-    ol3d = new olcs.OLCesium({
-        map: OLMap,
-      });
-
-      var layerSwitcher = new LayerSwitcher({
+    var layerSwitcher = new LayerSwitcher({
         reverse: false,
         groupSelectStyle: 'group',
-        activationMode: 'mouseover'
-      });
-      OLMap.addControl(layerSwitcher);
+        activationMode: 'click'
+    });
+    OLMap.addControl(layerSwitcher);
 
     // Listeners for newly created Map
-    OLMap.on("moveend", function() {
+    OLMap.on("moveend", function () {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
         if (TAB === 'METAR') {
             nearestStations(center[1], center[0])
@@ -539,7 +513,7 @@ function initialize_map() {
         fetchData()
     })
 
-    OLMap.getView().on('change:center', function(event) {
+    OLMap.getView().on('change:center', function (event) {
         var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
         localStorage['CenterLon'] = center[0]
         localStorage['CenterLat'] = center[1]
@@ -554,19 +528,19 @@ function initialize_map() {
         }
     });
 
-    OLMap.getView().on('change:resolution', function(event) {
+    OLMap.getView().on('change:resolution', function (event) {
         localStorage['ZoomLvl'] = OLMap.getView().getZoom();
         getBounds()
         fetchData()
     });
 
-    OLMap.on(['click', 'dblclick'], function(evt) {
+    OLMap.on(['click', 'dblclick'], function (evt) {
         var hex = evt.map.forEachFeatureAtPixel(evt.pixel,
-            function(feature, layer) {
+            function (feature, layer) {
                 return feature.hex;
             },
             20,
-            function(layer) {
+            function (layer) {
                 return (layer === iconsLayer);
             },
             null);
@@ -582,7 +556,9 @@ function initialize_map() {
             image: new ol.style.Circle({
                 radius: 7,
                 snapToPixel: false,
-                fill: new ol.style.Fill({ color: 'black' }),
+                fill: new ol.style.Fill({
+                    color: 'black'
+                }),
                 stroke: new ol.style.Stroke({
                     color: 'white',
                     width: 2
@@ -641,7 +617,7 @@ function initialize_map() {
         cache: true,
         dataType: 'json'
     });
-    request.done(function(data) {
+    request.done(function (data) {
         var ringStyle = new ol.style.Style({
             fill: null,
             stroke: new ol.style.Stroke({
@@ -667,7 +643,7 @@ function initialize_map() {
         }
     });
 
-    request.fail(function(jqxhr, status, error) {
+    request.fail(function (jqxhr, status, error) {
         // no rings available, do nothing
     });
     goHome()
@@ -681,7 +657,7 @@ function reaper() {
     var newPlanes = [];
     for (var i = 0; i < PlanesOrdered.length; ++i) {
         var plane = PlanesOrdered[i];
-       
+
         if (plane.seen > 300) {
             // Reap it.                                
             //console.log("Reaping " + plane.icao);
@@ -689,7 +665,7 @@ function reaper() {
             plane.tr.parentNode.removeChild(plane.tr);
             plane.tr = null;
             delete Planes[plane.icao];
-            plane.destroy();          
+            plane.destroy();
         } else {
             // Keep it.
             newPlanes.push(plane);
@@ -827,7 +803,7 @@ function refreshSelected() {
     } else {
         var mlat_bit = (selected.position_from_mlat ? "MLAT: " : "");
         if (selected.seen_pos > 1) {
-            $('#selected_position').text(mlat_bit + format_latlng(selected.position) + " (" + selected.seen_pos.toFixed(1) + "s)");
+            $('#selected_position').text("(" + mlat_bit + format_latlng(selected.position) + ")");
         } else {
             $('#selected_position').text(mlat_bit + format_latlng(selected.position));
         }
@@ -917,25 +893,65 @@ function compareNumeric(xf, yf) {
     return xf - yf;
 }
 
-function sortByICAO() { sortBy('icao', compareAlpha, function(x) { return x.icao; }); }
+function sortByICAO() {
+    sortBy('icao', compareAlpha, function (x) {
+        return x.icao;
+    });
+}
 
-function sortByFlight() { sortBy('flight', compareAlpha, function(x) { return x.flight; }); }
+function sortByFlight() {
+    sortBy('flight', compareAlpha, function (x) {
+        return x.flight;
+    });
+}
 
-function sortBySquawk() { sortBy('squawk', compareAlpha, function(x) { return x.squawk; }); }
+function sortBySquawk() {
+    sortBy('squawk', compareAlpha, function (x) {
+        return x.squawk;
+    });
+}
 
-function sortByAltitude() { sortBy('altitude', compareNumeric, function(x) { return (x.altitude == "ground" ? -1e9 : x.altitude); }); }
+function sortByAltitude() {
+    sortBy('altitude', compareNumeric, function (x) {
+        return (x.altitude == "ground" ? -1e9 : x.altitude);
+    });
+}
 
-function sortBySpeed() { sortBy('speed', compareNumeric, function(x) { return x.speed; }); }
+function sortBySpeed() {
+    sortBy('speed', compareNumeric, function (x) {
+        return x.speed;
+    });
+}
 
-function sortByDistance() { sortBy('sitedist', compareNumeric, function(x) { return x.sitedist; }); }
+function sortByDistance() {
+    sortBy('sitedist', compareNumeric, function (x) {
+        return x.sitedist;
+    });
+}
 
-function sortByTrack() { sortBy('track', compareNumeric, function(x) { return x.track; }); }
+function sortByTrack() {
+    sortBy('track', compareNumeric, function (x) {
+        return x.track;
+    });
+}
 
-function sortByMsgs() { sortBy('msgs', compareNumeric, function(x) { return x.messages; }); }
+function sortByMsgs() {
+    sortBy('msgs', compareNumeric, function (x) {
+        return x.messages;
+    });
+}
 
-function sortBySeen() { sortBy('seen', compareNumeric, function(x) { return x.seen; }); }
+function sortBySeen() {
+    sortBy('seen', compareNumeric, function (x) {
+        return x.seen;
+    });
+}
 
-function sortByCountry() { sortBy('country', compareAlpha, function(x) { return x.icaorange.country; }); }
+function sortByCountry() {
+    sortBy('country', compareAlpha, function (x) {
+        return x.icaorange.country;
+    });
+}
 
 var sortId = '';
 var sortCompare = null;
@@ -998,13 +1014,13 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].clearLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).removeClass("selected");
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
+        closeSidebar()
+        document.getElementById("tableinfo").style.display = "block"
     }
 
 
@@ -1013,34 +1029,36 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
+        closeSidebar()
+        radarRadarTabSwitch()
+        document.getElementById("tableinfo").style.display = "block"
+
     }
 
     if (hex !== null) {
         // Assign the new selected
         SelectedPlane = hex;
-
+        document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+        tabBackgroundImage()
+        expandSidebar()
+        radarRadarTabSwitch()
+        updateFlightTab()
+        document.getElementById("tableinfo").style.display = "none"
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
-        document.getElementById("radar_flight_tab_button").disabled = false
-        document.getElementById("radar_aircraft_tab_button").disabled = false
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
-        updateFlightTab()
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
         document.getElementById("radar_flight_info").style.display = "none"
         document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
