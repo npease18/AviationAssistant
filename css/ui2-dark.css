@@ -30,7 +30,7 @@
 }
 
 #aircraft_info_overlay {
-    color: white;
+    color: rgba(255, 255, 255, .7);
     font-size: large;
     position: absolute;
     top: 175px;
@@ -162,10 +162,29 @@
     top: 30%;
 }
 
+#button_background {
+    background-color: rgba(255, 255, 255, .7);
+}
+
 #external_mode_button {
     left: 50%;
     position: relative;
     right: 50%;
+    background-color: rgba(255, 255, 255, .7);
+}
+
+#power_table > tbody > tr:nth-child(1) > td:nth-child(1) > button
+{
+	background-color: rgba(255, 255, 255, .7);
+}
+
+#power_table > tbody > tr:nth-child(1) > td:nth-child(2) > button
+{
+	background-color: rgba(255, 255, 255, .7);
+}
+#power_table > tbody > tr:nth-child(1) > td:nth-child(3) > button
+{
+	background-color: rgba(255, 255, 255, .7);
 }
 
 #external_title {
@@ -275,7 +294,7 @@
 }
 
 #lock_button {
-    background-color: rgba(255, 255, 255, .3);
+    background-color: rgba(0, 0, 0, .3);
     line-height: 0%;
     margin-bottom: -80px;
     position: absolute;
@@ -332,9 +351,9 @@
 }
 
 #power_modal>.modal-content {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     font-size: 18px;
     height: 30%;
     left: 25%;
@@ -410,7 +429,7 @@
 }
 
 #sidebar_close {
-    color: rgba(0, 0, 0, .7);
+    color: rgba(255, 255, 255, .7);
     cursor: pointer;
     position: fixed;
     right: 5px;
@@ -418,10 +437,10 @@
 }
 
 #sidebar_open_button {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     cursor: pointer;
     height: 25%;
     padding: 2px;
@@ -470,14 +489,14 @@
 }
 
 .secondaryHeader th {
-    background-color: white;
+    background-color: rgba(255, 255, 255, .7);
     color: black;
     font-weight: bolder;
     text-transform: uppercase;
 }
 
 .itinheader {
-    background-color: white;
+    background-color: rgba(255, 255, 255, .7);
     color: black;
     font-weight: bolder;
     padding-left: 25px;
@@ -550,6 +569,7 @@
     color: rgba(255, 255, 255, .8);
     table-layout: fixed;
     width: 100%;
+    border: rgba(255, 255, 255, .7) solid 2px;
 }
 
 .mainHeader {
@@ -666,6 +686,8 @@
 
 .plane_table_row {
     cursor: pointer;
+    background-color: rgba(0, 0, 0, .7);
+	border: rgba(255, 255, 255, .5);
 }
 
 .pointer {
@@ -789,10 +811,17 @@ div#map_container {
     width: 100%;
 }
 
+#planes_table > tr > td
+{
+	border-bottom: solid rgba(255, 255, 255, .7) .5px;
+	text-align: center;
+}
+
 div#nav_bar {
-    background: rgba(255, 255, 255, 0.8);
+	color: rgba(255, 255, 255, .7);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     height: 40px;
     left: 10%;
     padding: 5px;
@@ -803,9 +832,9 @@ div#nav_bar {
 }
 
 div#itin_nav_bar {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     height: 40px;
     left: 10%;
     padding: 5px;
@@ -816,16 +845,16 @@ div#itin_nav_bar {
 }
 
 #itin_title {
-    color: rgba(0, 0, 0, .7);
+    color: rgba(255, 255, 255, .7);
     position: absolute;
     right: 10px;
     top: -18px;
 }
 
 div#sidebar_container {
-    background-color: rgba(255, 255, 255, .9);
+    background-color: rgba(0, 0, 0, .9);
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: none;
     height: 85%;
     ms-overflow-style: none;
@@ -882,8 +911,11 @@ div#update_error {
 }
 
 div.atc_state {
+	background-color: rgba(0, 0, 0, .1);
+	border: 1px solid rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, .9);
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: flex;
     float: left;
     height: 50px;
@@ -895,9 +927,14 @@ div.atc_state {
     width: 24%;
 }
 
+#branch_button
+{
+	background-color: rgba(255, 255, 255, .7);
+}
+
 .itin_state {
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     cursor: pointer;
     display: flex;
     float: left;
@@ -911,7 +948,7 @@ div.atc_state {
 }
 
 .itin_header {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: inline-block;
     height: 50px;
     line-height: 50px;
@@ -923,7 +960,7 @@ div.atc_state {
 }
 
 .itin_header1 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: inline-block;
     height: 50px;
     line-height: 50px;
@@ -941,10 +978,6 @@ div.atc_state {
     top: 15px;
 }
 
-
-#home_button {
-	background-color: transparent;
-}
 
 #itin_arrivals {
     bottom: 10px;
@@ -965,7 +998,7 @@ div.atc_state {
 }
 
 #itin_info button {
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(0, 0, 0, .7);
 }
 
 #itin_info {
@@ -1031,7 +1064,7 @@ div.atc_state {
 }
 
 div.atc_header {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: inline-block;
     height: 50px;
     line-height: 50px;
@@ -1043,7 +1076,7 @@ div.atc_header {
 }
 
 div.atc_header1 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: inline-block;
     height: 50px;
     line-height: 50px;
@@ -1059,6 +1092,44 @@ div.atc_header1 {
     text-align: center;
 }
 
+#map_container {
+    color: black
+}
+#planes_table {
+    background-color: black;
+    cursor: pointer;
+}
+#metar_loading {
+    top: 4px;
+}
+#liveatc_button {
+    color: rgba(255, 255, 255, .8);
+}
+#metar_button {
+    color: rgba(255, 255, 255, .8);
+}
+#radar_button {
+    color: rgba(255, 255, 255, .8);
+}
+#radar_flight_tab_button {
+    color: rgba(255, 255, 255, .7);
+}
+#radar_aircraft_tab_button {
+    color: rgba(255, 255, 255, .7);
+}
+#radar_radar_tab_button {
+    color: rgba(255, 255, 255, .7);
+}
+
+#home_button {
+    color:rgba(255, 255, 255, .7);
+    background-color: transparent;
+}
+
+#audioControl {
+    background-color: rgba(255, 255, 255, .5);
+}
+
 html,
 body {
     font-family: Tahoma, Sans-Serif;
@@ -1066,6 +1137,8 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #000000;
+    color: rgba(255, 255, 255, .7);
 }
 
 html::-webkit-scrollbar {
