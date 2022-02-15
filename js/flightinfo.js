@@ -27,7 +27,6 @@ function updateFlightTab() {
                         document.getElementById("flight_progress_div").style.display = "none"
                         document.getElementById('additional_info_hidden').style.display = "none"
                         document.getElementById("img_button").disabled = true
-                        document.getElementById("radar_aircraft_tab_button").disabled = true
 
                         document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
                         document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
@@ -39,7 +38,6 @@ function updateFlightTab() {
                         for (element in internet_mode_data) {
                             if (internet_mode_data[element].hex === SelectedPlane) {
                                 var data = internet_mode_data[element]
-                                console.log(internet_mode_data[element])
                                 if (data.airline != "") {
                                     document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                     document.getElementById("flight_status").innerHTML = ""
@@ -165,8 +163,6 @@ function flightInfo(data, world_airports, world_airlines) {
         }
     } catch {
         radarRadarTabSwitch()
-        document.getElementById("radar_flight_tab_button").disabled = true
-        document.getElementById("radar_aircraft_tab_button").disabled = true
     }
 }
 
@@ -191,7 +187,6 @@ function getAircraftInfo(aircraft_information, data) {
 
     } else {
         radarRadarTabSwitch()
-        document.getElementById("radar_aircraft_tab_button").disabled = true
 
     }
 }
