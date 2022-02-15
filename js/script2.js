@@ -481,11 +481,11 @@ function changeColorMode() {
         document.getElementById("graphs_image").setAttribute("src", "images/dark/graphs.png")
         document.getElementById("settings_image").setAttribute("src", "images/dark/settings.png")
         document.getElementById("settings_logo").setAttribute("src", "images/dark/logo.png")
-        themeStylesheet.href = 'css/ui1-dark.css'
+        themeStylesheet.href = 'css/ui2-dark.css'
         // themeToggle.innerText = 'Switch to light mode'
     } else {
         // if it's dark -> go light
-        themeStylesheet.href = 'css/ui1-light.css'
+        themeStylesheet.href = 'css/ui2-light.css'
         document.getElementById("logo").setAttribute("src", "images/light/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/light/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/light/itinerary.png")
@@ -528,6 +528,9 @@ function goRadar() {
 }
 
 function goItinerary() {
+    document.getElementById("metar_container").style.display = "none"
+    document.getElementById("radar_container").style.display = "none"
+    document.getElementById("atc_container").style.display = "none"
     document.getElementById("radar_page").style.display = "block"
     document.getElementById("itin_nav_bar").style.display = "block"
     document.getElementById("nav_bar").style.display = "none"
@@ -637,3 +640,10 @@ function hsl_col_perc(percent, start, end) {
     // hsl_col_perc(bed_percent, 0, 120)
 }
 
+function toggleMarkers() {
+    if (text_labels) {
+        text_labels = 0
+    } else {
+        text_labels = 1
+    }
+}

@@ -125,11 +125,11 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background" class=" mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
                         </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
@@ -137,14 +137,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised"
+                        <button id="button_background" class="mdl-button mdl-js-button mdl-button--raised"
                             onclick="sendCMD('update')">
                             Check For Updates
                         </button>
                     </td>
 
                     <td>
-                        <button id="home_button" class="mdl-button mdl-js-button mdl-button--raised"
+                        <button id="button_background" class="mdl-button mdl-js-button mdl-button--raised"
                             onclick="window.close();opener.window.focus();">
                             Close Application
                         </button>
@@ -224,15 +224,32 @@
         </div>
         <div id="itin_nav_bar">
             <!-- Raised button with ripple -->
-            <button id="home_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+            <button id="home_button" class="mdl-button mdl-js-button mdl-button--icon"
                 style="width: 40px; height: 40px; min-width: initial;" onclick="goHome()">
                 <i class="material-icons">home</i>
             </button>
-            <h3 id="itin_title">Airport Itinerary</h3>
-            <select id="itinerary_states" name="states" onchange="itineraryLoadAirports()" style="display: none;">
-            </select>
-            <select id="itinerary_airports" name="airports" style="display: none;" onchange="airportSchedule()">
-            </select>
+            <span style="float: right;">
+                <!-- FAB button with ripple -->
+                <button id="vol_down_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;" onclick="volDown()">
+                    <i class="material-icons">remove</i>
+                </button>
+                <span id="volume_text">Volume - <span id="volume_level"></span>%</span>
+                <!-- FAB button with ripple -->
+                <button id="vol_up_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;" onclick="volUp()">
+                    <i class="material-icons">add</i>
+                </button>
+
+
+                <!-- FAB button with ripple -->
+                <button id="power_button" class="mdl-button mdl-js-button mdl-button--icon"
+                    style="width: 40px; height: 40px; min-width: initial;">
+                    <i class="material-icons">power_settings_new</i>
+                </button>
+
+            </span>
+           
         </div>
         <div id="map_container">
             <div id="map_canvas"></div>
@@ -250,9 +267,6 @@
                     <div id="itin_airport_long_name"></div>
                     <div id="itin_airport_city"></div>
                     <div id="itin_airport_loc"></div>
-                    <button id="itin_air_info" onclick="itinAirportInfo()" class="mdl-button mdl-js-button mdl-button--raised">
-                        Airport Info
-                      </button>
                       <button id="itin_arrivals" onclick="itinAirportArrivals()" class="mdl-button mdl-js-button mdl-button--raised">
                         Arrivals Chart
                       </button>

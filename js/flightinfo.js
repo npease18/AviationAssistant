@@ -38,7 +38,6 @@ function updateFlightTab() {
                         for (element in internet_mode_data) {
                             if (internet_mode_data[element].hex === SelectedPlane) {
                                 var data = internet_mode_data[element]
-                                console.log(internet_mode_data[element])
                                 if (data.airline != "") {
                                     document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                     document.getElementById("flight_status").innerHTML = ""
