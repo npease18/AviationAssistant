@@ -238,6 +238,7 @@ function initialize() {
     modal()
     sendCMD("getbranch")
     window.setInterval(readBatteryLevel, 1000);
+    window.setInterval(getBounds, 60000)
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
     //window.setInterval(fetchInternetAircraft, 1000)
