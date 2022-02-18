@@ -495,8 +495,11 @@
     text-transform: uppercase;
 }
 
+#itin_body {
+    background-color: rgba(0, 0, 0, .9);
+}
+
 .itinheader {
-    background-color: rgba(255, 255, 255, .7);
     color: black;
     font-weight: bolder;
     padding-left: 25px;
@@ -821,7 +824,7 @@ div#nav_bar {
 	color: rgba(255, 255, 255, .7);
     background: rgba(0, 0, 0, 0.8);
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 15px 0 rgba(255, 255, 255, 0.19);
     height: 40px;
     left: 10%;
     padding: 5px;
@@ -927,8 +930,7 @@ div.atc_state {
     width: 24%;
 }
 
-#branch_button
-{
+#branch_button {
 	background-color: rgba(255, 255, 255, .7);
 }
 
@@ -983,22 +985,29 @@ div.atc_state {
     bottom: 10px;
     left: 10px;
     position: absolute;
+    
+}
+
+#itinerary_container {
+    background-color: rgba(255, 255, 255, .7);
 }
 
 #itin_back {
     top: 72px;
     left: 10px;
     position: absolute;
+    background-color: rgba(255, 255, 255, .7);
 }
 
 #itin_departures {
     bottom: 10px;
     position: absolute;
     right: 10px;
+    background-color: rgba(255, 255, 255, .7);
 }
 
 #itin_info button {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(255, 255, 255, .7);
 }
 
 #itin_info {
