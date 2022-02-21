@@ -13,6 +13,10 @@ def brightness():
         status = os.popen('sudo cat /sys/class/backlight/rpi_backlight/brightness').read()
       return status
 
+@app.route('/connection',methods = ['POST'])
+def connection():
+   if request.method == 'POST':
+      return "OK"
 
 @app.route('/audio',methods = ['POST'])
 def volume():
