@@ -13,6 +13,28 @@ def brightness():
         status = os.popen('sudo cat /sys/class/backlight/rpi_backlight/brightness').read()
       return status
 
+@app.route('/connection',methods = ['GET'])
+def connection():
+   if request.method == 'GET':
+      return "OK"
+
+@app.route('/authentication',methods = ['POST'])
+def authentication():
+   json = request.get_json()
+   if json['username'] == "npease" and json['password'] == "1118":
+     return "OK"
+   else:
+     return "NO"
+
+@app.route('/information',methods = ['GET'])
+def information():
+  ip = os.popen("ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'").read()
+  json = {
+    "name": name,
+    "version": version,
+    "ip": ip
+  }
+  return json
 
 @app.route('/audio',methods = ['POST'])
 def volume():
