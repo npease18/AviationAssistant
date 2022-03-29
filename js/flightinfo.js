@@ -287,7 +287,7 @@ function getTripProgress(arrival_time, departure_time) {
 // Get image of aircraft
 function getPlaneImage(flightdata) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
