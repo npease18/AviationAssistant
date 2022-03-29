@@ -435,7 +435,7 @@ function sendCMD(cmd) {
 function tabBackgroundImage() {
     if (Planes[SelectedPlane].registration !== null) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+        xhr.open("GET", "http://127.0.0.1:7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -451,9 +451,7 @@ function tabBackgroundImage() {
                 return
             }
         }
-        xhr.send(JSON.stringify({
-            command: "curl https://www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration
-        }));
+        xhr.send();
     } else {
         document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
         document.getElementById("sidebar_close").style.color = "rgba(255,255,255,.7)"
