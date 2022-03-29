@@ -435,7 +435,7 @@ function sendCMD(cmd) {
 function tabBackgroundImage() {
     if (Planes[SelectedPlane].registration !== null) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://127.0.0.1:7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
+        xhr.open("GET", "http://"+window.location.hostname+":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
