@@ -329,7 +329,7 @@ function getPlaneImage(flightdata) {
         }
     }
     xhr.send(JSON.stringify({
-        command: "curl https://www.jetphotos.com/photo/keyword/" + flightdata.aircraft.regNumber
+        command: "curl https://127.0.0.1:7000/www.jetphotos.com/photo/keyword/" + flightdata.aircraft.regNumber
     }));
 }
 
