@@ -113,7 +113,6 @@ function flightInfo(data, world_airports, world_airlines) {
             document.getElementById("flight_airline").innerHTML = "N/A "
         }
     } catch {
-        radarRadarTabSwitch()
     }
 }
 
@@ -135,9 +134,6 @@ function getAircraftInfo(aircraft_information, data) {
         if (aircraft.firstFlight) {
             document.getElementById("aircraft_first_flight").innerHTML = DateTime.fromISO(aircraft.firstFlight).toLocaleString("DATE_SHORT")
         }
-
-    } else {
-        radarRadarTabSwitch()
 
     }
 }
