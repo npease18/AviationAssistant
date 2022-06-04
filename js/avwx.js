@@ -1,5 +1,11 @@
 var baseurl = "https://avwx.rest/api/"
 
+/**
+ * "This function takes two arguments, x and y, and uses them to make an AJAX call to a weather API,
+ * then it takes the data returned from the API and displays it on the page."
+ * @param x - longitude
+ * @param y - latitude
+ */
 function nearestStations(x, y) {
     FetchPending = $.ajax({
         url: baseurl + 'metar/' + x + ',' + y + '?token=' + keys['AVWX'] + '&options=info&format=json',
