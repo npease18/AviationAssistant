@@ -45,7 +45,7 @@ function playPLS(url, title) {
         // PLS INFO
         const proxyurl = "http://" + window.location.hostname + ":7000/";
         var request = $.ajax({
-            url: 'json/liveatc.json',
+            url: 'information/liveatc.json',
             timeout: 5000,
             cache: true,
             dataType: 'json'
@@ -80,7 +80,7 @@ function playPause() {
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
@@ -118,7 +118,7 @@ function selectState(state) {
     var node = document.createElement("hr")
     document.getElementById("atc_selector").appendChild(node)
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
@@ -165,7 +165,7 @@ function selectAirport(airport, state) {
     var node = document.createElement("hr")
     document.getElementById("atc_selector").appendChild(node)
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
