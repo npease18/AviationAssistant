@@ -7,4 +7,5 @@ json/keys.json
 /data/battery.json
 /data/
 /.vscode/
-/information_files
+/information_files/
+/information/
