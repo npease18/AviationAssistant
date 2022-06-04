@@ -1,3 +1,8 @@
+/**
+ * It takes a URL and a title, and then it plays the audio stream at the URL.
+ * @param url - The URL of the PLS file
+ * @param title - The title of the stream
+ */
 function playPLS(url, title) {
     window.setInterval(function () {
         if (document.getElementById("player").readyState === 3 || document.getElementById("player").readyState === 4) {
@@ -65,6 +70,10 @@ function playPLS(url, title) {
     })
 
 }
+/**
+ * If the icon is a play button, play the audio and change the icon to a pause button. If the icon is a
+ * pause button, pause the audio and change the icon to a play button.
+ */
 
 function playPause() {
     var text = document.getElementById("audioControl_icon").innerHTML
@@ -76,6 +85,10 @@ function playPause() {
         document.getElementById("audioControl_icon").innerHTML = "play_arrow"
     }
 }
+/**
+ * It creates a div for each state in the JSON file, and then adds a div with a bunch of line breaks to
+ * the end.
+ */
 
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
@@ -100,6 +113,10 @@ function listStations() {
     })
 }
 
+/**
+ * It takes a state name as an argument, and then it creates a list of airports in that state.
+ * @param state - The state that the user has selected
+ */
 
 function selectState(state) {
     document.getElementById("atc_selector").innerHTML = ""
@@ -143,6 +160,12 @@ function selectState(state) {
     })
 }
 
+/**
+ * It takes the airport code and state code and then uses the airport code to find the feeds for that
+ * airport in the JSON file.
+ * @param airport - The airport code
+ * @param state - The state that the airport is in
+ */
 
 function selectAirport(airport, state) {
     document.getElementById("atc_selector").innerHTML = ""

@@ -1,5 +1,9 @@
 var us_airports = {}
 
+/**
+ * It creates a div for each state in the us_airports object, and when clicked, it calls the
+ * loadAirport function with the state as the argument.
+ */
 function initializeSchedulesPage() {
     document.getElementById("itin_body").innerHTML = ""
     document.getElementById("itin_img").setAttribute("src", 'images/black.jpg')
@@ -21,6 +25,10 @@ function initializeSchedulesPage() {
         }
     })
 }
+/**
+ * It loads the airports in a state.
+ * @param state - The state that the user has selected
+ */
 
 function loadAirport(state) {
     document.getElementById("itin_img").setAttribute("src", 'images/black.jpg')
@@ -51,7 +59,13 @@ function loadAirport(state) {
         }
     }
 }
-
+/* Retrieving the schedule for a given airport. */
+/**
+ * It takes in an airport code and state, and then it uses ajax to retrieve the airport's schedule from
+ * a server.
+ * @param airport - "KLAX"
+ * @param state - "California"
+ */
 function retrieveSchedule(airport, state) {
     document.getElementById("itin_arr").style.display = "none"
     document.getElementById("itin_dep").style.display = "none"
