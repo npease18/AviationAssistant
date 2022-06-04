@@ -282,8 +282,6 @@
     right: 10px;
 }
 
-#arrivals {}
-
 #loader_progress {
     height: 20px;
     left: 50%;
@@ -679,12 +677,7 @@
 }
 
 .noselect {
-    khtml-user-select: none;
-    moz-user-select: none;
-    ms-user-select: none;
     user-select: none;
-    webkit-touch-callout: none;
-    webkit-user-select: none;
 }
 
 .plane_table_row {
@@ -860,11 +853,9 @@ div#sidebar_container {
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
     display: none;
     height: 85%;
-    ms-overflow-style: none;
     overflow: auto;
     position: absolute;
     right: 5px;
-    scrollbar-width: none;
     top: 60px;
     width: 390px;
     z-index: 1;
@@ -1120,16 +1111,6 @@ div.atc_header1 {
 #radar_button {
     color: rgba(255, 255, 255, .8);
 }
-#radar_flight_tab_button {
-    color: rgba(255, 255, 255, .7);
-}
-#radar_aircraft_tab_button {
-    color: rgba(255, 255, 255, .7);
-}
-#radar_radar_tab_button {
-    color: rgba(255, 255, 255, .7);
-}
-
 #home_button {
     color:rgba(255, 255, 255, .7);
     background-color: transparent;
