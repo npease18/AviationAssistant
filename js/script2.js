@@ -177,42 +177,6 @@ function modal() {
             modal.style.display = "none";
         }
     }
-    modal2()
-}
-
-function modal2() {
-    var modal = document.getElementById("image_modal");
-    var btn = document.getElementById("img_button");
-    var span = document.getElementById("close_modal2");
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    modal3()
-}
-
-function modal3() {
-    var modal = document.getElementById("aircraft_modal");
-    var btn = document.getElementById("aircraft_button");
-    var span = document.getElementById("close_modal3");
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
     modal4()
 }
 
@@ -567,23 +531,6 @@ function itinAirportDepartures() {
     document.getElementById("itin_info").style.display = "none"
 }
 
-function radarRadarTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "block"
-    document.getElementById("radar_flight_tab").style.display = "none"
-    document.getElementById("radar_aircraft_tab").style.display = "none"
-}
-
-function radarFlightTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "none"
-    document.getElementById("radar_flight_tab").style.display = "block"
-    document.getElementById("radar_aircraft_tab").style.display = "none"
-}
-
-function radarAircraftTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "none"
-    document.getElementById("radar_flight_tab").style.display = "none"
-    document.getElementById("radar_aircraft_tab").style.display = "block"
-}
 
 function changeGraphsTime() {
     var time = document.getElementById("graphs_time").value

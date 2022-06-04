@@ -1014,10 +1014,6 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].clearLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).removeClass("selected");
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
         closeSidebar()
         document.getElementById("tableinfo").style.display = "block"
@@ -1029,8 +1025,6 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
@@ -1053,14 +1047,10 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
         document.getElementById("radar_aircraft_info").style.display = "none"
         document.getElementById("radar_aircraft_loading").style.display = "block"
     }
