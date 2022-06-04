@@ -1029,7 +1029,6 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
         closeSidebar()
-        radarRadarTabSwitch()
         document.getElementById("tableinfo").style.display = "block"
 
     }
@@ -1040,19 +1039,14 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
         tabBackgroundImage()
         expandSidebar()
-        radarRadarTabSwitch()
         updateFlightTab()
         document.getElementById("tableinfo").style.display = "none"
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
     }
 
     if (SelectedPlane !== null && autofollow) {
