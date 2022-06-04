@@ -1025,8 +1025,6 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
         closeSidebar()
         document.getElementById("tableinfo").style.display = "block"
@@ -1080,15 +1078,4 @@ function resetMap() {
     OLMap.getView().setCenter(ol.proj.fromLonLat([CenterLon, CenterLat]));
 
     selectPlaneByHex(null, false);
-}
-
-function toggleOffline() {
-    // Activates Offline Mode
-    if (OfflineMode === true) {
-        OfflineMode = false
-        console.log("False")
-    } else {
-        OfflineMode = true
-        console.log("True")
-    }
 }
