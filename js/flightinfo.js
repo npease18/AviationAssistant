@@ -17,7 +17,6 @@ function updateFlightTab() {
                             var data = internet_mode_data[element]
                             if (data.airline != "") {
                                 document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
-                                document.getElementById("flight_flighticaonum").innerHTML = data.flight
                                 try {
                                     document.getElementById("flight_airline").innerHTML = world_airlines[data.airline].nameAirline + " "
                                 } catch {
@@ -26,7 +25,6 @@ function updateFlightTab() {
                             } else {
                                 //document.getElementById("flight_flightnum").innerHTML = data.flight.replace(/\D/g, "")
                                 document.getElementById("flight_flightnum").innerHTML = ""
-                                document.getElementById("flight_flighticaonum").innerHTML = data.flight
                                 document.getElementById("flight_airline").innerHTML = data.flight
                             }
                             for (airport_search in world_airports) {
