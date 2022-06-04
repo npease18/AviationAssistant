@@ -9,12 +9,12 @@ function updateFlightTab() {
                     document.getElementById('additional_info_hidden').style.display = "none"
                     document.getElementById("img_button").disabled = true
 
-                    document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
-                    document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
-                    document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
-                    document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
-                    document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
-                    document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+                    document.getElementById("flight_airport_long_destination").innerHTML = ""
+                    document.getElementById("flight_airport_short_destination").innerHTML = ""
+                    document.getElementById("flight_airport_loc_destination").innerHTML = ""
+                    document.getElementById("flight_airport_long_origin").innerHTML = ""
+                    document.getElementById("flight_airport_short_origin").innerHTML = ""
+                    document.getElementById("flight_airport_loc_origin").innerHTML = ""
 
                     for (element in internet_mode_data) {
                         if (internet_mode_data[element].hex === SelectedPlane) {
@@ -43,14 +43,14 @@ function updateFlightTab() {
                                         document.getElementById("flight_airport_short_destination").innerHTML = airport.icao
                                         document.getElementById("flight_airport_loc_destination").innerHTML = airport.city + ", " + country_names[airport.country]
                                     } catch {
-                                        document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
-                                        document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
-                                        document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_long_destination").innerHTML = ""
+                                        document.getElementById("flight_airport_short_destination").innerHTML = ""
+                                        document.getElementById("flight_airport_loc_destination").innerHTML = ""
                                     }
                                 } else if (internet_mode_data[element].arr === "") {
-                                    document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
-                                    document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
-                                    document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+                                    document.getElementById("flight_airport_long_destination").innerHTML = ""
+                                    document.getElementById("flight_airport_short_destination").innerHTML = ""
+                                    document.getElementById("flight_airport_loc_destination").innerHTML = ""
                                 }
 
                                 if (world_airports[airport_search].iata === internet_mode_data[element].dep && internet_mode_data[element].dep != "") {
@@ -60,14 +60,14 @@ function updateFlightTab() {
                                         document.getElementById("flight_airport_short_origin").innerHTML = airport.icao
                                         document.getElementById("flight_airport_loc_origin").innerHTML = airport.city + ", " + country_names[airport.country]
                                     } catch {
-                                        document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
-                                        document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
-                                        document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+                                        document.getElementById("flight_airport_long_origin").innerHTML = ""
+                                        document.getElementById("flight_airport_short_origin").innerHTML = ""
+                                        document.getElementById("flight_airport_loc_origin").innerHTML = ""
                                     }
                                 } else if (internet_mode_data[element].dep === "") {
-                                    document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
-                                    document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
-                                    document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+                                    document.getElementById("flight_airport_long_origin").innerHTML = ""
+                                    document.getElementById("flight_airport_short_origin").innerHTML = ""
+                                    document.getElementById("flight_airport_loc_origin").innerHTML = ""
                                 }
                             }
                         }
@@ -91,9 +91,9 @@ function flightInfo(data, world_airports, world_airlines) {
             document.getElementById("flight_airport_short_origin").innerHTML = data.departure.icaoCode
             document.getElementById("flight_airport_loc_origin").innerHTML = world_airports[data.departure.icaoCode].city + ", " + country_names[world_airports[data.departure.icaoCode].country]
         } catch {
-            document.getElementById("flight_airport_long_origin").innerHTML = "N/A"
-            document.getElementById("flight_airport_short_origin").innerHTML = "N/A"
-            document.getElementById("flight_airport_loc_origin").innerHTML = "N/A"
+            document.getElementById("flight_airport_long_origin").innerHTML = ""
+            document.getElementById("flight_airport_short_origin").innerHTML = ""
+            document.getElementById("flight_airport_loc_origin").innerHTML = ""
         }
 
         try {
@@ -101,9 +101,9 @@ function flightInfo(data, world_airports, world_airlines) {
             document.getElementById("flight_airport_short_destination").innerHTML = data.arrival.icaoCode
             document.getElementById("flight_airport_loc_destination").innerHTML = world_airports[data.arrival.icaoCode].city + ", " + country_names[world_airports[data.arrival.icaoCode].country]
         } catch {
-            document.getElementById("flight_airport_long_destination").innerHTML = "N/A"
-            document.getElementById("flight_airport_short_destination").innerHTML = "N/A"
-            document.getElementById("flight_airport_loc_destination").innerHTML = "N/A"
+            document.getElementById("flight_airport_long_destination").innerHTML = ""
+            document.getElementById("flight_airport_short_destination").innerHTML = ""
+            document.getElementById("flight_airport_loc_destination").innerHTML = ""
         }
 
 
