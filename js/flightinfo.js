@@ -5,7 +5,7 @@ function updateFlightTab() {
             $.getJSON('json/world_airports.json', function (world_airports) {
                 $.getJSON('json/airplanes.json', function (aircraft_information) {
                     // Planes[SelectedPlane] gives 
-                    document.getElementById("flight_progress_div").style.display = "none"
+                   
                     document.getElementById('additional_info_hidden').style.display = "none"
                     document.getElementById("img_button").disabled = true
 
