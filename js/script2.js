@@ -584,11 +584,3 @@ function hsl_col_perc(percent, start, end) {
     return 'hsl(' + c + ', 100%, 50%)';
     // hsl_col_perc(bed_percent, 0, 120)
 }
-
-function toggleMarkers() {
-    if (text_labels) {
-        text_labels = 0
-    } else {
-        text_labels = 1
-    }
-}
