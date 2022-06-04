@@ -4,7 +4,7 @@ function initializeSchedulesPage() {
     document.getElementById("itin_body").innerHTML = ""
     document.getElementById("itin_img").setAttribute("src", 'images/black.jpg')
     FetchPending = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: false,
         dataType: 'json',

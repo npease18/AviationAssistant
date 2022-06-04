@@ -9,7 +9,7 @@
 var keys = {}
 // API Keys
 var xhr = new XMLHttpRequest();
-xhr.open("GET", "tiles/keys.json", true);
+xhr.open("GET", "information/keys.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
@@ -20,7 +20,6 @@ xhr.send();
 
 
 var ol3d
-var cesuim_active = false
 var internet_mode = 0
 var lastMETAR = 0
 var lastItin = 0
