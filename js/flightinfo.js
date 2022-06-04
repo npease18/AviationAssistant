@@ -5,10 +5,6 @@ function updateFlightTab() {
             $.getJSON('json/world_airports.json', function (world_airports) {
                 $.getJSON('json/airplanes.json', function (aircraft_information) {
                     // Planes[SelectedPlane] gives 
-                   
-                    document.getElementById('additional_info_hidden').style.display = "none"
-                    document.getElementById("img_button").disabled = true
-
                     document.getElementById("flight_airport_long_destination").innerHTML = ""
                     document.getElementById("flight_airport_short_destination").innerHTML = ""
                     document.getElementById("flight_airport_loc_destination").innerHTML = ""
