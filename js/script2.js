@@ -82,17 +82,6 @@ function ktsToMPH(num) {
     return num * 1.15078
 }
 
-function showInformation() {
-    document.getElementById("settings_information").style.display = "block"
-    document.getElementById("settings_default").style.display = "none"
-
-}
-
-function showDefault() {
-    document.getElementById("settings_default").style.display = "block"
-    document.getElementById("settings_information").style.display = "none"
-}
-
 function volUp() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
@@ -276,25 +265,6 @@ function setBrightness(direction) {
     }
 }
 
-function offlineToggle() {
-    if (document.getElementById("switch-1").checked) {
-        openRadar()
-        document.getElementById("metar_button").disabled = true;
-        document.getElementById("liveatc_button").disabled = true;
-        document.getElementById("player").pause()
-        document.getElementById("itinerary_button").style.opacity = .4
-        document.getElementById("itinerary_button").classList.remove("pointer")
-        document.getElementById("itinerary_button").removeAttribute("onclick")
-    } else {
-        document.getElementById("metar_button").disabled = false;
-        document.getElementById("liveatc_button").disabled = false;
-        document.getElementById("itinerary_button").style.opacity = 1
-        document.getElementById("itinerary_button").classList.add("pointer")
-        document.getElementById("itinerary_button").setAttribute("onclick", "goItinerary()")
-    }
-
-}
-
 function lockPlane() {
     selectPlaneByHex(SelectedPlane, true);
     document.getElementById("lock_button").disabled = true
@@ -436,7 +406,7 @@ function changeColorMode() {
     const themeStylesheet = document.getElementById('theme')
     //const themeToggle = document.getElementById('theme-toggle')
     if (themeStylesheet.href.includes('light')) {
-
+        themeStylesheet.href = 'css/ui2-dark.css'
         document.getElementById("logo").setAttribute("src", "images/dark/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/dark/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/dark/itinerary.png")
@@ -566,13 +536,6 @@ function changeGraph(direction) {
     } else {
         document.getElementById("graphs_holder").setAttribute("class", "graphs")
     }
-}
-
-
-function toTitleCase(str) {
-    return str.toLowerCase().split(' ').map(function (word) {
-        return (word.charAt(0).toUpperCase() + word.slice(1));
-    }).join(' ');
 }
 
 function hsl_col_perc(percent, start, end) {
