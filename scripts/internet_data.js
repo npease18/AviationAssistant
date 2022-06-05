@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 
 function getData() {
     var xhr = new XMLHttpRequest()
-    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.open("POST", "http://127.0.0.1:5000/curl", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.timeout = 8000;
     xhr.onreadystatechange = function () {
@@ -43,7 +43,7 @@ function getData() {
         }
     }
     xhr.send(JSON.stringify({
-        command: 'curl "http://data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=' + bounds.lat_north.toFixed(3) + '%2C' + bounds.lat_south.toFixed(3) + '%2C' + bounds.long_east.toFixed(3) + '%2C' + bounds.long_west.toFixed(3) + '&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1"'
+        command: 'http://data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=' + bounds.lat_north.toFixed(3) + '%2C' + bounds.lat_south.toFixed(3) + '%2C' + bounds.long_east.toFixed(3) + '%2C' + bounds.long_west.toFixed(3) + '&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1"'
     }));
 }
 
