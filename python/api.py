@@ -50,14 +50,6 @@ def volume():
         level = os.popen('vol').read()
       return str(level)
 
-@app.route('/cmd',methods = ['POST'])
-def command():
-   if request.method == 'POST':
-      json = request.get_json()
-      output = os.popen("cd /usr/share/dump1090-mutability/html && "+json['command']).read()
-      #output = os.popen(json['command']).read()
-      return str(output)
-
 @app.route('/curl',methods = ['POST'])
 def curl():
    if request.method == 'POST':
