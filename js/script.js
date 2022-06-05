@@ -249,6 +249,12 @@ function initialize() {
 
     if (navigator.userAgent === "RPI") {
         document.getElementById("body").style.cursor = "none"
+        document.getElementById("planes_table").style.cursor = "none"
+        document.getElementById("sidebar_close").style.cursor = "none"
+        document.getElementById("sidebar_open_button").style.cursor = "none"
+        document.getElementsByClassName("plane_table_row").style.cursor = "none"
+        document.getElementByClassName("pointer").style.cursor = "none"
+        document.getElementByClassName("itin_state").style.cursor = "none"
     }
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization

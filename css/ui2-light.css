@@ -571,7 +571,6 @@
 .close:hover,
 .close:focus {
     color: black;
-    cursor: pointer;
     text-decoration: none;
 }
 
@@ -665,10 +664,6 @@
 }
 
 .plane_table_row {
-    cursor: pointer;
-}
-
-.pointer {
     cursor: pointer;
 }
 
