@@ -1,5 +1,11 @@
 var baseurl = "https://avwx.rest/api/"
 
+/**
+ * "This function takes two arguments, x and y, and uses them to make an AJAX call to a weather API,
+ * then it takes the data returned from the API and displays it on the page."
+ * @param x - longitude
+ * @param y - latitude
+ */
 function nearestStations(x, y) {
     FetchPending = $.ajax({
         url: baseurl + 'metar/' + x + ',' + y + '?token=' + keys['AVWX'] + '&options=info&format=json',
@@ -7,7 +13,27 @@ function nearestStations(x, y) {
         cache: false,
         dataType: 'json',
     });
-    FetchPending.done(function(data) {
+    FetchPending.done(function (data) {
+        var markerStyle = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                snapToPixel: false,
+                fill: new ol.style.Fill({
+                    color: 'green'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 2
+                })
+            })
+        });
+       
+        var feature = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([data.info.longitude, data.info.latitude])));
+        feature.setStyle(markerStyle);
+        lastMETAR = StaticFeatures.push(feature) - 1
+        if (lastMETAR === 1) {
+            StaticFeatures.removeAt(0)
+        }
         document.getElementById('metar_loading').style.display = "none"
         document.getElementById('metar_data').style.display = "block"
         document.getElementById('station_id').innerHTML = data.station

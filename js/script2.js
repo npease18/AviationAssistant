@@ -1,25 +1,43 @@
 function openMetar() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "block"
     document.getElementById("radar_container").style.display = "none"
     document.getElementById("atc_container").style.display = "none"
     TAB = "METAR"
     var center = ol.proj.toLonLat(OLMap.getView().getCenter(), OLMap.getView().getProjection());
     nearestStations(center[1], center[0])
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastATC === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function openRadar() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "block"
     document.getElementById("atc_container").style.display = "none"
     TAB = "RADAR"
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastMETAR === 1) {
+        StaticFeatures.removeAt(0)
+    }
+    if (lastATC === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function openATC() {
+    expandSidebar()
     document.getElementById("metar_container").style.display = "none"
     document.getElementById("radar_container").style.display = "none"
     document.getElementById("atc_container").style.display = "block"
     TAB = "ATC"
     listStations()
+    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+    if (lastMETAR === 1) {
+        StaticFeatures.removeAt(0)
+    }
 }
 
 function readBatteryLevel() {
@@ -64,20 +82,9 @@ function ktsToMPH(num) {
     return num * 1.15078
 }
 
-function showInformation() {
-    document.getElementById("settings_information").style.display = "block"
-    document.getElementById("settings_default").style.display = "none"
-
-}
-
-function showDefault() {
-    document.getElementById("settings_default").style.display = "block"
-    document.getElementById("settings_information").style.display = "none"
-}
-
 function volUp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -93,7 +100,7 @@ function volUp() {
 
 function volDown() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -108,7 +115,7 @@ function volDown() {
 
 function changeMapBounds(btm_left, top_right) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":8000/internet", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":8000/internet", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -121,6 +128,7 @@ function changeMapBounds(btm_left, top_right) {
         long_east: btm_left[0],
         long_west: top_right[0]
     }
+    console.log(json)
     xhr.send(JSON.stringify(json));
 }
 
@@ -159,42 +167,6 @@ function modal() {
             modal.style.display = "none";
         }
     }
-    modal2()
-}
-
-function modal2() {
-    var modal = document.getElementById("image_modal");
-    var btn = document.getElementById("img_button");
-    var span = document.getElementById("close_modal2");
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    modal3()
-}
-
-function modal3() {
-    var modal = document.getElementById("aircraft_modal");
-    var btn = document.getElementById("aircraft_button");
-    var span = document.getElementById("close_modal3");
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
     modal4()
 }
 
@@ -217,7 +189,7 @@ function modal4() {
 
 function getInitialVolume() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/audio", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/audio", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -232,7 +204,7 @@ function getInitialVolume() {
 
 function getCPUTemp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("GET", "http://" + window.location.hostname + ":5000/cputemp", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -244,14 +216,12 @@ function getCPUTemp() {
             document.getElementById("internal_temperature").style.color = hsl_col_perc(temp_percentage, 0, 120)
         }
     }
-    xhr.send(JSON.stringify({
-        command: "vcgencmd measure_temp"
-    }));
+    xhr.send();
 }
 
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -271,7 +241,7 @@ function setBrightness(direction) {
         if (brightness + 5 <= 255) {
             brightness = brightness + 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+            xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -283,7 +253,7 @@ function setBrightness(direction) {
         if (brightness - 5 >= 15) {
             brightness = brightness - 5
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://"+window.location.hostname+":5000/brightness", true);
+            xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
                 level: brightness
@@ -292,25 +262,6 @@ function setBrightness(direction) {
         }
 
     }
-}
-
-function offlineToggle() {
-    if (document.getElementById("switch-1").checked) {
-        openRadar()
-        document.getElementById("metar_button").disabled = true;
-        document.getElementById("liveatc_button").disabled = true;
-        document.getElementById("player").pause()
-        document.getElementById("itinerary_button").style.opacity = .4
-        document.getElementById("itinerary_button").classList.remove("pointer")
-        document.getElementById("itinerary_button").removeAttribute("onclick")
-    } else {
-        document.getElementById("metar_button").disabled = false;
-        document.getElementById("liveatc_button").disabled = false;
-        document.getElementById("itinerary_button").style.opacity = 1
-        document.getElementById("itinerary_button").classList.add("pointer")
-        document.getElementById("itinerary_button").setAttribute("onclick", "goItinerary()")
-    }
-
 }
 
 function lockPlane() {
@@ -322,7 +273,7 @@ function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/update", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -342,14 +293,12 @@ function sendCMD(cmd) {
                 }
             }
         }
-        xhr.send(JSON.stringify({
-            command: "sudo git pull"
-        }));
+        xhr.send();
     }
     if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/branch", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -378,7 +327,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/shutdown", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -386,9 +335,7 @@ function sendCMD(cmd) {
                 output = xhr.response
             }
         }
-        xhr.send(JSON.stringify({
-            command: "cd /usr/local/bin && sudo x728softsd.sh"
-        }));
+        xhr.send();
     }
     if (cmd === "restart") {
         var snackbarContainer = document.getElementById('no-updates-snackbar');
@@ -398,7 +345,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/reboot", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -406,30 +353,64 @@ function sendCMD(cmd) {
                 output = xhr.response
             }
         }
-        xhr.send(JSON.stringify({
-            command: "cd /usr/local/bin && sudo reboot"
-        }));
+        xhr.send();
     }
 
 
+}
+
+function tabBackgroundImage() {
+    if (Planes[SelectedPlane].registration !== null) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://"+window.location.hostname+":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                var page_nodes = $($.parseHTML(xhr.response));
+                var img1 = page_nodes.find("#results > div:nth-child(1) > div.result__section.result__section--photo-wrapper > a > img")
+                if (img1.attr('src') !== undefined) {
+                    document.getElementById("aircraft_tab_background").setAttribute('src', img1.attr('src'))
+                    document.getElementById("sidebar_close").style.color = "rgba(0,0,0,.7)"
+                } else {
+                    document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+                    document.getElementById("sidebar_close").style.color = "rgba(255,255,255,.7)"
+                }
+                return
+            }
+        }
+        xhr.send();
+    } else {
+        document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
+        document.getElementById("sidebar_close").style.color = "rgba(255,255,255,.7)"
+    }
+}
+
+function expandSidebar() {
+    document.getElementById("sidebar_container").style.display = "block"
+    document.getElementById("sidebar_open_button").style.display = "none"
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar_container").style.display = "none"
+    document.getElementById("sidebar_open_button").style.display = "block"
 }
 
 function changeColorMode() {
     const themeStylesheet = document.getElementById('theme')
     //const themeToggle = document.getElementById('theme-toggle')
     if (themeStylesheet.href.includes('light')) {
-        
+        themeStylesheet.href = 'css/ui2-dark.css'
         document.getElementById("logo").setAttribute("src", "images/dark/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/dark/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/dark/itinerary.png")
         document.getElementById("graphs_image").setAttribute("src", "images/dark/graphs.png")
         document.getElementById("settings_image").setAttribute("src", "images/dark/settings.png")
         document.getElementById("settings_logo").setAttribute("src", "images/dark/logo.png")
-        themeStylesheet.href = 'css/style-dark.css'
+        themeStylesheet.href = 'css/ui2-dark.css'
         // themeToggle.innerText = 'Switch to light mode'
     } else {
         // if it's dark -> go light
-        themeStylesheet.href = 'css/style-light.css'
+        themeStylesheet.href = 'css/ui2-light.css'
         document.getElementById("logo").setAttribute("src", "images/light/logo.png")
         document.getElementById("radar_image").setAttribute("src", "images/light/radar.png")
         document.getElementById("itinerary_image").setAttribute("src", "images/light/itinerary.png")
@@ -442,16 +423,16 @@ function changeColorMode() {
 
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/setbranch", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        command: "sudo git checkout " + branch
+        command: branch
     }));
     sendCMD("getbranch")
 }
 
 function goHome() {
-    document.getElementById("itinerary_page").style.display = "none"
+   // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
@@ -459,23 +440,35 @@ function goHome() {
 }
 
 function goRadar() {
-    document.getElementById("itinerary_page").style.display = "none"
+    //document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "block"
+    document.getElementById("itin_nav_bar").style.display = "none"
+    document.getElementById("nav_bar").style.display = "block"
+    document.getElementById("radar_container").style.display = "block"
+    document.getElementById("itinerary_container").style.display = "none"
+
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("graphs_page").style.display = "none"
 }
 
 function goItinerary() {
-    document.getElementById("itinerary_page").style.display = "block"
-    document.getElementById("radar_page").style.display = "none"
+    document.getElementById("metar_container").style.display = "none"
+    document.getElementById("radar_container").style.display = "none"
+    document.getElementById("atc_container").style.display = "none"
+    document.getElementById("radar_page").style.display = "block"
+    document.getElementById("itin_nav_bar").style.display = "block"
+    document.getElementById("nav_bar").style.display = "none"
+    document.getElementById("radar_container").style.display = "none"
+    document.getElementById("itinerary_container").style.display = "block"
+
     document.getElementById("home_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("graphs_page").style.display = "none"
 }
 
 function goSettings() {
-    document.getElementById("itinerary_page").style.display = "none"
+   // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
@@ -484,34 +477,27 @@ function goSettings() {
 
 
 function goGraphs() {
-    document.getElementById("itinerary_page").style.display = "none"
+    //document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
     document.getElementById("graphs_page").style.display = "block"
 }
 
-function radarRadarTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "block"
-    document.getElementById("radar_flight_tab").style.display = "none"
-    document.getElementById("radar_aircraft_tab").style.display = "none"
+function itinAirportArrivals() {
+    document.getElementById("itin_arr").style.display = "block"
+    document.getElementById("itin_info").style.display = "none"
 }
 
-function radarFlightTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "none"
-    document.getElementById("radar_flight_tab").style.display = "block"
-    document.getElementById("radar_aircraft_tab").style.display = "none"
+function itinAirportDepartures() {
+    document.getElementById("itin_dep").style.display = "block"
+    document.getElementById("itin_info").style.display = "none"
 }
 
-function radarAircraftTabSwitch() {
-    document.getElementById("radar_radar_tab").style.display = "none"
-    document.getElementById("radar_flight_tab").style.display = "none"
-    document.getElementById("radar_aircraft_tab").style.display = "block"
-}
 
 function changeGraphsTime() {
     var time = document.getElementById("graphs_time").value
-    document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+    document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
 }
 
 function changeGraph(direction) {
@@ -519,11 +505,11 @@ function changeGraph(direction) {
     var time = document.getElementById("graphs_time").value
     if (direction && starting_graph != graph_types.length - 1) {
         starting_graph++
-        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     } else if (starting_graph != 0) {
         starting_graph = starting_graph - 1
-        document.getElementById("graphs_holder").setAttribute("src", "http://"+window.location.hostname+"/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
+        document.getElementById("graphs_holder").setAttribute("src", "http://" + window.location.hostname + "/graphs1090/graphs" + graph_types[starting_graph] + time + ".png")
         console.log(starting_graph)
     }
 
@@ -545,13 +531,6 @@ function changeGraph(direction) {
     }
 }
 
-
-function toTitleCase(str) {
-    return str.toLowerCase().split(' ').map(function (word) {
-        return (word.charAt(0).toUpperCase() + word.slice(1));
-    }).join(' ');
-}
-
 function hsl_col_perc(percent, start, end) {
     var a = percent / 100,
         b = (end - start) * a,
@@ -560,16 +539,4 @@ function hsl_col_perc(percent, start, end) {
     // Return a CSS HSL string
     return 'hsl(' + c + ', 100%, 50%)';
     // hsl_col_perc(bed_percent, 0, 120)
-}
-
-function toggleCesium() {
-    if (cesuim_active) {
-        ol3d.setEnabled(false);
-        cesuim_active = false
-        document.getElementById("cesium").innerHTML = "language"
-    } else {
-        ol3d.setEnabled(true);
-        cesuim_active = true
-        document.getElementById("cesium").innerHTML = "map"
-    }
 }

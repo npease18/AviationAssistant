@@ -1,32 +1,32 @@
 "use strict";
 
 function PlaneObject(icao) {
-	// Info about the plane
-        this.icao      = icao;
+        // Info about the plane
+        this.icao = icao;
         this.icaorange = findICAORange(icao);
-        this.flight    = null;
-	this.squawk    = null;
-	this.selected  = false;
-        this.category  = null;
+        this.flight = null;
+        this.squawk = null;
+        this.selected = false;
+        this.category = null;
 
-	// Basic location information
-        this.altitude  = null;
-        this.speed     = null;
-        this.track     = null;
+        // Basic location information
+        this.altitude = null;
+        this.speed = null;
+        this.track = null;
         this.prev_position = null;
-        this.position  = null;
+        this.position = null;
         this.position_from_mlat = false
-        this.sitedist  = null;
+        this.sitedist = null;
 
-	// Data packet numbers
-	this.messages  = null;
-        this.rssi      = null;
+        // Data packet numbers
+        this.messages = null;
+        this.rssi = null;
 
         // Track history as a series of line segments
         this.track_linesegs = [];
         this.history_size = 0;
 
-	// When was this last updated (receiver timestamp)
+        // When was this last updated (receiver timestamp)
         this.last_message_time = null;
         this.last_position_time = null;
 
@@ -50,7 +50,7 @@ function PlaneObject(icao) {
         this.icaotype = null;
 
         // request metadata
-        getAircraftData(this.icao).done(function(data) {
+        getAircraftData(this.icao).done(function (data) {
                 if ("r" in data) {
                         this.registration = data.r;
                 }
@@ -60,14 +60,14 @@ function PlaneObject(icao) {
                 }
 
                 if (this.selected) {
-		        refreshSelected();
+                        refreshSelected();
                 }
         }.bind(this));
 }
 
 // Appends data to the running track so we can get a visual tail on the plane
 // Only useful for a long running browser session.
-PlaneObject.prototype.updateTrack = function(estimate_time) {
+PlaneObject.prototype.updateTrack = function (estimate_time) {
         if (!this.position)
                 return false;
         if (this.position == this.prev_position)
@@ -86,34 +86,37 @@ PlaneObject.prototype.updateTrack = function(estimate_time) {
         if (this.track_linesegs.length == 0) {
                 // Brand new track
                 //console.log(this.icao + " new track");
-                var newseg = { fixed: new ol.geom.LineString([projHere]),
-                               feature: null,
-                               head_update: this.last_position_time,
-                               tail_update: this.last_position_time,
-                               estimated: false,
-                               ground: (this.altitude === "ground")
-                             };
+                var newseg = {
+                        fixed: new ol.geom.LineString([projHere]),
+                        feature: null,
+                        head_update: this.last_position_time,
+                        tail_update: this.last_position_time,
+                        estimated: false,
+                        ground: (this.altitude === "ground")
+                };
                 this.track_linesegs.push(newseg);
-                this.history_size ++;
+                this.history_size++;
                 return;
         }
 
         var lastseg = this.track_linesegs[this.track_linesegs.length - 1];
         var elapsed = (this.last_position_time - lastseg.head_update);
-        
+
         var est_track = (elapsed > estimate_time);
         var ground_track = (this.altitude === "ground");
-        
+
         if (est_track) {
 
                 if (!lastseg.estimated) {
                         // >5s gap in data, create a new estimated segment
                         //console.log(this.icao + " switching to estimated");
                         lastseg.fixed.appendCoordinate(projPrev);
-                        this.track_linesegs.push({ fixed: new ol.geom.LineString([projPrev, projHere]),
-                                                   feature: null,
-                                                   head_update: this.last_position_time,
-                                                   estimated: true });
+                        this.track_linesegs.push({
+                                fixed: new ol.geom.LineString([projPrev, projHere]),
+                                feature: null,
+                                head_update: this.last_position_time,
+                                estimated: true
+                        });
                         this.history_size += 2;
                 } else {
                         // Keep appending to the existing dashed line; keep every point
@@ -124,39 +127,43 @@ PlaneObject.prototype.updateTrack = function(estimate_time) {
 
                 return true;
         }
-        
+
         if (lastseg.estimated) {
                 // We are back to good data (we got two points close in time), switch back to
                 // solid lines.
-                lastseg = { fixed: new ol.geom.LineString([projPrev]),
-                            feature: null,
-                            head_update: this.last_position_time,
-                            tail_update: this.last_position_time,
-                            estimated: false,
-                            ground: (this.altitude === "ground") };
+                lastseg = {
+                        fixed: new ol.geom.LineString([projPrev]),
+                        feature: null,
+                        head_update: this.last_position_time,
+                        tail_update: this.last_position_time,
+                        estimated: false,
+                        ground: (this.altitude === "ground")
+                };
                 this.track_linesegs.push(lastseg);
-                this.history_size ++;
+                this.history_size++;
                 // continue
         }
-        
-        if ( (lastseg.ground && this.altitude !== "ground") ||
-             (!lastseg.ground && this.altitude === "ground") ) {
+
+        if ((lastseg.ground && this.altitude !== "ground") ||
+                (!lastseg.ground && this.altitude === "ground")) {
                 //console.log(this.icao + " ground state changed");
                 // Create a new segment as the ground state changed.
                 // assume the state changed halfway between the two points
                 // FIXME needs reimplementing post-google
 
                 lastseg.fixed.appendCoordinate(projPrev);
-                this.track_linesegs.push({ fixed: new ol.geom.LineString([projPrev, projHere]),
-                                           feature: null,
-                                           head_update: this.last_position_time,
-                                           tail_update: this.last_position_time,
-                                           estimated: false,
-                                           ground: (this.altitude === "ground") });
+                this.track_linesegs.push({
+                        fixed: new ol.geom.LineString([projPrev, projHere]),
+                        feature: null,
+                        head_update: this.last_position_time,
+                        tail_update: this.last_position_time,
+                        estimated: false,
+                        ground: (this.altitude === "ground")
+                });
                 this.history_size += 3;
                 return true;
         }
-        
+
         // Add more data to the existing track.
         // We only retain some historical points, at 5+ second intervals,
         // plus the most recent point
@@ -165,7 +172,7 @@ PlaneObject.prototype.updateTrack = function(estimate_time) {
                 //console.log(this.icao + " retain last point");
                 lastseg.fixed.appendCoordinate(projHere);
                 lastseg.tail_update = lastseg.head_update;
-                this.history_size ++;
+                this.history_size++;
         }
 
         lastseg.head_update = this.last_position_time;
@@ -173,8 +180,8 @@ PlaneObject.prototype.updateTrack = function(estimate_time) {
 };
 
 // This is to remove the line from the screen if we deselect the plane
-PlaneObject.prototype.clearLines = function() {
-        for (var i = this.track_linesegs.length - 1; i >= 0 ; --i) {
+PlaneObject.prototype.clearLines = function () {
+        for (var i = this.track_linesegs.length - 1; i >= 0; --i) {
                 var seg = this.track_linesegs[i];
                 if (seg.feature !== null) {
                         PlaneTrailFeatures.remove(seg.feature);
@@ -183,7 +190,7 @@ PlaneObject.prototype.clearLines = function() {
         }
 };
 
-PlaneObject.prototype.getMarkerColor = function() {
+PlaneObject.prototype.getMarkerColor = function () {
         // Emergency squawks override everything else
         if (this.squawk in SpecialSquawks)
                 return SpecialSquawks[this.squawk].markerColor;
@@ -206,12 +213,12 @@ PlaneObject.prototype.getMarkerColor = function() {
                 // and interpolate the hue between those points
                 var hpoints = ColorByAlt.air.h;
                 h = hpoints[0].val;
-                for (var i = hpoints.length-1; i >= 0; --i) {
+                for (var i = hpoints.length - 1; i >= 0; --i) {
                         if (this.altitude > hpoints[i].alt) {
-                                if (i == hpoints.length-1) {
+                                if (i == hpoints.length - 1) {
                                         h = hpoints[i].val;
                                 } else {
-                                        h = hpoints[i].val + (hpoints[i+1].val - hpoints[i].val) * (this.altitude - hpoints[i].alt) / (hpoints[i+1].alt - hpoints[i].alt)
+                                        h = hpoints[i].val + (hpoints[i + 1].val - hpoints[i].val) * (this.altitude - hpoints[i].alt) / (hpoints[i + 1].alt - hpoints[i].alt)
                                 }
                                 break;
                         }
@@ -226,7 +233,7 @@ PlaneObject.prototype.getMarkerColor = function() {
         }
 
         // If this marker is selected, change color
-        if (this.selected){
+        if (this.selected) {
                 h += ColorByAlt.selected.h;
                 s += ColorByAlt.selected.s;
                 l += ColorByAlt.selected.l;
@@ -251,10 +258,10 @@ PlaneObject.prototype.getMarkerColor = function() {
         if (l < 5) l = 5;
         else if (l > 95) l = 95;
 
-        return 'hsl(' + (h/5).toFixed(0)*5 + ',' + (s/5).toFixed(0)*5 + '%,' + (l/5).toFixed(0)*5 + '%)'
+        return 'hsl(' + (h / 5).toFixed(0) * 5 + ',' + (s / 5).toFixed(0) * 5 + '%,' + (l / 5).toFixed(0) * 5 + '%)'
 }
 
-PlaneObject.prototype.updateIcon = function() {
+PlaneObject.prototype.updateIcon = function () {
         var col = this.getMarkerColor();
         var opacity = (this.position_from_mlat ? 0.75 : 1.0);
         var outline = (this.position_from_mlat ? OutlineMlatColor : OutlineADSBColor);
@@ -306,13 +313,32 @@ PlaneObject.prototype.updateIcon = function() {
                                 rotateWithView: true
                         });
                         this.markerStyle = new ol.style.Style({
-                                image: this.markerIcon
+                                image: this.markerIcon,
+
                         });
                 } else {
                         this.markerIcon = icon;
-                        this.markerStyle = new ol.style.Style({
-                                image: this.markerIcon
-                        });
+                        if (text_labels) {
+                                this.markerStyle = new ol.style.Style({
+                                        image: this.markerIcon,
+                                        text: new ol.style.Text({
+                                                text: this.flight + "\n" + this.altitude,
+                                                scale: 1.2,
+                                                offsetY: -25,
+                                                fill: new ol.style.Fill({
+                                                  color: "#fff"
+                                                }),
+                                                stroke: new ol.style.Stroke({
+                                                  color: "0",
+                                                  width: 2
+                                                })
+                                              })
+                                });
+                        } else {
+                                this.markerStyle = new ol.style.Style({
+                                        image: this.markerIcon
+                                });
+                        }
                         this.markerStaticIcon = null;
                         this.markerStaticStyle = new ol.style.Style({});
                 }
@@ -340,22 +366,22 @@ PlaneObject.prototype.updateIcon = function() {
 };
 
 // Update our data
-PlaneObject.prototype.updateData = function(receiver_timestamp, data) {
-	// Update all of our data
-	this.messages	= data.messages;
-        this.rssi       = data.rssi;
-	this.last_message_time = receiver_timestamp - data.seen;
-        
+PlaneObject.prototype.updateData = function (receiver_timestamp, data) {
+        // Update all of our data
+        this.messages = data.messages;
+        this.rssi = data.rssi;
+        this.last_message_time = receiver_timestamp - data.seen;
+
         if (typeof data.altitude !== "undefined")
-		this.altitude	= data.altitude;
+                this.altitude = data.altitude;
         if (typeof data.vert_rate !== "undefined")
-		this.vert_rate	= data.vert_rate;
+                this.vert_rate = data.vert_rate;
         if (typeof data.speed !== "undefined")
-		this.speed	= data.speed;
+                this.speed = data.speed;
         if (typeof data.track !== "undefined")
-                this.track	= data.track;
+                this.track = data.track;
         if (typeof data.lat !== "undefined") {
-                this.position   = [data.lon, data.lat];
+                this.position = [data.lon, data.lat];
                 this.last_position_time = receiver_timestamp - data.seen_pos;
 
                 if (SitePosition !== null) {
@@ -374,58 +400,58 @@ PlaneObject.prototype.updateData = function(receiver_timestamp, data) {
                 }
         }
         if (typeof data.flight !== "undefined")
-		this.flight	= data.flight;
+                this.flight = data.flight;
         if (typeof data.squawk !== "undefined")
-		this.squawk	= data.squawk;
+                this.squawk = data.squawk;
         if (typeof data.category !== "undefined")
-                this.category	= data.category;
+                this.category = data.category;
 };
 
-PlaneObject.prototype.updateTick = function(receiver_timestamp, last_timestamp) {
+PlaneObject.prototype.updateTick = function (receiver_timestamp, last_timestamp) {
         // recompute seen and seen_pos
         this.seen = receiver_timestamp - this.last_message_time;
         this.seen_pos = (this.last_position_time === null ? null : receiver_timestamp - this.last_position_time);
-        
-	// If no packet in over 58 seconds, clear the plane.
-	if (this.seen > 58) {
+
+        // If no packet in over 58 seconds, clear the plane.
+        if (this.seen > 58) {
                 if (this.visible) {
                         //console.log("hiding " + this.icao);
                         this.clearMarker();
                         this.visible = false;
-			if (SelectedPlane == this.icao)
-                                selectPlaneByHex(null,false);
+                        if (SelectedPlane == this.icao)
+                                selectPlaneByHex(null, false);
                 }
-	} else {
+        } else {
                 this.visible = true;
                 if (this.position !== null && (this.selected || this.seen_pos < 60)) {
-			if (this.updateTrack(receiver_timestamp - last_timestamp + (this.position_from_mlat ? 30 : 5))) {
+                        if (this.updateTrack(receiver_timestamp - last_timestamp + (this.position_from_mlat ? 30 : 5))) {
                                 this.updateLines();
                                 this.updateMarker(true);
-                        } else { 
+                        } else {
                                 this.updateMarker(false); // didn't move
                         }
                 } else {
-			this.clearMarker();
-		}
-	}
+                        this.clearMarker();
+                }
+        }
 };
 
-PlaneObject.prototype.clearMarker = function() {
-	if (this.marker) {
+PlaneObject.prototype.clearMarker = function () {
+        if (this.marker) {
                 PlaneIconFeatures.remove(this.marker);
                 PlaneIconFeatures.remove(this.markerStatic);
                 /* FIXME google.maps.event.clearListeners(this.marker, 'click'); */
                 this.marker = this.markerStatic = null;
-	}
+        }
 };
 
 // Update our marker on the map
-PlaneObject.prototype.updateMarker = function(moved) {
+PlaneObject.prototype.updateMarker = function (moved) {
         if (!this.visible || this.position == null) {
                 this.clearMarker();
                 return;
         }
-        
+
         this.updateIcon();
         if (this.marker) {
                 if (moved) {
@@ -442,11 +468,11 @@ PlaneObject.prototype.updateMarker = function(moved) {
                 this.markerStatic.hex = this.icao;
                 this.markerStatic.setStyle(this.markerStaticStyle);
                 PlaneIconFeatures.push(this.markerStatic);
-	}
+        }
 };
 
 // Update our planes tail line,
-PlaneObject.prototype.updateLines = function() {
+PlaneObject.prototype.updateLines = function () {
         if (!this.selected)
                 return;
 
@@ -506,7 +532,7 @@ PlaneObject.prototype.updateLines = function() {
         }
 };
 
-PlaneObject.prototype.destroy = function() {
+PlaneObject.prototype.destroy = function () {
         this.clearLines();
         this.clearMarker();
 };

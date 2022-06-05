@@ -1,4 +1,4 @@
-const request = require('request');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require('fs')
 var json = {}
 var bounds = {
@@ -10,6 +10,17 @@ var bounds = {
 const express = require('express')
 const bodyParser = require("body-parser");
 const app = express()
+var cluster = require('cluster');
+if (cluster.isMaster) {
+  cluster.fork();
+
+  cluster.on('exit', function(worker, code, signal) {
+    cluster.fork();
+  });
+}
+
+if (cluster.isWorker) {
+  
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -22,20 +33,18 @@ app.use(function (req, res, next) {
 });
 
 function getData() {
-    //console.log('http://localhost:7000/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds='+bounds.lat_north.toFixed(3)+'%2C'+bounds.lat_south.toFixed(3)+'%2C'+bounds.long_east.toFixed(3)+'%2C'+bounds.long_west.toFixed(3)+'&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1')
-    const options = {
-        url: 'http://localhost:7000/data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=' + bounds.lat_north.toFixed(3) + '%2C' + bounds.lat_south.toFixed(3) + '%2C' + bounds.long_east.toFixed(3) + '%2C' + bounds.long_west.toFixed(3) + '&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1',
-        headers: {
-            'x-requested-with': 'request',
-            "origin": "*"
+    var xhr = new XMLHttpRequest()
+    xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.timeout = 8000;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            parseData(xhr.responseText)
         }
-    };
-    request(options, function (error, response, body) {
-        if (body) {
-            //console.log(body)
-            parseData(body)
-        }
-    });
+    }
+    xhr.send(JSON.stringify({
+        command: 'curl "http://data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=' + bounds.lat_north.toFixed(3) + '%2C' + bounds.lat_south.toFixed(3) + '%2C' + bounds.long_east.toFixed(3) + '%2C' + bounds.long_west.toFixed(3) + '&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1"'
+    }));
 }
 
 function parseData(data) {
@@ -112,3 +121,4 @@ app.post("/internet", function (req, res) {
 })
 
 app.listen(8000);
+}
