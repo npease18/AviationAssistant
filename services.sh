@@ -5,5 +5,4 @@ sudo node /usr/share/dump1090-mutability/html/scripts/internet_data.js & > /dev/
 export PORT=8080
 sudo node /home/pi/cors-anywhere/server.js
 
-cd /home/pi/dump1090-info
-wget http://server1.nicholaspease.com:6500/reports/liveatc.json
+wget http://server1.nicholaspease.com:6500/reports/liveatc.json -O /home/pi/dump1090-info/liveatc.json
