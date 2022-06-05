@@ -54,7 +54,7 @@ def volume():
 def curl():
    if request.method == 'POST':
       json = request.get_json()
-      output = os.popen("cd /usr/share/dump1090-mutability/html && curl "+json['url']).read()
+      output = os.popen("curl "+json['url']).read()
       #output = os.popen(json['command']).read()
       return str(output)
 
