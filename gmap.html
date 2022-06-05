@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
     <link id="theme" rel="stylesheet" type="text/css" href="css/ui2-light.css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-
     <script src="ol/ol.js"></script>
     <link rel="stylesheet" href="ol/ol.css">
     <script src="js/ol-layerswitcher.js"></script>
     <link rel="stylesheet" href="css/ol-layerswitcher.css" />
-    <link rel="stylesheet" href="css/css-circular-prog-bar.css" type="text/css" />
-    <script type="text/javascript" src="js/luxon.js"></script>
+
     <script type="text/javascript" src="js/flightinfo.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/liveatc.js"></script>
@@ -37,7 +33,7 @@
     <title>Aviation Assistant</title>
 </head>
 
-<body onload="initialize()" scroll="no">
+<body id="body" onload="initialize()" scroll="no">
     <div id="loader" class="hidden">
         <img src="images/spinny.gif" id="spinny" alt="Loading...">
         <progress id="loader_progress"></progress>
@@ -125,11 +121,13 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button id="button_background" class=" mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background"
+                            class=" mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
                         </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button id="button_background" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background"
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
@@ -249,7 +247,7 @@
                 </button>
 
             </span>
-           
+
         </div>
         <div id="map_container">
             <div id="map_canvas"></div>
@@ -267,15 +265,17 @@
                     <div id="itin_airport_long_name"></div>
                     <div id="itin_airport_city"></div>
                     <div id="itin_airport_loc"></div>
-                      <button id="itin_arrivals" onclick="itinAirportArrivals()" class="mdl-button mdl-js-button mdl-button--raised">
+                    <button id="itin_arrivals" onclick="itinAirportArrivals()"
+                        class="mdl-button mdl-js-button mdl-button--raised">
                         Arrivals Chart
-                      </button>
-                      <button id="itin_departures" onclick="itinAirportDepartures()" class="mdl-button mdl-js-button mdl-button--raised">
+                    </button>
+                    <button id="itin_departures" onclick="itinAirportDepartures()"
+                        class="mdl-button mdl-js-button mdl-button--raised">
                         Departures Chart
-                      </button>
-                      <button id="itin_back" class="mdl-button mdl-js-button mdl-button--raised">
+                    </button>
+                    <button id="itin_back" class="mdl-button mdl-js-button mdl-button--raised">
                         Back
-                      </button>
+                    </button>
                 </div>
                 <div id="itin_arr" style="display: none"></div>
                 <div id="itin_dep" style="display: none"></div>
@@ -337,16 +337,15 @@
                                 <tr>
                                     <td style="text-align: left">
                                         <b><span id="flight_airport_short_origin"
-                                                style="font-size: 18px;">N/A</span></b><br>
-                                        <span id="flight_airport_long_origin" style="font-size: 12px;">N/A</span><br>
-                                        <span id="flight_airport_loc_origin" style="font-size: 10px;">N/A</span>
+                                                style="font-size: 18px;"></span></b><br>
+                                        <span id="flight_airport_long_origin" style="font-size: 12px;"></span><br>
+                                        <span id="flight_airport_loc_origin" style="font-size: 10px;"></span>
                                     </td>
                                     <td style="text-align: right">
                                         <b><span id="flight_airport_short_destination"
-                                                style="font-size: 18px;">N/A</span></b><br>
-                                        <span id="flight_airport_long_destination"
-                                            style="font-size: 12px;">N/A</span><br>
-                                        <span id="flight_airport_loc_destination" style="font-size: 10px;">N/A</span>
+                                                style="font-size: 18px;"></span></b><br>
+                                        <span id="flight_airport_long_destination" style="font-size: 12px;"></span><br>
+                                        <span id="flight_airport_loc_destination" style="font-size: 10px;"></span>
                                     </td>
                                 </tr>
                             </table>
@@ -427,146 +426,6 @@
                         <!-- planes_table -->
 
                     </div>
-                    <div id="radar_flight_tab" style="display: none;">
-                        <div id="radar_flight_info" style="display: none;"><br>
-                            <span id="flight_airline" style="font-size: 28px;">Example Airline</span><span
-                                id="flight_flightnum" style="font-size: 28px;">Number</span><span
-                                style="font-size: 28px;">&nbsp;(<span id="flight_flighticaonum"></span>)</span>
-                            <br><br>
-                            <i><span id="flight_status" style="font-size: 20px;">En Route</span></i><br><br>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="text-align: left">
-                                        <span id="flight_airport_short_origin" style="font-size: 30px;">N/A</span><br>
-                                        <span id="flight_airport_long_origin" style="font-size: 16px;">N/A</span><br>
-                                        <span id="flight_airport_loc_origin" style="font-size: 14px;">N/A</span>
-                                    </td>
-                                    <td style="text-align: right">
-                                        <span id="flight_airport_short_destination"
-                                            style="font-size: 30px;">N/A</span><br>
-                                        <span id="flight_airport_long_destination"
-                                            style="font-size: 16px;">N/A</span><br>
-                                        <span id="flight_airport_loc_destination" style="font-size: 14px;">N/A</span>
-                                    </td>
-                                </tr>
-                            </table><br>
-                            <div id="flight_progress_div">
-                                <div id="flight_progress" class="mdl-progress mdl-js-progress"></div><br>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="text-align: left;" id="flight_depart_time"
-                                            style="font-size: 10px;width: 50%;">
-                                            Depart Time
-                                        </td>
-                                        <td style="text-align: right;" id="flight_arrival_time"
-                                            style="font-size: 10px;width: 50%;">
-                                            Arrival Time
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left;" style="font-size: 10px;">
-                                            Terminal / Gate:<br><span id="flight_depart_terminal"></span><span
-                                                id="flight_depart_gate"></span>
-                                        </td>
-
-                                        <td style="text-align: right;" style="font-size: 10px;">
-                                            Terminal / Gate:<br><span id="flight_arrival_terminal"></span><span
-                                                id="flight_arrival_gate"></span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised" id="img_button">
-                                More Flight Information
-                            </button>
-                        </div>
-                        <div id="radar_flight_loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
-                        </div>
-                        <div id="image_modal" class="modal">
-
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close" id="close_modal2">&times;</span>
-                                <span id="modal2_title">Additional Flight Information</span><br>
-                                <img id="progress_image" src="">
-                                <div id="additional_info_hidden">
-                                    <div class="progress-circle" id="flight_progress_circle">
-                                        <span id="flight_percentage_spinner"></span>
-                                        <div class="left-half-clipper">
-                                            <div class="first50-bar"></div>
-                                            <div class="value-bar"></div>
-                                        </div>
-                                    </div>
-                                    <span id="flight_progress_title">Total Flight Progress</span>
-                                    <span id="flight_progress_remaining_title">Hours Remaining</span>
-                                    <span id="flight_progress_remaining_amount"></span>
-                                    <span id="flight_progress_elapsed_title">Time Elapsed</span>
-                                    <span id="flight_progress_elapsed_amount"></span>
-                                    <span id="flight_progress_time_title">Total Flight Time</span>
-                                    <span id="flight_progress_time_amount"></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div id="radar_aircraft_tab" style="display: none;">
-                        <div id="radar_aircraft_info" style="display: none;">
-                            <img src="" id="aircraft_image1"><br><br>
-                            <span id="aircraft_name_css"><span id="aircraft_name"></span> </span><br><br>
-                            <table style="width: 100%">
-                                <tr>
-                                    <th style="text-align: center">Engine Type</th>
-                                    <th style="text-align: center">Engine Count</th>
-                                    <th style="text-align: center">Plane Age</th>
-                                    <th style="text-align: center">Plane Status</th>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" id="aircraft_engine"></td>
-                                    <td style="text-align: center" id="aircraft_engine_count"></td>
-                                    <td style="text-align: center" id="aircraft_age"></td>
-                                    <td style="text-align: center" id="aircraft_status"></td>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: center">Rollout Date</th>
-                                    <td></td>
-                                    <td></td>
-                                    <th style="text-align: center">First Flight</th>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" id="aircraft_first_flight"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center" id="aircraft_rollout_date"></td>
-                                </tr>
-
-                            </table>
-                            <button class="mdl-button mdl-js-button mdl-button--raised" id="aircraft_button">
-                                More Information
-                            </button>
-                        </div>
-                        <div id="radar_aircraft_loading"
-                            class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                        <div id="aircraft_modal" class="modal">
-
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close" id="close_modal3">&times;</span>
-                                <span id="modal3_title">Additional Aircraft Information</span><br>
-                                <img src="" id="aircraft_image1-1">
-                                <a onmousedown="setBigImage('aircraft_image2')"><img src="" id="aircraft_image2"></a>
-                                <a onmousedown="setBigImage('aircraft_image3')"><img src="" id="aircraft_image3"></a>
-                                <a onmousedown="setBigImage('aircraft_image4')"><img src="" id="aircraft_image4"></a>
-                                <span id="aircraft_name_title">Aircraft Name:</span>
-                                <span id="aircraft_name_addl"></span>
-                                <span id="aircraft_model_title">Aircraft Model:</span>
-                                <span id="aircraft_model"></span>
-                                <span id="aircraft_registration_title">Aircraft Registration:</span>
-                                <span id="aircraft_registration"></span>
-
-                            </div>
-
-                        </div>
-                    </div>
 
                 </div>
 
@@ -646,7 +505,7 @@
 
                 </div>
             </div>
-            
+
         </div>
         <!-- sidebar_container -->
 
