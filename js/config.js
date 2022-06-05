@@ -40,7 +40,7 @@ xhr1.send();
 
 var flight_info = {}
 var TAB = "Radar"
-var DateTime = luxon.DateTime;
+//var DateTime = luxon.DateTime;
 var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
 /* var graph_types = {
     "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",
