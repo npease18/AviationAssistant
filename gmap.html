@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="ol/ol.css">
     <script src="js/ol-layerswitcher.js"></script>
     <link rel="stylesheet" href="css/ol-layerswitcher.css" />
-    
+
     <script type="text/javascript" src="js/flightinfo.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/liveatc.js"></script>
@@ -121,11 +121,13 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button id="button_background" class=" mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background"
+                            class=" mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('down')">
                             <i class="material-icons">remove</i>
                         </button> <span id="brightness-text">Brightness (<span id="brightness_level"></span>)</span>
-                        <button id="button_background" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        <button id="button_background"
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
                             style="width: 40px; height: 40px; min-width: initial;" onclick="setBrightness('up')">
                             <i class="material-icons">add</i>
                         </button>
@@ -245,7 +247,7 @@
                 </button>
 
             </span>
-           
+
         </div>
         <div id="map_container">
             <div id="map_canvas"></div>
@@ -263,15 +265,17 @@
                     <div id="itin_airport_long_name"></div>
                     <div id="itin_airport_city"></div>
                     <div id="itin_airport_loc"></div>
-                      <button id="itin_arrivals" onclick="itinAirportArrivals()" class="mdl-button mdl-js-button mdl-button--raised">
+                    <button id="itin_arrivals" onclick="itinAirportArrivals()"
+                        class="mdl-button mdl-js-button mdl-button--raised">
                         Arrivals Chart
-                      </button>
-                      <button id="itin_departures" onclick="itinAirportDepartures()" class="mdl-button mdl-js-button mdl-button--raised">
+                    </button>
+                    <button id="itin_departures" onclick="itinAirportDepartures()"
+                        class="mdl-button mdl-js-button mdl-button--raised">
                         Departures Chart
-                      </button>
-                      <button id="itin_back" class="mdl-button mdl-js-button mdl-button--raised">
+                    </button>
+                    <button id="itin_back" class="mdl-button mdl-js-button mdl-button--raised">
                         Back
-                      </button>
+                    </button>
                 </div>
                 <div id="itin_arr" style="display: none"></div>
                 <div id="itin_dep" style="display: none"></div>
@@ -340,8 +344,7 @@
                                     <td style="text-align: right">
                                         <b><span id="flight_airport_short_destination"
                                                 style="font-size: 18px;"></span></b><br>
-                                        <span id="flight_airport_long_destination"
-                                            style="font-size: 12px;"></span><br>
+                                        <span id="flight_airport_long_destination" style="font-size: 12px;"></span><br>
                                         <span id="flight_airport_loc_destination" style="font-size: 10px;"></span>
                                     </td>
                                 </tr>
@@ -502,7 +505,7 @@
 
                 </div>
             </div>
-            
+
         </div>
         <!-- sidebar_container -->
 
