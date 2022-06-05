@@ -246,6 +246,12 @@ function initialize() {
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")
     $("#loader").removeClass("hidden");
+
+    if (navigator.userAgent === "RPI") {
+        document.getElementById("body").style.cursor = "none"
+    } else {
+    
+    }
     // Get receiver metadata, reconfigure using it, then continue
     // with initialization
     $.ajax({
@@ -1014,10 +1020,6 @@ function selectPlaneByHex(hex, autofollow) {
         Planes[SelectedPlane].clearLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).removeClass("selected");
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
         closeSidebar()
         document.getElementById("tableinfo").style.display = "block"
@@ -1029,13 +1031,8 @@ function selectPlaneByHex(hex, autofollow) {
     // (unless it was a doubleclick..)
     if (SelectedPlane === hex && !autofollow) {
         hex = null;
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
         document.getElementById("lock_button").disabled = false
         closeSidebar()
-        radarRadarTabSwitch()
         document.getElementById("tableinfo").style.display = "block"
 
     }
@@ -1046,23 +1043,14 @@ function selectPlaneByHex(hex, autofollow) {
         document.getElementById("aircraft_tab_background").setAttribute('src', "images/black.jpg")
         tabBackgroundImage()
         expandSidebar()
-        radarRadarTabSwitch()
         updateFlightTab()
         document.getElementById("tableinfo").style.display = "none"
         Planes[SelectedPlane].selected = true;
         Planes[SelectedPlane].updateLines();
         Planes[SelectedPlane].updateMarker();
         $(Planes[SelectedPlane].tr).addClass("selected");
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
     } else {
         SelectedPlane = null;
-        document.getElementById("radar_flight_info").style.display = "none"
-        document.getElementById("radar_flight_loading").style.display = "block"
-        document.getElementById("radar_aircraft_info").style.display = "none"
-        document.getElementById("radar_aircraft_loading").style.display = "block"
     }
 
     if (SelectedPlane !== null && autofollow) {
@@ -1096,15 +1084,4 @@ function resetMap() {
     OLMap.getView().setCenter(ol.proj.fromLonLat([CenterLon, CenterLat]));
 
     selectPlaneByHex(null, false);
-}
-
-function toggleOffline() {
-    // Activates Offline Mode
-    if (OfflineMode === true) {
-        OfflineMode = false
-        console.log("False")
-    } else {
-        OfflineMode = true
-        console.log("True")
-    }
 }

@@ -571,7 +571,6 @@
 .close:hover,
 .close:focus {
     color: black;
-    cursor: pointer;
     text-decoration: none;
 }
 
@@ -672,9 +671,6 @@
     cursor: pointer;
 }
 
-.pointer {
-    cursor: pointer;
-}
 
 .selected {
     background-color: #dddddd;

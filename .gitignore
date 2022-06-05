@@ -6,3 +6,6 @@ json/keys.json
 /data/aircraft1.json
 /data/battery.json
 /data/
+/.vscode/
+/information_files/
+/information/

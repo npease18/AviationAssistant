@@ -9,7 +9,7 @@
 var keys = {}
 // API Keys
 var xhr = new XMLHttpRequest();
-xhr.open("GET", "tiles/keys.json", true);
+xhr.open("GET", "information/keys.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
@@ -20,7 +20,6 @@ xhr.send();
 
 
 var ol3d
-var cesuim_active = false
 var internet_mode = 0
 var lastMETAR = 0
 var lastItin = 0
@@ -41,7 +40,7 @@ xhr1.send();
 
 var flight_info = {}
 var TAB = "Radar"
-var DateTime = luxon.DateTime;
+//var DateTime = luxon.DateTime;
 var graph_types = ["/dump1090-localhost-local_trailing_rate-", "/dump1090-localhost-aircraft-", "/dump1090-localhost-tracks-", "/dump1090-localhost-signal-", "/dump1090-localhost-local_rate-", "/dump1090-localhost-aircraft_message_rate-", "/dump1090-localhost-cpu-", "/system-localhost-cpu-", "/system-localhost-temperature-", "/system-localhost-memory-", "/system-localhost-network_bandwidth-", "/system-localhost-df_root-", "/system-localhost-disk_io_iops-", "/system-localhost-disk_io_octets-"]
 /* var graph_types = {
     "ADSB Message Rate": "/dump1090-localhost-local_trailing_rate-",

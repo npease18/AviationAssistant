@@ -8,7 +8,7 @@ function initializeSchedulesPage() {
     document.getElementById("itin_body").innerHTML = ""
     document.getElementById("itin_img").setAttribute("src", 'images/black.jpg')
     FetchPending = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: false,
         dataType: 'json',
@@ -155,7 +155,7 @@ function retrieveSchedule(airport, state) {
    
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/curl", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -265,7 +265,7 @@ function retrieveSchedule(airport, state) {
         }
     }
     xhr.send(JSON.stringify({
-        command: "curl https://flightaware.com/live/airport/" + airport
+        url: "https://flightaware.com/live/airport/" + airport
     }));
 
 }

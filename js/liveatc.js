@@ -50,7 +50,7 @@ function playPLS(url, title) {
         // PLS INFO
         const proxyurl = "http://" + window.location.hostname + ":7000/";
         var request = $.ajax({
-            url: 'json/liveatc.json',
+            url: 'information/liveatc.json',
             timeout: 5000,
             cache: true,
             dataType: 'json'
@@ -93,7 +93,7 @@ function playPause() {
 function listStations() {
     document.getElementById("atc_selector").innerHTML = ""
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
@@ -135,7 +135,7 @@ function selectState(state) {
     var node = document.createElement("hr")
     document.getElementById("atc_selector").appendChild(node)
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
@@ -188,7 +188,7 @@ function selectAirport(airport, state) {
     var node = document.createElement("hr")
     document.getElementById("atc_selector").appendChild(node)
     var request = $.ajax({
-        url: 'json/liveatc.json',
+        url: 'information/liveatc.json',
         timeout: 5000,
         cache: true,
         dataType: 'json'
@@ -209,71 +209,6 @@ function selectAirport(airport, state) {
         document.getElementById("atc_selector").appendChild(node)
     })
 
-}
-
-//DEPRECATED - NOT USED - GENERATES FILE
-function startPulling() {
-    var json = {}
-
-    FetchPending = $.ajax({
-        url: 'json/us_airports.json',
-        timeout: 5000,
-        cache: false,
-        dataType: 'json',
-    });
-    FetchPending.done(function (data) {
-        var us_airports = data
-        for (state in us_airports) {
-            for (airport in us_airports[state].airports) {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://127.0.0.1:5000/cmd", true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        console.log(xhr.response)
-                        let a = $(data);
-                        if (json[airport_json[airport].state]) {
-
-                        } else {
-                            json[airport_json[airport].state] = {}
-                        }
-
-                        if (json[airport_json[airport].state].airports) {
-
-                        } else {
-                            json[airport_json[airport].state].airports = {}
-                        }
-                        if (a('font.body > font[color="red"]').html()) {
-                            json[airport_json[airport].state].airports[airport].feeds = "ERROR"
-                        } else {
-                            var feedName = a('table.body > tbody > tr > td[bgcolor="lightblue"]');
-                            n = 0
-                            json[airport_json[airport].state].airports[airport].feeds = {}
-                            json[airport_json[airport].state].airports[airport].name = airport_json[airport].name
-                            for (b in feedName) {
-                                let title = a(b).find("strong").text();
-                                json[airport_json[airport].state].airports[airport].feeds[n] = {}
-                                json[airport_json[airport].state].airports[airport].feeds[n].name = title
-                                n++
-                            }
-                            var pageurl = a('table.body > tbody > tr:nth-child(4) > td')
-                            i = 0
-                            for (url in pageurl) {
-                                let title = a(url).find("a").attr('href');
-                                if (title) {
-                                    json[airport_json[airport].state].airports[airport].feeds[i].url = title
-                                    i++
-                                }
-                            }
-                        }
-                    }
-                }
-                xhr.send(JSON.stringify({
-                    command: "https://www.liveatc.net/search/?icao=" + airport
-                }));
-            }
-        }
-    })
 }
 
 function HHMMSS(time) {
