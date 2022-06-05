@@ -141,7 +141,7 @@ function retrieveSchedule(airport, state) {
    
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/cmd", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/url", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -251,7 +251,7 @@ function retrieveSchedule(airport, state) {
         }
     }
     xhr.send(JSON.stringify({
-        command: "curl https://flightaware.com/live/airport/" + airport
+        url: "https://flightaware.com/live/airport/" + airport
     }));
 
 }

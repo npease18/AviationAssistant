@@ -203,7 +203,7 @@ function getInitialVolume() {
 
 function getCPUTemp() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+    xhr.open("GET", "http://" + window.location.hostname + ":5000/cputemp", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -215,9 +215,7 @@ function getCPUTemp() {
             document.getElementById("internal_temperature").style.color = hsl_col_perc(temp_percentage, 0, 120)
         }
     }
-    xhr.send(JSON.stringify({
-        command: "vcgencmd measure_temp"
-    }));
+    xhr.send();
 }
 
 function readBrightnessLevel() {
@@ -274,7 +272,7 @@ function sendCMD(cmd) {
     if (cmd === "update") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/update", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -294,14 +292,12 @@ function sendCMD(cmd) {
                 }
             }
         }
-        xhr.send(JSON.stringify({
-            command: "sudo git pull"
-        }));
+        xhr.send();
     }
     if (cmd === "getbranch") {
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/branch", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -330,7 +326,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/shutdown", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -338,9 +334,7 @@ function sendCMD(cmd) {
                 output = xhr.response
             }
         }
-        xhr.send(JSON.stringify({
-            command: "cd /usr/local/bin && sudo x728softsd.sh"
-        }));
+        xhr.send(JSON.stringify();
     }
     if (cmd === "restart") {
         var snackbarContainer = document.getElementById('no-updates-snackbar');
@@ -350,7 +344,7 @@ function sendCMD(cmd) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         var output = ""
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+        xhr.open("GET", "http://" + window.location.hostname + ":5000/reboot", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -358,9 +352,7 @@ function sendCMD(cmd) {
                 output = xhr.response
             }
         }
-        xhr.send(JSON.stringify({
-            command: "cd /usr/local/bin && sudo reboot"
-        }));
+        xhr.send();
     }
 
 
@@ -430,10 +422,10 @@ function changeColorMode() {
 
 function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://" + window.location.hostname + ":5000/cmd", true);
+    xhr.open("POST", "http://" + window.location.hostname + ":5000/setbranch", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        command: "sudo git checkout " + branch
+        command: branch
     }));
     sendCMD("getbranch")
 }
