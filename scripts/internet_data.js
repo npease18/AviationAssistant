@@ -40,7 +40,7 @@ function getData() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log('http://data-live.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=' + bounds.lat_north.toFixed(3) + '%2C' + bounds.lat_south.toFixed(3) + '%2C' + bounds.long_east.toFixed(3) + '%2C' + bounds.long_west.toFixed(3) + '&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1')
-            console.log(xhr.responseText)
+            //console.log(xhr.responseText)
             parseData(xhr.responseText)
         }
     }
