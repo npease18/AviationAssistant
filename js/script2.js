@@ -334,7 +334,7 @@ function sendCMD(cmd) {
                 output = xhr.response
             }
         }
-        xhr.send(JSON.stringify();
+        xhr.send();
     }
     if (cmd === "restart") {
         var snackbarContainer = document.getElementById('no-updates-snackbar');
