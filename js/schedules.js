@@ -141,7 +141,7 @@ function retrieveSchedule(airport, state) {
    
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://"+window.location.hostname+":5000/url", true);
+    xhr.open("POST", "http://"+window.location.hostname+":5000/curl", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
