@@ -128,6 +128,7 @@ function changeMapBounds(btm_left, top_right) {
         long_east: btm_left[0],
         long_west: top_right[0]
     }
+    console.log(json)
     xhr.send(JSON.stringify(json));
 }
 
