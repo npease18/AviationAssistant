@@ -1,7 +1,3 @@
 [submodule "liveatc_update"]
 	path = liveatc_update
 	url = http://server1.nicholaspease.com:2000/LAX18/LiveATC-Database-Updater.git
-
-[submodule "docs"]
-	path = docs
-	url = http://server1.nicholaspease.com:2000/LAX18/AviationAssistantDocs.git
