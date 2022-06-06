@@ -303,6 +303,7 @@ function sendCMD(cmd) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 output = xhr.response
+                console.log(output)
                 var current_branch = output.substr(2, output.length - 3)
                 if (current_branch === 'unstable') {
                     document.getElementById("branch_name").innerHTML = "stable"
@@ -314,9 +315,7 @@ function sendCMD(cmd) {
 
             }
         }
-        xhr.send(JSON.stringify({
-            command: "sudo git branch | grep -F '*'"
-        }));
+        xhr.send();
 
     }
     if (cmd === "shutdown") {
