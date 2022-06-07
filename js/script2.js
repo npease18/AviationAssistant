@@ -361,7 +361,7 @@ function sendCMD(cmd) {
 function tabBackgroundImage() {
     if (Planes[SelectedPlane].registration !== null) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://"+window.location.hostname+":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
+        xhr.open("GET", "http://" + window.location.hostname + ":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -424,14 +424,19 @@ function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + window.location.hostname + ":5000/setbranch", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            sendCMD("getbranch")
+        }
+    }
     xhr.send(JSON.stringify({
         branch: branch
     }));
-    sendCMD("getbranch")
+
 }
 
 function goHome() {
-   // document.getElementById("itinerary_page").style.display = "none"
+    // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
@@ -467,7 +472,7 @@ function goItinerary() {
 }
 
 function goSettings() {
-   // document.getElementById("itinerary_page").style.display = "none"
+    // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
