@@ -356,7 +356,7 @@ function sendCMD(cmd) {
     }
 
 
-}
+} 
 
 function tabBackgroundImage() {
     if (Planes[SelectedPlane].registration !== null) {
