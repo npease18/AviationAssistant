@@ -68,6 +68,8 @@ def cputemp():
 def update():
    if request.method == 'GET':
       output = os.popen("cd /usr/share/dump1090-mutability/html && sudo git pull").read()
+      output1 = os.popen("sudo killall chromium-browser-v7").read()
+      output2 = os.popen("chromium-browser http://localhost/dump1090 --window-size=800,480 --window-position=0,0 --user-agent="RPI" --kiosk --incognito --noerrdialogs --remote-debugging-port=9222 --disable-translate --no-first-run --fast --fast-start --disable-infobars --disable-features=TranslateUI --disk-cache-dir=/dev/null --password-store=basic").read()
       return str(output)
 
 @app.route('/branch',methods = ['GET'])
