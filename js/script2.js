@@ -425,7 +425,7 @@ function changeBranch(branch) {
     xhr.open("POST", "http://" + window.location.hostname + ":5000/setbranch", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        command: branch
+        branch: branch
     }));
     sendCMD("getbranch")
 }
