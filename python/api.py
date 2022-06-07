@@ -67,7 +67,7 @@ def cputemp():
 @app.route('/update',methods = ['GET'])
 def update():
    if request.method == 'GET':
-      output = os.popen("sudo git pull").read()
+      output = os.popen("cd /usr/share/dump1090-mutability/html && sudo git pull").read()
       return str(output)
 
 @app.route('/branch',methods = ['GET'])
