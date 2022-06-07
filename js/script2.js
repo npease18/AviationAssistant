@@ -308,7 +308,7 @@ function sendCMD(cmd) {
                 if (current_branch === 'unstable') {
                     document.getElementById("branch_name").innerHTML = "stable"
                     document.getElementById("branch_button").setAttribute("onclick", "changeBranch('master')")
-                } else if (current_branch === 'unstable') {
+                } else if (current_branch === 'master') {
                     document.getElementById("branch_name").innerHTML = "unstable"
                     document.getElementById("branch_button").setAttribute("onclick", "changeBranch('unstable')")
                 }
