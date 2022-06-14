@@ -11,4 +11,4 @@ steps:
 
 trigger:
   branch:
-    - master
+    - unstable
