@@ -24,3 +24,5 @@ steps:
 trigger:
   branch:
     - unstable
+  event:
+    - tag
