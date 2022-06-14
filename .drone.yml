@@ -7,7 +7,16 @@ steps:
     image: alpine
     commands:
       - apk add zip
-      - zip release.zip *
+      - zip -r release.zip *
+
+  - name: gitea_release
+    image: plugins/gitea-release
+    settings:
+      api_key:
+        from_secret: gitea_token
+      base_url:
+        from_secret: gitea_url
+      files: release.zip
 
 trigger:
   branch:
