@@ -1,0 +1,14 @@
+kind: pipeline
+type: docker
+name: en
+
+steps:
+  - name: production-release-build
+    image: alpine
+    commands:
+      - zip * release.zip
+
+
+trigger:
+  branch:
+    - master
