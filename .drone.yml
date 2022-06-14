@@ -1,12 +1,17 @@
 kind: pipeline
 type: docker
-name: en
+name: aa-publish
 
 steps:
+  - name: install-prerequisits
+    image: alpine
+    commands:
+      - apk add zip
+
   - name: production-release-build
     image: alpine
     commands:
-      - zip * release.zip
+      - zip release.zip *
 
 
 trigger:
