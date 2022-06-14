@@ -23,4 +23,5 @@ steps:
 
 trigger:
   event:
-    - tag
+    include: 
+      - tag
