@@ -3,16 +3,11 @@ type: docker
 name: aa-publish
 
 steps:
-  - name: install-prerequisits
-    image: alpine
-    commands:
-      - apk add zip
-
   - name: production-release-build
     image: alpine
     commands:
+      - apk add zip
       - zip release.zip *
-
 
 trigger:
   branch:
