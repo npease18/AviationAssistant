@@ -17,6 +17,7 @@ steps:
       base_url:
         from_secret: gitea_url
       files: release.zip
-      draft: true
+      title: Aviation Assistant ${DRONE_TAG} Release
+      note: Auto Released by DroneCI
     when:
       event: tag
