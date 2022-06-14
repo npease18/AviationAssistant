@@ -219,6 +219,18 @@ function getCPUTemp() {
     xhr.send();
 }
 
+function viz1090() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://" + window.location.hostname + ":5000/viz1090", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            // nothing goes here, remember to setup API script
+        }
+    }
+    xhr.send();
+}
+
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
