@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: aa-publish
+
+steps:
+  - name: production-release-build
+    image: alpine
+    commands:
+      - apk add zip
+      - zip -r release.zip * 
+
+  - name: gitea_release
+    image: plugins/gitea-release
+    settings:
+      api_key:
+        from_secret: gitea_token
+      base_url:
+        from_secret: gitea_url
+      files: release.zip
+      title: Aviation Assistant ${DRONE_TAG} Release
+      note: Auto Released by DroneCI
+    when:
+      event: tag

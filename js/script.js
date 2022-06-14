@@ -201,35 +201,6 @@ function initialize() {
     document.title = PageName;
     PlaneRowTemplate = document.getElementById("plane_row_template");
 
-    if (!ShowClocks) {
-        $('#timestamps').css('display', 'none');
-    } else {
-        // Create the clocks.
-        new CoolClock({
-            canvasId: "utcclock",
-            skinId: "classic",
-            displayRadius: 40,
-            showSecondHand: true,
-            gmtOffset: "0", // this has to be a string!
-            showDigital: false,
-            logClock: false,
-            logClockRev: false
-        });
-
-        ReceiverClock = new CoolClock({
-            canvasId: "receiverclock",
-            skinId: "classic",
-            displayRadius: 40,
-            showSecondHand: true,
-            gmtOffset: null,
-            showDigital: false,
-            logClock: false,
-            logClockRev: false
-        });
-
-        // disable ticking on the receiver clock, we will update it ourselves
-        ReceiverClock.tick = (function () {})
-    }
 
     // Initialize my functions
     getInitialVolume()
@@ -241,7 +212,6 @@ function initialize() {
     window.setInterval(getBounds, 60000)
     getCPUTemp()
     window.setInterval(getCPUTemp, 30000)
-    //window.setInterval(fetchInternetAircraft, 1000)
     initializeSchedulesPage();
     document.getElementById("graphs_holder").setAttribute("class", "graphs_s")
     document.getElementById("graphs_holder").setAttribute("src", "http://localhost/graphs1090/graphs" + graph_types[starting_graph] + "2h.png")

@@ -219,6 +219,18 @@ function getCPUTemp() {
     xhr.send();
 }
 
+function viz1090() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://" + window.location.hostname + ":5000/viz1090", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            // nothing goes here, remember to setup API script
+        }
+    }
+    xhr.send();
+}
+
 function readBrightnessLevel() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + window.location.hostname + ":5000/brightness", true);
@@ -303,20 +315,19 @@ function sendCMD(cmd) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 output = xhr.response
+                console.log(output)
                 var current_branch = output.substr(2, output.length - 3)
                 if (current_branch === 'unstable') {
                     document.getElementById("branch_name").innerHTML = "stable"
                     document.getElementById("branch_button").setAttribute("onclick", "changeBranch('master')")
-                } else {
+                } else if (current_branch === 'master') {
                     document.getElementById("branch_name").innerHTML = "unstable"
                     document.getElementById("branch_button").setAttribute("onclick", "changeBranch('unstable')")
                 }
 
             }
         }
-        xhr.send(JSON.stringify({
-            command: "sudo git branch | grep -F '*'"
-        }));
+        xhr.send();
 
     }
     if (cmd === "shutdown") {
@@ -357,12 +368,12 @@ function sendCMD(cmd) {
     }
 
 
-}
+} 
 
 function tabBackgroundImage() {
     if (Planes[SelectedPlane].registration !== null) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://"+window.location.hostname+":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
+        xhr.open("GET", "http://" + window.location.hostname + ":7000/www.jetphotos.com/photo/keyword/" + Planes[SelectedPlane].registration, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -425,14 +436,19 @@ function changeBranch(branch) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + window.location.hostname + ":5000/setbranch", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            sendCMD("getbranch")
+        }
+    }
     xhr.send(JSON.stringify({
-        command: branch
+        branch: branch
     }));
-    sendCMD("getbranch")
+
 }
 
 function goHome() {
-   // document.getElementById("itinerary_page").style.display = "none"
+    // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "block"
     document.getElementById("settings_page").style.display = "none"
@@ -468,7 +484,7 @@ function goItinerary() {
 }
 
 function goSettings() {
-   // document.getElementById("itinerary_page").style.display = "none"
+    // document.getElementById("itinerary_page").style.display = "none"
     document.getElementById("settings_page").style.display = "block"
     document.getElementById("radar_page").style.display = "none"
     document.getElementById("home_page").style.display = "none"
