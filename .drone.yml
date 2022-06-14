@@ -17,6 +17,7 @@ steps:
       base_url:
         from_secret: gitea_url
       files: release.zip
+      draft: true
 
 trigger:
   branch:
