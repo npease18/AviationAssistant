@@ -7,7 +7,7 @@ steps:
     image: alpine
     commands:
       - apk add zip
-      - zip -r release.zip *
+      - zip -r release.zip * 
 
   - name: gitea_release
     image: plugins/gitea-release
