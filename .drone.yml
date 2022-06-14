@@ -18,10 +18,5 @@ steps:
         from_secret: gitea_url
       files: release.zip
       draft: true
-      when:
-        event: tag
-
-trigger:
-  event:
-    include: 
-      - tag
+    when:
+      event: tag
