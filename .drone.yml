@@ -22,7 +22,5 @@ steps:
         event: tag
 
 trigger:
-  branch:
-    - unstable
   event:
     - tag
