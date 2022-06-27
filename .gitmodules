@@ -1,3 +1,0 @@
-[submodule "liveatc_update"]
-	path = liveatc_update
-	url = https://server1.nicholaspease.com:2000/npease/LiveATC-Database-Updater.git
