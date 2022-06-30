@@ -8,7 +8,7 @@ function initializeSchedulesPage() {
     document.getElementById("itin_body").innerHTML = ""
     document.getElementById("itin_img").setAttribute("src", 'images/black.jpg')
     FetchPending = $.ajax({
-        url: 'information/liveatc.json',
+        url: 'https://server1.nicholaspease.com/reports/liveatc.json',
         timeout: 5000,
         cache: false,
         dataType: 'json',
